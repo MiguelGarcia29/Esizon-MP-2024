@@ -1,7 +1,6 @@
-@ -0,0 +1,111 @@
 //Estructura Cliente:
 
-typedef struct Cliente{
+typedef struct{
     char id_cliente[8];
     char nomb_cliente[21];
     char dir_cliente[51];
@@ -10,17 +9,17 @@ typedef struct Cliente{
     char email[31];
     char contraseña[16];
     float cartera;
-};
+} Cliente;
 
-typedef struct AdminProv{
+typedef struct{
     char id_empresa[5];
     char nombre[21];
     char email[31];
     char contraseña[16];
     char perfil_usuario[13]; // "administrador" o "proveedor"
-};
+} AdminProv;
 
-typedef struct Producto{
+typedef struct {
     char id_prod[8];
     char descrip[51];
     char id_categ[5];
@@ -28,47 +27,47 @@ typedef struct Producto{
     int stock;
     int entrega;
     float importe;
-};
+}Producto;
 
-typedef struct Categoria{
+typedef struct {
     char id_categ[5];
     char descrip[51];
-};
+}Categoria;
 
-typedef struct Descuento{
+typedef struct {
     char id_cod[11];
     char descrip[51];
     char tipo[9]; // "codpro" o "cheqreg"
     char estado[9]; // "activo" o "inactivo"
     float importe;
     char aplicable[6]; // "todos" (si es aplicable a todos)
-};
+}Descuento;
 
-typedef struct DescuentoCliente{
+typedef struct {
     char id_cliente[8];
     char id_cod[11];
     char fecha_asignacion[11];
     char fecha_caducidad[11];
     int estado; // 1 (Aplicado) ó 0 (No aplicado)
-};
+}DescuentoCliente;
 
-typedef struct Locker{
+typedef struct {
     char id_locker[11];
     char localidad[21];
     char provincia[21];
     char ubicacion[21];
     int num_compt;
     int num_compocup;
-};
+}Locker;
 
-typedef struct ComportamientoLocker{
+typedef struct {
     char id_locker[11];
     int num_comp;
     char cod_locker[11];
     char estado[7]; // "ocupado" o "vacío"
     char fecha_ocupacion[11];
     char fecha_caducidad[11];
-};
+}ComportamientoLocker;
 
 typedef struct Pedido{
     char id_pedido[8];
@@ -79,7 +78,7 @@ typedef struct Pedido{
     char id_cod[11];
 };
 
-typedef struct ProductoPedido{
+typedef struct {
     char id_pedido[8];
     char id_prod[8];
     int num_unid;
@@ -90,18 +89,18 @@ typedef struct ProductoPedido{
     char id_locker[11];
     char cod_locker[11];
     char fecha_entrega_devolucion_transp[11];
-};
+}ProductoPedido;
 
-typedef struct Transportista{
+typedef struct {
     char id_transp[5];
     char nombre[21];
     char email[31];
     char contraseña[16];
     char nombre_empresa[21];
     char ciudad_reparto[21];
-};
+}Transportista;
 
-typedef struct Devolucion{
+typedef struct {
     char id_pedido[8];
     char id_prod[8];
     char fecha_devolucion[11];
@@ -109,4 +108,4 @@ typedef struct Devolucion{
     char estado[10]; // "pendiente", "aceptado", "denegado", "enviado", "recibido"
     char fecha_aceptacion[11];
     char fecha_caducidad[11];
-};
+}Devolucion;
