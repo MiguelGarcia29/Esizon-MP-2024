@@ -14,6 +14,9 @@ void pedidos();
 void transportista();
 void descuentos();
 void devoluciones();
+void reparto();
+void retorno();
+void salir();
 
 int rol = 0;
 
@@ -80,6 +83,7 @@ void menuadmin() {
                 break;
             case 10:
                 printf("Hasta pronto, ESIZON\n");
+                salir();
                 break;
             default:
                 printf("Opción no válida\n");
@@ -114,6 +118,7 @@ void menuusuario() {
                 break;
             case 6:
                 printf("Hasta pronto, ESIZON\n");
+                salir();
                 break;
             default:
                 printf("Opción no válida\n");
@@ -123,16 +128,62 @@ void menuusuario() {
 }
 
 void menuproveedor() {
-    // Implementación del menú para el proveedor
+    int opcion;
+    do {
+        printf("Dime que quieres realizar como proveedor: \n");
+        printf("1-Perfil\n2-Productos\n3-Pedidos\n4-Salir del sistema\n");
+        scanf("%d", &opcion);
+        switch (opcion) {
+            case 1:
+                perfil();
+                break;
+            case 2:
+                productos();
+                break;
+            case 3:
+                pedidos();
+                break;
+            case 4:
+                printf("Hasta pronto, ESIZON\n");
+                salir();
+                break;
+            default:
+                printf("Opción no válida\n");
+                break;
+        }
+    } while (opcion != 4);
 }
 
 void menutransportista() {
-    // Implementación del menú para el transportista
+   int opcion;
+    do {
+        printf("Dime que quieres realizar como transportista: \n");
+        printf("1-Perfil\n2-Repartos\n3-Retornos\n4-Salir del sistema\n");
+        scanf("%d", &opcion);
+        switch (opcion) {
+            case 1:
+                perfil();
+                break;
+            case 2:
+                reparto();
+                break;
+            case 3:
+                retorno();
+                break;
+            case 4:
+                printf("Hasta pronto, ESIZON\n");
+                salir();
+                break;
+            default:
+                printf("Opción no válida\n");
+                break;
+        }
+    } while (opcion != 4);
 }
 
 
 //Esta opción permitirá a un usuario administrador consultar los datos de su perfil y modificarlos.
-//Solo puede acceder: Administrador y cliente
+//Solo puede acceder: Administrador y clientes y transportista y proveedores
 void perfil() {
     // Implementación de la función perfil
 }
@@ -150,7 +201,7 @@ void proveedores() {
 }
 
 //Mediante esta opción el administrador podrá acceder a la información de los productos dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de productos.
-//Solo puede acceder: Administrador y cliente
+//Solo puede acceder: Administrador y cliente y proveedor
 void productos() {
     // Implementación de la función productos
 }
@@ -162,7 +213,7 @@ void categorias() {
 }
 
 //Mediante esta opción el administrador podrá acceder a la información de los pedidos dados de alta en la plataforma.
-//Solo puede acceder: Administrador y cliente
+//Solo puede acceder: Administrador y cliente y proveedores
 void pedidos() {
     // Implementación de la función pedidos
 }
@@ -184,3 +235,27 @@ void descuentos() {
 void devoluciones() {
     // Implementación de la función devoluciones
 }
+
+//Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
+//Solo puede acceder: transportista
+void reparto(){
+    
+}
+
+//El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido recogidos de los lockers en el plazo determinado, permitiéndole consultar todos los lockers por localidad y mostrando sus pedidos. En el momento de la recogida de los productos
+//para su retorno, el sistema debe actualizar automáticamente el número de compartimentos
+//ocupados y eliminar el código locker asociado al producto. Así como el estado de los productos
+//y el stock de los mismos para que quede reflejada la operación
+//Solo puede acceder: transportista
+void retorno()
+{
+    
+}
+
+//Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
+//Solo puede acceder: Administrador y clientes y transportista y proveedor
+void salir()
+{
+    
+}
+
