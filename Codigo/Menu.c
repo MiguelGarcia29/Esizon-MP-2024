@@ -103,6 +103,50 @@ void menuadmin
 	
 }
 
+
+//Rol de cliente
+//Solo puede acceder: cliente y administrador
+
+void menuusuario
+{
+	int opcion;
+	do
+	{
+		printf("Dime que quieres realizar como administrador: ");
+		printf("1-Perfil \n2-Productos \n3-Descuentos \n4-Pedidos \n5-Devoluciones\n6-Salir del sistema");
+		scanf("%d",&opcion);
+		switch(opcion)
+		{
+		
+			case 1:
+				perfil;
+				break;
+			case 2:
+				productos;
+				break;
+			case 3:
+				descuentos;
+				break;
+			case 4:
+				pedidos;
+				break;
+			case 5:
+				devoluciones;
+				break;
+			case 6:
+				printf("Hasta pronto, ESIZON");
+				break;
+	
+		
+		
+		}
+			
+	}while(opcion!=6 || opcion >6);
+	
+}
+
+
+
 //Esta opción permitirá a un usuario administrador consultar los datos de su perfil y modificarlos.
 //Solo puede acceder: Administrador
 void perfil
