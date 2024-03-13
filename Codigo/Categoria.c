@@ -7,9 +7,9 @@ typedef struct {
 }Categoria;
 
 
-//La función muestra la información de la categoria del producto requerido. 
-void almacenar(Categoria* cat);
 
+void almacenar(Categoria* cat);
+//La función muestra la información de la categoria del producto requerido. 
 void mostrar_categ(Categoria* cat){
     
     for(int i = 0 ; strcmp(cat[i].id_categ,'-1') != 0 ; i++)//Comparamos nuestro vector de Id_categ con el -1,indica el final de este.
