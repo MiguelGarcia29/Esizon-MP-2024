@@ -10,6 +10,7 @@
 #define Categorias_txt "Datos/Categorias.txt"
 #define Descuento_txt "Datos/Descuentos.txt"
 #define DescuentoCliente_txt "Datos/DescuentosClientes.txt"
+#define Lockers_txt "Datos/Lockers.txt"
 
 // Guarda el vector de clientes en el archivo siguiendo la estructura:
 /*  o Identificador del cliente (Id_cliente), 7 digitos.
@@ -311,11 +312,11 @@ Categoria* iniciarCategoriasDeArchivo(int *numCat) {
     // Regresar al inicio del archivo
     rewind(archivo);
 
-    // Crear el vector de adminProv
+    // Crear el vector de categorias
     Categoria *categorias = malloc(count * sizeof(Categoria));
     if (categorias == NULL) {
         fclose(archivo);
-        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        printf("Error: No se pudo asignar memoria para el vector de categorias.\n");
         return NULL;
     }
 
@@ -382,11 +383,11 @@ Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
     // Regresar al inicio del archivo
     rewind(archivo);
 
-    // Crear el vector de adminProv
+    // Crear el vector de descuentos
     Descuento *descuentos = malloc(count * sizeof(Descuento));
     if (descuentos == NULL) {
         fclose(archivo);
-        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        printf("Error: No se pudo asignar memoria para el vector de descuentos.\n");
         return NULL;
     }
 
@@ -438,7 +439,6 @@ void guardarDescuentosClientesEnArchivo(DescuentoCliente *descuentosClientes, in
     }
 
     fclose(archivo);
-    printf("Datos de descuentos de clientes guardados en el archivo DescuentosClientes.txt.\n");
 }
 
 Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
@@ -458,11 +458,11 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
     // Regresar al inicio del archivo
     rewind(archivo);
 
-    // Crear el vector de adminProv
+    // Crear el vector de DescuentoCliente
     DescuentoCliente *descuentos = malloc(count * sizeof(DescuentoCliente));
     if (descuentos == NULL) {
         fclose(archivo);
-        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        printf("Error: No se pudo asignar memoria para el vector de DescuentoCliente.\n");
         return NULL;
     }
 
@@ -487,26 +487,104 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
     return descuentos;
 }
 
+// Guarda el vector de DescuentosClientes en el archivo siguiendo la estructura:
+/*
+    o Identificador del Locker (Id_locker), 10 caracteres máximo.
+    o Población (Localidad), 20 caracteres máximo.
+    o Provincia (Provincia), 20 caracteres máximo.
+    o Ubicación (Ubica), 20 caracteres máximo.
+    o Número de compartimentos total (Num_compT).
+    o Número de compartimentos ocupados actualmente (Num_compOcup).
+*/
+void guardarLockersEnArchivo(Locker *lockers, int numLockers) {
+    FILE *archivo = fopen(Lockers_txt, "w");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo Lockers.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numLockers; i++) {
+        fprintf(archivo, "%s-%s-%s-%s-%d-%d\n",
+                lockers[i].id_locker,
+                lockers[i].localidad,
+                lockers[i].provincia,
+                lockers[i].ubicacion,
+                lockers[i].num_compt,
+                lockers[i].num_compocup);
+    }
+
+    fclose(archivo);
+}
+
+Locker* iniciarLockersDeArchivo(int *numLock) {
+    FILE *archivo = fopen(Lockers_txt, "r");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo %s.\n", Lockers_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    Locker *descuentos = malloc(count * sizeof(Locker));
+    if (descuentos == NULL) {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Locker.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        char *token = strtok(buffer, "-");
+        strncpy(descuentos[i].id_locker, token, sizeof(descuentos[i].id_locker));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].localidad, token, sizeof(descuentos[i].localidad));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].provincia, token, sizeof(descuentos[i].provincia));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].ubicacion, token, sizeof(descuentos[i].ubicacion));
+        token = strtok(NULL, "-");
+        descuentos[i].num_compt=atoi(token);
+        token = strtok(NULL, "-");
+        descuentos[i].num_compocup=atoi(token);
+        i++;
+    }
+
+    fclose(archivo);
+    *numLock = count;
+    return descuentos;
+}
+
 
 int main() {
-    int numDescuentosClientes;
-    DescuentoCliente *descuentosClientes = iniciarDescuentosClientesDeArchivo(&numDescuentosClientes);
-    if (descuentosClientes == NULL) {
-        printf("No se pudieron cargar los datos de descuentos de clientes del archivo.\n");
+    int numLockers;
+    Locker *lockers = iniciarLockersDeArchivo(&numLockers);
+    if (lockers == NULL) {
+        printf("No se pudieron cargar los datos de los lockers del archivo.\n");
         return 1;
     }
 
-    printf("Descuentos de clientes cargados del archivo:\n");
-    for (int i = 0; i < numDescuentosClientes; i++) {
-        printf("ID Cliente: %s\n", descuentosClientes[i].id_cliente);
-        printf("ID Código: %s\n", descuentosClientes[i].id_cod);
-        printf("Fecha Asignación: %s\n", descuentosClientes[i].fecha_asignacion);
-        printf("Fecha Caducidad: %s\n", descuentosClientes[i].fecha_caducidad);
-        printf("Estado: %d\n", descuentosClientes[i].estado);
+    printf("Lockers cargados del archivo:\n");
+    for (int i = 0; i < numLockers; i++) {
+        printf("ID Locker: %s\n", lockers[i].id_locker);
+        printf("Localidad: %s\n", lockers[i].localidad);
+        printf("Provincia: %s\n", lockers[i].provincia);
+        printf("Ubicación: %s\n", lockers[i].ubicacion);
+        printf("Número de compartimentos total: %d\n", lockers[i].num_compt);
+        printf("Número de compartimentos ocupados: %d\n", lockers[i].num_compocup);
         printf("\n");
     }
 
-    free(descuentosClientes); // Liberar la memoria asignada para el vector de descuentos de clientes
+    free(lockers); // Liberar la memoria asignada para el vector de lockers
 
     return 0;
 }

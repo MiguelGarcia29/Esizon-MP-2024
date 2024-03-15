@@ -201,3 +201,41 @@ int main() {
 }
 
 //LEER DescuentosClientes
+int main() {
+    int numDescuentosClientes;
+    DescuentoCliente *descuentosClientes = iniciarDescuentosClientesDeArchivo(&numDescuentosClientes);
+    if (descuentosClientes == NULL) {
+        printf("No se pudieron cargar los datos de descuentos de clientes del archivo.\n");
+        return 1;
+    }
+
+    printf("Descuentos de clientes cargados del archivo:\n");
+    for (int i = 0; i < numDescuentosClientes; i++) {
+        printf("ID Cliente: %s\n", descuentosClientes[i].id_cliente);
+        printf("ID Código: %s\n", descuentosClientes[i].id_cod);
+        printf("Fecha Asignación: %s\n", descuentosClientes[i].fecha_asignacion);
+        printf("Fecha Caducidad: %s\n", descuentosClientes[i].fecha_caducidad);
+        printf("Estado: %d\n", descuentosClientes[i].estado);
+        printf("\n");
+    }
+
+    free(descuentosClientes); // Liberar la memoria asignada para el vector de descuentos de clientes
+
+    return 0;
+}
+
+//GUARDAR LOCKERS
+int main() {
+    // Ejemplo de lockers
+    Locker lockers[2] = {
+        {"Lock001", "Puerto Real", "Cádiz", "local 12", 15, 0},
+        {"Lock002", "San Fernando", "Cádiz", "avenida principal", 20, 5}
+    };
+
+    // Guardar lockers en el archivo
+    guardarLockersEnArchivo(lockers, 2);
+
+    return 0;
+}
+
+//LEER LOCKERS
