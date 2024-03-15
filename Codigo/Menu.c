@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <string.h>
 // Prototipos de las funciones
 void menuadmin();
 void menuusuario();
@@ -18,14 +18,32 @@ void reparto();
 void retorno();
 void salir();
 
-int rol = 0;
-
+int rol = 2;
+int opcion;
+char  nombre[50];
 //1-Administrador
 //2-Usuario
 //3-Proveedor
 //4-Transportista
 
 int main() {
+    printf(" ########  #######   ######     ##########  ##########  ###      ##\n");
+    printf(" ##       ##           ##              #    ##      ##  ## #     ##\n");
+    printf(" ##       ##           ##             #     ##      ##  ##  #    ##\n");
+    printf(" #####     ######      ##         #####     ##      ##  ##   #   ##\n");
+    printf(" ##              ##    ##         #         ##      ##  ##    #  ##\n");
+    printf(" ##              ##    ##        #          ##      ##  ##     # ##\n");
+    printf(" #######    #####    ######     ########    ##########  ##      ###\n");
+    printf("                                                      ##\n");
+    printf("        ##                                          ##  ##\n");
+    printf("         ##                                       ##     ##\n");
+    printf("           ##                                   ##   ##    ##\n");
+    printf("             ###                                   ###       ##\n");
+    printf("                ###                             ###\n");
+    printf("                   ####                     ####  \n");
+    printf("                       #######       #######\n");
+    printf("                              #######\n");
+    
     switch (rol) {
         case 1:
             menuadmin();
@@ -47,12 +65,23 @@ int main() {
 //Rol de administrador
 //Solo puede acceder: Administrador
 void menuadmin() {
-    int opcion;
+
     do {
-        printf("Dime que quieres realizar como administrador: \n");
-        printf("1-Perfil\n2-Clientes\n3-Proveedores\n4-Productos\n5-Categorías\n");
-        printf("6-Pedidos\n7-Transportista\n8-Descuentos\n9-Devoluciones\n10-Salir del sistema\n");
-        scanf("%d", &opcion);
+    	printf("--------------------------------------------------------\n");
+    	printf("             NOMBRE: %s                                 \n", nombre);
+    	printf("--------------------------------------------------------\n");
+    	printf("|1-Perfil                                              |\n");
+    	printf("|2-Clientes                                            |\n");
+    	printf("|3-Proveedores                                         |\n");
+    	printf("|4-Productos                                           |\n");
+    	printf("|5-Categorias                                          |\n");
+    	printf("|6-Pedidos                                             |\n");
+    	printf("|7-Transportista                                       |\n");
+    	printf("|8-Descuentos                                          |\n");
+    	printf("|9-Devoluciones                                        |\n");
+    	printf("|10-Salir del sistema                                  |\n");
+    	printf("--------------------------------------------------------\n");
+    	scanf("%d",&opcion);
         switch (opcion) {
             case 1:
                 perfil();
@@ -95,11 +124,20 @@ void menuadmin() {
 //Rol de cliente
 //Solo puede acceder: cliente y administrador
 void menuusuario() {
-    int opcion;
+    
     do {
-        printf("Dime que quieres realizar como usuario: \n");
-        printf("1-Perfil\n2-Productos\n3-Descuentos\n4-Pedidos\n5-Devoluciones\n6-Salir del sistema\n");
-        scanf("%d", &opcion);
+        printf("--------------------------------------------------------\n");
+    	printf("             NOMBRE: %s                                 \n", nombre);
+    	printf("--------------------------------------------------------\n");
+    	printf("|1-Perfil                                              |\n");
+    	printf("|2-Productos                                           |\n");
+    	printf("|3-Descuentos                                          |\n");
+    	printf("|4-Pedidos                                             |\n");
+    	printf("|5-Devoluciones                                        |\n");
+    	printf("|6-Salir del sistema                                   |\n");
+    	printf("--------------------------------------------------------\n");
+    	scanf("%d",&opcion);
+        
         switch (opcion) {
             case 1:
                 perfil();
@@ -128,11 +166,17 @@ void menuusuario() {
 }
 
 void menuproveedor() {
-    int opcion;
     do {
-        printf("Dime que quieres realizar como proveedor: \n");
-        printf("1-Perfil\n2-Productos\n3-Pedidos\n4-Salir del sistema\n");
-        scanf("%d", &opcion);
+        printf("--------------------------------------------------------\n");
+    	printf("             NOMBRE: %s                                 \n", nombre);
+    	printf("--------------------------------------------------------\n");
+    	printf("|1-Perfil                                              |\n");
+    	printf("|2-Productos                                           |\n");
+    	printf("|3-Pedidos                                             |\n");
+    	printf("|4-Salir del sistema                                   |\n");
+    	printf("--------------------------------------------------------\n");
+    	scanf("%d",&opcion);
+        
         switch (opcion) {
             case 1:
                 perfil();
@@ -155,11 +199,18 @@ void menuproveedor() {
 }
 
 void menutransportista() {
-   int opcion;
     do {
-        printf("Dime que quieres realizar como transportista: \n");
-        printf("1-Perfil\n2-Repartos\n3-Retornos\n4-Salir del sistema\n");
-        scanf("%d", &opcion);
+        
+        printf("--------------------------------------------------------\n");
+    	printf("             NOMBRE: %s                                 \n", nombre);
+    	printf("--------------------------------------------------------\n");
+    	printf("|1-Perfil                                              |\n");
+    	printf("|2-Repartos                                            |\n");
+    	printf("|3-Retornos                                            |\n");
+    	printf("|4-Salir del sistema                                   |\n");
+    	printf("--------------------------------------------------------\n");
+    	scanf("%d",&opcion);
+        
         switch (opcion) {
             case 1:
                 perfil();
@@ -256,6 +307,8 @@ void retorno()
 //Solo puede acceder: Administrador y clientes y transportista y proveedor
 void salir()
 {
+    
+}
     
 }
 
