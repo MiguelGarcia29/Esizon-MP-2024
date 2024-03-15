@@ -87,3 +87,62 @@ int main() {
 
     return 0;
 }
+
+//LEER PRODUCTOS
+int main() {
+    int numProductos;
+    Producto *productos = iniciarProductosDeArchivo(&numProductos);
+    if (productos == NULL) {
+        printf("No se pudieron leer los datos de productos del archivo.\n");
+        return 1;
+    }
+
+    printf("Productos leídos del archivo:\n");
+    for (int i = 0; i < numProductos; i++) {
+        printf("ID Producto: %s\n", productos[i].id_prod);
+        printf("Descripción: %s\n", productos[i].descrip);
+        printf("ID Categoría: %s\n", productos[i].id_categ);
+        printf("ID Gestor: %s\n", productos[i].id_gestor);
+        printf("Stock: %d\n", productos[i].stock);
+        printf("Entrega: %d\n", productos[i].entrega);
+        printf("Importe: %.2f\n", productos[i].importe);
+        printf("\n");
+    }
+
+    free(productos); // Liberar la memoria asignada para el vector de productos
+
+    return 0;
+}
+
+//GUARDAR CATEGORIAS
+int main() {
+    Categoria categorias[2] = {
+        {"0001", "tv video home cinema"},
+        {"0002", "audio HIFI"}
+    };
+
+    guardarCategoriasEnArchivo(categorias, 2);
+
+    return 0;
+}
+
+//LEER CATEGORIAS
+int main() {
+    int numCategorias;
+    Categoria *categorias = iniciarCategoriasDeArchivo(&numCategorias);
+    if (categorias == NULL) {
+        printf("No se pudieron leer los datos de categorías del archivo.\n");
+        return 1;
+    }
+
+    printf("Categorías leídas del archivo:\n");
+    for (int i = 0; i < numCategorias; i++) {
+        printf("ID Categoría: %s\n", categorias[i].id_categ);
+        printf("Descripción: %s\n", categorias[i].descrip);
+        printf("\n");
+    }
+
+    free(categorias); // Liberar la memoria asignada para el vector de categorías
+
+    return 0;
+}

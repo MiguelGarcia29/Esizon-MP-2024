@@ -7,17 +7,18 @@
 #define Clientes_txt "Datos/Clientes.txt"
 #define AdminProv_txt "Datos/AdminProv.txt"
 #define Productos_txt "Datos/Productos.txt"
+#define Categorias_txt "Datos/Categorias.txt"
 
 // Guarda el vector de clientes en el archivo siguiendo la estructura:
-/*  o Identificador del cliente (Id_cliente), 7 dígitos.
-    o Nombre completo del cliente (Nomb_cliente), 20 caracteres máximo.
-    o Dirección del cliente (Dir_cliente), 50 caracteres máximo.
-    o Población (Localidad), 20 caracteres máximo.
-    o Provincia (Provincia), 20 caracteres máximo.
-    o Email (email), 30 caracteres máximo, será usado como nombre de usuario para el acceso a la
+/*  o Identificador del cliente (Id_cliente), 7 digitos.
+    o Nombre completo del cliente (Nomb_cliente), 20 caracteres maximo.
+    o Dirección del cliente (Dir_cliente), 50 caracteres maximo.
+    o Población (Localidad), 20 caracteres maximo.
+    o Provincia (Provincia), 20 caracteres maximo.
+    o Email (email), 30 caracteres maximo, sera usado como nombre de usuario para el acceso a la
     plataforma.
-    o Contrasenia para acceder al sistema (Contrasenia), con 15 caracteres máximo.
-    o Cartera (Cartera), almacenará el dinero del que dispone el cliente para poder adquirir los
+    o Contrasenia para acceder al sistema (Contrasenia), con 15 caracteres maximo.
+    o Cartera (Cartera), almacenara el dinero del que dispone el cliente para poder adquirir los
     productos.
     */
 
@@ -46,7 +47,7 @@ void guardarClientesEnArchivo(Cliente *clientes, int numClientes)
     fclose(archivo);
 }
 
-// LE PASO COMO PUNTERO EL NUM DE CLIENTES PARA LUEGO PODER ALMACENARLO EN EL PROGRAMA (MAIN)
+// LE PASO COMO PUNTERO EL NUM DE CLIENTES PARA LUEGO PODER ALMACENARLO EN EL PROGRAMA (MAIN) -> MISMA LOGICA PARA LAS DEMAS LECTURAS
 Cliente *iniciarClientesDeArchivo(int *numClientes)
 {
     FILE *archivo = fopen(Clientes_txt, "r");
@@ -109,11 +110,11 @@ Cliente *iniciarClientesDeArchivo(int *numClientes)
 
 // Guarda el vector de AdminYProvs en el archivo siguiendo la estructura:
 /*
-    o Identificador de la empresa administradora o proveedora (Id_empresa), 4 dígitos.
-    o Nombre de la empresa (Nombre), sería ESIZON si es administrador, 20 caracteres máximo.
-    o Email (email), 30 caracteres máximo, será usado como nombre de usuario para el acceso a la
+    o Identificador de la empresa administradora o proveedora (Id_empresa), 4 digitos.
+    o Nombre de la empresa (Nombre), seria ESIZON si es administrador, 20 caracteres maximo.
+    o Email (email), 30 caracteres maximo, sera usado como nombre de usuario para el acceso a la
     plataforma.
-    o Contrasenia para acceder al sistema (Contrasenia), con 15 caracteres máximo.
+    o Contrasenia para acceder al sistema (Contrasenia), con 15 caracteres maximo.
     o Perfil del usuario (Perfil_usuario): «administrador» o «proveedor».
 */
 void guardarAdminProvEnArchivo(AdminProv *admins, int numAdmins)
@@ -145,9 +146,9 @@ AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
         return NULL;
     }
 
-    // Contar la cantidad de líneas en el archivo
+    // Contar la cantidad de lineas en el archivo
     int count = 0;
-    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud máxima de línea
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
     while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
         count++;
     }
@@ -186,13 +187,13 @@ AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
 
 // Guarda el vector de Produtcos en el archivo siguiendo la estructura:
 /*
-    o Identificador del producto (Id_prod), 7 dígitos.
-    o Descripción del producto (Descrip), 50 caracteres máximo.
-    o Id de la categoría a la que pertenece (Id_categ), 4 dígitos.
-    o Id del gestor del producto (Id_gestor), 4 digítos. Deberá coincidir con el identificador de la
+    o Identificador del producto (Id_prod), 7 digitos.
+    o Descripción del producto (Descrip), 50 caracteres maximo.
+    o Id de la categoria a la que pertenece (Id_categ), 4 digitos.
+    o Id del gestor del producto (Id_gestor), 4 digitos. Debera coincidir con el identificador de la
     empresa administradora o proveedora del producto.
     o Stock del producto (Stock).
-    o Compromiso de Entrega (Entrega). Indicará el número de días máximo que transcurrirá desde
+    o Compromiso de Entrega (Entrega). Indicara el número de dias maximo que transcurrira desde
     la fecha de realización del pedido hasta la entrega al cliente.
     o Importe del producto en euros (Importe).
 */
@@ -217,13 +218,138 @@ void guardarProductosEnArchivo(Producto *productos, int numProductos) {
     fclose(archivo);
 }
 
-int main() {
-    Producto productos[2] = {
-        {"0000001", "televisor 32” 3D", "0001", "0001", 50, 5, 340.0},
-        {"0000002", "Auriculares inalámbricos", "0002", "0001", 125, 1, 45.0}
-    };
+Producto *iniciarProductosDeArchivo(int *numProductos)
+{
+    FILE *archivo = fopen(Productos_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Productos_txt);
+        return NULL;
+    }
 
-    guardarProductosEnArchivo(productos, 2);
+    // Contar la cantidad de lineas = productos en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA];
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear vector cliente
+    Producto *productos = malloc(count * sizeof(Producto));
+    if (productos == NULL)
+    {
+        fclose(Productos_txt);
+        printf("No se pudo asignar memoria para el vector de productos.\n");
+        return NULL;
+    }
+
+    // Leer cada linea del archivo y rellenar el vector de productos
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(productos[i].id_prod, token, sizeof(productos[i].id_prod));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].descrip, token, sizeof(productos[i].descrip));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].id_categ, token, sizeof(productos[i].id_categ));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].id_gestor, token, sizeof(productos[i].id_gestor));
+        token = strtok(NULL, "-");
+        productos[i].stock=atoi(token);
+        token = strtok(NULL, "-");
+        productos[i].entrega=atoi(token); // atoi convierte la cadena en int
+        token = strtok(NULL, "-");
+        productos[i].importe = atof(token); // atof convierte la cadena en Float.
+        i++;
+    }
+
+    fclose(archivo);
+    *numProductos = count;
+    return productos;
+}
+
+// Guarda el vector de Categoria en el archivo siguiendo la estructura:
+/*
+    o Identificador de la categoria (Id_categ), 4 digitos.
+    o Descripción de la categoria (Descrip), 50 caracteres maximo.
+*/
+void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias) {
+    FILE *archivo = fopen(Categorias_txt, "w");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo Categorias.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numCategorias; i++) {
+        fprintf(archivo, "%s-%s-\n", categorias[i].id_categ, categorias[i].descrip);
+    }
+
+    fclose(archivo);
+    printf("Datos de categorias guardados en el archivo Categorias.txt.\n");
+}
+
+Categoria* iniciarCategoriasDeArchivo(int *numCat) {
+    FILE *archivo = fopen(Categorias_txt, "r");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo %s.\n", Categorias_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de adminProv
+    Categoria *categorias = malloc(count * sizeof(Categoria));
+    if (categorias == NULL) {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        char *token = strtok(buffer, "-");
+        strncpy(categorias[i].id_categ, token, sizeof(categorias[i].id_categ));
+        token = strtok(NULL, "-");
+        strncpy(categorias[i].descrip, token, sizeof(categorias[i].descrip));
+        i++;
+    }
+
+    fclose(archivo);
+    *numCat = count;
+    return categorias;
+}
+
+
+int main() {
+    int numCategorias;
+    Categoria *categorias = iniciarCategoriasDeArchivo(&numCategorias);
+    if (categorias == NULL) {
+        printf("No se pudieron leer los datos de categorías del archivo.\n");
+        return 1;
+    }
+
+    printf("Categorías leídas del archivo:\n");
+    for (int i = 0; i < numCategorias; i++) {
+        printf("ID Categoría: %s\n", categorias[i].id_categ);
+        printf("Descripción: %s\n", categorias[i].descrip);
+        printf("\n");
+    }
+
+    free(categorias); // Liberar la memoria asignada para el vector de categorías
 
     return 0;
 }
