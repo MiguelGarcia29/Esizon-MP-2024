@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<string.h>
+#include <stdlib.h>
+
+typedef struct {
+    char id_locker[11];
+    char localidad[21];
+    char provincia[21];
+    char ubicacion[21];
+    int num_compt;
+    int num_compocup;
+}Locker;
+
+// Declaración de variables globales
+int next_id = 1;
+int* user_ids = NULL;  // Puntero para almacenar los IDs de usuarios
+char nombre_u[100][10];
+int num_users = 0;     // Número actual de usuarios almacenados
+
+void almacenar_id(int id) {
+    user_ids = (int*)realloc(user_ids, (num_users + 1) * sizeof(int));
+    if (user_ids == NULL) {
+        printf("Error de memoria al intentar almacenar el ID.\n");
+        exit(1);
+    }
+    user_ids[num_users++] = id;
+}
+
+
+void agregar_usuario(const char *nombre) {
+    // Generar el ID para el nuevo usuario
+    int id_usuario = next_id;
+    
+	strcpy(nombre_u[next_id],nombre);
+    // Almacenar el ID del usuario
+    almacenar_id(id_usuario);
+
+    // Incrementar el ID para el próximo usuario
+    next_id++;
+}
+
+void eliminar_id(int id) {
+    for (int i = 0; i < num_users; i++) {
+        if (user_ids[i] == id) {
+            for (int j = i; j < num_users - 1; j++) {
+                user_ids[j] = user_ids[j + 1];
+            }
+            num_users--;
+            user_ids = (int*)realloc(user_ids, num_users * sizeof(int));
+            if (user_ids == NULL && num_users != 0) {
+                printf("Error de memoria al intentar eliminar el ID.\n");
+                exit(1);
+            }
+            printf("ID %04d eliminado exitosamente.\n", id);
+            return;
+        }
+    }
+    printf("ID %d no encontrado.\n", id);
+}
+
+
+int main() {
+    // Ejemplo de uso
+    agregar_usuario("Juan");
+    agregar_usuario("María");
+    agregar_usuario("Carlos");
+
+    // Imprimir los IDs almacenados
+    printf("IDs de usuarios almacenados: ");
+    for (int i = 0; i < next_id - 1; i++) {
+        printf("%04d ", user_ids[i]);
+    }
+    printf("\n");
+    
+	eliminar_id(2);
+
+    // Imprimir los IDs almacenados después de eliminar uno
+    printf("IDs de usuarios almacenados despues de eliminar: ");
+    for (int i = 0; i < num_users; i++) {
+        printf("%04d ", user_ids[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
