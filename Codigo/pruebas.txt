@@ -146,3 +146,58 @@ int main() {
 
     return 0;
 }
+
+//Guardar Descuentos
+int main() {
+    // Ejemplo de descuentos
+    Descuento descuentos[2] = {
+        {"black001", "Black Friday", "codpro", "activo", 10.0, "esizon"},
+        {"che001", "cheque regalo nivel 1", "cheqreg", "activo", 5.0, "todos"}
+    };
+
+    // Guardar descuentos en el archivo
+    guardarDescuentosEnArchivo(descuentos, 2);
+    return 0;
+}
+
+//Leer descuentos
+int main(){
+    int numDescuentos;
+    Descuento *descuentos_leidos = iniciarDescuentosDeArchivo(&numDescuentos);
+    if (descuentos_leidos == NULL) {
+        printf("No se pudieron leer los datos de descuentos del archivo.\n");
+        return 1;
+    }
+
+    // Imprimir descuentos leídos del archivo
+    printf("Descuentos leídos del archivo:\n");
+    for (int i = 0; i < numDescuentos; i++) {
+        printf("ID Código: %s\n", descuentos_leidos[i].id_cod);
+        printf("Descripción: %s\n", descuentos_leidos[i].descrip);
+        printf("Tipo: %s\n", descuentos_leidos[i].tipo);
+        printf("Estado: %s\n", descuentos_leidos[i].estado);
+        printf("Importe: %.2f\n", descuentos_leidos[i].importe);
+        printf("Aplicable: %s\n", descuentos_leidos[i].aplicable);
+        printf("\n");
+    }
+
+    free(descuentos_leidos); // Liberar la memoria asignada para el vector de descuentos leídos
+
+    return 0;
+}
+
+//GUARDAR DescuentosClientes
+int main() {
+    // Ejemplo de DescuentosClientes
+    DescuentoCliente descuentosClientes[2] = {
+        {"0000001", "black001", "25/01/2024", "27/03/2024", 0},
+        {"0000002", "che001", "01/02/2024", "01/06/2024", 0}
+    };
+
+    // Guardar DescuentosClientes en el archivo
+    guardarDescuentosClientesEnArchivo(descuentosClientes, 2);
+
+    return 0;
+}
+
+//LEER DescuentosClientes

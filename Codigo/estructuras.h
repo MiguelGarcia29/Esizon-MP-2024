@@ -43,7 +43,7 @@ typedef struct {
     char tipo[9]; // "codpro" o "cheqreg"
     char estado[9]; // "activo" o "inactivo"
     float importe;
-    char aplicable[6]; // "todos" (si es aplicable a todos)
+    char aplicable[7]; // "todos" (si es aplicable a todos)
 }Descuento;
 
 typedef struct {
@@ -51,7 +51,7 @@ typedef struct {
     char id_cod[11];
     char fecha_asignacion[11];
     char fecha_caducidad[11];
-    int estado; // 1 (Aplicado) ó 0 (No aplicado)
+    int estado; // 1 (Aplicado) o 0 (No aplicado)
 }DescuentoCliente;
 
 typedef struct {
@@ -67,7 +67,7 @@ typedef struct {
     char id_locker[11];
     int num_comp;
     char cod_locker[11];
-    char estado[7]; // "ocupado" o "vacío"
+    char estado[8]; // "ocupado" o "vacio"
     char fecha_ocupacion[11];
     char fecha_caducidad[11];
 }ComportamientoLocker;
@@ -87,7 +87,7 @@ typedef struct {
     int num_unid;
     char fecha_entrega_prevista[11];
     float importe;
-    char estado_pedido[15]; // "enPreparación", "enviado", "enReparto", "enLocker", "entregado", "devuelto", "transportista"
+    char estado_pedido[15]; // "enPreparacion", "enviado", "enReparto", "enLocker", "entregado", "devuelto", "transportista"
     char id_transp[5];
     char id_locker[11];
     char cod_locker[11];

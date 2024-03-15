@@ -8,6 +8,8 @@
 #define AdminProv_txt "Datos/AdminProv.txt"
 #define Productos_txt "Datos/Productos.txt"
 #define Categorias_txt "Datos/Categorias.txt"
+#define Descuento_txt "Datos/Descuentos.txt"
+#define DescuentoCliente_txt "Datos/DescuentosClientes.txt"
 
 // Guarda el vector de clientes en el archivo siguiendo la estructura:
 /*  o Identificador del cliente (Id_cliente), 7 digitos.
@@ -290,7 +292,6 @@ void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias) {
     }
 
     fclose(archivo);
-    printf("Datos de categorias guardados en el archivo Categorias.txt.\n");
 }
 
 Categoria* iniciarCategoriasDeArchivo(int *numCat) {
@@ -333,23 +334,179 @@ Categoria* iniciarCategoriasDeArchivo(int *numCat) {
     return categorias;
 }
 
+// Guarda el vector de Descuentos en el archivo siguiendo la estructura:
+/*
+    o Identificador del código promocional o cheque regalo (Id_cod), 10 caracteres máximo.
+    o Descripción del descuento (Descrip), 50 caracteres máximo.
+    o Tipo de descuento (Tipo): «codpro» (código promocional) o «cheqreg» (cheque regalo)
+    o Estado (Estado): «activo» o «inactivo»
+    o Importe del descuento en euros (Importe)
+    o Aplicabilidad (Aplicable): «todos» (si es aplicable a todos los productos) o «esizon» (si sólo es
+    aplicable a los gestionados por ESIZON.
+*/
+
+void guardarDescuentosEnArchivo(Descuento *descuentos, int numDescuentos) {
+    FILE *archivo = fopen(Descuento_txt, "w");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo Descuentos.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numDescuentos; i++) {
+        fprintf(archivo, "%s-%s-%s-%s-%.2f-%s-\n",
+                descuentos[i].id_cod,
+                descuentos[i].descrip,
+                descuentos[i].tipo,
+                descuentos[i].estado,
+                descuentos[i].importe,
+                descuentos[i].aplicable);
+    }
+
+    fclose(archivo);
+}
+
+Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
+    FILE *archivo = fopen(Descuento_txt, "r");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo %s.\n", Descuento_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de adminProv
+    Descuento *descuentos = malloc(count * sizeof(Descuento));
+    if (descuentos == NULL) {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        char *token = strtok(buffer, "-");
+        strncpy(descuentos[i].id_cod, token, sizeof(descuentos[i].id_cod));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].descrip, token, sizeof(descuentos[i].descrip));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].tipo, token, sizeof(descuentos[i].tipo));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].estado, token, sizeof(descuentos[i].estado));
+        token = strtok(NULL, "-");
+        descuentos[i].importe=atof(token);
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].aplicable, token, sizeof(descuentos[i].aplicable));
+        i++;
+    }
+
+    fclose(archivo);
+    *numDesc = count;
+    return descuentos;
+}
+
+// Guarda el vector de DescuentosClientes en el archivo siguiendo la estructura:
+/*
+    o Identificador del cliente (Id_cliente), 7 dígitos.
+    o Identificador del código promocional o cheque regalo (Id_cod), 10 caracteres máximo.
+    o Fecha de asignación (día, mes y año)
+    o Fecha de caducidad (día, mes y año)
+    o Estado (Estado): 1 (Aplicado) ó 0 (No aplicado)
+*/
+void guardarDescuentosClientesEnArchivo(DescuentoCliente *descuentosClientes, int numDescuentosClientes) {
+    FILE *archivo = fopen(DescuentoCliente_txt, "w");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo DescuentosClientes.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numDescuentosClientes; i++) {
+        fprintf(archivo, "%s-%s-%s-%s-%d\n",
+                descuentosClientes[i].id_cliente,
+                descuentosClientes[i].id_cod,
+                descuentosClientes[i].fecha_asignacion,
+                descuentosClientes[i].fecha_caducidad,
+                descuentosClientes[i].estado);
+    }
+
+    fclose(archivo);
+    printf("Datos de descuentos de clientes guardados en el archivo DescuentosClientes.txt.\n");
+}
+
+Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
+    FILE *archivo = fopen(DescuentoCliente_txt, "r");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo %s.\n", DescuentoCliente_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de adminProv
+    DescuentoCliente *descuentos = malloc(count * sizeof(DescuentoCliente));
+    if (descuentos == NULL) {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+        char *token = strtok(buffer, "-");
+        strncpy(descuentos[i].id_cliente, token, sizeof(descuentos[i].id_cliente));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].id_cod, token, sizeof(descuentos[i].id_cod));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].fecha_asignacion, token, sizeof(descuentos[i].fecha_asignacion));
+        token = strtok(NULL, "-");
+        strncpy(descuentos[i].fecha_caducidad, token, sizeof(descuentos[i].fecha_caducidad));
+        token = strtok(NULL, "-");
+        descuentos[i].estado=atoi(token);
+        i++;
+    }
+
+    fclose(archivo);
+    *numDescC = count;
+    return descuentos;
+}
+
 
 int main() {
-    int numCategorias;
-    Categoria *categorias = iniciarCategoriasDeArchivo(&numCategorias);
-    if (categorias == NULL) {
-        printf("No se pudieron leer los datos de categorías del archivo.\n");
+    int numDescuentosClientes;
+    DescuentoCliente *descuentosClientes = iniciarDescuentosClientesDeArchivo(&numDescuentosClientes);
+    if (descuentosClientes == NULL) {
+        printf("No se pudieron cargar los datos de descuentos de clientes del archivo.\n");
         return 1;
     }
 
-    printf("Categorías leídas del archivo:\n");
-    for (int i = 0; i < numCategorias; i++) {
-        printf("ID Categoría: %s\n", categorias[i].id_categ);
-        printf("Descripción: %s\n", categorias[i].descrip);
+    printf("Descuentos de clientes cargados del archivo:\n");
+    for (int i = 0; i < numDescuentosClientes; i++) {
+        printf("ID Cliente: %s\n", descuentosClientes[i].id_cliente);
+        printf("ID Código: %s\n", descuentosClientes[i].id_cod);
+        printf("Fecha Asignación: %s\n", descuentosClientes[i].fecha_asignacion);
+        printf("Fecha Caducidad: %s\n", descuentosClientes[i].fecha_caducidad);
+        printf("Estado: %d\n", descuentosClientes[i].estado);
         printf("\n");
     }
 
-    free(categorias); // Liberar la memoria asignada para el vector de categorías
+    free(descuentosClientes); // Liberar la memoria asignada para el vector de descuentos de clientes
 
     return 0;
 }
