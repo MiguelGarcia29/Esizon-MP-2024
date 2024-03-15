@@ -1,0 +1,89 @@
+//GUARDAR CLIENTES
+#include <stdio.h>
+#include "cliente.h"
+
+int main() {
+    Cliente clientes[2] = {
+        {"0000001", "Juan Pérez", "Plaza San Francisco 1", "San Fernando", "Cádiz", "juanperez@gmail.com", "psw1234", 1000},
+        {"0000002", "María López", "Calle Mayor 5", "Madrid", "Madrid", "marialopez@gmail.com", "clave456", 1500}
+    };
+
+    guardarClientesEnArchivo(clientes, 2);
+    printf("Datos de clientes guardados en el archivo Clientes.txt.\n");
+
+    return 0;
+}
+
+//LEER CLIENTES
+int main() {
+    int numClientes;
+    Cliente *clientes = iniciarClientesDeArchivo("Clientes.txt", &numClientes);
+    if (clientes == NULL) {
+        printf("No se pudieron leer los datos de clientes del archivo.\n");
+        return 1;
+    }
+
+    printf("Clientes leídos del archivo:\n");
+    for (int i = 0; i < numClientes; i++) {
+        printf("ID Cliente: %s\n", clientes[i].id_cliente);
+        printf("Nombre: %s\n", clientes[i].nomb_cliente);
+        printf("Dirección: %s\n", clientes[i].dir_cliente);
+        printf("Localidad: %s\n", clientes[i].localidad);
+        printf("Provincia: %s\n", clientes[i].provincia);
+        printf("Email: %s\n", clientes[i].email);
+        printf("Contraseña: %s\n", clientes[i].contraseña);
+        printf("Cartera: %.2f\n", clientes[i].cartera);
+        printf("\n");
+    }
+
+    free(clientes); // Liberar la memoria asignada para el vector de clientes
+
+    return 0;
+}
+
+//GUARDAR ADMINPROV
+int main() {
+    AdminProv admins[2] = {
+        {"0001", "ESIZON", "antonio.martin@esizon.com", "antmar01", "administrador"},
+        {"0002", "DISTGEN", "donato.lima@distgen.com", "donlim04", "proveedor"}
+    };
+
+    guardarAdminProvEnArchivo(admins, 2);
+    printf("Datos de AdminProv guardados en el archivo AdminProv.txt.\n");
+
+    return 0;
+}
+
+//LEER ADMINPROV
+int numAdmins;
+    AdminProv *adminProvs = iniciarAdminProvDeArchivo(&numAdmins);
+    if (adminProvs == NULL) {
+        printf("No se pudieron leer los datos de AdminProv del archivo.\n");
+        return 1;
+    }
+
+    printf("AdminProv leídos del archivo:\n");
+    for (int i = 0; i < numAdmins; i++) {
+        printf("ID Empresa: %s\n", adminProvs[i].id_empresa);
+        printf("Nombre: %s\n", adminProvs[i].nombre);
+        printf("Email: %s\n", adminProvs[i].email);
+        printf("Contraseña: %s\n", adminProvs[i].contrasenia);
+        printf("Perfil de Usuario: %s\n", adminProvs[i].perfil_usuario);
+        printf("\n");
+    }
+
+    free(adminProvs); // Liberar la memoria asignada para el vector de AdminProv
+
+    return 0;
+
+//GUARDAR PRODUCTOS
+int main() {
+    Producto productos[2] = {
+        {"0000001", "televisor 32” 3D", "0001", "0001", 50, 5, 340.0},
+        {"0000002", "Auriculares inalámbricos", "0002", "0001", 125, 1, 45.0}
+    };
+
+    guardarProductosEnArchivo(productos, 2);
+
+    return 0;
+}
