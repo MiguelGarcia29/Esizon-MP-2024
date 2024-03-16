@@ -141,14 +141,14 @@ int mod(char cad[])
 void productos(Producto prod[], char empresa[5] )  // permitira acceder a la informacion de los productos que provea.
 {
     char cad[51];
-    int nombre,id,a,k;
+    int nombre,id,a,k,i;
 
     printf("\n(1) Buscar producto\n");  //menu segun lo que quiera hacer el usuario
     printf("(2) Modificar producto\n");
     printf("(3) Dar producto de alta\n__________\n\n");
     scanf("%d",&a);
 
-    switch (a);
+    switch (a)
     {
     case 1:
 
@@ -156,34 +156,57 @@ void productos(Producto prod[], char empresa[5] )  // permitira acceder a la inf
     fflush(stdin);
     fgets(cad,50,stdin); //actuara a modo de buscador
 
-    id = strcmp(prod.id_gestor,empresa);
-    nombre = strcmp(cad,prod.descrip );
+
+    for (i = 0;i < 5 && id != 0 || nombre != 0; i++)
+    {
+
+    id = strcmp(prod[i].id_gestor,empresa);
+    nombre = strcmp(cad,prod[i].descrip );
+
+    }
+
+    i = i-1; //se suma una i de mas
 
     if(id == 0 && nombre == 0)
     {
 
-        info_prod(prod); //llamada a la funcion para mostrar la informacion del producto
-        
+        info_prod(prod[i]); //llamada a la funcion para mostrar la informacion del producto
+
     }
+    else
+    {
+        printf("Producto no encontrado\n");
+    }
+
          break;
+
 
     case 2:
     printf("Modificar producto: ");
     fflush(stdin);
     fgets(cad,50,stdin); //actuara a modo de buscador
 
-    id = strcmp(prod.id_gestor,empresa);
-    nombre = strcmp(cad,prod.descrip );
+
+    for(i = 0;i < 5 && id !=0 || nombre != 0; i++)
+    {
+
+    id = strcmp(prod[i].id_gestor,empresa);
+    nombre = strcmp(cad,prod[i].descrip );
+
+    }
+
+    i = i-1; //se suma una i de mas
 
     if(id == 0 && nombre == 0)
     {
 
-        info_prod(prod); //llamada a la funcion para mostrar la informacion del producto
+        info_prod(prod[i]); //llamada a la funcion para mostrar la informacion del producto
         while(a == 2)
     {
         printf("\n(1) Modificar descripcion.\n "); //menu para saber que dato cambiar
         printf("(2) Modificar categoria.\n ");
-        printf("(3) Modificar precio.\n__________\n\n ");
+        printf("(3) Modificar precio.\n ");
+        printf("(4) Modificar stock.\n__________\n\n ");
 
         fflush(stdin);
         scanf("%d",&k);
@@ -191,18 +214,22 @@ void productos(Producto prod[], char empresa[5] )  // permitira acceder a la inf
     switch (k)  //segun lo que se quiera cambiar se enviara una cadena distinta a la funcion para modificarlas funcion
     {
     case 1:
-        mod(prod->descrip);
+        mod(prod[i].descrip);
         break;
 
     case 2:
-        mod(prod->id_categ);
+        mod(prod[i].id_categ);
         break;
 
      case 3:
     printf("Introduzca el nuevo dato: ");
     fflush(stdin);
-    printf("%f",prod->importe);
+    scanf("%f",&prod[i].importe);
         break;
+     case 4:
+    printf("Introduzca el nuevo dato: ");
+    fflush(stdin);
+    scanf("%d",&prod[i].stock);
 
     default:
     printf("Caracter equivocado\n\n");
@@ -210,40 +237,44 @@ void productos(Producto prod[], char empresa[5] )  // permitira acceder a la inf
 
     }
 
-    printf("(1) Seguir modificando\n\n");
+    printf("Presione 2 para seguir modificando\n\n");
     fflush(stdin);
     scanf("%d",&a);
 
-    } 
-    
+    }
+
 }
-        
+    else
+    {
+        printf("Producto no encontrado\n");
+    }
+
         break;
-    //dar de alta productos
+
     case 3:
-        
+            //dar de alta productos
         break;
-    
+
     default:
         break;
     }
-    
+
 
 }
+
 
 
 void info_prod(Producto info) //funcion para mostrar la informacon del producto escogido
 {
 
         printf("\nId: %s\n",info.id_prod);
-        printf("Nombre: %s\n",info.descrip);
+        printf("Nombre: %s",info.descrip);
         printf("Categoria: %s\n",info.id_categ);
         printf("%d en stock\n",info.stock);
         printf("Precio: %f\n",info.importe);
         printf("Llegara en %d dias\n",info.entrega);
-
+        printf("_________\n\n");
 }
-
 
 
 
