@@ -230,6 +230,7 @@ void productos(Producto prod[], char empresa[5] )  // permitira acceder a la inf
     printf("Introduzca el nuevo dato: ");
     fflush(stdin);
     scanf("%d",&prod[i].stock);
+        break;
 
     default:
     printf("Caracter equivocado\n\n");
@@ -294,7 +295,7 @@ void pedidos(Pedido ped, Locker lock, ComportamientoLocker comp)
     fflush(stdin);
     fgets(busc,8,stdin);
 
-    comp = strcmp(busc, ped.id_pedido) //asegurarse de que 
+    comp = strcmp(busc, ped.id_pedido) //asegurarse de que sea el pedido buscado
 
     if(comp == 0);
     {
