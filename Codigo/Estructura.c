@@ -52,13 +52,14 @@ typedef struct {
 }DescuentoCliente;
 
 typedef struct {
-    char id_locker[11];
-    char localidad[21];
-    char provincia[21];
-    char ubicacion[21];
+    int id_locker[15];
+    char localidad[15][21];
+    char provincia[15][21];
+    char ubicacion[15][21];
     int num_compt;
     int num_compocup;
-}Locker;
+} Locker;
+
 
 typedef struct {
     char id_locker[11];
