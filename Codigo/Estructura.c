@@ -7,7 +7,7 @@ typedef struct{
     char localidad[21];
     char provincia[21];
     char email[31];
-    char contraseña[16];
+    char contrasenia[16];
     float cartera;
 } Cliente;
 
@@ -15,7 +15,7 @@ typedef struct{
     char id_empresa[5];
     char nombre[21];
     char email[31];
-    char contraseña[16];
+    char contrasenia[16];
     char perfil_usuario[13]; // "administrador" o "proveedor"
 } AdminProv;
 
@@ -95,7 +95,7 @@ typedef struct {
     char id_transp[5];
     char nombre[21];
     char email[31];
-    char contraseña[16];
+    char contrasenia[16];
     char nombre_empresa[21];
     char ciudad_reparto[21];
 }Transportista;
