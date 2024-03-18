@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
-
-#define MAX_DIG 7
-
-
 typedef struct {
     char id_prod[8];
     char descrip[51];
@@ -18,13 +13,13 @@ typedef struct {
 }Producto;
 
 // Funciones a hacer de los productos: 
+
 void alta_producto();
 void baja_producto();
 void busqueda_producto();
 void listado_producto();
 void modificaciones_producto();
-
-
+void flushInputBuffer();
 
 
 
@@ -37,7 +32,12 @@ char* id_generator(Producto *productos, int tamanio_vector){
         id_generada = atoi(productos[tamanio_vector - 1].id_prod);
         id_generada++;
     }
-    char id[8];
+    char *id = malloc(8 * sizeof(char));
+    
+    if(id == NULL){
+        printf("Error al asignar memoria. \n");
+        exit(EXIT_FAILURE);
+    }
 
     sprintf(id,"%07d",id_generada);
 
@@ -61,6 +61,14 @@ void alta_producto(Producto *productos, int* tamanio_vector){
     scanf("%d", &nuevo_producto.stock);
     flushInputBuffer();
 
+    printf("\nNumero de dias que tarda la entrega:");
+    scanf("%d", &nuevo_producto.entrega);
+    flushInputBuffer();
+
+    /*
+    Categoria a que pertenece?
+    */
+
     strcpy(nuevo_producto.id_prod, id_generator(productos ,*tamanio_vector));
 
     productos[*tamanio_vector] = nuevo_producto;
@@ -69,10 +77,41 @@ void alta_producto(Producto *productos, int* tamanio_vector){
  
 }
 
-/*
-baja_producto(Producto *productos , int* tamanio){
 
+
+
+void baja_producto(Producto *productos , int* tamanio, char *id_baja){
+
+    int encontrado = 0;
+
+    for(int i = 0 ; i < *tamanio ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
+    {
+        if(strcmp(productos[i].id_prod,id_baja) == 0){
+            encontrado = 1;
+
+        for(int j = i; j < *tamanio - 1; j++) //Reposicionamos las ids posteriores a la dada de baja.
+        {
+           productos[j] = productos[j + 1];
+        }
+
+        (*tamanio)--; //Reduzco el tamaño del array.
+
+        printf("Producto con ID %s ha sido de baja correctamente.\n", id_baja);
+
+        }
+    }
+
+    if(encontrado != 0){
+        printf("La ID registrada no ha sido encontrada.");
+    }
+}
+
+void listado_producto(Producto *productos, int* tamanio){
+
+    for(int i = 0 ; i < *tamanio ; i++){
+
+        printf("%s-%s-%s-%s-%d-%d-%f\n",productos[i].id_prod,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
+
+    }
 
 }
-*/
-  
