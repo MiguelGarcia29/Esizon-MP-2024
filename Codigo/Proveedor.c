@@ -55,7 +55,15 @@ typedef struct {
 
 void perfil_prov(AdminProv *info);
 
-int mod(char cad[]);
+void mod(char cad[]);
+
+void productos(Producto prod[], char empresa[5] );
+
+void info_prod(Producto info);
+
+void pedidos(Pedido ped, Locker lock, ComportamientoLocker comp);
+
+void info_ped(Pedido info);
 
 
 
@@ -122,7 +130,7 @@ void perfil_prov(AdminProv *info) //Mostrar y modificar la informacion del perfi
 }
 
 
-int mod(char cad[])
+void mod(char cad[51])
 {
     printf("Introduzca el nuevo dato: ");
     fflush(stdin);
@@ -154,7 +162,7 @@ void productos(Producto prod[], char empresa[5] )  // permitira acceder a la inf
 
     printf("Buscar producto: ");
     fflush(stdin);
-    fgets(cad,50,stdin); //actuara a modo de buscador
+    fgets(cad,51,stdin); //actuara a modo de buscador
 
 
     for (i = 0;i < 5 && id != 0 || nombre != 0; i++)
@@ -184,7 +192,7 @@ void productos(Producto prod[], char empresa[5] )  // permitira acceder a la inf
     case 2:
     printf("Modificar producto: ");
     fflush(stdin);
-    fgets(cad,50,stdin); //actuara a modo de buscador
+    fgets(cad,51,stdin); //actuara a modo de buscador
 
 
     for(i = 0;i < 5 && id !=0 || nombre != 0; i++)
@@ -285,33 +293,42 @@ void info_prod(Producto info) //funcion para mostrar la informacon del producto 
 
 
 
-void pedidos(Pedido ped, Locker lock, ComportamientoLocker comp)
+void pedidos(Pedido ped[])
 {
 
     char busc[8];
-    int comp,a;
+    int compara,a,i;
 
     printf("Introduzca el Id del pedido: ");
     fflush(stdin);
     fgets(busc,8,stdin);
 
-    comp = strcmp(busc, ped.id_pedido) //asegurarse de que sea el pedido buscado
+    compara = 1;
 
-    if(comp == 0);
+    for(i = 0; i < 5 && compara != 0; i++)
+    {
+        compara = strcmp(busc, ped[i].id_pedido); //asegurarse de que sea el pedido buscado
+    }
+
+        i = i-1;
+
+    if(compara == 0)
     {
 
     printf("\n(1) Buscar pedido\n");  //menu segun lo que quiera hacer el usuario
-    printf("(2) Asignar locker\n_________\n\n");
+    printf("(2) Asignar locker\n");
 
     fflush(stdin);
     scanf("%d",&a);
 
+    printf("_________\n\n");
+
     switch (a)
     {
     case 1:
-        info_ped(ped);
+        info_ped(ped[i]);
         break;
-    
+
     default:
         break;
     }
@@ -319,7 +336,7 @@ void pedidos(Pedido ped, Locker lock, ComportamientoLocker comp)
     }
     else
     {
-        printf("Pedido no encontrado");
+        printf("\nPedido no encontrado\n__________\n\n");
     }
 
 }
@@ -331,22 +348,7 @@ void info_ped(Pedido info)
     printf("Cliente: %s\n",info.id_cliente);
     printf("Locker: %s\n",info.id_locker);
     printf("Llegara el %s\n",info.fecha_pedido);
-    printf("Lugar: %s\n",info.lugar_entrega);
+    printf("Lugar: %s",info.lugar_entrega);
     printf("Codigo promocional: %s\n",info.id_cod);
-}
-
-
-
-
-
-
-
-
-
-void salir_del_sistema()
-{
-
-    //llamada a la funcion de inicio de sesion para salir del sistema
-
 }
 
