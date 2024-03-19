@@ -2,7 +2,7 @@
 #include <string.h>
 
 typedef struct {
-    char id_locker[4]; // Cambiado a 4 para incluir espacio para el número de 3 dígitos y el carácter nulo
+    char id_locker[21]; 
     char localidad[21];
     char provincia[21];
     char ubicacion[21];
