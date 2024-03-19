@@ -2,7 +2,7 @@
 #include <string.h>
 
 typedef struct {
-    char id_locker[21]; 
+    char id_locker[11]; 
     char localidad[21];
     char provincia[21];
     char ubicacion[21];
@@ -10,15 +10,18 @@ typedef struct {
     int num_compocup;
 } Locker;
 
-int num_compt=15;// Definir un valor máximo para el número de lockers
+Locker l;
+
 
 Locker lockers[15];
 int num_compocup = 0;
 int id_counter = 1; // Inicializar el contador de ID
 
 // Función para dar de alta un nuevo locker
-void altaLocker(const char *localidad, const char *provincia, const char *ubicacion) {
-    if (num_compocup < num_compt) { // Verificar si se ha alcanzado el límite de lockers
+void altaLocker(const char *localidad, const char *provincia, const char *ubicacion) 
+{
+	l.num_compt=15;
+    if (num_compocup < l.num_compt) { // Verificar si se ha alcanzado el límite de lockers
         // Generar el ID del locker con el formato "001", "002", etc.
         sprintf(lockers[num_compocup].id_locker, "%03d", id_counter++);
         
@@ -49,7 +52,7 @@ void borrarLocker(const char *id) {
     int indice = buscarLocker(id);
     if (indice != -1) {
         // Mover los lockers restantes para llenar el espacio
-        for (int i = indice; i < num_compocup - 1; i++) {
+        for (int i = indice; i < 15; i++) {
             lockers[i] = lockers[i + 1];
         }
         num_compocup--;
@@ -61,9 +64,10 @@ void borrarLocker(const char *id) {
 
 // Función para acceder a la información de un locker por su ID
 void accederInfoLocker(const char *id) {
+	l.num_compt=15;
     int indice = buscarLocker(id);
     if (indice != -1) {
-        printf("Locker%s-%s-%s-%s-%d-%d\n", lockers[indice].id_locker, lockers[indice].localidad, lockers[indice].provincia, lockers[indice].ubicacion, lockers[indice].num_compt, lockers[indice].num_compocup);
+        printf("Locker%s-%s-%s-%s-%d-%d\n", lockers[indice].id_locker, lockers[indice].localidad, lockers[indice].provincia, lockers[indice].ubicacion, l.num_compt, num_compocup);
     } else {
         printf("No se encontró ningún locker con el ID %s.\n", id);
     }
