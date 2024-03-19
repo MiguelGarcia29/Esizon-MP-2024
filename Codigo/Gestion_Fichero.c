@@ -11,6 +11,7 @@
 #define Descuento_txt "Datos/Descuentos.txt"
 #define DescuentoCliente_txt "Datos/DescuentosClientes.txt"
 #define Lockers_txt "Datos/Lockers.txt"
+#define ComportamientoLocker_txt "Datos/CompartimentosLockers.txt"
 
 // Guarda el vector de clientes en el archivo siguiendo la estructura:
 /*  o Identificador del cliente (Id_cliente), 7 digitos.
@@ -142,9 +143,11 @@ void guardarAdminProvEnArchivo(AdminProv *admins, int numAdmins)
     fclose(archivo);
 }
 
-AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
+AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
+{
     FILE *archivo = fopen(AdminProv_txt, "r");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo %s.\n", AdminProv_txt);
         return NULL;
     }
@@ -152,7 +155,8 @@ AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
     // Contar la cantidad de lineas en el archivo
     int count = 0;
     char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         count++;
     }
 
@@ -161,7 +165,8 @@ AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
 
     // Crear el vector de adminProv
     AdminProv *adminProvs = malloc(count * sizeof(AdminProv));
-    if (adminProvs == NULL) {
+    if (adminProvs == NULL)
+    {
         fclose(archivo);
         printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
         return NULL;
@@ -169,7 +174,8 @@ AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
 
     // Leo cada linea y rellenar el vector de adminProv
     int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         char *token = strtok(buffer, "-");
         strncpy(adminProvs[i].id_empresa, token, sizeof(adminProvs[i].id_empresa));
         token = strtok(NULL, "-");
@@ -200,14 +206,17 @@ AdminProv* iniciarAdminProvDeArchivo(int *numAdmins) {
     la fecha de realización del pedido hasta la entrega al cliente.
     o Importe del producto en euros (Importe).
 */
-void guardarProductosEnArchivo(Producto *productos, int numProductos) {
+void guardarProductosEnArchivo(Producto *productos, int numProductos)
+{
     FILE *archivo = fopen(Productos_txt, "w");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo Productos.txt.\n");
         return;
     }
 
-    for (int i = 0; i < numProductos; i++) {
+    for (int i = 0; i < numProductos; i++)
+    {
         fprintf(archivo, "%s-%s-%s-%s-%d-%d-%.2f\n",
                 productos[i].id_prod,
                 productos[i].descrip,
@@ -263,9 +272,9 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
         token = strtok(NULL, "-");
         strncpy(productos[i].id_gestor, token, sizeof(productos[i].id_gestor));
         token = strtok(NULL, "-");
-        productos[i].stock=atoi(token);
+        productos[i].stock = atoi(token);
         token = strtok(NULL, "-");
-        productos[i].entrega=atoi(token); // atoi convierte la cadena en int
+        productos[i].entrega = atoi(token); // atoi convierte la cadena en int
         token = strtok(NULL, "-");
         productos[i].importe = atof(token); // atof convierte la cadena en Float.
         i++;
@@ -281,23 +290,28 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
     o Identificador de la categoria (Id_categ), 4 digitos.
     o Descripción de la categoria (Descrip), 50 caracteres maximo.
 */
-void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias) {
+void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias)
+{
     FILE *archivo = fopen(Categorias_txt, "w");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo Categorias.txt.\n");
         return;
     }
 
-    for (int i = 0; i < numCategorias; i++) {
+    for (int i = 0; i < numCategorias; i++)
+    {
         fprintf(archivo, "%s-%s-\n", categorias[i].id_categ, categorias[i].descrip);
     }
 
     fclose(archivo);
 }
 
-Categoria* iniciarCategoriasDeArchivo(int *numCat) {
+Categoria *iniciarCategoriasDeArchivo(int *numCat)
+{
     FILE *archivo = fopen(Categorias_txt, "r");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo %s.\n", Categorias_txt);
         return NULL;
     }
@@ -305,7 +319,8 @@ Categoria* iniciarCategoriasDeArchivo(int *numCat) {
     // Contar la cantidad de lineas en el archivo
     int count = 0;
     char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         count++;
     }
 
@@ -314,7 +329,8 @@ Categoria* iniciarCategoriasDeArchivo(int *numCat) {
 
     // Crear el vector de categorias
     Categoria *categorias = malloc(count * sizeof(Categoria));
-    if (categorias == NULL) {
+    if (categorias == NULL)
+    {
         fclose(archivo);
         printf("Error: No se pudo asignar memoria para el vector de categorias.\n");
         return NULL;
@@ -322,7 +338,8 @@ Categoria* iniciarCategoriasDeArchivo(int *numCat) {
 
     // Leo cada linea y rellenar el vector de adminProv
     int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         char *token = strtok(buffer, "-");
         strncpy(categorias[i].id_categ, token, sizeof(categorias[i].id_categ));
         token = strtok(NULL, "-");
@@ -346,14 +363,17 @@ Categoria* iniciarCategoriasDeArchivo(int *numCat) {
     aplicable a los gestionados por ESIZON.
 */
 
-void guardarDescuentosEnArchivo(Descuento *descuentos, int numDescuentos) {
+void guardarDescuentosEnArchivo(Descuento *descuentos, int numDescuentos)
+{
     FILE *archivo = fopen(Descuento_txt, "w");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo Descuentos.txt.\n");
         return;
     }
 
-    for (int i = 0; i < numDescuentos; i++) {
+    for (int i = 0; i < numDescuentos; i++)
+    {
         fprintf(archivo, "%s-%s-%s-%s-%.2f-%s-\n",
                 descuentos[i].id_cod,
                 descuentos[i].descrip,
@@ -366,9 +386,11 @@ void guardarDescuentosEnArchivo(Descuento *descuentos, int numDescuentos) {
     fclose(archivo);
 }
 
-Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
+Descuento *iniciarDescuentosDeArchivo(int *numDesc)
+{
     FILE *archivo = fopen(Descuento_txt, "r");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo %s.\n", Descuento_txt);
         return NULL;
     }
@@ -376,7 +398,8 @@ Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
     // Contar la cantidad de lineas en el archivo
     int count = 0;
     char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         count++;
     }
 
@@ -385,7 +408,8 @@ Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
 
     // Crear el vector de descuentos
     Descuento *descuentos = malloc(count * sizeof(Descuento));
-    if (descuentos == NULL) {
+    if (descuentos == NULL)
+    {
         fclose(archivo);
         printf("Error: No se pudo asignar memoria para el vector de descuentos.\n");
         return NULL;
@@ -393,7 +417,8 @@ Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
 
     // Leo cada linea y rellenar el vector de adminProv
     int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         char *token = strtok(buffer, "-");
         strncpy(descuentos[i].id_cod, token, sizeof(descuentos[i].id_cod));
         token = strtok(NULL, "-");
@@ -403,7 +428,7 @@ Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
         token = strtok(NULL, "-");
         strncpy(descuentos[i].estado, token, sizeof(descuentos[i].estado));
         token = strtok(NULL, "-");
-        descuentos[i].importe=atof(token);
+        descuentos[i].importe = atof(token);
         token = strtok(NULL, "-");
         strncpy(descuentos[i].aplicable, token, sizeof(descuentos[i].aplicable));
         i++;
@@ -422,14 +447,17 @@ Descuento* iniciarDescuentosDeArchivo(int *numDesc) {
     o Fecha de caducidad (día, mes y año)
     o Estado (Estado): 1 (Aplicado) ó 0 (No aplicado)
 */
-void guardarDescuentosClientesEnArchivo(DescuentoCliente *descuentosClientes, int numDescuentosClientes) {
+void guardarDescuentosClientesEnArchivo(DescuentoCliente *descuentosClientes, int numDescuentosClientes)
+{
     FILE *archivo = fopen(DescuentoCliente_txt, "w");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo DescuentosClientes.txt.\n");
         return;
     }
 
-    for (int i = 0; i < numDescuentosClientes; i++) {
+    for (int i = 0; i < numDescuentosClientes; i++)
+    {
         fprintf(archivo, "%s-%s-%s-%s-%d\n",
                 descuentosClientes[i].id_cliente,
                 descuentosClientes[i].id_cod,
@@ -441,9 +469,11 @@ void guardarDescuentosClientesEnArchivo(DescuentoCliente *descuentosClientes, in
     fclose(archivo);
 }
 
-Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
+Descuento *iniciarDescuentosClientesDeArchivo(int *numDescC)
+{
     FILE *archivo = fopen(DescuentoCliente_txt, "r");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo %s.\n", DescuentoCliente_txt);
         return NULL;
     }
@@ -451,7 +481,8 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
     // Contar la cantidad de lineas en el archivo
     int count = 0;
     char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         count++;
     }
 
@@ -460,7 +491,8 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
 
     // Crear el vector de DescuentoCliente
     DescuentoCliente *descuentos = malloc(count * sizeof(DescuentoCliente));
-    if (descuentos == NULL) {
+    if (descuentos == NULL)
+    {
         fclose(archivo);
         printf("Error: No se pudo asignar memoria para el vector de DescuentoCliente.\n");
         return NULL;
@@ -468,7 +500,8 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
 
     // Leo cada linea y rellenar el vector de adminProv
     int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         char *token = strtok(buffer, "-");
         strncpy(descuentos[i].id_cliente, token, sizeof(descuentos[i].id_cliente));
         token = strtok(NULL, "-");
@@ -478,7 +511,7 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
         token = strtok(NULL, "-");
         strncpy(descuentos[i].fecha_caducidad, token, sizeof(descuentos[i].fecha_caducidad));
         token = strtok(NULL, "-");
-        descuentos[i].estado=atoi(token);
+        descuentos[i].estado = atoi(token);
         i++;
     }
 
@@ -496,14 +529,17 @@ Descuento* iniciarDescuentosClientesDeArchivo(int *numDescC) {
     o Número de compartimentos total (Num_compT).
     o Número de compartimentos ocupados actualmente (Num_compOcup).
 */
-void guardarLockersEnArchivo(Locker *lockers, int numLockers) {
+void guardarLockersEnArchivo(Locker *lockers, int numLockers)
+{
     FILE *archivo = fopen(Lockers_txt, "w");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo Lockers.txt.\n");
         return;
     }
 
-    for (int i = 0; i < numLockers; i++) {
+    for (int i = 0; i < numLockers; i++)
+    {
         fprintf(archivo, "%s-%s-%s-%s-%d-%d\n",
                 lockers[i].id_locker,
                 lockers[i].localidad,
@@ -516,9 +552,11 @@ void guardarLockersEnArchivo(Locker *lockers, int numLockers) {
     fclose(archivo);
 }
 
-Locker* iniciarLockersDeArchivo(int *numLock) {
+Locker * iniciarLockersDeArchivo(int *numLock)
+{
     FILE *archivo = fopen(Lockers_txt, "r");
-    if (archivo == NULL) {
+    if (archivo == NULL)
+    {
         printf("Error al abrir el archivo %s.\n", Lockers_txt);
         return NULL;
     }
@@ -526,7 +564,8 @@ Locker* iniciarLockersDeArchivo(int *numLock) {
     // Contar la cantidad de lineas en el archivo
     int count = 0;
     char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         count++;
     }
 
@@ -534,8 +573,9 @@ Locker* iniciarLockersDeArchivo(int *numLock) {
     rewind(archivo);
 
     // Crear el vector de Locker
-    Locker *descuentos = malloc(count * sizeof(Locker));
-    if (descuentos == NULL) {
+    Locker *lockers = malloc(count * sizeof(Locker));
+    if (lockers == NULL)
+    {
         fclose(archivo);
         printf("Error: No se pudo asignar memoria para el vector de Locker.\n");
         return NULL;
@@ -543,48 +583,135 @@ Locker* iniciarLockersDeArchivo(int *numLock) {
 
     // Leo cada linea y rellenar el vector de adminProv
     int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL) {
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
         char *token = strtok(buffer, "-");
-        strncpy(descuentos[i].id_locker, token, sizeof(descuentos[i].id_locker));
+        strncpy(lockers[i].id_locker, token, sizeof(lockers[i].id_locker));
         token = strtok(NULL, "-");
-        strncpy(descuentos[i].localidad, token, sizeof(descuentos[i].localidad));
+        strncpy(lockers[i].localidad, token, sizeof(lockers[i].localidad));
         token = strtok(NULL, "-");
-        strncpy(descuentos[i].provincia, token, sizeof(descuentos[i].provincia));
+        strncpy(lockers[i].provincia, token, sizeof(lockers[i].provincia));
         token = strtok(NULL, "-");
-        strncpy(descuentos[i].ubicacion, token, sizeof(descuentos[i].ubicacion));
+        strncpy(lockers[i].ubicacion, token, sizeof(lockers[i].ubicacion));
         token = strtok(NULL, "-");
-        descuentos[i].num_compt=atoi(token);
+        lockers[i].num_compt = atoi(token);
         token = strtok(NULL, "-");
-        descuentos[i].num_compocup=atoi(token);
+        lockers[i].num_compocup = atoi(token);
         i++;
     }
 
     fclose(archivo);
     *numLock = count;
-    return descuentos;
+    return lockers;
+}
+
+// Guarda el vector de ComportamientoLocker en el archivo siguiendo la estructura:
+/*
+    o Identificador del locker (Id_locker), 10 caracteres máximo.
+    o Número de compartimento (Num_comp).
+    o Código del locker (Cod_locker).
+    o Estado: «ocupado» o «vacío»
+    o Fecha ocupación (día, mes y año).
+    o Fecha caducidad (día, mes y año).
+*/
+void guardarComportamientoLockerEnArchivo(ComportamientoLocker *comportamientos, int numComportamientos)
+{
+    FILE *archivo = fopen(ComportamientoLocker_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo CompartimentosLockers.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numComportamientos; i++)
+    {
+        fprintf(archivo, "%s-%d-%s-%s-%s-%s-\n",
+                comportamientos[i].id_locker,
+                comportamientos[i].num_comp,
+                comportamientos[i].cod_locker,
+                comportamientos[i].estado,
+                comportamientos[i].fecha_ocupacion,
+                comportamientos[i].fecha_caducidad);
+    }
+
+    fclose(archivo);
+}
+
+ComportamientoLocker * iniciarComportamientoLockersDeArchivo(int *numCompLock)
+{
+    FILE *archivo = fopen(ComportamientoLocker_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", ComportamientoLocker_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    ComportamientoLocker *comportamientoL = malloc(count * sizeof(ComportamientoLocker));
+    if (comportamientoL == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de ComportamientoLocker.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(comportamientoL[i].id_locker, token, sizeof(comportamientoL[i].id_locker));
+        token = strtok(NULL, "-");
+        comportamientoL[i].num_comp = atoi(token);
+        token = strtok(NULL, "-");
+        strncpy(comportamientoL[i].cod_locker, token, sizeof(comportamientoL[i].cod_locker));
+        token = strtok(NULL, "-");
+        strncpy(comportamientoL[i].estado, token, sizeof(comportamientoL[i].estado));
+        token = strtok(NULL, "-");
+        strncpy(comportamientoL[i].fecha_ocupacion, token, sizeof(comportamientoL[i].fecha_ocupacion));
+        token = strtok(NULL, "-");
+        strncpy(comportamientoL[i].fecha_caducidad, token, sizeof(comportamientoL[i].fecha_caducidad));
+        
+        i++;
+    }
+
+    fclose(archivo);
+    *numCompLock = count;
+    return comportamientoL;
 }
 
 
 int main() {
-    int numLockers;
-    Locker *lockers = iniciarLockersDeArchivo(&numLockers);
-    if (lockers == NULL) {
-        printf("No se pudieron cargar los datos de los lockers del archivo.\n");
+    int numComportamientos;
+    ComportamientoLocker *comportamientos = iniciarComportamientoLockersDeArchivo(&numComportamientos);
+    if (comportamientos == NULL) {
+        printf("No se pudieron cargar los datos de comportamientos de lockers del archivo.\n");
         return 1;
     }
 
-    printf("Lockers cargados del archivo:\n");
-    for (int i = 0; i < numLockers; i++) {
-        printf("ID Locker: %s\n", lockers[i].id_locker);
-        printf("Localidad: %s\n", lockers[i].localidad);
-        printf("Provincia: %s\n", lockers[i].provincia);
-        printf("Ubicación: %s\n", lockers[i].ubicacion);
-        printf("Número de compartimentos total: %d\n", lockers[i].num_compt);
-        printf("Número de compartimentos ocupados: %d\n", lockers[i].num_compocup);
+    printf("Comportamientos de lockers cargados del archivo:\n");
+    for (int i = 0; i < numComportamientos; i++) {
+        printf("ID Locker: %s\n", comportamientos[i].id_locker);
+        printf("Número de compartimento: %d\n", comportamientos[i].num_comp);
+        printf("Código del locker: %s\n", comportamientos[i].cod_locker);
+        printf("Estado: %s\n", comportamientos[i].estado);
+        printf("Fecha de ocupación: %s\n", comportamientos[i].fecha_ocupacion);
+        printf("Fecha de caducidad: %s\n", comportamientos[i].fecha_caducidad);
         printf("\n");
     }
 
-    free(lockers); // Liberar la memoria asignada para el vector de lockers
+    free(comportamientos); // Liberar la memoria asignada para el vector de comportamientos de lockers
 
     return 0;
 }

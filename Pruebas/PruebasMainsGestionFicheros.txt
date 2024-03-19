@@ -239,3 +239,65 @@ int main() {
 }
 
 //LEER LOCKERS
+int main() {
+    int numLockers;
+    Locker *lockers = iniciarLockersDeArchivo(&numLockers);
+    if (lockers == NULL) {
+        printf("No se pudieron cargar los datos de los lockers del archivo.\n");
+        return 1;
+    }
+
+    printf("Lockers cargados del archivo:\n");
+    for (int i = 0; i < numLockers; i++) {
+        printf("ID Locker: %s\n", lockers[i].id_locker);
+        printf("Localidad: %s\n", lockers[i].localidad);
+        printf("Provincia: %s\n", lockers[i].provincia);
+        printf("Ubicación: %s\n", lockers[i].ubicacion);
+        printf("Número de compartimentos total: %d\n", lockers[i].num_compt);
+        printf("Número de compartimentos ocupados: %d\n", lockers[i].num_compocup);
+        printf("\n");
+    }
+
+    free(lockers); // Liberar la memoria asignada para el vector de lockers
+
+    return 0;
+}
+
+//GUARDAR COMPORTAMIENTOLOCKER
+int main()
+{
+    // Ejemplo de comportamientos de lockers
+    ComportamientoLocker comportamientos[2] = {
+        {"Lock001", 1, "Prod001", "ocupado", "25/01/2024", "27/03/2024"},
+        {"Lock002", 2, "Prod002", "vacio", "01/02/2024", "01/06/2024"}};
+
+    // Guardar comportamientos de lockers en el archivo
+    guardarComportamientoLockerEnArchivo(comportamientos, 2);
+
+    return 0;
+}
+
+//LEER COMPORTAMIENTOLOCKER
+int main() {
+    int numComportamientos;
+    ComportamientoLocker *comportamientos = iniciarComportamientoLockersDeArchivo(&numComportamientos);
+    if (comportamientos == NULL) {
+        printf("No se pudieron cargar los datos de comportamientos de lockers del archivo.\n");
+        return 1;
+    }
+
+    printf("Comportamientos de lockers cargados del archivo:\n");
+    for (int i = 0; i < numComportamientos; i++) {
+        printf("ID Locker: %s\n", comportamientos[i].id_locker);
+        printf("Número de compartimento: %d\n", comportamientos[i].num_comp);
+        printf("Código del locker: %s\n", comportamientos[i].cod_locker);
+        printf("Estado: %s\n", comportamientos[i].estado);
+        printf("Fecha de ocupación: %s\n", comportamientos[i].fecha_ocupacion);
+        printf("Fecha de caducidad: %s\n", comportamientos[i].fecha_caducidad);
+        printf("\n");
+    }
+
+    free(comportamientos); // Liberar la memoria asignada para el vector de comportamientos de lockers
+
+    return 0;
+}
