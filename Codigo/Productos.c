@@ -44,6 +44,7 @@ char* id_generator(Producto *productos, int tamanio_vector){
     return id;
 }
 
+//Procedimiento da de alta los productos.
 void alta_producto(Producto *productos, int* tamanio_vector){
 
     Producto nuevo_producto;
@@ -79,7 +80,7 @@ void alta_producto(Producto *productos, int* tamanio_vector){
 
 
 
-
+//Procedimiento da de baja los productos. (Usando la id, quizas alla que cambiarlo, o imprimir la lista de productos cada vez que se haga)
 void baja_producto(Producto *productos , int* tamanio, char *id_baja){
 
     int encontrado = 0;
@@ -105,7 +106,7 @@ void baja_producto(Producto *productos , int* tamanio, char *id_baja){
         printf("La ID registrada no ha sido encontrada.");
     }
 }
-
+// Muestra lista de los productos, dados de alta.
 void listado_producto(Producto *productos, int* tamanio){
 
     for(int i = 0 ; i < *tamanio ; i++){
