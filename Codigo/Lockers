@@ -1,133 +1,115 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 typedef struct {
-    int id_locker[15];
-    char localidad[15][21];
-    char provincia[15][21];
-    char ubicacion[15][21];
-    int num_compt;
+    char id_locker[4]; // Cambiado a 4 para incluir espacio para el número de 3 dígitos y el carácter nulo
+    char localidad[21];
+    char provincia[21];
+    char ubicacion[21];
+    int num_compt; // Cambiado para representar el número máximo de lockers
     int num_compocup;
 } Locker;
 
-void id(Locker *l, int *ocupados) {
-    if (*ocupados == 0) {
-        l->id_locker[0] = 1;
+int num_compt=15;// Definir un valor máximo para el número de lockers
+
+Locker lockers[15];
+int num_compocup = 0;
+int id_counter = 1; // Inicializar el contador de ID
+
+// Función para dar de alta un nuevo locker
+void altaLocker(const char *localidad, const char *provincia, const char *ubicacion) {
+    if (num_compocup < num_compt) { // Verificar si se ha alcanzado el límite de lockers
+        // Generar el ID del locker con el formato "001", "002", etc.
+        sprintf(lockers[num_compocup].id_locker, "%03d", id_counter++);
+        
+        strcpy(lockers[num_compocup].localidad, localidad);
+        strcpy(lockers[num_compocup].provincia, provincia);
+        strcpy(lockers[num_compocup].ubicacion, ubicacion);
+        lockers[num_compocup].num_compt = 1; // Cambiado para representar un solo compartimento
+        lockers[num_compocup].num_compocup = 0; // Inicialmente, ningún compartimento ocupado
+        num_compocup++;
+        printf("Locker dado de alta correctamente.\n");
     } else {
-        for (int i = 0; i < *ocupados; i++) {
-            l->id_locker[i] = i + 1;
+        printf("No se pueden agregar más lockers, se ha alcanzado el límite máximo.\n");
+    }
+}
+
+// Función para buscar un locker por su ID
+int buscarLocker(const char *id) {
+    for (int i = 0; i < num_compocup; i++) {
+        if (strcmp(lockers[i].id_locker, id) == 0) {
+            return i;
         }
     }
-    (*ocupados)++;
+    return -1; // Si no se encuentra el locker
 }
 
-void local(Locker *l, int num) {
-    printf("Dime a que localidad perteneces: \n");
-    scanf("%s", l->localidad[num]);
-}
-
-void pro(Locker *l, int num) {
-    printf("Dime a que provincia perteneces: \n");
-    scanf("%s", l->provincia[num]);
-}
-
-void domicilio(Locker *l, int num) {
-    printf("Dime a la ubicacion a la que perteneces: \n");
-    scanf("%s", l->ubicacion[num]);
-}
-
-void dar_de_baja(Locker *l, int *ocupados) {
-    int id_baja;
-    printf("Introduce el ID del locker que quieres dar de baja: ");
-    scanf("%d", &id_baja);
-
-    int encontrado = 0;
-    for (int i = 0; i < *ocupados; i++) {
-        if (l->id_locker[i] == id_baja) {
-            encontrado = 1;
-            // Mover los lockers hacia arriba para llenar el espacio
-            for (int j = i; j < *ocupados - 1; j++) {
-                l->id_locker[j] = l->id_locker[j + 1];
-                strcpy(l->localidad[j], l->localidad[j + 1]);
-                strcpy(l->provincia[j], l->provincia[j + 1]);
-                strcpy(l->ubicacion[j], l->ubicacion[j + 1]);
-            }
-            (*ocupados)--;
-            printf("Locker dado de baja con exito.\n");
-            break;
+// Función para eliminar un locker por su ID
+void borrarLocker(const char *id) {
+    int indice = buscarLocker(id);
+    if (indice != -1) {
+        // Mover los lockers restantes para llenar el espacio
+        for (int i = indice; i < num_compocup - 1; i++) {
+            lockers[i] = lockers[i + 1];
         }
-    }
-    if (!encontrado) {
-        printf("No se encontro el ID del locker.\n");
+        num_compocup--;
+        printf("Locker con ID %s eliminado correctamente.\n", id);
+    } else {
+        printf("No se encontró ningún locker con el ID %s.\n", id);
     }
 }
 
-void acceder_contenido(Locker *l, int ocupados) {
-    int id;
-    printf("Introduce el ID del locker del que quieres acceder al contenido: ");
-    scanf("%d", &id);
-
-    int encontrado = 0;
-    for (int i = 0; i < ocupados; i++) {
-        if (l->id_locker[i] == id) {
-            encontrado = 1;
-            printf("Contenido del locker %d:\n", id);
-            printf("Locker%03d-%s-%s-%s-15-%d",l->id_locker[i], l->localidad[i],l->provincia[i],l->ubicacion[i],ocupados);
-            break;
-        }
-    }
-    if (!encontrado) {
-        printf("No se encontro el ID del locker.\n");
+// Función para acceder a la información de un locker por su ID
+void accederInfoLocker(const char *id) {
+    int indice = buscarLocker(id);
+    if (indice != -1) {
+        printf("Locker%s-%s-%s-%s-%d-%d\n", lockers[indice].id_locker, lockers[indice].localidad, lockers[indice].provincia, lockers[indice].ubicacion, lockers[indice].num_compt, lockers[indice].num_compocup);
+    } else {
+        printf("No se encontró ningún locker con el ID %s.\n", id);
     }
 }
 
 int main() {
-    Locker l;
-    int ocupados = 0;
-
-    while (1) {
-        int opcion;
-        printf("\n1. Dar de alta un nuevo locker\n");
-        printf("2. Dar de baja un locker\n");
-        printf("3. Acceder al contenido de un locker\n");
+    int opcion;
+    char localidad[21], provincia[21], ubicacion[21], id[4];
+    
+    do {
+        printf("\n--- Menú de opciones ---\n");
+        printf("1. Dar de alta un nuevo locker\n");
+        printf("2. Borrar un locker\n");
+        printf("3. Acceder a la información de un locker\n");
         printf("4. Salir\n");
-        printf("Elige una opcion: ");
+        printf("Ingrese su opción: ");
         scanf("%d", &opcion);
-
+        
         switch (opcion) {
             case 1:
-                if (ocupados < 15) {
-                    local(&l, ocupados);
-                    pro(&l, ocupados);
-                    domicilio(&l, ocupados);
-                    id(&l, &ocupados);
-                    printf("Locker agregado con exito.\n");
-                } else {
-                    printf("Ya no se pueden agregar más lockers, el límite es 15.\n");
-                }
+                printf("Ingrese la localidad: ");
+                scanf("%s", localidad);
+                printf("Ingrese la provincia: ");
+                scanf("%s", provincia);
+                printf("Ingrese la ubicación: ");
+                scanf("%s", ubicacion);
+                altaLocker(localidad, provincia, ubicacion);
                 break;
             case 2:
-                if (ocupados > 0) {
-                    dar_de_baja(&l, &ocupados);
-                } else {
-                    printf("No hay lockers para dar de baja.\n");
-                }
+                printf("Ingrese el ID del locker a borrar: ");
+                scanf("%s", id);
+                borrarLocker(id);
                 break;
             case 3:
-                if (ocupados > 0) {
-                    acceder_contenido(&l, ocupados);
-                } else {
-                    printf("No hay lockers para acceder al contenido.\n");
-                }
+                printf("Ingrese el ID del locker del que desea acceder a la información: ");
+                scanf("%s", id);
+                accederInfoLocker(id);
                 break;
             case 4:
                 printf("Saliendo del programa.\n");
-                exit(0);
+                break;
             default:
-                printf("Opcion no valida. Por favor, elige una opcion del 1 al 4.\n");
+                printf("Opción inválida. Por favor, seleccione una opción válida.\n");
+                break;
         }
-    }
+    } while (opcion != 4);
 
     return 0;
 }
