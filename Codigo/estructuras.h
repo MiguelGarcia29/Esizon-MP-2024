@@ -70,7 +70,7 @@ typedef struct {
     char estado[8]; // "ocupado" o "vacio"
     char fecha_ocupacion[11];
     char fecha_caducidad[11];
-}ComportamientoLocker;
+}CompartimentoLocker;
 
 typedef struct {
     char id_pedido[8];

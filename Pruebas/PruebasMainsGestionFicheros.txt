@@ -272,7 +272,7 @@ int main()
         {"Lock002", 2, "Prod002", "vacio", "01/02/2024", "01/06/2024"}};
 
     // Guardar comportamientos de lockers en el archivo
-    guardarComportamientoLockerEnArchivo(comportamientos, 2);
+    guardarCompartimentoLockerEnArchivo(comportamientos, 2);
 
     return 0;
 }
@@ -298,6 +298,89 @@ int main() {
     }
 
     free(comportamientos); // Liberar la memoria asignada para el vector de comportamientos de lockers
+
+    return 0;
+}
+
+//GUARDAR PEDIDO
+int main() {
+    // Ejemplo de pedidos
+    Pedido pedidos[2] = {
+        {"0000001", "02/02/2024", "0000001", "domicilio", "", "che001"},
+        {"0000002", "03/02/2024", "0000002", "locker", "Lock001", ""}
+    };
+
+    // Guardar pedidos en el archivo
+    guardarPedidoEnArchivo(pedidos, 2);
+
+    return 0;
+}
+
+//LEER PEDIDO
+int main() {
+    int numPedidos;
+    Pedido *pedidos = iniciarPedidosDeArchivo(&numPedidos);
+    if (pedidos == NULL) {
+        printf("No se pudieron cargar los datos de los pedidos del archivo.\n");
+        return 1;
+    }
+
+    printf("Pedidos cargados del archivo:\n");
+    for (int i = 0; i < numPedidos; i++) {
+        printf("ID Pedido: %s\n", pedidos[i].id_pedido);
+        printf("Fecha del pedido: %s\n", pedidos[i].fecha_pedido);
+        printf("ID Cliente: %s\n", pedidos[i].id_cliente);
+        printf("Lugar de entrega: %s\n", pedidos[i].lugar_entrega);
+        printf("ID Locker: %s\n", pedidos[i].id_locker);
+        printf("ID Código: %s\n", pedidos[i].id_cod);
+        printf("\n");
+    }
+
+    free(pedidos); // Liberar la memoria asignada para el vector de pedidos
+
+    return 0;
+}
+
+//GUARDAR PRODUCTOPEDIDO
+int main() {
+    // Ejemplo de productos pedidos
+    ProductoPedido productosPedidos[3] = {
+        {"0000001", "000001", 1, "07/03/2024", 340, "enPreparacion", "", "", "", ""},
+        {"0000001", "000002", 1, "03/02/2024", 45, "entregado", "0001", "", "", ""},
+        {"0000002", "000001", 2, "08/02/2024", 45, "enLocker", "0002", "Lock001", "134697", "08/02/2024"}
+    };
+
+    // Guardar productos pedidos en el archivo
+    guardarProductoPedidoEnArchivo(productosPedidos, 3);
+
+    return 0;
+}
+
+//LEER PRODUCTOPEDIDO
+int main() {
+    int numProductosPedidos;
+    ProductoPedido *productosPedidos = iniciarProductoPedidosDeArchivo(&numProductosPedidos);
+    if (productosPedidos == NULL) {
+        printf("No se pudieron cargar los datos de productos pedidos del archivo.\n");
+        return 1;
+    }
+
+    printf("Productos pedidos cargados del archivo:\n");
+    for (int i = 0; i < numProductosPedidos; i++) {
+        printf("ID Pedido: %s\n", productosPedidos[i].id_pedido);
+        printf("ID Producto: %s\n", productosPedidos[i].id_prod);
+        printf("Número de unidades: %d\n", productosPedidos[i].num_unid);
+        printf("Fecha de entrega prevista: %s\n", productosPedidos[i].fecha_entrega_prevista);
+        printf("Importe: %.2f\n", productosPedidos[i].importe);
+        printf("Estado del pedido: %s\n", productosPedidos[i].estado_pedido);
+        printf("ID Transportista: %s\n", productosPedidos[i].id_transp);
+        printf("ID Locker: %s\n", productosPedidos[i].id_locker);
+        printf("Código Locker: %s\n", productosPedidos[i].cod_locker);
+        printf("Fecha de entrega/devolución por el transportista: %s\n", productosPedidos[i].fecha_entrega_devolucion_transp);
+        printf("\n");
+    }
+
+    free(productosPedidos); // Liberar la memoria asignada para el vector de productos pedidos
 
     return 0;
 }

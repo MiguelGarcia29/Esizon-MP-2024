@@ -12,6 +12,8 @@
 #define DescuentoCliente_txt "Datos/DescuentosClientes.txt"
 #define Lockers_txt "Datos/Lockers.txt"
 #define ComportamientoLocker_txt "Datos/CompartimentosLockers.txt"
+#define Pedido_txt "Datos/Pedidos.txt"
+#define ProductoPedido_txt "Datos/ProductosPedidos.txt"
 
 // Guarda el vector de clientes en el archivo siguiendo la estructura:
 /*  o Identificador del cliente (Id_cliente), 7 digitos.
@@ -552,7 +554,7 @@ void guardarLockersEnArchivo(Locker *lockers, int numLockers)
     fclose(archivo);
 }
 
-Locker * iniciarLockersDeArchivo(int *numLock)
+Locker *iniciarLockersDeArchivo(int *numLock)
 {
     FILE *archivo = fopen(Lockers_txt, "r");
     if (archivo == NULL)
@@ -614,7 +616,7 @@ Locker * iniciarLockersDeArchivo(int *numLock)
     o Fecha ocupación (día, mes y año).
     o Fecha caducidad (día, mes y año).
 */
-void guardarComportamientoLockerEnArchivo(ComportamientoLocker *comportamientos, int numComportamientos)
+void guardarCompartimentoLockerEnArchivo(CompartimentoLocker *comportamientos, int numComportamientos)
 {
     FILE *archivo = fopen(ComportamientoLocker_txt, "w");
     if (archivo == NULL)
@@ -637,7 +639,7 @@ void guardarComportamientoLockerEnArchivo(ComportamientoLocker *comportamientos,
     fclose(archivo);
 }
 
-ComportamientoLocker * iniciarComportamientoLockersDeArchivo(int *numCompLock)
+CompartimentoLocker *iniciarCompartimientoLockersDeArchivo(int *numCompLock)
 {
     FILE *archivo = fopen(ComportamientoLocker_txt, "r");
     if (archivo == NULL)
@@ -658,7 +660,7 @@ ComportamientoLocker * iniciarComportamientoLockersDeArchivo(int *numCompLock)
     rewind(archivo);
 
     // Crear el vector de Locker
-    ComportamientoLocker *comportamientoL = malloc(count * sizeof(ComportamientoLocker));
+    CompartimentoLocker *comportamientoL = malloc(count * sizeof(CompartimentoLocker));
     if (comportamientoL == NULL)
     {
         fclose(archivo);
@@ -682,7 +684,7 @@ ComportamientoLocker * iniciarComportamientoLockersDeArchivo(int *numCompLock)
         strncpy(comportamientoL[i].fecha_ocupacion, token, sizeof(comportamientoL[i].fecha_ocupacion));
         token = strtok(NULL, "-");
         strncpy(comportamientoL[i].fecha_caducidad, token, sizeof(comportamientoL[i].fecha_caducidad));
-        
+
         i++;
     }
 
@@ -691,27 +693,242 @@ ComportamientoLocker * iniciarComportamientoLockersDeArchivo(int *numCompLock)
     return comportamientoL;
 }
 
+// Guarda el vector de ComportamientoLocker en el archivo siguiendo la estructura:
+/*
+    o Identificador del pedido (Id_pedido), 7 dígitos.
+    o Fecha del pedido (día, mes y año)
+    o Identificador del cliente que realiza el pedido (Id_cliente), 7 dígitos.
+    o Lugar de entrega (Lugar): «domicilio» o «locker»
+    o Identificador de Locker (Id_locker), 10 caracteres máximo.
+    o Identificador del código promocional o cheque regalo (Id_cod), 10 caracteres máximo.
+*/
+void guardarPedidoEnArchivo(Pedido *pedidos, int numPedidos)
+{
+    FILE *archivo = fopen(Pedido_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Pedidos.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numPedidos; i++)
+    {
+
+        // PARA QUE INTRODUZCA UN ESPACIO SI NO HAY LOCKER
+        if (strcmp(pedidos[i].lugar_entrega, "locker") != 0)
+        {
+            strcpy(pedidos[i].id_locker, " ");
+        }
+
+        fprintf(archivo, "%s-%s-%s-%s-%s-%s-\n",
+                pedidos[i].id_pedido,
+                pedidos[i].fecha_pedido,
+                pedidos[i].id_cliente,
+                pedidos[i].lugar_entrega,
+                pedidos[i].id_locker,
+                pedidos[i].id_cod);
+    }
+
+    fclose(archivo);
+    printf("Datos de pedidos guardados en el archivo Pedidos.txt.\n");
+}
+
+Pedido *iniciarPedidosDeArchivo(int *numPedidos)
+{
+    FILE *archivo = fopen(Pedido_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Pedido_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    Pedido *pedidos = malloc(count * sizeof(Pedido));
+    if (pedidos == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Pedido.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(pedidos[i].id_pedido, token, sizeof(pedidos[i].id_pedido));
+        token = strtok(NULL, "-");
+        strncpy(pedidos[i].fecha_pedido, token, sizeof(pedidos[i].fecha_pedido));
+        token = strtok(NULL, "-");
+        strncpy(pedidos[i].id_cliente, token, sizeof(pedidos[i].id_cliente));
+        token = strtok(NULL, "-");
+        strncpy(pedidos[i].lugar_entrega, token, sizeof(pedidos[i].lugar_entrega));
+        token = strtok(NULL, "-");
+        // SI NO ESTA EN LOCKER QUE DEJE ID LOCKER VACIA
+        if (strcmp(pedidos[i].lugar_entrega, "locker") != 0)
+            strncpy(pedidos[i].id_locker, "", sizeof(pedidos[i].id_locker));
+        else
+            strncpy(pedidos[i].id_locker, token, sizeof(pedidos[i].id_locker));
+        token = strtok(NULL, "-");
+        strncpy(pedidos[i].id_cod, token, sizeof(pedidos[i].id_cod));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numPedidos = count;
+    return pedidos;
+}
+
+// Guarda el vector de ProductoPedidos en el archivo siguiendo la estructura:
+/*
+    o Identificador del pedido (Id_pedido), 7 dígitos.
+    o Identificador del producto (Id_prod), 7 dígitos.
+    o Número de unidades (Num_unid)
+    o Fecha prevista de entrega (día, mes y año).
+    o Importe del producto en euros (Importe). Importante que quede constancia del importe al que
+    compra un cliente un producto si la empresa modifica posteriormente su importe.
+    o Estado del pedido: «enPreparación», «enviado», «enReparto», «enLocker», «entregado», «devuelto» o «transportista».
+    o Identificador del transportista (Id_transp), 4 dígitos.
+    o Identificador del locker (Id_locker), 10 caracteres máximo.
+    o Código del locker (Cod_locker).
+    o Fecha de entrega/devolución por el transportista
+*/
+void guardarProductoPedidoEnArchivo(ProductoPedido *productosPedidos, int numProductosPedidos)
+{
+    FILE *archivo = fopen(ProductoPedido_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo ProductosPedidos.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numProductosPedidos; i++)
+    {
+        // SI EL PRODUCTO ES DISTINTO DE "ENLOCKER", ESTABLECE CON ESPACIO LA INFORMACION DEL LOCKER
+        if (strcmp(productosPedidos[i].id_locker, "") == 0)
+            strcpy(productosPedidos[i].id_locker, " ");
+        if (strcmp(productosPedidos[i].cod_locker, "") == 0)
+            strcpy(productosPedidos[i].cod_locker, " ");
+        if (strcmp(productosPedidos[i].id_transp, "") == 0)
+            strcpy(productosPedidos[i].id_transp, " ");
+        if (strcmp(productosPedidos[i].fecha_entrega_devolucion_transp, "") == 0)
+            strcpy(productosPedidos[i].fecha_entrega_devolucion_transp, " ");
+
+        fprintf(archivo, "%s-%s-%d-%s-%.2f-%s-%s-%s-%s-%s-\n",
+                productosPedidos[i].id_pedido,
+                productosPedidos[i].id_prod,
+                productosPedidos[i].num_unid,
+                productosPedidos[i].fecha_entrega_prevista,
+                productosPedidos[i].importe,
+                productosPedidos[i].estado_pedido,
+                productosPedidos[i].id_transp,
+                productosPedidos[i].id_locker,
+                productosPedidos[i].cod_locker,
+                productosPedidos[i].fecha_entrega_devolucion_transp);
+    }
+
+    fclose(archivo);
+    printf("Datos de productos pedidos guardados en el archivo ProductosPedidos.txt.\n");
+}
+
+Pedido *iniciarProductoPedidosDeArchivo(int *numProductos)
+{
+    FILE *archivo = fopen(ProductoPedido_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", ProductoPedido_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    ProductoPedido *prodPed = malloc(count * sizeof(ProductoPedido));
+    if (prodPed == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de ComportamientoLocker.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(prodPed[i].id_pedido, token, sizeof(prodPed[i].id_pedido));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].id_prod, token, sizeof(prodPed[i].id_prod));
+        token = strtok(NULL, "-");
+        prodPed[i].num_unid=atoi(token);
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].fecha_entrega_prevista, token, sizeof(prodPed[i].fecha_entrega_prevista));
+        token = strtok(NULL, "-");
+        prodPed[i].importe=atof(token);
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].estado_pedido, token, sizeof(prodPed[i].estado_pedido));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].id_transp, token, sizeof(prodPed[i].id_transp));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].id_locker, token, sizeof(prodPed[i].id_locker));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].cod_locker, token, sizeof(prodPed[i].cod_locker));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].fecha_entrega_devolucion_transp, token, sizeof(prodPed[i].fecha_entrega_devolucion_transp));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numProductos = count;
+    return prodPed;
+}
 
 int main() {
-    int numComportamientos;
-    ComportamientoLocker *comportamientos = iniciarComportamientoLockersDeArchivo(&numComportamientos);
-    if (comportamientos == NULL) {
-        printf("No se pudieron cargar los datos de comportamientos de lockers del archivo.\n");
+    int numProductosPedidos;
+    ProductoPedido *productosPedidos = iniciarProductoPedidosDeArchivo(&numProductosPedidos);
+    if (productosPedidos == NULL) {
+        printf("No se pudieron cargar los datos de productos pedidos del archivo.\n");
         return 1;
     }
 
-    printf("Comportamientos de lockers cargados del archivo:\n");
-    for (int i = 0; i < numComportamientos; i++) {
-        printf("ID Locker: %s\n", comportamientos[i].id_locker);
-        printf("Número de compartimento: %d\n", comportamientos[i].num_comp);
-        printf("Código del locker: %s\n", comportamientos[i].cod_locker);
-        printf("Estado: %s\n", comportamientos[i].estado);
-        printf("Fecha de ocupación: %s\n", comportamientos[i].fecha_ocupacion);
-        printf("Fecha de caducidad: %s\n", comportamientos[i].fecha_caducidad);
+    printf("Productos pedidos cargados del archivo:\n");
+    for (int i = 0; i < numProductosPedidos; i++) {
+        printf("ID Pedido: %s\n", productosPedidos[i].id_pedido);
+        printf("ID Producto: %s\n", productosPedidos[i].id_prod);
+        printf("Número de unidades: %d\n", productosPedidos[i].num_unid);
+        printf("Fecha de entrega prevista: %s\n", productosPedidos[i].fecha_entrega_prevista);
+        printf("Importe: %.2f\n", productosPedidos[i].importe);
+        printf("Estado del pedido: %s\n", productosPedidos[i].estado_pedido);
+        printf("ID Transportista: %s\n", productosPedidos[i].id_transp);
+        printf("ID Locker: %s\n", productosPedidos[i].id_locker);
+        printf("Código Locker: %s\n", productosPedidos[i].cod_locker);
+        printf("Fecha de entrega/devolución por el transportista: %s\n", productosPedidos[i].fecha_entrega_devolucion_transp);
         printf("\n");
     }
 
-    free(comportamientos); // Liberar la memoria asignada para el vector de comportamientos de lockers
+    free(productosPedidos); // Liberar la memoria asignada para el vector de productos pedidos
 
     return 0;
 }
