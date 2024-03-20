@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "estructuras.h"
 
@@ -77,10 +78,10 @@ Cliente *iniciarClientesDeArchivo(int *numClientes)
     rewind(archivo);
 
     // Crear vector cliente
-    Cliente *clientes = malloc(count * sizeof(Cliente));
+    Cliente *clientes = (Cliente *)malloc(count * sizeof(Cliente));
     if (clientes == NULL)
     {
-        fclose(Clientes_txt);
+        fclose(archivo);
         printf("No se pudo asignar memoria para el vector de clientes.\n");
         return NULL;
     }
@@ -168,7 +169,7 @@ AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
     rewind(archivo);
 
     // Crear el vector de adminProv
-    AdminProv *adminProvs = malloc(count * sizeof(AdminProv));
+    AdminProv *adminProvs = (AdminProv *) malloc(count * sizeof(AdminProv));
     if (adminProvs == NULL)
     {
         fclose(archivo);
@@ -256,10 +257,10 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
     rewind(archivo);
 
     // Crear vector cliente
-    Producto *productos = malloc(count * sizeof(Producto));
+    Producto *productos = (Producto *)malloc(count * sizeof(Producto));
     if (productos == NULL)
     {
-        fclose(Productos_txt);
+        fclose(archivo);
         printf("No se pudo asignar memoria para el vector de productos.\n");
         return NULL;
     }
@@ -335,7 +336,7 @@ Categoria *iniciarCategoriasDeArchivo(int *numCat)
     rewind(archivo);
 
     // Crear el vector de categorias
-    Categoria *categorias = malloc(count * sizeof(Categoria));
+    Categoria *categorias = (Categoria *)malloc(count * sizeof(Categoria));
     if (categorias == NULL)
     {
         fclose(archivo);
@@ -414,7 +415,7 @@ Descuento *iniciarDescuentosDeArchivo(int *numDesc)
     rewind(archivo);
 
     // Crear el vector de descuentos
-    Descuento *descuentos = malloc(count * sizeof(Descuento));
+    Descuento *descuentos =(Descuento *) malloc(count * sizeof(Descuento));
     if (descuentos == NULL)
     {
         fclose(archivo);
@@ -476,7 +477,7 @@ void guardarDescuentosClientesEnArchivo(DescuentoCliente *descuentosClientes, in
     fclose(archivo);
 }
 
-Descuento *iniciarDescuentosClientesDeArchivo(int *numDescC)
+DescuentoCliente *iniciarDescuentosClientesDeArchivo(int *numDescC)
 {
     FILE *archivo = fopen(DescuentoCliente_txt, "r");
     if (archivo == NULL)
@@ -497,7 +498,7 @@ Descuento *iniciarDescuentosClientesDeArchivo(int *numDescC)
     rewind(archivo);
 
     // Crear el vector de DescuentoCliente
-    DescuentoCliente *descuentos = malloc(count * sizeof(DescuentoCliente));
+    DescuentoCliente *descuentos =(DescuentoCliente *) malloc(count * sizeof(DescuentoCliente));
     if (descuentos == NULL)
     {
         fclose(archivo);
@@ -580,7 +581,7 @@ Locker *iniciarLockersDeArchivo(int *numLock)
     rewind(archivo);
 
     // Crear el vector de Locker
-    Locker *lockers = malloc(count * sizeof(Locker));
+    Locker *lockers = (Locker *)malloc(count * sizeof(Locker));
     if (lockers == NULL)
     {
         fclose(archivo);
@@ -665,7 +666,7 @@ CompartimentoLocker *iniciarCompartimientoLockersDeArchivo(int *numCompLock)
     rewind(archivo);
 
     // Crear el vector de Locker
-    CompartimentoLocker *comportamientoL = malloc(count * sizeof(CompartimentoLocker));
+    CompartimentoLocker *comportamientoL = (CompartimentoLocker *)malloc(count * sizeof(CompartimentoLocker));
     if (comportamientoL == NULL)
     {
         fclose(archivo);
@@ -759,7 +760,7 @@ Pedido *iniciarPedidosDeArchivo(int *numPedidos)
     rewind(archivo);
 
     // Crear el vector de Locker
-    Pedido *pedidos = malloc(count * sizeof(Pedido));
+    Pedido *pedidos = (Pedido *)malloc(count * sizeof(Pedido));
     if (pedidos == NULL)
     {
         fclose(archivo);
@@ -848,7 +849,7 @@ void guardarProductoPedidoEnArchivo(ProductoPedido *productosPedidos, int numPro
     printf("Datos de productos pedidos guardados en el archivo ProductosPedidos.txt.\n");
 }
 
-Pedido *iniciarProductoPedidosDeArchivo(int *numProductos)
+ProductoPedido *iniciarProductoPedidosDeArchivo(int *numProductos)
 {
     FILE *archivo = fopen(ProductoPedido_txt, "r");
     if (archivo == NULL)
@@ -869,7 +870,7 @@ Pedido *iniciarProductoPedidosDeArchivo(int *numProductos)
     rewind(archivo);
 
     // Crear el vector de Locker
-    ProductoPedido *prodPed = malloc(count * sizeof(ProductoPedido));
+    ProductoPedido *prodPed = (ProductoPedido *)malloc(count * sizeof(ProductoPedido));
     if (prodPed == NULL)
     {
         fclose(archivo);
@@ -965,7 +966,7 @@ Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
     rewind(archivo);
 
     // Crear el vector de Locker
-    Transportista *transportistas = malloc(count * sizeof(Transportista));
+    Transportista *transportistas = (Transportista *)malloc(count * sizeof(Transportista));
     if (transportistas == NULL)
     {
         fclose(archivo);
@@ -1048,7 +1049,7 @@ Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)
     rewind(archivo);
 
     // Crear el vector de Devoluciones
-    Devolucion *devoluciones = malloc(count * sizeof(Devolucion));
+    Devolucion *devoluciones =(Devolucion *) malloc(count * sizeof(Devolucion));
     if (devoluciones == NULL)
     {
         fclose(archivo);
@@ -1081,30 +1082,4 @@ Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)
     fclose(archivo);
     *numDevolucion = count;
     return devoluciones;
-}
-
-
-int main() {
-    int numDevoluciones;
-    Devolucion *devoluciones = iniciarDevolucionDeArchivo(&numDevoluciones);
-    if (devoluciones == NULL) {
-        printf("No se pudieron cargar los datos de devoluciones del archivo.\n");
-        return 1;
-    }
-
-    printf("Devoluciones cargadas del archivo:\n");
-    for (int i = 0; i < numDevoluciones; i++) {
-        printf("ID Pedido: %s\n", devoluciones[i].id_pedido);
-        printf("ID Producto: %s\n", devoluciones[i].id_prod);
-        printf("Fecha Devolución: %s\n", devoluciones[i].fecha_devolucion);
-        printf("Motivo: %s\n", devoluciones[i].motivo);
-        printf("Estado: %s\n", devoluciones[i].estado);
-        printf("Fecha Aceptación: %s\n", devoluciones[i].fecha_aceptacion);
-        printf("Fecha Caducidad: %s\n", devoluciones[i].fecha_caducidad);
-        printf("\n");
-    }
-
-    free(devoluciones); // Liberar la memoria asignada para el vector de devoluciones
-
-    return 0;
 }
