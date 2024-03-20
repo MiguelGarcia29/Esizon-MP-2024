@@ -11,89 +11,140 @@ typedef struct {
     int num_compocup;
 } Locker;
 
+// Prototipos de funciones
+char* id_generator(Locker *l, int tamanio_vector);
+void alta_locker(Locker *l, int* tamanio_vector);
+void baja_locker(Locker *l , int* tamanio, char *id_baja);
+void listado_locker(Locker *l, int tamanio); // Corregido el tipo de tamanio
 
+void flushInputBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
 
 // La función se encarga de generar IDs en un vector de 4 dígitos.
 char* id_generator(Locker *l, int tamanio_vector) {
     int id_generada = 1;
 
     if (tamanio_vector != 0) { // Si no hay nada en el vector, la primer id es 000001.
-        id_generada = atoi(l[tamanio_vector - 1].id_locker) + 1;
-        printf("Ha entrado\n");
+        id_generada = atoi(l[tamanio_vector - 1].id_locker + 4) + 1;
     }
 
-    char *id = malloc(11 * sizeof(char)); // Se aumenta el tamaño para considerar "Lock" y el carácter nulo
+    char* id = malloc(11 * sizeof(char)); // Asigna memoria dinámica para el ID
     if (id == NULL) {
         printf("Error al asignar memoria. \n");
         exit(EXIT_FAILURE);
     }
 
-    char id2[5]; // Aumentar el tamaño para incluir el carácter nulo
-    sprintf(id2, "%03d", id_generada); // Se cambia el formato para que genere IDs de 6 dígitos
+    char id2[5];
+    sprintf(id2, "%03d", id_generada); 
     strcpy(id, "Lock");
-    strcat(id, id2); // Concatena "Lock" con el ID generado
+    strcat(id, id2);
 
     return id;
 }
 
-
-//Procedimiento da de alta los productos.
+// Procedimiento da de alta los productos.
 void alta_locker(Locker *l, int* tamanio_vector){
 
     Locker nuevo_locker;
-
+    char *cadena = id_generator(l, *tamanio_vector); 
+    strcpy(nuevo_locker.id_locker, cadena);
+    free(cadena); // Liberar la memoria asignada para el ID generada
+    
     printf("\nDime la localidad:");
-    scanf("%s", &nuevo_locker.localidad);
+    scanf("%20s", nuevo_locker.localidad);
     flushInputBuffer();
 
-
-    printf("\Dime la provincia:");
-    scanf("%s", &nuevo_locker.provincia);
-	flushInputBuffer();
+    printf("\nDime la provincia:");
+    scanf("%20s", nuevo_locker.provincia);
+    flushInputBuffer();
 
     printf("\nDime la direccion:");
-    scanf("%s", &nuevo_locker.ubicacion);
+    scanf("%20s", nuevo_locker.ubicacion);
     flushInputBuffer();
 
-	
-	printf("\nDime cuantos lockers hay en total:");
-	scanf("%d", &l->num_compt);
+    printf("\nDime cuantos lockers hay en total:");
+    scanf("%d", &nuevo_locker.num_compt); // Corregido el acceso al campo num_compt
 
-    l->num_compocup=(*tamanio_vector)++;
- 
+    l[*tamanio_vector] = nuevo_locker; // Guarda el nuevo locker en el arreglo
+    (*tamanio_vector)++;
 }
 
+// Procedimiento para dar de baja un locker.
 void baja_locker(Locker *l , int* tamanio, char *id_baja){
 
     int encontrado = 0;
 
-    for(int i = 0 ; i < *tamanio ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
-    {
-        if(strcmp(l[i].id_locker,id_baja) == 0){
+    for(int i = 0 ; i < *tamanio ; i++) {
+        if(strcmp(l[i].id_locker, id_baja) == 0){
             encontrado = 1;
 
-        for(int j = i; j < *tamanio - 1; j++) //Reposicionamos las ids posteriores a la dada de baja.
-        {
-           l[j] = l[j + 1];
-        }
+            for(int j = i; j < *tamanio - 1; j++) {
+                l[j] = l[j + 1];
+            }
 
-        (*tamanio)--; //Reduzco el tamaño del array.
+            (*tamanio)--; // Reduzco el tamaño del array.
 
-        printf("Producto con ID %s ha sido de baja correctamente.\n", id_baja);
-
+            printf("Locker con ID %s ha sido dado de baja correctamente.\n", id_baja);
+            break; // Salir del bucle una vez encontrado y eliminado el locker.
         }
     }
 
-    if(encontrado != 0){
-        printf("La ID registrada no ha sido encontrada.");
+    if(encontrado == 0){
+        printf("La ID registrada no ha sido encontrada.\n");
     }
 }
-// Muestra lista de los productos, dados de alta.
-void listado_locker(Locker *l, int* tamanio){
 
-    for(int i = 0 ; i < *tamanio ; i++){
+// Muestra lista de los lockers dados de alta.
+void listado_locker(Locker *l, int tamanio){
 
-        printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l->num_compt, l->num_compocup );
+    for(int i = 0 ; i < tamanio ; i++){
+        printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l[i].num_compt, l[i].num_compocup);
     }
-
 }
+
+int main()
+{
+    Locker lockers[100]; // Supongamos que podemos almacenar hasta 100 lockers
+    int tamanio_lockers = 0; // Inicialmente no hay lockers almacenados
+
+    int opcion;
+    char id_baja[11];
+
+    do {
+        printf("\nMenú de Opciones:\n");
+        printf("1. Alta de Locker\n");
+        printf("2. Baja de Locker\n");
+        printf("3. Listado de Lockers\n");
+        printf("4. Salir\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
+        flushInputBuffer(); // Limpiar el buffer de entrada después de leer la opción
+
+        switch (opcion) {
+            case 1:
+                alta_locker(lockers, &tamanio_lockers);
+                break;
+            case 2:
+                printf("\nIngrese el ID del Locker a dar de baja: ");
+                scanf("%10s", id_baja); // Leer hasta 10 caracteres para el ID
+                flushInputBuffer();
+                baja_locker(lockers, &tamanio_lockers, id_baja);
+                break;
+            case 3:
+                printf("\nListado de Lockers:\n");
+                listado_locker(lockers, tamanio_lockers); // Pasar el tamaño actual del vector
+                break;
+            case 4:
+                printf("\nSaliendo del programa.\n");
+                break;
+            default:
+                printf("\nOpción no válida. Por favor, seleccione una opción válida.\n");
+                break;
+        }
+    } while (opcion != 4);
+
+    return 0;
+}
+
