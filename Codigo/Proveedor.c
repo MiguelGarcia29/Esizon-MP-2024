@@ -1,356 +1,160 @@
-//Proveedor
+//proveedor
 #include<stdio.h>
 #include<string.h>
+#include "estructuras.h"
 
 
-typedef struct {
-    char id_prod[8];
-    char descrip[51];
-    char id_categ[5];
-    char id_gestor[5];
-    int stock;
-    int entrega;
-    float importe;
-}Producto;
+void perfil_proveedor(AdminProv *prov);
 
+void modificar_perfilprov(AdminProv *mod);
 
-typedef struct{
-    char id_empresa[5];
-    char nombre[21];
-    char email[31];
-    char contrasenia[16];
-    char perfil_usuario[13]; // "administrador" o "proveedor"
-} AdminProv;
+void mostrar_perfilprov(AdminProv perfil);
 
+int verificar_contrasenia(AdminProv.contrasenia contrasena);
 
-typedef struct {
-    char id_locker[11];
-    char localidad[21];
-    char provincia[21];
-    char ubicacion[21];
-    int num_compt;
-    int num_compocup;
-}Locker;
+void cambiar_contrasenia(AdminProv.contrasenia nueva);
 
-
-typedef struct {
-    char id_locker[11];
-    int num_comp;
-    char cod_locker[11];
-    char estado[7]; // "ocupado" o "vacío"
-    char fecha_ocupacion[11];
-    char fecha_caducidad[11];
-}ComportamientoLocker;
-
-
-typedef struct {
-    char id_pedido[8];
-    char fecha_pedido[11];
-    char id_cliente[8];
-    char lugar_entrega[10]; // "domicilio" o "locker"
-    char id_locker[11];
-    char id_cod[11];
-}Pedido;
-
-
-void perfil_prov(AdminProv *info);
-
-void mod(char cad[51]);
-
-void productos(Producto prod[], char empresa[5] );
-
-void info_prod(Producto info);
-
-void pedidos(Pedido ped[], ComportamientoLocker lock[]);
-
-void info_ped(Pedido info);
+void cambiar_email(AdminProv.email nuevo);
 
 
 
 
-
-
-
-void perfil_prov(AdminProv *info) //Mostrar y modificar la informacion del perfil
+void perfil_proveedor(AdminProv *prov)
 {
-    int j,k;
+	int a,b;
+	
+	printf("(1) Mostrar perfil\n");
+	printf("(2) Modificar perfil\n");
+	
+	scanf("%d",&a);
+	
+	switch(a)
+	{
+		case 1:
+			mostrar_perfilprov(prov);
+		break;
+		
+		case 2:
+			
+			b = verificar_contrasenia(prov->contrasenia);
+			
+			if(b == 0)
+			{
+				modificar_perfilprov(&prov);	
+			}
+			else
+			{
+				printf("Contrasena incorrecta.\n");
+			}
+		break;
+		
+		default:
+		break;	
+	}
+	
+}
 
-    printf("\nId_empresa: ");
-    printf("%s", info->id_empresa); //Imprime el id
 
-    printf("\nEmpresa: ");
-    printf("%s", info->nombre); //Imprime la empresa
 
+void mostrar_perfilprov(AdminProv perfil)//funcion que imprime los datos del usuario
+{
+	printf("Nombre de usuario: %s\n",perfil.usuario);	
+	printf("Empresa: %s\n",perfil.nombre);
+	printf("Id empresa: %s\n",perfil.id_empresa);
+	printf("Email: %s\n",perfil.email);
+	printf("__________n\n");
+}
+	
+
+
+int verificar_contrasenia(AdminProv.contrasenia contrasena)
+{
+	char verificacion[16];
+	int a;
+	
+	printf("Contrasena: ");
+	fflush(stdin);
+	fgets(verificacion,16,stdin);
+	
+	a = strcmp(verificacion,contrasena);
+	
+	return a;
+}
+	
+
+void modificar_perfilprov(AdminProv *mod)
+{
+	int a;
+	
+	printf("(1) Cambiar contrasena\n");
+	printf("(2) Cambiar email\n");
+	scanf("%d",&a);
+	
+		switch(a)
+		{
+			case 1:
+				cambiar_contrasenia(&mod->contrasenia);
+			break;
+			
+			case 2:
+				cambiar_email(&mod->email);
+			break;
+			
+			default:
+			break;
+		}
+} 
+
+
+void cambiar_contrasenia(AdminProv.contrasenia nueva)
+{
+	printf("Introduzca su nueva contrasena: ");
+	fflush(stdin);
+	fgets(nueva,16,stdin);
+}
+
+void cambiar_email(AdminProv.email nuevo)
+{
+	printf("Introduzca el nuevo email: ");
+	fflush(stdin);
+	fgets(nuevo,31,stdin);
+}
+
+
+int main()
+{
+	    AdminProv proveedor;
+    int a = 0;
+
+    fflush(stdin);
     printf("Email: ");
-    printf("%s", info->email); //Imprime el email
+    fgets(prov.email,31,stdin);
 
-    printf("Nombre de usuario: ");
-    printf("%s", info->perfil_usuario); //imprime el perfil
-
-    printf("\n__________");
-
-    printf("\n\n(1) Modificar\n"); //Preguntar si se desea modificar los datos
     fflush(stdin);
-    scanf("%d",&j);
+    printf("Id empresa: ");
+    fgets(prov.id_empresa,5,stdin);
 
-    while(j == 1){
-        printf("\n(1) Modificar nombre de usuario.\n "); //menu para saber que dato cambiar
-        printf("(2) Modificar empresa.\n ");
-        printf("(3) Modificar email.\n__________\n\n ");
-
-        fflush(stdin);
-        scanf("%d",&k);
-
-    switch (k)  //segun lo que se quiera cambiar se enviara una cadena distinta a una funcion
-    {
-    case 1:
-        mod(info->perfil_usuario);
-        break;
-
-    case 2:
-        mod(info->nombre);
-        break;
-
-     case 3:
-        mod(info->email);
-        break;
-
-    default:
-    printf("Caracter equivocado\n\n");
-        break;
-
-    }
-
-    printf("(1) Seguir modificando\n\n");
     fflush(stdin);
-    scanf("%d",&j);
+    printf("Empresa: ");
+    fgets(prov.nombre,21,stdin);
 
-    } 
+    fflush(stdin);
+    printf("Usuario: ");
+    fgets(prov.perfil_usuario,13,stdin);
     
-}
-
-
-void mod(char cad[51])
-{
-    printf("Introduzca el nuevo dato: ");
     fflush(stdin);
-    fgets(cad,51,stdin); //Modifica la cadena
-}
+    printf("Contrasena: ");
+    fgets(prov.perfil_usuario,16,stdin);
 
-
-
-
-
-
-
-
-
-
-void productos(Producto prod[], char empresa[5] )  // permitira acceder a la informacion de los productos que provea.
-{
-    char cad[51];
-    int nombre,id,a,k,i;
-
-    printf("\n(1) Buscar producto\n");  //menu segun lo que quiera hacer el usuario
-    printf("(2) Modificar producto\n");
-    printf("(3) Dar producto de alta\n__________\n\n");
-    scanf("%d",&a);
-
-    switch (a)
+    while(a == 0)
     {
-    case 1:
-
-    printf("Buscar producto: ");
-    fflush(stdin);
-    fgets(cad,51,stdin); //actuara a modo de buscador
+        perfil_proveedor(&proveedor);
 
 
-    for (i = 0;i < 5 && id != 0 || nombre != 0; i++)
-    {
-
-    id = strcmp(prod[i].id_gestor,empresa);
-    nombre = strcmp(cad,prod[i].descrip );
-
-    }
-
-    i = i-1; //se suma una i de mas
-
-    if(id == 0 && nombre == 0)
-    {
-
-        info_prod(prod[i]); //llamada a la funcion para mostrar la informacion del producto
-
-    }
-    else
-    {
-        printf("Producto no encontrado\n");
-    }
-
-         break;
-
-
-    case 2:
-    printf("Modificar producto: ");
-    fflush(stdin);
-    fgets(cad,51,stdin); //actuara a modo de buscador
-
-
-    for(i = 0;i < 5 && id !=0 || nombre != 0; i++)
-    {
-
-    id = strcmp(prod[i].id_gestor,empresa);
-    nombre = strcmp(cad,prod[i].descrip );
-
-    }
-
-    i = i-1; //se suma una i de mas
-
-    if(id == 0 && nombre == 0)
-    {
-
-        info_prod(prod[i]); //llamada a la funcion para mostrar la informacion del producto
-        while(a == 2)
-    {
-        printf("\n(1) Modificar descripcion.\n "); //menu para saber que dato cambiar
-        printf("(2) Modificar categoria.\n ");
-        printf("(3) Modificar precio.\n ");
-        printf("(4) Modificar stock.\n__________\n\n ");
-
+        printf("Seguir pruebas: ");
         fflush(stdin);
-        scanf("%d",&k);
-
-    switch (k)  //segun lo que se quiera cambiar se enviara una cadena distinta a la funcion para modificarlas funcion
-    {
-    case 1:
-        mod(prod[i].descrip);
-        break;
-
-    case 2:
-        mod(prod[i].id_categ);
-        break;
-
-     case 3:
-    printf("Introduzca el nuevo dato: ");
-    fflush(stdin);
-    scanf("%f",&prod[i].importe);
-        break;
-     case 4:
-    printf("Introduzca el nuevo dato: ");
-    fflush(stdin);
-    scanf("%d",&prod[i].stock);
-        break;
-
-    default:
-    printf("Caracter equivocado\n\n");
-        break;
-
+        scanf("%d",&a);
     }
 
-    printf("Presione 2 para seguir modificando\n\n");
-    fflush(stdin);
-    scanf("%d",&a);
-
-    }
-
+    return 0;
 }
-    else
-    {
-        printf("Producto no encontrado\n");
-    }
-
-        break;
-
-    case 3:
-            //dar de alta productos
-        break;
-
-    default:
-        break;
-    }
-
-
-}
-
-
-
-void info_prod(Producto info) //funcion para mostrar la informacon del producto escogido
-{
-
-        printf("\nId: %s\n",info.id_prod);
-        printf("Nombre: %s",info.descrip);
-        printf("Categoria: %s\n",info.id_categ);
-        printf("%d en stock\n",info.stock);
-        printf("Precio: %f\n",info.importe);
-        printf("Llegara en %d dias\n",info.entrega);
-        printf("_________\n\n");
-}
-
-
-
-
-
-
-
-
-
-void pedidos(Pedido ped[], ComportamientoLocker lock[])
-{
-
-    char busc[8];
-    int compara,a,i;
-
-    printf("Introduzca el Id del pedido: ");
-    fflush(stdin);
-    fgets(busc,8,stdin);
-
-    compara = 1;
-
-    for(i = 0; i < 5 && compara != 0; i++)
-    {
-        compara = strcmp(busc, ped[i].id_pedido); //asegurarse de que sea el pedido buscado
-    }
-
-        i = i-1;
-
-    if(compara == 0)
-    {
-
-    printf("\n(1) Buscar pedido\n");  //menu segun lo que quiera hacer el usuario
-    printf("(2) Asignar locker\n");
-
-    fflush(stdin);
-    scanf("%d",&a);
-
-    printf("_________\n\n");
-
-    switch (a)
-    {
-    case 1:
-        info_ped(ped[i]);
-        break;
-    case 2:
-        printf("Locker:\n\n"); // se pedira que indique el nuevo locker y compartimento y se respondera diciendo si esta vacio o no dicho compartimento
-        mod(ped.id_locker);
-    default:
-        break;
-    }
-
-    }
-    else
-    {
-        printf("\nPedido no encontrado\n__________\n\n");
-    }
-
-}
-
-
-void info_ped(Pedido info)
-{
-    printf("\nId: %s\n",info.id_pedido);
-    printf("Cliente: %s\n",info.id_cliente);
-    printf("Locker: %s\n",info.id_locker);
-    printf("Llegara el %s\n",info.fecha_pedido);
-    printf("Lugar: %s",info.lugar_entrega);
-    printf("Codigo promocional: %s\n",info.id_cod);
-}
-
