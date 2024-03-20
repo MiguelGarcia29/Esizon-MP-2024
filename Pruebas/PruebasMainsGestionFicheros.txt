@@ -1,0 +1,463 @@
+//GUARDAR CLIENTES
+#include <stdio.h>
+#include "cliente.h"
+
+int main() {
+    Cliente clientes[2] = {
+        {"0000001", "Juan Pérez", "Plaza San Francisco 1", "San Fernando", "Cádiz", "juanperez@gmail.com", "psw1234", 1000},
+        {"0000002", "María López", "Calle Mayor 5", "Madrid", "Madrid", "marialopez@gmail.com", "clave456", 1500}
+    };
+
+    guardarClientesEnArchivo(clientes, 2);
+    printf("Datos de clientes guardados en el archivo Clientes.txt.\n");
+
+    return 0;
+}
+
+//LEER CLIENTES
+int main() {
+    int numClientes;
+    Cliente *clientes = iniciarClientesDeArchivo("Clientes.txt", &numClientes);
+    if (clientes == NULL) {
+        printf("No se pudieron leer los datos de clientes del archivo.\n");
+        return 1;
+    }
+
+    printf("Clientes leídos del archivo:\n");
+    for (int i = 0; i < numClientes; i++) {
+        printf("ID Cliente: %s\n", clientes[i].id_cliente);
+        printf("Nombre: %s\n", clientes[i].nomb_cliente);
+        printf("Dirección: %s\n", clientes[i].dir_cliente);
+        printf("Localidad: %s\n", clientes[i].localidad);
+        printf("Provincia: %s\n", clientes[i].provincia);
+        printf("Email: %s\n", clientes[i].email);
+        printf("Contraseña: %s\n", clientes[i].contraseña);
+        printf("Cartera: %.2f\n", clientes[i].cartera);
+        printf("\n");
+    }
+
+    free(clientes); // Liberar la memoria asignada para el vector de clientes
+
+    return 0;
+}
+
+//GUARDAR ADMINPROV
+int main() {
+    AdminProv admins[2] = {
+        {"0001", "ESIZON", "antonio.martin@esizon.com", "antmar01", "administrador"},
+        {"0002", "DISTGEN", "donato.lima@distgen.com", "donlim04", "proveedor"}
+    };
+
+    guardarAdminProvEnArchivo(admins, 2);
+    printf("Datos de AdminProv guardados en el archivo AdminProv.txt.\n");
+
+    return 0;
+}
+
+//LEER ADMINPROV
+int numAdmins;
+    AdminProv *adminProvs = iniciarAdminProvDeArchivo(&numAdmins);
+    if (adminProvs == NULL) {
+        printf("No se pudieron leer los datos de AdminProv del archivo.\n");
+        return 1;
+    }
+
+    printf("AdminProv leídos del archivo:\n");
+    for (int i = 0; i < numAdmins; i++) {
+        printf("ID Empresa: %s\n", adminProvs[i].id_empresa);
+        printf("Nombre: %s\n", adminProvs[i].nombre);
+        printf("Email: %s\n", adminProvs[i].email);
+        printf("Contraseña: %s\n", adminProvs[i].contrasenia);
+        printf("Perfil de Usuario: %s\n", adminProvs[i].perfil_usuario);
+        printf("\n");
+    }
+
+    free(adminProvs); // Liberar la memoria asignada para el vector de AdminProv
+
+    return 0;
+
+//GUARDAR PRODUCTOS
+int main() {
+    Producto productos[2] = {
+        {"0000001", "Television", "televisor 32” 3D", "0001", "0001", 50, 5, 340.0},
+        {"0000002", "Auriculares","Auriculares inalámbricos", "0002", "0001", 125, 1, 45.0}
+    };
+
+    guardarProductosEnArchivo(productos, 2);
+
+    return 0;
+}
+
+//LEER PRODUCTOS
+int main() {
+    int numProductos;
+    Producto *productos = iniciarProductosDeArchivo(&numProductos);
+    if (productos == NULL) {
+        printf("No se pudieron leer los datos de productos del archivo.\n");
+        return 1;
+    }
+
+    printf("Productos leídos del archivo:\n");
+    for (int i = 0; i < numProductos; i++) {
+        printf("ID Producto: %s\n", productos[i].id_prod);
+        printf("Nombre: %s\n", productos[i].nombre);
+        printf("Descripción: %s\n", productos[i].descrip);
+        printf("ID Categoría: %s\n", productos[i].id_categ);
+        printf("ID Gestor: %s\n", productos[i].id_gestor);
+        printf("Stock: %d\n", productos[i].stock);
+        printf("Entrega: %d\n", productos[i].entrega);
+        printf("Importe: %.2f\n", productos[i].importe);
+        printf("\n");
+    }
+
+    free(productos); // Liberar la memoria asignada para el vector de productos
+
+    return 0;
+}
+
+//GUARDAR CATEGORIAS
+int main() {
+    Categoria categorias[2] = {
+        {"0001", "tv video home cinema"},
+        {"0002", "audio HIFI"}
+    };
+
+    guardarCategoriasEnArchivo(categorias, 2);
+
+    return 0;
+}
+
+//LEER CATEGORIAS
+int main() {
+    int numCategorias;
+    Categoria *categorias = iniciarCategoriasDeArchivo(&numCategorias);
+    if (categorias == NULL) {
+        printf("No se pudieron leer los datos de categorías del archivo.\n");
+        return 1;
+    }
+
+    printf("Categorías leídas del archivo:\n");
+    for (int i = 0; i < numCategorias; i++) {
+        printf("ID Categoría: %s\n", categorias[i].id_categ);
+        printf("Descripción: %s\n", categorias[i].descrip);
+        printf("\n");
+    }
+
+    free(categorias); // Liberar la memoria asignada para el vector de categorías
+
+    return 0;
+}
+
+//Guardar Descuentos
+int main() {
+    // Ejemplo de descuentos
+    Descuento descuentos[2] = {
+        {"black001", "Black Friday", "codpro", "activo", 10.0, "esizon"},
+        {"che001", "cheque regalo nivel 1", "cheqreg", "activo", 5.0, "todos"}
+    };
+
+    // Guardar descuentos en el archivo
+    guardarDescuentosEnArchivo(descuentos, 2);
+    return 0;
+}
+
+//Leer descuentos
+int main(){
+    int numDescuentos;
+    Descuento *descuentos_leidos = iniciarDescuentosDeArchivo(&numDescuentos);
+    if (descuentos_leidos == NULL) {
+        printf("No se pudieron leer los datos de descuentos del archivo.\n");
+        return 1;
+    }
+
+    // Imprimir descuentos leídos del archivo
+    printf("Descuentos leídos del archivo:\n");
+    for (int i = 0; i < numDescuentos; i++) {
+        printf("ID Código: %s\n", descuentos_leidos[i].id_cod);
+        printf("Descripción: %s\n", descuentos_leidos[i].descrip);
+        printf("Tipo: %s\n", descuentos_leidos[i].tipo);
+        printf("Estado: %s\n", descuentos_leidos[i].estado);
+        printf("Importe: %.2f\n", descuentos_leidos[i].importe);
+        printf("Aplicable: %s\n", descuentos_leidos[i].aplicable);
+        printf("\n");
+    }
+
+    free(descuentos_leidos); // Liberar la memoria asignada para el vector de descuentos leídos
+
+    return 0;
+}
+
+//GUARDAR DescuentosClientes
+int main() {
+    // Ejemplo de DescuentosClientes
+    DescuentoCliente descuentosClientes[2] = {
+        {"0000001", "black001", "25/01/2024", "27/03/2024", 0},
+        {"0000002", "che001", "01/02/2024", "01/06/2024", 0}
+    };
+
+    // Guardar DescuentosClientes en el archivo
+    guardarDescuentosClientesEnArchivo(descuentosClientes, 2);
+
+    return 0;
+}
+
+//LEER DescuentosClientes
+int main() {
+    int numDescuentosClientes;
+    DescuentoCliente *descuentosClientes = iniciarDescuentosClientesDeArchivo(&numDescuentosClientes);
+    if (descuentosClientes == NULL) {
+        printf("No se pudieron cargar los datos de descuentos de clientes del archivo.\n");
+        return 1;
+    }
+
+    printf("Descuentos de clientes cargados del archivo:\n");
+    for (int i = 0; i < numDescuentosClientes; i++) {
+        printf("ID Cliente: %s\n", descuentosClientes[i].id_cliente);
+        printf("ID Código: %s\n", descuentosClientes[i].id_cod);
+        printf("Fecha Asignación: %s\n", descuentosClientes[i].fecha_asignacion);
+        printf("Fecha Caducidad: %s\n", descuentosClientes[i].fecha_caducidad);
+        printf("Estado: %d\n", descuentosClientes[i].estado);
+        printf("\n");
+    }
+
+    free(descuentosClientes); // Liberar la memoria asignada para el vector de descuentos de clientes
+
+    return 0;
+}
+
+//GUARDAR LOCKERS
+int main() {
+    // Ejemplo de lockers
+    Locker lockers[2] = {
+        {"Lock001", "Puerto Real", "Cádiz", "local 12", 15, 0},
+        {"Lock002", "San Fernando", "Cádiz", "avenida principal", 20, 5}
+    };
+
+    // Guardar lockers en el archivo
+    guardarLockersEnArchivo(lockers, 2);
+
+    return 0;
+}
+
+//LEER LOCKERS
+int main() {
+    int numLockers;
+    Locker *lockers = iniciarLockersDeArchivo(&numLockers);
+    if (lockers == NULL) {
+        printf("No se pudieron cargar los datos de los lockers del archivo.\n");
+        return 1;
+    }
+
+    printf("Lockers cargados del archivo:\n");
+    for (int i = 0; i < numLockers; i++) {
+        printf("ID Locker: %s\n", lockers[i].id_locker);
+        printf("Localidad: %s\n", lockers[i].localidad);
+        printf("Provincia: %s\n", lockers[i].provincia);
+        printf("Ubicación: %s\n", lockers[i].ubicacion);
+        printf("Número de compartimentos total: %d\n", lockers[i].num_compt);
+        printf("Número de compartimentos ocupados: %d\n", lockers[i].num_compocup);
+        printf("\n");
+    }
+
+    free(lockers); // Liberar la memoria asignada para el vector de lockers
+
+    return 0;
+}
+
+//GUARDAR COMPORTAMIENTOLOCKER
+int main()
+{
+    // Ejemplo de comportamientos de lockers
+    ComportamientoLocker comportamientos[2] = {
+        {"Lock001", 1, "Prod001", "ocupado", "25/01/2024", "27/03/2024"},
+        {"Lock002", 2, "Prod002", "vacio", "01/02/2024", "01/06/2024"}};
+
+    // Guardar comportamientos de lockers en el archivo
+    guardarCompartimentoLockerEnArchivo(comportamientos, 2);
+
+    return 0;
+}
+
+//LEER COMPORTAMIENTOLOCKER
+int main() {
+    int numComportamientos;
+    ComportamientoLocker *comportamientos = iniciarComportamientoLockersDeArchivo(&numComportamientos);
+    if (comportamientos == NULL) {
+        printf("No se pudieron cargar los datos de comportamientos de lockers del archivo.\n");
+        return 1;
+    }
+
+    printf("Comportamientos de lockers cargados del archivo:\n");
+    for (int i = 0; i < numComportamientos; i++) {
+        printf("ID Locker: %s\n", comportamientos[i].id_locker);
+        printf("Número de compartimento: %d\n", comportamientos[i].num_comp);
+        printf("Código del locker: %s\n", comportamientos[i].cod_locker);
+        printf("Estado: %s\n", comportamientos[i].estado);
+        printf("Fecha de ocupación: %s\n", comportamientos[i].fecha_ocupacion);
+        printf("Fecha de caducidad: %s\n", comportamientos[i].fecha_caducidad);
+        printf("\n");
+    }
+
+    free(comportamientos); // Liberar la memoria asignada para el vector de comportamientos de lockers
+
+    return 0;
+}
+
+//GUARDAR PEDIDO
+int main() {
+    // Ejemplo de pedidos
+    Pedido pedidos[2] = {
+        {"0000001", "02/02/2024", "0000001", "domicilio", "", "che001"},
+        {"0000002", "03/02/2024", "0000002", "locker", "Lock001", ""}
+    };
+
+    // Guardar pedidos en el archivo
+    guardarPedidoEnArchivo(pedidos, 2);
+
+    return 0;
+}
+
+//LEER PEDIDO
+int main() {
+    int numPedidos;
+    Pedido *pedidos = iniciarPedidosDeArchivo(&numPedidos);
+    if (pedidos == NULL) {
+        printf("No se pudieron cargar los datos de los pedidos del archivo.\n");
+        return 1;
+    }
+
+    printf("Pedidos cargados del archivo:\n");
+    for (int i = 0; i < numPedidos; i++) {
+        printf("ID Pedido: %s\n", pedidos[i].id_pedido);
+        printf("Fecha del pedido: %s\n", pedidos[i].fecha_pedido);
+        printf("ID Cliente: %s\n", pedidos[i].id_cliente);
+        printf("Lugar de entrega: %s\n", pedidos[i].lugar_entrega);
+        printf("ID Locker: %s\n", pedidos[i].id_locker);
+        printf("ID Código: %s\n", pedidos[i].id_cod);
+        printf("\n");
+    }
+
+    free(pedidos); // Liberar la memoria asignada para el vector de pedidos
+
+    return 0;
+}
+
+//GUARDAR PRODUCTOPEDIDO
+int main() {
+    // Ejemplo de productos pedidos
+    ProductoPedido productosPedidos[3] = {
+        {"0000001", "000001", 1, "07/03/2024", 340, "enPreparacion", "", "", "", ""},
+        {"0000001", "000002", 1, "03/02/2024", 45, "entregado", "0001", "", "", ""},
+        {"0000002", "000001", 2, "08/02/2024", 45, "enLocker", "0002", "Lock001", "134697", "08/02/2024"}
+    };
+
+    // Guardar productos pedidos en el archivo
+    guardarProductoPedidoEnArchivo(productosPedidos, 3);
+
+    return 0;
+}
+
+//LEER PRODUCTOPEDIDO
+int main() {
+    int numProductosPedidos;
+    ProductoPedido *productosPedidos = iniciarProductoPedidosDeArchivo(&numProductosPedidos);
+    if (productosPedidos == NULL) {
+        printf("No se pudieron cargar los datos de productos pedidos del archivo.\n");
+        return 1;
+    }
+
+    printf("Productos pedidos cargados del archivo:\n");
+    for (int i = 0; i < numProductosPedidos; i++) {
+        printf("ID Pedido: %s\n", productosPedidos[i].id_pedido);
+        printf("ID Producto: %s\n", productosPedidos[i].id_prod);
+        printf("Número de unidades: %d\n", productosPedidos[i].num_unid);
+        printf("Fecha de entrega prevista: %s\n", productosPedidos[i].fecha_entrega_prevista);
+        printf("Importe: %.2f\n", productosPedidos[i].importe);
+        printf("Estado del pedido: %s\n", productosPedidos[i].estado_pedido);
+        printf("ID Transportista: %s\n", productosPedidos[i].id_transp);
+        printf("ID Locker: %s\n", productosPedidos[i].id_locker);
+        printf("Código Locker: %s\n", productosPedidos[i].cod_locker);
+        printf("Fecha de entrega/devolución por el transportista: %s\n", productosPedidos[i].fecha_entrega_devolucion_transp);
+        printf("\n");
+    }
+
+    free(productosPedidos); // Liberar la memoria asignada para el vector de productos pedidos
+
+    return 0;
+}
+
+//GUARDAR Transportistaç
+int main() {
+    Transportista transportistas[2] = {
+        {"0001", "Rafael Guitierrez", "rafael@gutitrans.com", "rf001", "GutiTrans", "Cádiz"},
+        {"0002", "Pepe Tinoco", "pepe@itranspo.com", "pp001", "TransPo", "Cádiz"}
+    };
+
+    guardarTransportistasEnArchivo(transportistas, 2);
+
+    return 0;
+}
+
+//LEER Transportista
+int main() {
+    int numTransportistas;
+    Transportista *transportistas = iniciarTransportistasDeArchivo(&numTransportistas);
+    if (transportistas == NULL) {
+        printf("No se pudieron cargar los datos de transportistas del archivo.\n");
+        return 1;
+    }
+
+    printf("Transportistas cargados del archivo:\n");
+    for (int i = 0; i < numTransportistas; i++) {
+        printf("ID Transportista: %s\n", transportistas[i].id_transp);
+        printf("Nombre: %s\n", transportistas[i].nombre);
+        printf("Email: %s\n", transportistas[i].email);
+        printf("Contraseña: %s\n", transportistas[i].contrasenia);
+        printf("Nombre de la empresa: %s\n", transportistas[i].nombre_empresa);
+        printf("Ciudad de reparto: %s\n", transportistas[i].ciudad_reparto);
+        printf("\n");
+    }
+
+    free(transportistas); // Liberar la memoria asignada para el vector de transportistas
+
+    return 0;
+}
+
+//GUARDAR DEVOLUCION
+int main()
+{
+    // Ejemplo de devoluciones
+    Devolucion devoluciones[1] = {
+        {"0000002", "0000001", "25/02/2024", "desperfecto", "pendiente", ""}};
+
+    // Guardar devoluciones en el archivo
+    guardarDevolucionesEnArchivo(devoluciones, 1);
+
+    return 0;
+}
+
+//LEER DEVOLUCION
+int main() {
+    int numDevoluciones;
+    Devolucion *devoluciones = iniciarDevolucionDeArchivo(&numDevoluciones);
+    if (devoluciones == NULL) {
+        printf("No se pudieron cargar los datos de devoluciones del archivo.\n");
+        return 1;
+    }
+
+    printf("Devoluciones cargadas del archivo:\n");
+    for (int i = 0; i < numDevoluciones; i++) {
+        printf("ID Pedido: %s\n", devoluciones[i].id_pedido);
+        printf("ID Producto: %s\n", devoluciones[i].id_prod);
+        printf("Fecha Devolución: %s\n", devoluciones[i].fecha_devolucion);
+        printf("Motivo: %s\n", devoluciones[i].motivo);
+        printf("Estado: %s\n", devoluciones[i].estado);
+        printf("Fecha Aceptación: %s\n", devoluciones[i].fecha_aceptacion);
+        printf("Fecha Caducidad: %s\n", devoluciones[i].fecha_caducidad);
+        printf("\n");
+    }
+
+    free(devoluciones); // Liberar la memoria asignada para el vector de devoluciones
+
+    return 0;
+}
