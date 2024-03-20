@@ -14,6 +14,8 @@
 #define ComportamientoLocker_txt "Datos/CompartimentosLockers.txt"
 #define Pedido_txt "Datos/Pedidos.txt"
 #define ProductoPedido_txt "Datos/ProductosPedidos.txt"
+#define Transportistas_txt "Datos/Transportistas.txt"
+#define Devoluciones_txt "Datos/Devoluciones.txt"
 
 // Guarda el vector de clientes en el archivo siguiendo la estructura:
 /*  o Identificador del cliente (Id_cliente), 7 digitos.
@@ -219,8 +221,9 @@ void guardarProductosEnArchivo(Producto *productos, int numProductos)
 
     for (int i = 0; i < numProductos; i++)
     {
-        fprintf(archivo, "%s-%s-%s-%s-%d-%d-%.2f\n",
+        fprintf(archivo, "%s-%s-%s-%s-%s-%d-%d-%.2f\n",
                 productos[i].id_prod,
+                productos[i].nombre,
                 productos[i].descrip,
                 productos[i].id_categ,
                 productos[i].id_gestor,
@@ -267,6 +270,8 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
     {
         char *token = strtok(buffer, "-");
         strncpy(productos[i].id_prod, token, sizeof(productos[i].id_prod));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].nombre, token, sizeof(productos[i].nombre));
         token = strtok(NULL, "-");
         strncpy(productos[i].descrip, token, sizeof(productos[i].descrip));
         token = strtok(NULL, "-");
@@ -881,11 +886,11 @@ Pedido *iniciarProductoPedidosDeArchivo(int *numProductos)
         token = strtok(NULL, "-");
         strncpy(prodPed[i].id_prod, token, sizeof(prodPed[i].id_prod));
         token = strtok(NULL, "-");
-        prodPed[i].num_unid=atoi(token);
+        prodPed[i].num_unid = atoi(token);
         token = strtok(NULL, "-");
         strncpy(prodPed[i].fecha_entrega_prevista, token, sizeof(prodPed[i].fecha_entrega_prevista));
         token = strtok(NULL, "-");
-        prodPed[i].importe=atof(token);
+        prodPed[i].importe = atof(token);
         token = strtok(NULL, "-");
         strncpy(prodPed[i].estado_pedido, token, sizeof(prodPed[i].estado_pedido));
         token = strtok(NULL, "-");
@@ -905,30 +910,201 @@ Pedido *iniciarProductoPedidosDeArchivo(int *numProductos)
     return prodPed;
 }
 
+// Guarda el vector de Transportitas en el archivo siguiendo la estructura:
+/*
+    o Identificador del transportista (Id_transp), 4 dígitos.
+    o Nombre del transportista (Nombre), 20 caracteres máximo.
+    o Email (email), 30 caracteres máximo, será usado como nombre de usuario para el acceso a la
+    plataforma.
+    o Contraseña para acceder al sistema (Contraseña), con 15 caracteres máximo.
+    o Nombre de la empresa (Nombre), 20 caracteres máximo.
+    o Ciudad de reparto (Ciudad), 20 caracteres máximo.
+*/
+void guardarTransportistasEnArchivo(Transportista *transportistas, int numTransportistas)
+{
+    FILE *archivo = fopen(Transportistas_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Transportistas.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numTransportistas; i++)
+    {
+        fprintf(archivo, "%s-%s-%s-%s-%s-%s-\n",
+                transportistas[i].id_transp,
+                transportistas[i].nombre,
+                transportistas[i].email,
+                transportistas[i].contrasenia,
+                transportistas[i].nombre_empresa,
+                transportistas[i].ciudad_reparto);
+    }
+
+    fclose(archivo);
+    printf("Datos de transportistas guardados en el archivo Transportistas.txt.\n");
+}
+
+Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
+{
+    FILE *archivo = fopen(Transportistas_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Transportistas_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    Transportista *transportistas = malloc(count * sizeof(Transportista));
+    if (transportistas == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Transportistas.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(transportistas[i].id_transp, token, sizeof(transportistas[i].id_transp));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].nombre, token, sizeof(transportistas[i].nombre));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].email, token, sizeof(transportistas[i].email));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].contrasenia, token, sizeof(transportistas[i].contrasenia));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].nombre_empresa, token, sizeof(transportistas[i].nombre_empresa));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].ciudad_reparto, token, sizeof(transportistas[i].ciudad_reparto));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numTransportista = count;
+    return transportistas;
+}
+
+void guardarDevolucionesEnArchivo(Devolucion *devoluciones, int numDevoluciones)
+{
+    FILE *archivo = fopen(Devoluciones_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Devoluciones.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numDevoluciones; i++)
+    {
+        if (strcmp(devoluciones[i].fecha_aceptacion, "") == 0)
+            strcpy(devoluciones[i].fecha_aceptacion, " ");
+        if (strcmp(devoluciones[i].fecha_caducidad, "") == 0)
+            strcpy(devoluciones[i].fecha_caducidad, " ");
+        fprintf(archivo, "%s-%s-%s-%s-%s-%s-%s-\n",
+                devoluciones[i].id_pedido,
+                devoluciones[i].id_prod,
+                devoluciones[i].fecha_devolucion,
+                devoluciones[i].motivo,
+                devoluciones[i].estado,
+                devoluciones[i].fecha_aceptacion,
+                devoluciones[i].fecha_caducidad);
+    }
+
+    fclose(archivo);
+    printf("Datos de devoluciones guardados en el archivo Devoluciones.txt.\n");
+}
+
+Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)
+{
+    FILE *archivo = fopen(Devoluciones_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Devoluciones_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Devoluciones
+    Devolucion *devoluciones = malloc(count * sizeof(Devolucion));
+    if (devoluciones == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Devoluciones.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(devoluciones[i].id_pedido, token, sizeof(devoluciones[i].id_pedido));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].id_prod, token, sizeof(devoluciones[i].id_prod));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].fecha_devolucion, token, sizeof(devoluciones[i].fecha_devolucion));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].motivo, token, sizeof(devoluciones[i].motivo));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].estado, token, sizeof(devoluciones[i].estado));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].fecha_aceptacion, token, sizeof(devoluciones[i].fecha_aceptacion));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].fecha_caducidad, token, sizeof(devoluciones[i].fecha_caducidad));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numDevolucion = count;
+    return devoluciones;
+}
+
+
 int main() {
-    int numProductosPedidos;
-    ProductoPedido *productosPedidos = iniciarProductoPedidosDeArchivo(&numProductosPedidos);
-    if (productosPedidos == NULL) {
-        printf("No se pudieron cargar los datos de productos pedidos del archivo.\n");
+    int numDevoluciones;
+    Devolucion *devoluciones = iniciarDevolucionDeArchivo(&numDevoluciones);
+    if (devoluciones == NULL) {
+        printf("No se pudieron cargar los datos de devoluciones del archivo.\n");
         return 1;
     }
 
-    printf("Productos pedidos cargados del archivo:\n");
-    for (int i = 0; i < numProductosPedidos; i++) {
-        printf("ID Pedido: %s\n", productosPedidos[i].id_pedido);
-        printf("ID Producto: %s\n", productosPedidos[i].id_prod);
-        printf("Número de unidades: %d\n", productosPedidos[i].num_unid);
-        printf("Fecha de entrega prevista: %s\n", productosPedidos[i].fecha_entrega_prevista);
-        printf("Importe: %.2f\n", productosPedidos[i].importe);
-        printf("Estado del pedido: %s\n", productosPedidos[i].estado_pedido);
-        printf("ID Transportista: %s\n", productosPedidos[i].id_transp);
-        printf("ID Locker: %s\n", productosPedidos[i].id_locker);
-        printf("Código Locker: %s\n", productosPedidos[i].cod_locker);
-        printf("Fecha de entrega/devolución por el transportista: %s\n", productosPedidos[i].fecha_entrega_devolucion_transp);
+    printf("Devoluciones cargadas del archivo:\n");
+    for (int i = 0; i < numDevoluciones; i++) {
+        printf("ID Pedido: %s\n", devoluciones[i].id_pedido);
+        printf("ID Producto: %s\n", devoluciones[i].id_prod);
+        printf("Fecha Devolución: %s\n", devoluciones[i].fecha_devolucion);
+        printf("Motivo: %s\n", devoluciones[i].motivo);
+        printf("Estado: %s\n", devoluciones[i].estado);
+        printf("Fecha Aceptación: %s\n", devoluciones[i].fecha_aceptacion);
+        printf("Fecha Caducidad: %s\n", devoluciones[i].fecha_caducidad);
         printf("\n");
     }
 
-    free(productosPedidos); // Liberar la memoria asignada para el vector de productos pedidos
+    free(devoluciones); // Liberar la memoria asignada para el vector de devoluciones
 
     return 0;
 }

@@ -24,6 +24,7 @@ typedef struct{
 
 typedef struct {
     char id_prod[8];
+    char nombre[16];
     char descrip[51];
     char id_categ[5];
     char id_gestor[5];
