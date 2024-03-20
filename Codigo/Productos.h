@@ -80,19 +80,15 @@ void alta_producto(Producto *productos, int* tamanio_vector, Cliente actual, Cat
         categoria_productos[strcspn(categoria_productos,"\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
         encontradoCategoria = indicar_categ(categ,tamanio_categ,categoria_productos);
     }
-
     strcpy(nuevo_producto.id_categ, categoria_productos);
 
     strcpy(nuevo_producto.id_gestor, actual.id_cliente);
    
-
     productos[*tamanio_vector] = nuevo_producto;
 
     (*tamanio_vector)++;
  
 }
-
-
 
 //Procedimiento da de baja los productos. (Usando la id, quizas alla que cambiarlo, o imprimir la lista de productos cada vez que se haga)
 void baja_producto(Producto *productos , int* tamanio, char *id_baja){
@@ -124,14 +120,11 @@ void baja_producto(Producto *productos , int* tamanio, char *id_baja){
 void listado_producto(Producto *productos, int* tamanio){
 
     for(int i = 0 ; i < *tamanio ; i++){
-
-        printf("%s-%s-%s-%s-%d-%d-%f\n",productos[i].id_prod,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
-
+        printf("%s-%s-%s-%s-%s-%d-%d-%f\n",productos[i].id_prod,productos[i].nombre,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
     }
 
 }
-
-//Búsqueda por descripción.
+//Búsqueda por descripción. Se toma como parametro "descripcion" aquella descripcion que introduce el usuario.
 void busqueda_producto_descr(Producto *productos, int* tamanio, char *descripcion) {
     
     int coincidencias = 0;
@@ -140,15 +133,11 @@ void busqueda_producto_descr(Producto *productos, int* tamanio, char *descripcio
 
     for (int i = 0; i < *tamanio; i++) {
         if (strstr(productos[i].descrip, descripcion) != NULL) { //El usuario introduce el nombre de el producto y lo busca imprimiendo todo sus datos.
-            printf("ID: %s\n", productos[i].id_prod);
-            printf("Descripción: %s\n", productos[i].descrip);
-            printf("Categoría: %s\n", productos[i].id_categ);
-            printf("Gestor: %s\n", productos[i].id_gestor);
-            printf("Stock: %d\n", productos[i].stock);
-            printf("Entrega: %d\n", productos[i].entrega);
-            printf("Importe: %.2f\n", productos[i].importe);
+            
+            printf("%s-%s-%s-%s-%s-%d-%d-%f\n",productos[i].id_prod,productos[i].nombre,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
             printf("\n");
             coincidencias++;
+
         }
     }
 
@@ -157,7 +146,7 @@ void busqueda_producto_descr(Producto *productos, int* tamanio, char *descripcio
     }
 }
 
-//Búsqueda por categoría.
+//Búsqueda por categoría. Se toma como parametro "categ" aquella categoria que introduce el usuario.
 void busqueda_producto_categ(Producto *productos, int* tamanio, char *categ, Categoria *categorias, int* tamanio_categ) {
     int coincidencias = 0;
 
@@ -166,43 +155,33 @@ void busqueda_producto_categ(Producto *productos, int* tamanio, char *categ, Cat
     for (int i = 0; i < *tamanio; i++) {
         for(int j = 0 ; j < *tamanio_categ; j++){
         if (strcmp(productos[i].id_categ, categorias[j].id_categ) == 0) {
-            printf("ID: %s\n", productos[i].id_prod);
-            printf("Descripción: %s\n", productos[i].descrip);
-            printf("Categoría: %s\n", productos[i].id_categ);
-            printf("Gestor: %s\n", productos[i].id_gestor);
-            printf("Stock: %d\n", productos[i].stock);
-            printf("Entrega: %d\n", productos[i].entrega);
-            printf("Importe: %.2f\n", productos[i].importe);
+           
+            printf("%s-%s-%s-%s-%s-%d-%d-%f\n",productos[i].id_prod,productos[i].nombre,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
             printf("\n");
             coincidencias++;
+
             }
         }
     }
-
     if (coincidencias == 0) {
         printf("No se encontraron productos de la categoria '%s'.\n", categ);
     }
 }
-
-void buscador_un_producto(Producto *p, int* tamanio , char *producto_buscado){
+//Buscador de un producto. Se toma como parametro "producto_buscado" aquel producto que introduce el usuario.
+void buscador_un_producto(Producto *productos, int* tamanio , char *producto_buscado){
 
     int coincidencias = 0;
 
     for(int i = 0 ; i < *tamanio ; i++ ){
 
-        if(strcmp(p[i].nombre,producto_buscado) == 0){
-            printf("ID: %s\n", p[i].id_prod);
-            printf("Descripción: %s\n", p[i].descrip);
-            printf("Categoría: %s\n", p[i].id_categ);
-            printf("Gestor: %s\n", p[i].id_gestor);
-            printf("Stock: %d\n", p[i].stock);
-            printf("Entrega: %d\n", p[i].entrega);
-            printf("Importe: %.2f\n", p[i].importe);
+        if(strcmp(productos[i].nombre,producto_buscado) == 0){
+
+            printf("%s-%s-%s-%s-%s-%d-%d-%f\n",productos[i].id_prod,productos[i].nombre,productos[i].descrip,productos[i].id_categ,      productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
             printf("\n");
             coincidencias++;
+
             }
         }
-    
     if (coincidencias == 0) {
         printf("No se encontro el producto '%s'.\n", producto_buscado);
     }

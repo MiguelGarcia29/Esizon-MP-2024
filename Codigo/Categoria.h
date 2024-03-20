@@ -44,8 +44,8 @@ void alta_categoria(Categoria *categoria, int* tamanio_vector, Cliente actual){
  
 }
 
-//Procedimiento da de baja los productos. (Usando la id, quizas alla que cambiarlo, o imprimir la lista de productos cada vez que se haga)
-void baja_producto(Categoria *categoria , int* tamanio, char *id_baja, Producto productos){
+//Procedimiento da de baja los productos. (Usando la id introducida por user, quizas alla que cambiarlo, o imprimir la lista de productos cada vez que se haga)
+void baja_categoria(Categoria *categoria , int* tamanio, char *id_baja){
 
     int encontrado = 0;
 
@@ -70,7 +70,7 @@ void baja_producto(Categoria *categoria , int* tamanio, char *id_baja, Producto 
         printf("La ID registrada no ha sido encontrada.");
     }
 }
-
+//Funcion usada para compara categorias con la que ingresara el usuario al dar de alta un producto. Se pasa como parametro el registro de categorias y categoria_productos como aquella categoria que introduce el usuario.
 int indicar_categ(Categoria *categ, int* tamanio,char *categoria_productos){
 
     int coincidencia = 0 ;
