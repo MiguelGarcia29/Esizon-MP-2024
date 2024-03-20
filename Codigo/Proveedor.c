@@ -55,13 +55,13 @@ typedef struct {
 
 void perfil_prov(AdminProv *info);
 
-void mod(char cad[]);
+void mod(char cad[51]);
 
 void productos(Producto prod[], char empresa[5] );
 
 void info_prod(Producto info);
 
-void pedidos(Pedido ped, Locker lock, ComportamientoLocker comp);
+void pedidos(Pedido ped[], ComportamientoLocker lock[]);
 
 void info_ped(Pedido info);
 
@@ -293,7 +293,7 @@ void info_prod(Producto info) //funcion para mostrar la informacon del producto 
 
 
 
-void pedidos(Pedido ped[])
+void pedidos(Pedido ped[], ComportamientoLocker lock[])
 {
 
     char busc[8];
@@ -328,7 +328,9 @@ void pedidos(Pedido ped[])
     case 1:
         info_ped(ped[i]);
         break;
-
+    case 2:
+        printf("Locker:\n\n"); // se pedira que indique el nuevo locker y compartimento y se respondera diciendo si esta vacio o no dicho compartimento
+        mod(ped.id_locker);
     default:
         break;
     }
