@@ -15,7 +15,7 @@
 #define Descuento_txt "Datos/Descuentos.txt"
 #define DescuentoCliente_txt "Datos/DescuentosClientes.txt"
 #define Lockers_txt "Datos/Lockers.txt"
-#define ComportamientoLocker_txt "Datos/CompartimentosLockers.txt"
+#define CompartimentoLocker_txt "Datos/CompartimentosLockers.txt"
 #define Pedido_txt "Datos/Pedidos.txt"
 #define ProductoPedido_txt "Datos/ProductosPedidos.txt"
 #define Transportistas_txt "Datos/Transportistas.txt"

@@ -605,7 +605,7 @@ Locker *iniciarLockersDeArchivo(int *numLock)
 */
 void guardarCompartimentoLockerEnArchivo(CompartimentoLocker *comportamientos, int numComportamientos)
 {
-    FILE *archivo = fopen(ComportamientoLocker_txt, "w");
+    FILE *archivo = fopen(CompartimentoLocker_txt, "w");
     if (archivo == NULL)
     {
         printf("Error al abrir el archivo CompartimentosLockers.txt.\n");
@@ -628,10 +628,10 @@ void guardarCompartimentoLockerEnArchivo(CompartimentoLocker *comportamientos, i
 
 CompartimentoLocker *iniciarCompartimientoLockersDeArchivo(int *numCompLock)
 {
-    FILE *archivo = fopen(ComportamientoLocker_txt, "r");
+    FILE *archivo = fopen(CompartimentoLocker_txt, "r");
     if (archivo == NULL)
     {
-        printf("Error al abrir el archivo %s.\n", ComportamientoLocker_txt);
+        printf("Error al abrir el archivo %s.\n", CompartimentoLocker_txt);
         return NULL;
     }
 
