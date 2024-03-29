@@ -54,8 +54,8 @@ void obtener_fecha_actual(char *fecha_actual) {
     strftime(fecha_actual, 11, "%d/%m/%Y", info);
 }
 
-int pedido_existe(ProductoPedido *pedido, int num_devoluciones, char *id_pedido) {
-    for (int i = 0; i < num_devoluciones; i++) {
+int pedido_existe(ProductoPedido *pedido, int tamanio_pedido, char *id_pedido) {
+    for (int i = 0; i < tamanio_pedido; i++) {
         if (strcmp(pedido[i].id_pedido, id_pedido) == 0) {
             return 1; // El pedido existe
         }
@@ -63,33 +63,12 @@ int pedido_existe(ProductoPedido *pedido, int num_devoluciones, char *id_pedido)
     return 0; // El pedido no existe
 }
 
-int pedido_cliente_existe(Pedido *k, int num, char *id_pedido, char *id_cliente) {
-    for (int i = 0; i < num; i++) {
-        if (strcmp(k[i].id_pedido, id_pedido) == 0 && strcmp(k[i].id_cliente, id_cliente) == 0) {
-            return 1; // El pedido existe
-        }
-    }
-    return 0; // El pedido no existe
-}
-
-int producto_en_pedido(ProductoPedido *p, int tamanio_pedido, char *id_pedido, char *id_producto)
-{
-	for (int i = 0; i < tamanio_pedido; i++) {
-        if (strcmp(p[i].id_pedido, id_pedido) == 0 && strcmp(p[i].id_prod, id_producto) == 0) 
-		{
-            return 1; // El pedido existe
-        }
-    }
-    return 0; // El pedido no existe
-}
-
-void alta_devolucion_admin(Devolucion *devoluciones, int *num_devoluciones) {
+void alta_devolucion_admin(Devolucion **devoluciones, int *num_devoluciones, ProductoPedido *pedidos, int tamanio_pedidos) {
     char id_pedido[8];
     printf("\nIngrese el ID del pedido: ");
     scanf("%s", id_pedido);
     
-    int rastreo1 = pedido_existe(devoluciones, *num_devoluciones, id_pedido);
-    if (rastreo1 == 1) {
+    if (pedido_existe(pedidos, tamanio_pedidos, id_pedido)) {
         Devolucion nueva_devolucion;
         strcpy(nueva_devolucion.id_pedido, id_pedido);
         printf("Ingrese el ID del producto: ");
@@ -99,26 +78,25 @@ void alta_devolucion_admin(Devolucion *devoluciones, int *num_devoluciones) {
         scanf(" %[^\n]", nueva_devolucion.motivo);
         strcpy(nueva_devolucion.estado, "pendiente");
 
-        devoluciones = (Devolucion*)realloc(devoluciones, (*num_devoluciones + 1) * sizeof(Devolucion));
-        if (devoluciones == NULL) {
+        *devoluciones = (Devolucion*)realloc(*devoluciones, (*num_devoluciones + 1) * sizeof(Devolucion));
+        if (*devoluciones == NULL) {
             printf("Error al asignar memoria.\n");
             exit(EXIT_FAILURE);
         }
 
-        devoluciones[*num_devoluciones] = nueva_devolucion;
+        (*devoluciones)[*num_devoluciones] = nueva_devolucion;
         (*num_devoluciones)++;
     } else {
         printf("El pedido no ha sido encontrado o no existe.\n");
     }
 }
 
-void alta_devolucion_cliente(Devolucion *devoluciones, int *num_devoluciones, Cliente actual) {
+void alta_devolucion_cliente(Devolucion **devoluciones, int *num_devoluciones, Cliente actual, ProductoPedido *pedidos, int tamanio_pedidos) {
     char id_pedido[8];
     printf("\nIngrese el ID del pedido: ");
     scanf("%s", id_pedido);
     
-    int rastreo1 = pedido_existe(devoluciones, *num_devoluciones, id_pedido);
-    if (rastreo1 == 1) {
+    if (pedido_existe(pedidos, tamanio_pedidos, id_pedido)) {
         Devolucion nueva_devolucion;
         strcpy(nueva_devolucion.id_pedido, id_pedido);
         printf("Ingrese el ID del producto: ");
@@ -128,27 +106,28 @@ void alta_devolucion_cliente(Devolucion *devoluciones, int *num_devoluciones, Cl
         scanf(" %[^\n]", nueva_devolucion.motivo);
         strcpy(nueva_devolucion.estado, "pendiente");
 
-        devoluciones = (Devolucion*)realloc(devoluciones, (*num_devoluciones + 1) * sizeof(Devolucion));
-        if (devoluciones == NULL) {
+        *devoluciones = (Devolucion*)realloc(*devoluciones, (*num_devoluciones + 1) * sizeof(Devolucion));
+        if (*devoluciones == NULL) {
             printf("Error al asignar memoria.\n");
             exit(EXIT_FAILURE);
         }
 
-        devoluciones[*num_devoluciones] = nueva_devolucion;
+        (*devoluciones)[*num_devoluciones] = nueva_devolucion;
         (*num_devoluciones)++;
     } else {
         printf("El pedido no ha sido encontrado o no existe.\n");
     }
 }
 
-void baja_devolucion(Devolucion *devoluciones, int *num_devoluciones, char *id_devolucion) {
+void baja_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_devolucion) {
     int encontrado = 0;
     for (int i = 0; i < *num_devoluciones; i++) {
-        if (strcmp(devoluciones[i].id_pedido, id_devolucion) == 0) {
-            for (int j = i; j < *num_devoluciones - 1; j++) {
-                devoluciones[j] = devoluciones[j + 1];
-            }
+        if (strcmp((*devoluciones)[i].id_pedido, id_devolucion) == 0) {
             encontrado = 1;
+            
+            for (int j = i; j < *num_devoluciones - 1; j++) {
+                (*devoluciones)[j] = (*devoluciones)[j + 1];
+            }
             (*num_devoluciones)--;
             printf("Devolución con ID %s eliminada correctamente.\n", id_devolucion);
             break;
@@ -160,7 +139,6 @@ void baja_devolucion(Devolucion *devoluciones, int *num_devoluciones, char *id_d
 }
 
 void buscar_devolucion(Devolucion *devoluciones, int num_devoluciones, char *id_devolucion) {
-    // Buscar la devolución con el ID dado
     int encontrado = 0;
     for (int i = 0; i < num_devoluciones; i++) {
         if (strcmp(devoluciones[i].id_pedido, id_devolucion) == 0) {
@@ -197,12 +175,17 @@ void devoluciones_pendientes(Devolucion *devoluciones, int num_devoluciones) {
 }
 
 void modificar_estado_enviado(Devolucion *devoluciones, int num_devoluciones, char *id_devolucion) {
+    int encontrado = 0;
     for (int i = 0; i < num_devoluciones; i++) {
         if (strcmp(devoluciones[i].id_pedido, id_devolucion) == 0) {
             strcpy(devoluciones[i].estado, "enviado");
             printf("Estado de la devolución con ID %s cambiado a 'enviado'.\n", id_devolucion);
+            encontrado = 1;
             break;
         }
+    }
+    if (!encontrado) {
+        printf("Devolución con ID %s no encontrada.\n", id_devolucion);
     }
 }
 
@@ -214,7 +197,9 @@ int main() {
     int num_devoluciones = 0;
     int opcion;
     int usu;
-	char id[8];
+    char id[8];
+    ProductoPedido pedidos[10]; // Definir un arreglo de pedidos como ejemplo
+    
     do {
         printf("\nMenú de Opciones:\n");
         printf("1. Alta de Devolución\n");
@@ -229,25 +214,25 @@ int main() {
 
         switch (opcion) {
             case 1:
-            	printf("Dime si eres admin o usuario: 1-Admin 2-Cliente \n");
-            	scanf("%d", &usu);
-            	if(usu==1)
-            	{
-            		alta_devolucion_admin(devoluciones, &num_devoluciones);
-				}
-				else
-				{
-					printf("Dime el id de usuario: ");
-					scanf("%s", id);
-					alta_devolucion_cliente(devoluciones, &num_devoluciones, actual);
-				}
+                printf("Dime si eres admin o usuario: 1-Admin 2-Cliente \n");
+                scanf("%d", &usu);
+                if(usu==1)
+                {
+                    alta_devolucion_admin(&devoluciones, &num_devoluciones, pedidos, sizeof(pedidos) / sizeof(pedidos[0]));
+                }
+                else
+                {
+                    printf("Dime el id de usuario: ");
+                    scanf("%s", id);
+                    alta_devolucion_cliente(&devoluciones, &num_devoluciones, actual, pedidos, sizeof(pedidos) / sizeof(pedidos[0]));
+                }
                 break;
             case 2:
                 if (num_devoluciones > 0) {
                     char id_baja[8];
                     printf("\nIngrese el ID de la devolución a dar de baja: ");
                     scanf("%s", id_baja);
-                    baja_devolucion(devoluciones, &num_devoluciones, id_baja);
+                    baja_devolucion(&devoluciones, &num_devoluciones, id_baja);
                 } else {
                     printf("No hay devoluciones para dar de baja.\n");
                 }
