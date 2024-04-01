@@ -48,5 +48,4 @@ Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion);
 
 
 
-#include  "Gestion_Fichero.c"
 #endif
