@@ -1,6 +1,12 @@
 #include "Categoria.h"
 
-char* id_generator(Categoria *categorias, int tamanio_vector){
+//Depura el buffer.
+void flushInputBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+char* id_generator_categ(Categoria *categorias, int tamanio_vector){
 
     int id_generada = 1;
 
@@ -24,7 +30,7 @@ void alta_categoria(Categoria *categoria, int* tamanio_vector /*Cliente actual*/
 
     Categoria nueva_categoria;
 
-    strcpy(nueva_categoria.id_categ, id_generator(categoria ,*tamanio_vector));
+    strcpy(nueva_categoria.id_categ, id_generator_categ(categoria ,*tamanio_vector));
 
     printf("\nIndique una breve descripcion de la categoria:");
     fgets(nueva_categoria.descrip, 51, stdin);
@@ -63,7 +69,7 @@ void baja_categoria(Categoria *categoria , int* tamanio, char *id_baja){
     }
 }
 //Funcion usada para compara categorias con la que ingresara el usuario al dar de alta un producto. Se pasa como parametro el registro de categorias y categoria_productos como aquella categoria que introduce el usuario.
-int indicar_categ(Categoria *categ, int* tamanio,char *categoria_productos){
+int check_categ(Categoria *categ, int* tamanio,char *categoria_productos){
 
     int coincidencia = 0 ;
 
@@ -73,4 +79,50 @@ int indicar_categ(Categoria *categ, int* tamanio,char *categoria_productos){
             }
         }
     return coincidencia;
+}
+
+char *indicar_categ(Categoria *categ, int* tamanio, char *categoria_productos) {
+    char *categoriaEncontrada = NULL;
+    int coincidencia = 0;
+
+    for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++) {
+        if (strcmp(categ[i].descrip, categoria_productos) == 0) {
+            categoriaEncontrada = malloc(5 * sizeof(char));
+            if (categoriaEncontrada == NULL) {
+                printf("Error al asignar memoria.\n");
+                exit(EXIT_FAILURE);
+            }
+            strcpy(categoriaEncontrada, categ[i].id_categ);
+            coincidencia = 1;
+        }
+    }
+    return categoriaEncontrada;
+}
+
+void modificar_categoria(Categoria *categorias, int* tamanio){
+    char id_modificar[8];
+
+    printf("\nIntroduce el ID de la categoria que quieres modificar: ");
+    fgets(id_modificar,8,stdin);
+    id_modificar[strcspn(id_modificar,"\n")] = '\0';
+    flushInputBuffer();
+
+    modificar_descripcion_categ(categorias, tamanio, id_modificar);
+}
+
+void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_modificar) {
+    int i = 0;
+
+    while(i < *tamanio && strcmp(categorias[i].id_categ,id_modificar) != 0){
+        i++;
+    }
+
+    printf("Escribe la nueva descripcion: ");
+    fflush(stdin);
+    fgets(categorias[i].descrip, 51, stdin);
+    categorias[i].descrip[strcspn(categorias[i].descrip, "\n")] = '\0';
+    flushInputBuffer();
+}
+int main(){
+    return 0;
 }

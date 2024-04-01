@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "estructuras.h"
 #include "Categoria.h"
 
 void alta_producto(Producto *productos, int* tamanio_vector, Cliente actual, Categoria *categ , int* tamanio_categ);
