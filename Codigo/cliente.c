@@ -58,7 +58,7 @@ void cambiar_perfil_cliente(Cliente *client) //se presentara un menu para que el
 		break;
 		
 		default:
-			printf("Error");
+			printf("Error\n\n");
 		break;
 	}
 	
@@ -91,6 +91,7 @@ void cambiar_direccion_cliente(char direccion[51], char provincia[21], char loca
 	printf("Localidad: ");
 	fflush(stdin);
 	fgets(localidad,21,stdin);
+	cli.localidad[strcspn(cli.localidad,"\n")] = '\0';
 	
 	printf("Direccion: ");
 	fflush(stdin);
@@ -130,6 +131,7 @@ int main()
 	printf("Localidad: ");
 	fflush(stdin);
 	fgets(cli.localidad,21,stdin);
+	cli.localidad[strcspn(cli.localidad,"\n")] = '\0';
 	
 	printf("Direccion: ");
 	fflush(stdin);
