@@ -1,4 +1,7 @@
 //cliente
+#include <stdio.h>
+#include "Proveedor.h"
+#include "estructuras.h"
 
 void mostrar_cliente(Cliente cliente);
 

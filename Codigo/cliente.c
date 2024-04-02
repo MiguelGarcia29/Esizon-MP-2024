@@ -1,9 +1,6 @@
 //Cliente
 
-#include<stdio.h>
-#include"estructuras.h"
-#include"Proveedor.h"
-#include"cliente.h"
+#include "cliente.h"
 
 
 void cambiar_contrasenia_cliente(char nueva[16]); // funcion que cambia la contrasenia
@@ -12,6 +9,8 @@ void cambiar_email_cliente(char nuevo[31]); //funcion que cambia el email
 
 void cambiar_direccion_cliente(char direccion[51], char provincia[21], char localidad[21]); //funcion que cambia direccion, provincia y localidad
 
+int corroborar_contrasenia(char contrasena[16]); // para modificar los datos del usuario se pedira la contrasenia
+
 
 
 
@@ -19,7 +18,7 @@ void mostrar_cliente(Cliente client)
 {
 	
 	printf("Hola: %s\n",client.nomb_cliente);
-	printf("%s, %s\n",client.localidad,cliente.provincia);
+	printf("%s, %s\n",client.localidad,client.provincia);
 	printf("Email: %s\n",client.email);
 	printf("Saldo: %f\n",client.cartera);
 	printf("----------\n\n");
@@ -38,12 +37,12 @@ void cambiar_perfil_cliente(Cliente *client) //se presentara un menu para que el
 	printf("(4) Acceder a mi cartera\n");
 	
 	scanf("%d",&a);
-	printf("----------\n\n")
+	printf("----------\n\n");
 	
 	switch(a)
 	{
 		case(1):
-			cambiar_direccion_cliente(client->dir_cliente, cliente->provincia, cliente->localidad); //funcion cambiar direccion(provincia y localidad incluida)
+			cambiar_direccion_cliente(client->dir_cliente, client->provincia, client->localidad); //funcion cambiar direccion(provincia y localidad incluida)
 		break;
 		
 		case (2):
@@ -100,6 +99,21 @@ void cambiar_direccion_cliente(char direccion[51], char provincia[21], char loca
 }
 
 
+int corroborar_contrasenia(char contrasena[16])// para modificar los datos del usuario se pedira la contrasenia
+{
+	char verificacion[16]; 
+	int a;
+	
+	printf("Contrasena: ");
+	fflush(stdin);
+	fgets(verificacion,16,stdin);// Se introduce la contrasenia
+	
+	a = strcmp(verificacion,contrasena); // Compara si la contrasenia introducida y la del usuario son iguales
+	
+	return a; //si devuelve 0 el usuario ha introducido la contrasenia correcta
+}
+
+
 int main()
 {
 	Cliente cli;
@@ -123,7 +137,7 @@ int main()
 	
 	printf("Email: ");
 	fflush(stdin);
-	fgets(cli.nomb_cliente,31,stdin);
+	fgets(cli.email,31,stdin);
 	
 	printf("Contrasenia: ");
 	fflush(stdin);
@@ -149,7 +163,7 @@ int main()
 			break;
 			
 			case(2):
-				c = verificar_contrasenia(cli.contrasenia);
+				c = corroborar_contrasenia(cli.contrasenia);
 				
 				if(c == 0)
 				{
