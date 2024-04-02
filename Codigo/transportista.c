@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct {
     char id_transp[5];
@@ -24,43 +25,54 @@ typedef struct {
     char fecha_entrega_devolucion_transp[11];
 } ProductoPedido;
 
+typedef struct {
+    char id_locker[11];
+    int num_comp;
+    char cod_locker[11];
+    char estado[7]; // "ocupado" o "vacío"
+    char fecha_ocupacion[11];
+    char fecha_caducidad[11];
+} ComportamientoLocker;
+
 void flushInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-// Función para generar un ID único
+void obtener_fecha_actual(char *fecha_actual) 
+{
+    time_t rawtime;
+    struct tm *info;
+    time(&rawtime);
+    info = localtime(&rawtime);
+    strftime(fecha_actual, 11, "%d/%m/%Y", info);
+}
+
 char* id_generator(Transportista *t, int tamanio_vector) {
     int id_generada = 1;
 
-    // Si hay transportistas en el vector, obtiene el último ID y genera uno nuevo incrementándolo
     if (tamanio_vector != 0) {
         id_generada = atoi(t[tamanio_vector - 1].id_transp) + 1;
     }
 
-    // Asigna memoria para el ID generado
     char* id = malloc(5 * sizeof(char));
     if (id == NULL) {
         printf("Error al asignar memoria. \n");
         exit(EXIT_FAILURE);
     }
 
-    // Formatea la nueva ID y la guarda en el arreglo
     sprintf(id, "%04d", id_generada); 
 
     return id;
 }
 
-// Función para dar de alta un nuevo transportista
 void alta_transportista(Transportista **t, int* tamanio_vector){
 
     Transportista nuevo_transportista;
-    // Genera un nuevo ID para el transportista
     char *cadena = id_generator(*t, *tamanio_vector); 
     strcpy(nuevo_transportista.id_transp, cadena);
-    free(cadena); // Libera la memoria asignada para el ID generado
+    free(cadena);
     
-    // Solicita al usuario información sobre el nuevo transportista
     printf("\nDime el nombre:");
     scanf("%20s", nuevo_transportista.nombre);
     flushInputBuffer();
@@ -81,13 +93,12 @@ void alta_transportista(Transportista **t, int* tamanio_vector){
     scanf("%20s", nuevo_transportista.ciudad_reparto);
     flushInputBuffer();
     
-    // Realiza una realocación de memoria para agregar el nuevo transportista al arreglo
     *t = (Transportista *)realloc(*t, (*tamanio_vector + 1) * sizeof(Transportista));
     if (*t == NULL) {
         printf("Error al asignar memoria. \n");
         exit(EXIT_FAILURE);
     }
-    (*t)[*tamanio_vector] = nuevo_transportista; // Guarda el nuevo transportista en el arreglo
+    (*t)[*tamanio_vector] = nuevo_transportista;
     (*tamanio_vector)++;
 }
 
@@ -95,19 +106,15 @@ void baja_transportista(Transportista *t , int* tamanio, char *id_baja){
 
     int encontrado = 0;
 
-    // Busca el transportista con el ID dado y lo elimina del arreglo
     for(int i = 0 ; i < *tamanio ; i++) {
         if(strcmp(t[i].id_transp, id_baja) == 0){
             encontrado = 1;
-
-            // Reorganiza el arreglo para eliminar el transportista encontrado
             for(int j = i; j < *tamanio - 1; j++) {
                 t[j] = t[j + 1];
             }
-
-            (*tamanio)--; // Reduce el tamaño del arreglo
+            (*tamanio)--;
             printf("Transportista con ID %s ha sido dado de baja correctamente.\n", id_baja);
-            break; // Sale del bucle una vez encontrado y eliminado el transportista
+            break;
         }
     }
 
@@ -116,16 +123,14 @@ void baja_transportista(Transportista *t , int* tamanio, char *id_baja){
     }
 }
 
-// Función para mostrar un listado de todos los transportistas dados de alta
 void listado_transportista(Transportista *t, int tamanio){
 
-    // Recorre el arreglo de transportistas y muestra la información de cada uno
+    printf("ID Transportista - Nombre - Email - Contraseña - Nombre de la empresa - Ciudad de reparto\n");
     for(int i = 0 ; i < tamanio ; i++){
-        printf("%s-%s-%s-%s-%s-%s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
+        printf("%s - %s - %s - %s - %s - %s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
     }
 }
 
-// Función para mostrar el perfil de un transportista y permitir su modificación
 void perfil(Transportista *t, int tamanio, char *id)
 {
     int indice = -1;
@@ -133,7 +138,8 @@ void perfil(Transportista *t, int tamanio, char *id)
     {
         if(strcmp(id, t[i].id_transp) == 0)
         {
-            printf("%s-%s-%s-%s-%s-%s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
+            printf("ID Transportista - Nombre - Email - Contraseña - Nombre de la empresa - Ciudad de reparto\n");
+            printf("%s - %s - %s - %s - %s - %s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
             indice = i;
             break;
         }
@@ -177,9 +183,7 @@ void perfil(Transportista *t, int tamanio, char *id)
     }
 }
 
-// Función para realizar el reparto de productos por parte del transportista
 void reparto(ProductoPedido *pedidos, int num_pedidos, char *id_transp) {
-    // Mostrar los productos asignados para el reparto del transportista dado
     printf("Productos asignados para reparto:\n");
     for (int i = 0; i < num_pedidos; i++) {
         if (strcmp(pedidos[i].id_transp, id_transp) == 0 && strcmp(pedidos[i].estado_pedido, "enReparto") == 0) {
@@ -191,20 +195,75 @@ void reparto(ProductoPedido *pedidos, int num_pedidos, char *id_transp) {
             printf("-------------------------------------\n");
         }
     }
-
-    // Lógica de reparto (marcar como entregado, actualizar estado, etc.)
-    // Aquí puedes implementar la lógica para el reparto de productos
-    // Por ejemplo, podrías pedir al transportista que ingrese el ID del pedido
-    // que está entregando y luego actualizar el estado del pedido a "entregado".
-    // También podrías considerar actualizar el stock de los productos entregados, etc.
 }
 
+void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int num_pedidos, int tamanio_compartimento , char *id_transp)
+{
+    printf("Dime la id del producto que quieres entregar: ");
+    char id_producto[8];
+    scanf("%s", id_producto);
+    flushInputBuffer();
+    int encontrado = 0;
+    for(int i=0;i<num_pedidos;i++)
+    {
+        if(strcmp(pedidos[i].id_prod, id_producto) == 0 && strcmp(pedidos[i].id_transp, id_transp) == 0)
+        {
+            encontrado = 1;
+            printf("Donde lo quieres entregar: \n");
+            printf("1-Locker\n");
+            printf("2-Domicilio\n");
+            int entrega;
+            scanf("%d", &entrega);
+            flushInputBuffer();
+            switch(entrega)
+            {
+                case 1:
+                    for(int j=0;j<tamanio_compartimento;j++)
+                    {
+                        if(strcmp(pedidos[i].id_locker, comportamiento[j].id_locker)==0 && strcmp(comportamiento[j].estado, "vacío")==0)
+                        {
+                            printf("Dime el código numerico asignado al locker (10 digitos): ");
+                            char contrasenia_locker[11];
+                            scanf("%s", contrasenia_locker);
+                            strcpy(pedidos[i].cod_locker, contrasenia_locker);
+                            strcpy(comportamiento[j].cod_locker, contrasenia_locker);
+                            strcpy(comportamiento[j].estado, "ocupado");
+                            char fecha[11];
+                            obtener_fecha_actual(fecha); 
+                            strcpy(comportamiento[j].fecha_ocupacion, fecha);
+                            printf("Producto entregado exitosamente en el locker.\n");
+//                            falta una opcion para que ponga la fecha de caducidad
+                            break;
+                        }
+                    }
+                    break;
+                case 2:
+                    printf("Producto entregado exitosamente en el domicilio.\n");
+                    strcpy(pedidos[i].estado_pedido, "entregado");
+                    break;
+                default:
+                    printf("Esa opción no se contempla.\n");
+                    break;
+            }
+            break;
+        }
+    }
+
+    if(encontrado == 0)
+    {
+        printf("No se encuentra esa ID de producto asociada al transportista.\n");
+    }
+}
 
 int main() {
     Transportista *transportistas = NULL;
     int num_transportistas = 0;
     int opcion;
     char id[5];
+
+    ProductoPedido productos_pedidos[100];
+    ComportamientoLocker comportamiento_locker[100];
+    int num_productos_pedidos = 0;
 
     do {
         printf("\nMenú de opciones:\n");
@@ -216,7 +275,7 @@ int main() {
         printf("6. Salir\n");
         printf("Ingrese su opción: ");
         scanf("%d", &opcion);
-        flushInputBuffer(); // Limpia el buffer de entrada
+        flushInputBuffer();
 
         switch (opcion) {
             case 1:
@@ -225,7 +284,7 @@ int main() {
             case 2:
                 printf("Ingrese el ID del transportista a dar de baja: ");
                 scanf("%4s", id);
-                flushInputBuffer(); // Limpia el buffer de entrada
+                flushInputBuffer();
                 baja_transportista(transportistas, &num_transportistas, id);
                 break;
             case 3:
@@ -235,13 +294,13 @@ int main() {
             case 4:
                 printf("Ingrese el ID del transportista para ver/modificar su perfil: ");
                 scanf("%4s", id);
-                flushInputBuffer(); // Limpia el buffer de entrada
+                flushInputBuffer();
                 perfil(transportistas, num_transportistas, id);
                 break;
             case 5:
                 printf("Ingrese el ID del transportista para realizar el reparto de productos: ");
                 scanf("%4s", id);
-                flushInputBuffer(); // Limpia el buffer de entrada
+                flushInputBuffer();
                 reparto(productos_pedidos, num_productos_pedidos, id);
                 break;
             case 6:
@@ -253,7 +312,6 @@ int main() {
         }
     } while (opcion != 6);
 
-    // Liberar memoria asignada para el arreglo de transportistas
     free(transportistas);
 
     return 0;
