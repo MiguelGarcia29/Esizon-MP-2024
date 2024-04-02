@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Proveedor.h"
 #include "estructuras.h"
+#include "Productos.h"
 
 void mostrar_cliente(Cliente cliente);
 

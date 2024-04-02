@@ -17,10 +17,10 @@ int corroborar_contrasenia(char contrasena[16]); // para modificar los datos del
 void mostrar_cliente(Cliente client)
 {
 	
-	printf("Hola: %s\n",client.nomb_cliente);
+	printf("\nHola: %s\n",client.nomb_cliente);
 	printf("%s, %s\n",client.localidad,client.provincia);
 	printf("Email: %s\n",client.email);
-	printf("Saldo: %f\n",client.cartera);
+	printf("Saldo: %.2f\n",client.cartera);
 	printf("----------\n\n");
 	
 }
