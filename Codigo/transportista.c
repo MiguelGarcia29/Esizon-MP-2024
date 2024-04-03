@@ -184,17 +184,41 @@ void perfil(Transportista *t, int tamanio, char *id)
 }
 
 void reparto(ProductoPedido *pedidos, int num_pedidos, char *id_transp) {
-    printf("Productos asignados para reparto:\n");
+    int indice=0;
     for (int i = 0; i < num_pedidos; i++) {
         if (strcmp(pedidos[i].id_transp, id_transp) == 0 && strcmp(pedidos[i].estado_pedido, "enReparto") == 0) {
+        	printf("Productos asignados para reparto:\n");
             printf("ID Pedido: %s\n", pedidos[i].id_pedido);
             printf("ID Producto: %s\n", pedidos[i].id_prod);
             printf("Cantidad: %d\n", pedidos[i].num_unid);
             printf("Fecha de entrega prevista: %s\n", pedidos[i].fecha_entrega_prevista);
             printf("Importe: %.2f\n", pedidos[i].importe);
             printf("-------------------------------------\n");
+            indice=1;
         }
     }
+    if(indice!=1)
+    {
+    	printf("No se han encontrado pedidos asignados a esa ID\n");
+	}
+}
+
+void fecha_caducidad(char *fecha)
+{
+	time_t rawtime;
+    struct tm *info;
+    
+    // Obtener la fecha y hora actual
+    time(&rawtime);
+    info = localtime(&rawtime);
+    
+    // Sumar 7 días
+    rawtime += 7 * 24 * 60 * 60; // 7 días en segundos
+    
+    // Actualizar la estructura tm
+    info = localtime(&rawtime);
+    
+    strftime(fecha, 11, "%d/%m/%Y", info);
 }
 
 void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int num_pedidos, int tamanio_compartimento , char *id_transp)
@@ -204,7 +228,7 @@ void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int 
     scanf("%s", id_producto);
     flushInputBuffer();
     int encontrado = 0;
-    for(int i=0;i<num_pedidos;i++)
+    for(int i=0;i<num_pedidos && encontrado!=1 ;i++)
     {
         if(strcmp(pedidos[i].id_prod, id_producto) == 0 && strcmp(pedidos[i].id_transp, id_transp) == 0)
         {
@@ -232,7 +256,9 @@ void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int 
                             obtener_fecha_actual(fecha); 
                             strcpy(comportamiento[j].fecha_ocupacion, fecha);
                             printf("Producto entregado exitosamente en el locker.\n");
-//                            falta una opcion para que ponga la fecha de caducidad
+                            char fecha_vencimiento[11];
+                            fecha_caducidad(fecha_vencimiento);
+                            strcpy(comportamiento[j].fecha_caducidad, fecha_vencimiento);
                             break;
                         }
                     }
