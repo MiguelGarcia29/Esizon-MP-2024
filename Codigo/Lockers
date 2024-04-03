@@ -12,6 +12,15 @@ typedef struct {
     int num_compocup;       // Número de compartimentos ocupados en el locker (no utilizado en el código actual)
 } Locker;
 
+typedef struct {
+    char id_locker[11];
+    int num_comp;
+    char cod_locker[11];
+    char estado[7]; // "ocupado" o "vacío"
+    char fecha_ocupacion[11];
+    char fecha_caducidad[11];
+} ComportamientoLocker;
+
 // Función para limpiar el buffer de entrada
 void flushInputBuffer() {
     int c;
@@ -43,9 +52,28 @@ char* id_generator(Locker *l, int tamanio_vector) {
     return id;
 }
 
-// Función para dar de alta un nuevo locker
-void alta_locker(Locker **l, int* tamanio_vector){
+// Función para crear los compartimentos para un nuevo locker
+void crear_compartimentos(Locker *l, ComportamientoLocker **j, int num_compartimentos) {
+    // Asigna memoria para los compartimentos
+    *j = malloc(num_compartimentos * sizeof(ComportamientoLocker));
+    if (*j == NULL) {
+        printf("Error al asignar memoria para los compartimentos. \n");
+        exit(EXIT_FAILURE);
+    }
 
+    // Itera sobre cada compartimento y establece sus valores predeterminados
+    for (int i = 0; i < num_compartimentos; i++) {
+        strcpy((*j)[i].id_locker, l->id_locker); // Copia el ID del locker al compartimento
+        (*j)[i].num_comp = i + 1; // Número de compartimento
+        strcpy((*j)[i].cod_locker, l->id_locker); // Código del locker
+        strcpy((*j)[i].estado, "vacío"); // Estado inicial
+        strcpy((*j)[i].fecha_ocupacion, ""); // Fecha de ocupación inicial
+        strcpy((*j)[i].fecha_caducidad, ""); // Fecha de caducidad inicial
+    }
+}
+
+// Función para dar de alta un nuevo locker
+void alta_locker(Locker **l, int* tamanio_vector, ComportamientoLocker ***c, int* tamanio_compartimento) {
     Locker nuevo_locker;
     // Genera un nuevo ID para el locker
     char *cadena = id_generator(*l, *tamanio_vector); 
@@ -65,18 +93,33 @@ void alta_locker(Locker **l, int* tamanio_vector){
     scanf("%20s", nuevo_locker.ubicacion);
     flushInputBuffer();
 
-    printf("\nDime cuantos lockers hay en total:");
+    printf("\nDime cuantos compartimentos hay en total:");
     scanf("%d", &nuevo_locker.num_compt); 
+    flushInputBuffer();
+    
     // Realiza una realocación de memoria para agregar el nuevo locker al arreglo
     *l = (Locker *)realloc(*l, (*tamanio_vector + 1) * sizeof(Locker));
+    if (*l == NULL) {
+        printf("Error al asignar memoria para el nuevo locker. \n");
+        exit(EXIT_FAILURE);
+    }
     (*l)[*tamanio_vector] = nuevo_locker; // Guarda el nuevo locker en el arreglo
     (*tamanio_vector)++;
-    nuevo_locker.num_compocup=0;
+    
+    // Realiza una realocación de memoria para los compartimentos del nuevo locker
+    *c = realloc(*c, (*tamanio_compartimento + 1) * sizeof(ComportamientoLocker*));
+    if (*c == NULL) {
+        printf("Error al asignar memoria para los compartimentos del nuevo locker. \n");
+        exit(EXIT_FAILURE);
+    }
+    crear_compartimentos(&nuevo_locker, &(*c)[*tamanio_compartimento], nuevo_locker.num_compt);
+    (*tamanio_compartimento)++;
+    nuevo_locker.num_compocup = 0; // Inicializar el contador de compartimentos ocupados
 }
 
+// Función para verificar la disponibilidad de un locker
 int ocupados_lockers(Locker *l, int tamanio, char *id) {
-    
-	for (int i = 0; i < tamanio; i++) {
+    for (int i = 0; i < tamanio; i++) {
         if (strcmp(id, l[i].id_locker) == 0) { // Compara el ID dado con el ID del locker en la posición i
             if (l[i].num_compt > l[i].num_compocup) { // Verifica si hay compartimentos disponibles
                 l[i].num_compocup++; // Incrementa el contador de compartimentos ocupados
@@ -93,17 +136,16 @@ int ocupados_lockers(Locker *l, int tamanio, char *id) {
 }
 
 // Función para dar de baja un locker existente
-void baja_locker(Locker *l , int* tamanio, char *id_baja){
-
+void baja_locker(Locker *l, int* tamanio, char *id_baja) {
     int encontrado = 0;
 
     // Busca el locker con el ID dado y lo elimina del arreglo
-    for(int i = 0 ; i < *tamanio ; i++) {
-        if(strcmp(l[i].id_locker, id_baja) == 0){
+    for (int i = 0; i < *tamanio; i++) {
+        if (strcmp(l[i].id_locker, id_baja) == 0) {
             encontrado = 1;
 
             // Reorganiza el arreglo para eliminar el locker encontrado
-            for(int j = i; j < *tamanio - 1; j++) {
+            for (int j = i; j < *tamanio - 1; j++) {
                 l[j] = l[j + 1];
             }
 
@@ -113,24 +155,24 @@ void baja_locker(Locker *l , int* tamanio, char *id_baja){
         }
     }
 
-    if(encontrado == 0){
+    if (encontrado == 0) {
         printf("La ID registrada no ha sido encontrada.\n");
     }
 }
 
 // Función para mostrar un listado de todos los lockers dados de alta
-void listado_locker(Locker *l, int tamanio){
-
+void listado_locker(Locker *l, int tamanio) {
     // Recorre el arreglo de lockers y muestra la información de cada uno
-    for(int i = 0 ; i < tamanio ; i++){
-        printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l[i].num_compt, (l[i].num_compocup-1));
+    for (int i = 0; i < tamanio; i++) {
+        printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l[i].num_compt, (l[i].num_compocup - 1));
     }
 }
 
-int main()
-{
+int main() {
     Locker *lockers = malloc(100 * sizeof(Locker)); 
     int tamanio_lockers = 0; 
+    ComportamientoLocker **compartimentos = malloc(100 * sizeof(ComportamientoLocker*));
+    int tamanio_compartimento = 0;
 
     int opcion;
     char id_baja[11];
@@ -149,7 +191,7 @@ int main()
 
         switch (opcion) {
             case 1:
-                alta_locker(&lockers, &tamanio_lockers);
+                alta_locker(&lockers, &tamanio_lockers, &compartimentos, &tamanio_compartimento);
                 break;
             case 2:
                 printf("\nIngrese el ID del Locker a dar de baja: ");
@@ -176,7 +218,12 @@ int main()
         }
     } while (opcion != 5);
 
-    free(lockers); 
+    free(lockers);
+    for (int i = 0; i < tamanio_compartimento; i++) {
+        free(compartimentos[i]);
+    }
+    free(compartimentos);
 
     return 0;
 }
+
