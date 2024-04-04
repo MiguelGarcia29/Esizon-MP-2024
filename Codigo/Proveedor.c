@@ -5,7 +5,7 @@ void cambiar_contrasenia(char nueva[16]); //cambia la contrasenia. Recibe la con
 
 void cambiar_email(char nuevo[31]);  // cambia el email. Recibe el email del usuario
 
-int encontrar_producto(Producto prod[],char id[8],AdminProv prov, int cantdad_prod); //recorre un bucle para relacionar un pedido con el producto que contiene el pedido
+int encontrar_producto(Producto *prod,char id[8],AdminProv prov, int cantdad_prod); //recorre un bucle para relacionar un pedido con el producto que contiene el pedido
 
 
 
@@ -88,7 +88,7 @@ int mi_producto(char empresa[5],char gestor[5]) // funcion que verifica que el p
 }
 
 
-int mi_pedido(ProductoPedido pedidos[],char busc[8],Producto prod[],AdminProv prov,int cantdad_productospedidos, int cantdad_prod)//verifica que el producto pedido es provisto por el proveedor
+int mi_pedido(ProductoPedido *pedidos,char busc[8],Producto *prod,AdminProv prov,int cantdad_productospedidos, int cantdad_prod)//verifica que el producto pedido es provisto por el proveedor
 {
 	int i,res,mio;
 	
@@ -110,7 +110,7 @@ int mi_pedido(ProductoPedido pedidos[],char busc[8],Producto prod[],AdminProv pr
 }
 
 
-int encontrar_producto(Producto prod[],char id[8],AdminProv prov,int cantdad_prod) //relaciona el pedido con el producto
+int encontrar_producto(Producto *prod,char id[8],AdminProv prov,int cantdad_prod) //relaciona el pedido con el producto
 {
 	int i,res,mio;
 	
