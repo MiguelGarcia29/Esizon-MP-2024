@@ -105,16 +105,16 @@ void cambiar_direccion_cliente(char direccion[51], char provincia[21], char loca
 }
 
 
-int corroborar_contrasenia(char contrasena[16])// para modificar los datos del usuario se pedira la contrasenia
+int corroborar_contrasenia(char cad[16])// para modificar los datos del usuario se pedira la contrasenia
 {
 	char verificacion[16]; 
 	int a;
 	
-	printf("Contrasena: ");
+	printf("Contrasenia: ");
 	fflush(stdin);
 	fgets(verificacion,16,stdin);// Se introduce la contrasenia
 	
-	a = strcmp(verificacion,contrasena);
+	a = strcmp(verificacion,cad);
 	
 	return a; //si devuelve 0 el usuario ha introducido la contrasenia correcta
 }
@@ -223,6 +223,7 @@ int main()
 		printf("(1) Mostrar perfil\n");
 		printf("(2) Modificar perfil\n");
 		
+		fflush(stdin);
 		scanf("%d",&b);
 		
 		switch(b)
@@ -238,9 +239,13 @@ int main()
 				{
 					cambiar_perfil_cliente(&cli);	
 				}
+				else
+				{
+					printf("Contrasenia incorrecta\n");
+				}
 		}
 		
-		printf("Continuar pruebas:");
+		printf("Presione 0 para continuar pruebas:");
 		fflush(stdin);
 		scanf("%d",&a);
 		
