@@ -17,9 +17,39 @@
 
 //listar_descuentos();
 
-void alta_descuentos(Descuento *desc)
+
+char *generar_id_descuentos(Descuento *desc, int cantdad_desc)
+{
+	
+	int id_generada = 1;
+	
+	if(cantdad_desc != 0)
+	{
+		id_generada = atoi(desc[cantdad_desc].id_cod);
+		
+		id_generada++;
+	}
+	
+	char *id = malloc(11 * sizeof(char));
+	
+	if(id == NULL)
+	{
+		printf("Error al guardar en memoria\n");
+		return NULL;
+	}
+	
+	snprintf(id,10,"%010d",id_generada);
+	
+	return id;
+}
+
+
+void alta_descuentos(Descuento *desc,int *cantdad_desc,DescuentoCliente *desccli)
 {
 	int a;
+	
+	fflush(stdin);
+	strcpy(desc->id_cod,generar_id_descuentos(&desc,*cantdad_desc));
 	
 	printf("Descripcion: ");
 	fflush(stdin);
@@ -61,7 +91,7 @@ void alta_descuentos(Descuento *desc)
 		break;
 		
 		case 2:
-			strcpy(desc->tipo,"esizon\0");
+			strcpy(desc->aplicable,"esizon\0");
 		break;
 		
 		default:
@@ -74,6 +104,39 @@ void alta_descuentos(Descuento *desc)
 	scanf("%f",&desc->importe);
 	
 
+	printf("Estado: \n");
+	printf("(1) Activo\n");
+	printf("(2) Inactivo\n");
+	
+	fflush(stdin);
+	scanf("%d",&a);
+	
+	switch(a)
+	{
+		case 1:
+			strcpy(desc->estado,"activo\0");
+			
+			
+		break;
+		
+		case 2:
+			strcpy(desc->estado,"inactivo\0");
+			
+			printf("Introduzca la fecha en que quiere que entre en vigor el descuento: ");
+			fflush(stdin);
+			fgets(desccli->fecha_asignacion,10,stdin);
+			
+		break;
+		
+		default:
+		break;
+	}
+	
+	printf("Indique la fecha hasta la que estara habilitado este descuento: ");
+	fflush(stdin);
+	fgets(desccli->fecha_caducidad,10,stdin);
+	
+	cantdad_desc++;
 	
 }
 
@@ -82,7 +145,11 @@ int main()
 {
 	Descuento des;
 	
-	alta_descuentos(&des);
+	DescuentoCliente descli;
+	
+	int cantdad_des = 1;
+	
+	alta_descuentos(&des,&cantdad_des,&descli);
 	
 	printf("%s ",des.descrip);
 	
@@ -91,6 +158,16 @@ int main()
 	printf("%s \n",des.aplicable);
 	
 	printf("%2.f \n",des.importe);
+	
+	printf("%s \n",des.estado);
+	
+	printf("%s",descli.fecha_asignacion);
+	
+	printf("%s",descli.fecha_caducidad);
+
+	printf("%s",des.id_cod);
+	
+	printf("%d",cantdad_des);
 	
 	return 0;
 }

@@ -3,8 +3,12 @@
 #include<stdio.h>
 #include<string.h>
 #include"estructuras.h"
+#include<stdlib.h>
+#include<time.h>
 
 
 
 
-void alta_descuentos(Descuento *desc);
+void alta_descuentos(Descuento *desc, int *cantdad_desc,DescuentoCliente *desccli);
+
+char *generar_id_descuentos(Descuento *desc, int cantdad_desc);
