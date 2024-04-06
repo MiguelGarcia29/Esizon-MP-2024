@@ -7,7 +7,7 @@
 
 
 
-//void baja_descuentos();
+
 
 //void activo_inactivo();
 
@@ -136,8 +136,33 @@ void alta_descuentos(Descuento *desc,int *cantdad_desc,DescuentoCliente *desccli
 	fflush(stdin);
 	fgets(desccli->fecha_caducidad,10,stdin);
 	
-	cantdad_desc++;
+	*cantdad_desc++;
 	
+}
+
+void baja_descuentos(Descuento *desc,int *cantdad_desc,char *id_baja)
+{
+	int encontrado = 0,i,j;
+	
+	for(i = 0;i < *cantdad_desc;i++)
+	{
+		if(strcmp(desc[i].id_cod,id_baja) == 0)
+		{
+			encontrado = 1;
+			
+			for(j = i;j < *cantdad_desc - 1; j++)
+			{
+				desc[j] = desc[j+1];
+			}
+			
+			*cantdad_desc--;
+			
+			printf("\nBaja efectuada.\n");
+			
+		}
+			
+	}
+		
 }
 
 
