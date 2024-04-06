@@ -1,10 +1,9 @@
 #ifndef ESIZON_H
 #define ESIZON_H
 
-#include "limpiarBuffer.c"
 #include "estructuras.h"
 #include "Gestion_Fichero.c"
-#include "Categoria.c"
+#include "Categoria.h"
 #include "Productos.c"
 #include "Proveedor.c"
 //#include "Menu.c"

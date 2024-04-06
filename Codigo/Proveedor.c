@@ -12,8 +12,8 @@ int encontrar_producto(Producto *prod,char id[8],AdminProv prov, int cantdad_pro
 
 void mostrar_perfilprov(AdminProv perfil) //funcion que imprime los datos del usuario
 {	
-	printf("Nombre de usuario: %s",perfil.perfil_usuario);	
-	printf("Empresa: %s",perfil.nombre);
+	printf("Rol: %s\n",perfil.perfil_usuario);	
+	printf("Empresa: %s\n",perfil.nombre);
 	printf("Id empresa: %s\n",perfil.id_empresa);
 	printf("Email: %s\n",perfil.email);
 	printf("__________\n");

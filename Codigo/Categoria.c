@@ -1,5 +1,10 @@
 #include "Categoria.h"
 
+void flushInputBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 char* id_generator_categ(Categoria *categorias, int tamanio_vector){
 
     int id_generada = 1;
@@ -76,17 +81,12 @@ int check_categ(Categoria *categ, int* tamanio,char *categoria_productos){
 }
 
 char *indicar_categ(Categoria *categ, int* tamanio, char *categoria_productos) {
-    char *categoriaEncontrada = NULL;
+    char *categoriaEncontrada;
     int coincidencia = 0;
 
     for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++) {
         if (strcmp(categ[i].descrip, categoria_productos) == 0) {
-            categoriaEncontrada = malloc(5 * sizeof(char));
-            if (categoriaEncontrada == NULL) {
-                printf("Error al asignar memoria.\n");
-                exit(EXIT_FAILURE);
-            }
-            strcpy(categoriaEncontrada, categ[i].id_categ);
+            categoriaEncontrada = categ[i].id_categ;
             coincidencia = 1;
         }
     }
