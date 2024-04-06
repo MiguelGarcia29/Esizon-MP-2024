@@ -249,7 +249,7 @@ void modificar_descripcion_prod(Producto *productos, int* tamanio,char *id_modif
 
     printf("Escribe la nueva descripcion: ");
 	fflush(stdin);
-	fgets(productos[i].id_prod,51,stdin);
+	fgets(productos[i].descrip,51,stdin);
     flushInputBuffer();
 }
 

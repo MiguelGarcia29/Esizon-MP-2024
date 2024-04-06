@@ -88,10 +88,10 @@ int mi_producto(char empresa[5],char gestor[5]) // funcion que verifica que el p
 }
 
 
-int mi_pedido(ProductoPedido pedidos[cantdad_productospedidos],char busc[8],Producto prod[cantdad_prod],AdminProv prov)//verifica que el producto pedido es provisto por el proveedor
+int mi_pedido(ProductoPedido pedidos[],char busc[8],Producto prod[],AdminProv prov, int cantdad_prod){//verifica que el producto pedido es provisto por el proveedor
 	int i,res,mio;
 	
-	for(i = 0;i < cantdad_productospedidos && res != 0; i++)
+	for(i = 0;i < cantdad_prod && res != 0; i++)
 	{
 		res = strcmp(busc, pedidos[i].id_pedido); //busca en que estruct de productopedido esta la informacion sobre el pedido que se quiere
 	}
@@ -123,9 +123,7 @@ int encontrar_producto(Producto prod[cantdad_prod],char id[8],AdminProv prov) //
 		i--;
 		
 		mio = mi_producto(prov.id_empresa,prod[i].id_gestor);//si se encuentra el producto pasara a verificar si dicho producto es provisto por mi
-	}
-	
-	
+	}	
 	return mio; //si devuelve 0 el producto es provisto por el proveedor
 }
 

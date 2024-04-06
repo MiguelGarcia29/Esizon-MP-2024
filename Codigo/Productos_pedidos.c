@@ -23,6 +23,12 @@ función de la dirección del cliente y ciudad de reparto*/
 entrega y ubicación del locker.*/
 /*Un usuario proveedor podrá acceder únicamente a la información de los pedidos de productos
 que él mismo suministra*/
+
+void flushInputBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 char* id_generator_pedido(ProductoPedido *pedidos, int tamanio_vector){
 
     int id_generada = 1;
@@ -42,25 +48,14 @@ char* id_generator_pedido(ProductoPedido *pedidos, int tamanio_vector){
     return id;
 }
 
-void obtener_fecha_actual(char *fecha_actual) 
-{
-    time_t rawtime;
-    struct tm *info;
-    time(&rawtime);
-    info = localtime(&rawtime);
-    strftime(fecha_actual, 11, "%d/%m/%Y", info);
-}
 
 void fecha_entrega(char *fecha, int dia_entrega)
-{
-    char fecha_actual[11]; 
-    obtener_fecha_actual(fecha_actual); // Obtengo la fecha actual
+{ 
     
-    struct tm info; // Defino la struct de tiempo.
-    strptime(fecha_actual, "%d/%m/%Y", &info);
+    time_t rawtime; // Defino la struct de tiempo.
 
     // Convertir la fecha actual a time_t 
-    time_t rawtime = mktime(&time);
+    time(&rawtime);
     
     // Sumar x días a la fecha actual.
     rawtime += dia_entrega * 24 * 60 * 60; // X días en segundos
@@ -71,8 +66,59 @@ void fecha_entrega(char *fecha, int dia_entrega)
     strftime(fecha, 11, "%d/%m/%Y", nueva_fecha); // Convierte la struct tm en un formato legible tal que dia/mes/año
 }
 
+
+
+void busqueda_locker_localidad(Locker *lockers, int* tamanio, char *localidad){ // Se busca un locker en la localidad solicitada por el usuario.
+    int coincidencias = 0;
+
+    printf("Productos encontrados de la localidad '%s':\n", localidad);
+
+    for (int i = 0; i < *tamanio; i++) {
+        if (strcmp(lockers[i].localidad, localidad) == 0) {
+            printf("%s-%s-%s-%s-%d-%d\n", lockers[i].id_locker, lockers[i].localidad, lockers[i].provincia, lockers[i].ubicacion, lockers[i].num_compt, (lockers[i].num_compocup-1));
+            printf("\n");
+            coincidencias++;
+            }
+    }
+    if (coincidencias == 0) {
+        printf("No se encontraron Lockers en la localidad '%s'.\n", localidad);
+    }
+}
+
+
+int ocupados_lockers(Locker *l, int tamanio, char *id) {
+    
+	for (int i = 0; i < tamanio; i++) {
+        if (strcmp(id, l[i].id_locker) == 0) { // Compara el ID dado con el ID del locker en la posición i
+            if (l[i].num_compt > l[i].num_compocup) { // Verifica si hay compartimentos disponibles
+                l[i].num_compocup++; // Incrementa el contador de compartimentos ocupados
+                printf("Se ha añadido correctamente\n");
+                return 0; // Devuelve 0 si no está lleno
+            } else {
+                printf("El locker está lleno\n");
+                return 1; // Devuelve 1 si está lleno
+            }
+        }
+    }
+    printf("El ID del locker no se encontró en el sistema\n");
+    return -1; // Devuelve -1 si no se encontró el ID del locker
+}
+
+void listado_transportista(Transportista *t, int tamanio){
+
+    printf("ID Transportista - Nombre - Email - Contraseña - Nombre de la empresa - Ciudad de reparto\n");
+    for(int i = 0 ; i < tamanio ; i++){
+        printf("%s - %s - %s - %s - %s - %s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
+    }
+}
+
+
+
+
+
+
 // Sirve para seleccionar el producto que se va a pedir.
-char pedir_producto(Producto *productos , int* tamanio_productos){
+Producto *pedir_producto(Producto *productos , int* tamanio_productos, ProductoPedido *pedidos, int* tamanio , char estad_pedido){
 
     char producto_pedido[16];
     int respuesta;
@@ -81,7 +127,7 @@ char pedir_producto(Producto *productos , int* tamanio_productos){
     fgets(producto_pedido,16,stdin);
     producto_pedido[strcspn(producto_pedido,"\n")] = '\0'; 
 
-    buscador_un_producto(productos, tamanio_productos , producto_pedido);
+    buscador_un_pedidos(pedidos, tamanio , producto_pedido);
 
     printf("Esta seguro que desea comprar ese producto?\n1) SI \n 2) NO \n");
     scanf("%d",&respuesta);
@@ -98,13 +144,13 @@ char pedir_producto(Producto *productos , int* tamanio_productos){
 
 
 // Una vez seleccionado el producto que se quiere comprar, se da de alta el pedido correspondiente. Struct de Productos debe pasar como puntero??
-void alta_pedidos(ProductoPedido **pedidos, int* tamanio_vector, Cliente actual_cliente,int tamanio_cliente, Producto producto_seleccionado , int tamanio_produc, Locker lockers, int tamanio_lockers, Transportista transportista, int tamanio_transportistas){
+void alta_pedidos(ProductoPedido **pedidos, int* tamanio_vector, Cliente actual_cliente,int tamanio_cliente, Producto producto_seleccionado , int tamanio_produc, Locker *lockers, int* tamanio_lockers, Transportista *transportista, int tamanio_transportistas){
     
     ProductoPedido nuevo_producto_pedido;
     char fecha_estimada[11];
 
 
-    strcpy(nuevo_producto_pedido.id_pedido, id_generator_pedido(pedidos ,*tamanio_vector)); //Damos el id, al pedido mediante la funcion generadora de IDs.
+    strcpy(nuevo_producto_pedido.id_pedido, id_generator_pedido(*pedidos ,*tamanio_vector)); //Damos el id, al pedido mediante la funcion generadora de IDs.
     flushInputBuffer();
 
     strcpy(nuevo_producto_pedido.id_prod,producto_seleccionado.id_prod); // Copia la id del producto en la id de producto pedido.
@@ -199,8 +245,8 @@ void listado_Pedido(ProductoPedido *pedidos, int* tamanio){
     }
 }
 
-
-void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char estad_pedido){
+//buscador de pedido segun su estado
+void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_pedido){
     
     int coincidencias = 0;
 
@@ -218,7 +264,8 @@ void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char estad_pedi
     }
 }
 
-void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista transportistas, int tamanio_transportistas){
+
+void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *transportistas, int tamanio_transportistas){
 
     int a;
 
@@ -300,7 +347,7 @@ void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar)
     // COMPROBAR FUNC DE LA SUMA DE DIAS.
     printf("Escribe el retraso que puede tener el pedido: ");
 	scanf("%d",&dia_retraso);
-    fecha_entrega(&pedidos[i].fecha_entrega_prevista,dia_retraso); // Comprobar que lo que hace es sumar los dias de retraso a la fecha anteriormente estimada.
+    fecha_entrega(pedidos[i].fecha_entrega_prevista,dia_retraso); // Comprobar que lo que hace es sumar los dias de retraso a la fecha anteriormente estimada.
     flushInputBuffer();
 }
 
@@ -324,5 +371,70 @@ void consultado_estado(ProductoPedido *pedidos, int* tamanio,char id_pedido_busc
     }
 }
 
+ // Prototipos de funciones
+void mostrar_menu();
+void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos);
 
- 
+// Función principal
+int main() {
+    // Declaración e inicialización de las variables
+    Cliente clientes[100]; // Se asume un máximo de 100 clientes
+    int tamanio_clientes = 0;
+    Producto productos[100]; // Se asume un máximo de 100 productos
+    int tamanio_productos = 0;
+    ProductoPedido pedidos[100]; // Se asume un máximo de 100 pedidos
+    int tamanio_pedidos = 0;
+    int opcion;
+
+    // Bucle principal del programa
+    do {
+        mostrar_menu();
+        scanf("%d", &opcion);
+        ejecutar_opcion(opcion, clientes, &tamanio_clientes, productos, &tamanio_productos, pedidos, &tamanio_pedidos);
+    } while (opcion != 0);
+
+    return 0;
+}
+void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos);
+void mostrar_menu();
+// Función para mostrar el menú de opciones
+void mostrar_menu() {
+    printf("\n----- MENU -----\n");
+    printf("1. Alta de pedido\n");
+    printf("2. Baja de pedido\n");
+    printf("3. Modificar pedido\n");
+    printf("4. Consultar estado de pedido\n");
+    printf("0. Salir\n");
+    printf("Ingrese su opcion: ");
+}
+
+// Función para ejecutar la opción seleccionada
+void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos) {
+    switch (opcion) {
+        case 1:
+            // Llamar a la función de alta de pedido
+            // alta_pedidos(&pedidos, &tamanio_pedidos, ...);
+            printf("Opción de alta de pedido seleccionada.\n");
+            break;
+        case 2:
+            // Llamar a la función de baja de pedido
+            // baja_pedidos(&pedidos, &tamanio_pedidos, ...);
+            printf("Opción de baja de pedido seleccionada.\n");
+            break;
+        case 3:
+            // Llamar a la función de modificar pedido
+            // modificar_pedidos(pedidos, &tamanio_pedidos, ...);
+            printf("Opción de modificar pedido seleccionada.\n");
+            break;
+        case 4:
+            // Llamar a la función de consultar estado de pedido
+            // consultar_estado_pedido(pedidos, &tamanio_pedidos, ...);
+            printf("Opción de consultar estado de pedido seleccionada.\n");
+            break;
+        case 0:
+            printf("Saliendo del programa.\n");
+            break;
+        default:
+            printf("Opción no válida. Por favor, seleccione una opción válida.\n");
+    }
+}
