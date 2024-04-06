@@ -1,8 +1,9 @@
 #include "Productos.h"
 
+char* id_generator_prod(Producto *productos, int tamanio_vector);
 
 //Depura el buffer.
-void flushInputBuffer(){
+void flushInputBufferr(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
@@ -28,34 +29,34 @@ char* id_generator_prod(Producto *productos, int tamanio_vector){
 
 //Procedimiento da de alta los productos.
 // En ella se necesita que se hayan dado de alta previamente las categorias.
-void alta_producto(Producto *productos, int* tamanio_vector, Cliente actual, Categoria *categ , int* tamanio_categ){
+void alta_producto(Producto *productos, int* tamanio_vector, char* idAlta, Categoria *categ , int* tamanio_categ){
 
     Producto nuevo_producto;
 
     strcpy(nuevo_producto.id_prod, id_generator_prod(productos ,*tamanio_vector));
-    flushInputBuffer();
+    flushInputBufferr();
 
     printf("\nNombre del producto: ");
     fgets(nuevo_producto.nombre, 15, stdin);
-    flushInputBuffer();
+    flushInputBufferr();
     nuevo_producto.nombre[strcspn(nuevo_producto.nombre,"\n")] = '\0'; 
 
     printf("\nPrecio del producto:");
     scanf("%f", &nuevo_producto.importe);
-    flushInputBuffer();
+    flushInputBufferr();
 
     printf("\nIndique una breve descripcion del producto: ");
     fgets(nuevo_producto.descrip, 51, stdin);
-    flushInputBuffer();
+    flushInputBufferr();
     nuevo_producto.descrip[strcspn(nuevo_producto.descrip,"\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
 
     printf("\nNumero de producto que se van a vender: ");
     scanf("%d", &nuevo_producto.stock);
-    flushInputBuffer();
+    flushInputBufferr();
 
     printf("\nNumero de dias que tarda la entrega: ");
     scanf("%d", &nuevo_producto.entrega);
-    flushInputBuffer();
+    flushInputBufferr();
 
 
     char categoria_productos[51];
@@ -77,7 +78,7 @@ void alta_producto(Producto *productos, int* tamanio_vector, Cliente actual, Cat
         strcpy(nuevo_producto.id_categ,indicar_categ(categ,tamanio_categ,categoria_productos));
     }
 
-    strcpy(nuevo_producto.id_gestor, actual.id_cliente);
+    strcpy(nuevo_producto.id_gestor, idAlta);
    
     productos[*tamanio_vector] = nuevo_producto;
 
@@ -90,7 +91,7 @@ void baja_producto(Producto *productos , int* tamanio, char *id_baja){
 
     int encontrado = 0;
 
-    for(int i = 0 ; i < *tamanio ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
+    for(int i = 0 ; i < *tamanio && encontrado==0 ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
     {
         if(strcmp(productos[i].id_prod,id_baja) == 0){
             encontrado = 1;
@@ -114,12 +115,22 @@ void baja_producto(Producto *productos , int* tamanio, char *id_baja){
 // Muestra lista de los productos, dados de alta.
 void listado_producto(Producto *productos, int* tamanio){
     
-    flushInputBuffer();
     for(int i = 0 ; i < *tamanio ; i++){
         printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n",productos[i].id_prod,productos[i].nombre,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
     }
 
 }
+
+// Muestra lista de los productos, dados de alta.
+void listado_producto_prooved(Producto *productos, int* tamanio,char *idProd){
+    
+    for(int i = 0 ; i < *tamanio ; i++){
+        if(strcmp(productos[i].id_gestor,idProd)==0)
+         printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n",productos[i].id_prod,productos[i].nombre,productos[i].descrip,productos[i].id_categ,productos[i].id_gestor,productos[i].stock,productos[i].entrega,productos[i].importe);
+    }
+
+}
+
 //Búsqueda por descripción. Se toma como parametro "descripcion" aquella descripcion que introduce el usuario.
 void busqueda_producto_descr(Producto *productos, int* tamanio, char *descripcion) {
     
@@ -203,7 +214,7 @@ void modificar_producto(Producto *productos, int* tamanio) {
     printf("\nIntroduce el ID del producto que quieres modificar: ");
     fgets(id_modificar,8,stdin);
     id_modificar[strcspn(id_modificar,"\n")] = '\0';
-    flushInputBuffer();
+    flushInputBufferr();
 
 
      //SI NO ES ADMIN HAY Q COMPROBAR QUE LA ID DEL PRODUCTO SEA LA MISMA QUE LA ID DEL QUE ESTA HACIENDO LA MODIFICACION -> ES UNA FUNCION NUEVA PERO IGUAL QUE ESTA
@@ -250,7 +261,7 @@ void modificar_descripcion_prod(Producto *productos, int* tamanio,char *id_modif
     printf("Escribe la nueva descripcion: ");
 	fflush(stdin);
 	fgets(productos[i].id_prod,51,stdin);
-    flushInputBuffer();
+    flushInputBufferr();
 }
 
 void modificar_precio(Producto *productos, int* tamanio,char *id_modificar){
@@ -264,7 +275,7 @@ void modificar_precio(Producto *productos, int* tamanio,char *id_modificar){
 	printf("Introduce el nuevo importe: ");
 	fflush(stdin);
 	scanf("%f",&productos[i].importe);
-    flushInputBuffer();
+    flushInputBufferr();
 }
 
 void modificar_stock(Producto *productos, int* tamanio,char *id_modificar){
@@ -278,7 +289,7 @@ void modificar_stock(Producto *productos, int* tamanio,char *id_modificar){
 	printf("Cantidad de productos en stock: ");
 	fflush(stdin);
 	scanf("%d",&productos[i].stock);
-    flushInputBuffer();
+    flushInputBufferr();
 }
 
 void modificar_entrega(Producto *productos, int* tamanio,char *id_modificar){
@@ -292,7 +303,7 @@ void modificar_entrega(Producto *productos, int* tamanio,char *id_modificar){
 	printf("Nueva fecha maxima de entrega: ");
 	fflush(stdin);
 	scanf("%d",&productos[i].entrega);
-    flushInputBuffer();
+    flushInputBufferr();
 }
 
 

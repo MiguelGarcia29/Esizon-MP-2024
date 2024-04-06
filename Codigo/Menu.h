@@ -7,9 +7,6 @@
 
 #include "estructuras.h"
 
-// Función para limpiar el buffer de entrada
-void flushInputBuffer();
-
 // Rol de administrador
 // Solo puede acceder: Administrador
 void mostrarPerfil();

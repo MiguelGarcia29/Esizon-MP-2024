@@ -82,7 +82,8 @@ int main()
     inicializarDatos();
 
     // ESTRUCTURA DEL PROGRAMA
-    accederPrograma();
+    //accederPrograma();
+    listado_producto(productos,&numProductos);
 
     almacenarDatos();
 }
@@ -228,14 +229,6 @@ int comprobarTransportista(char *email, char *contrasenia)
     }
 
     return encontrado;
-}
-
-// Función para limpiar el buffer de entrada
-void flushInputBuffer()
-{
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF)
-        ;
 }
 
 // Rol de administrador
@@ -426,7 +419,24 @@ void menutransportista()
 // Solo puede acceder: Administrador y clientes y transportista y proveedores
 void mostrarPerfil()
 {
-    // Implementación de la función perfil
+    switch (rol)
+    {
+    case 1:
+        
+        break;
+    case 2:
+        
+        break;
+    case 3:
+        mostrar_perfilprov(adminProvs[posVectorClienteActual]);
+        modificar_perfilprov(&adminProvs[posVectorClienteActual]);
+        break;
+    case 4:
+        
+        break;
+    default:
+        break;
+    }
 }
 
 // Mediante esta opción el administrador podrá acceder a la información de los clientes dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de clientes.
@@ -447,7 +457,26 @@ void mostrarProveedores()
 // Solo puede acceder: Administrador y cliente y proveedor
 void mostrarProductos()
 {
-    // Implementación de la función productos
+      switch (rol)
+    {
+    case 1:
+        
+        break;
+    case 2:
+        
+        break;
+    case 3:
+        seccionProductosProv();
+        break;
+    case 4:
+        break;
+    default:
+        break;
+    }
+}
+
+void seccionProductosProv(){
+    
 }
 
 // Mediante esta opción el administrador podrá acceder a la información de las categorías dadas de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de categorías. Además podrá generar listados de productos por categoría.

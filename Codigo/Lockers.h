@@ -6,9 +6,6 @@
 #include <string.h>
 #include "estructuras.h"
 
-// Función para limpiar el buffer de entrada
-void flushInputBuffer();
-
 // Función para generar un ID único para un nuevo locker
 char* id_generator(Locker *l, int tamanio_vector);
 

@@ -1,12 +1,5 @@
 #include "Lockers.h"
 
-
-// Función para limpiar el buffer de entrada
-void flushInputBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 // Función para generar un ID único para un nuevo locker
 char* id_generator(Locker *l, int tamanio_vector) {
     int id_generada = 1;

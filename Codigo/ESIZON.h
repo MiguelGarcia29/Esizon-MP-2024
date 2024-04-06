@@ -1,8 +1,12 @@
-#ifndef CABECERA_H
-#define CABECERA_H
+#ifndef ESIZON_H
+#define ESIZON_H
 
+#include "limpiarBuffer.c"
 #include "estructuras.h"
 #include "Gestion_Fichero.c"
+#include "Categoria.c"
+#include "Productos.c"
+#include "Proveedor.c"
 //#include "Menu.c"
 
 void accederPrograma();

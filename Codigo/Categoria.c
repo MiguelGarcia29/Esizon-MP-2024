@@ -1,11 +1,5 @@
 #include "Categoria.h"
 
-//Depura el buffer.
-void flushInputBuffer(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 char* id_generator_categ(Categoria *categorias, int tamanio_vector){
 
     int id_generada = 1;
@@ -47,7 +41,7 @@ void baja_categoria(Categoria *categoria , int* tamanio, char *id_baja){
 
     int encontrado = 0;
 
-    for(int i = 0 ; i < *tamanio ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
+    for(int i = 0 ; i < *tamanio && encontrado==0 ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
     {
         if(strcmp(categoria[i].id_categ,id_baja) == 0){
             encontrado = 1;
@@ -122,7 +116,4 @@ void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_mo
     fgets(categorias[i].descrip, 51, stdin);
     categorias[i].descrip[strcspn(categorias[i].descrip, "\n")] = '\0';
     flushInputBuffer();
-}
-int main(){
-    return 0;
 }

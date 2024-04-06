@@ -34,11 +34,6 @@ typedef struct {
     char fecha_caducidad[11];
 } ComportamientoLocker;
 
-void flushInputBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 void obtener_fecha_actual(char *fecha_actual) 
 {
     time_t rawtime;
