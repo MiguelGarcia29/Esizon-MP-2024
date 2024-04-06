@@ -1,4 +1,5 @@
-//Estructura Cliente:
+#ifndef ESTRUCTURAS_H
+#define ESTRUCTURAS_H
 
 typedef struct{
     char id_cliente[8];
@@ -110,3 +111,5 @@ typedef struct {
     char fecha_aceptacion[11];
     char fecha_caducidad[11];
 }Devolucion;
+
+#endif // MENU_H
