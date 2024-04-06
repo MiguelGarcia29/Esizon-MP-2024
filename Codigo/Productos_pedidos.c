@@ -170,7 +170,7 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
 
     for(int i = 0 ; i < *tamanio && encontrado == 0 ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
     {
-        if(strcmp(*pedidos[i].id_prod,id_baja) == 0){
+        if(strcmp((*pedidos)[i].id_prod,id_baja) == 0){
             encontrado = 1;
 
         for(int j = i; j < *tamanio - 1; j++) //Reposicionamos las ids posteriores a la dada de baja.
@@ -179,7 +179,7 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
         }
 
         (*tamanio)--; //Reduzco el tamaño del array.
-        *pedidos = (ProductoPedido *)realloc(*pedidos, (*tamanio - 1) * sizeof(ProductoPedido));
+        *pedidos = (ProductoPedido *)realloc(*pedidos, (*tamanio) * sizeof(ProductoPedido));
 
         printf("Producto con ID %s ha sido de baja correctamente.\n", id_baja);
 
@@ -226,7 +226,7 @@ void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista tran
 
     char id_modificar[8];
     printf("\nIntroduce el ID del producto que quieres modificar: ");
-    fgets(id_modificar,8,stdin);
+    fgets(id_modificar,8,stdin);    
     id_modificar[strcspn(id_modificar,"\n")] = '\0';
     flushInputBuffer();
 
@@ -282,7 +282,7 @@ void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_mod
         i++;    // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
-    printf("Escribe el estado del pedido: ");
+    printf("Escribe el nuevo id del transportista: ");
 	fflush(stdin);
 	fgets(pedidos[i].id_transp,5,stdin);
     flushInputBuffer();
@@ -305,9 +305,24 @@ void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar)
 }
 
 /* void checkear_descuento(Descuento *descuentos, int* tamanio, char *descuento_buscado); */
-void consultado_estado(ProductoPedido *pedidos, int* tamanio , char pedido_buscado){
+void consultado_estado(ProductoPedido *pedidos, int* tamanio,char id_pedido_buscado){
 
+    int coincidencias = 0;
+
+    for(int i = 0 ; i < *tamanio ; i++ ){
+
+        if(strcmp(pedidos[i].id_pedido,id_pedido_buscado) == 0){
+
+            printf("%s\n",pedidos[i].estado_pedido);
+            printf("\n");
+            coincidencias++;
+
+            }
+        }
+    if (coincidencias == 0) {
+        printf("No se encontro el producto pedido con la id '%s'.\n", id_pedido_buscado);
+    }
 }
-void modificar_estado(ProductoPedido *pedidos, int* tamanio , char *pedido_buscado); // Irá en modificar pedidos.
+
 
  
