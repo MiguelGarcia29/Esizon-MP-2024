@@ -121,7 +121,7 @@ void alta_locker(Locker **l, int* tamanio_vector, ComportamientoLocker ***c, int
 int ocupados_lockers(Locker *l, int tamanio, char *id) {
     for (int i = 0; i < tamanio; i++) {
         if (strcmp(id, l[i].id_locker) == 0) { // Compara el ID dado con el ID del locker en la posición i
-            if (l[i].num_compt > l[i].num_compocup) { // Verifica si hay compartimentos disponibles
+            if (l[i].num_compt >= l[i].num_compocup) { // Verifica si hay compartimentos disponibles
                 l[i].num_compocup++; // Incrementa el contador de compartimentos ocupados
                 printf("Se ha añadido correctamente\n");
                 return 0; // Devuelve 0 si no está lleno
@@ -182,7 +182,7 @@ int main() {
         printf("\nMenú de Opciones:\n");
         printf("1. Alta de Locker\n");
         printf("2. Baja de Locker\n");
-        printf("3. Verificar disponibilidad de Locker\n"); // Nueva opción
+        printf("3. Añadir compartimento ocupado al locker\n"); // Nueva opción
         printf("4. Listado de Lockers\n");
         printf("5. Salir\n");
         printf("Seleccione una opción: ");
