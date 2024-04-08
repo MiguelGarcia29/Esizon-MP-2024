@@ -163,8 +163,7 @@ void baja_descuentos(Descuento **desc,int *cantdad_desc,char *id_baja) //funcion
 	if(encontrado == 0)
 	{
 		printf("\nDescuento no encontrado\n\n");
-	}
-		
+	}	
 }
 
 
@@ -215,41 +214,132 @@ void aplicar_descuento(Descuento *desc,Producto *prod) //funcion para aplicar lo
 
 
 
+void modificar_descuento(Descuento *desc)
+{
+	int a,b;
+	
+	printf("(1) Modificar estado\n");
+	printf("(2) Modificar importe\n");
+	
+	fflush(stdin);
+	scanf("%d",&b);
+	fflush(stdin);
+	
+	switch(b)
+	{
+		case 1:
+			printf("\nNuevo estado\n\n");
+			printf("(1) Activo\n");
+			printf("(2) Inactivo\n");
+			
+			scanf("%d",&a);
+			fflush(stdin);
+			
+			switch(a)
+		{
+		case 1:
+			strcpy(desc->estado,"activo");	       
+		break;  
+		
+		case 2:
+			strcpy(desc->estado,"inactivo");
+		break;
+		
+		default:
+			printf("\nError\n\n");
+		break;
+			
+			
+		}
+		break;
+	
+		case 2:
+			printf("Introduzca el nuevo importe a descontar");
+			
+			scanf("%f",&desc->importe);
+		break;
+		
+		default:
+		break;
+	}
+}
+
+
 
 int main()
 {
-	int cantdad_des = 0;
+	int c,b,cantdad_des = 0;
+	c = 0;
 	
 	Descuento *des;
+	
+	char id[11];
 	
 	Producto producto;
 	producto.importe = 25;
 	strcpy(producto.id_gestor,"0001");
 	
-	alta_descuentos(&des,&cantdad_des);
+	while(c == 0)
+	{
+		printf("\n(1) Alta\n");
+		printf("(2) Mostrar\n");
+		printf("(3) Modificar\n");
+		printf("(4) Baja\n");
+		
+		scanf("%d",&b);
+		fflush(stdin);
+		
+		switch(b)
+		{
+			case 1:
+				alta_descuentos(&des,&cantdad_des);
+			break;
+			
+			case 2:
+				printf("Descripcion: %s ",des[cantdad_des].descrip);
 	
-	//printf("Descripcion: %s ",des[cantdad_des].descrip);
+				printf("Tipo: %s \n",des[cantdad_des].tipo);
+			
+				printf("Aplicabilidad: %s \n",des[cantdad_des].aplicable);
 	
-	printf("%s \n",des[cantdad_des].tipo);
+				printf("Importe:%2.f \n",des[cantdad_des].importe);
 	
-	printf("%s \n",des[cantdad_des].aplicable);
-	
-	printf("Importe:%2.f \n",des[cantdad_des].importe);
-	
-	//printf("%s \n",des[cantdad_des].estado);
+				printf("Estado: %s \n",des[cantdad_des].estado);
 
-	//printf("%s \n",des[cantdad_des].id_cod);
+				printf("Id: %s \n",des[cantdad_des].id_cod);
 	
-	//printf("Cantidad: %d\n",cantdad_des);
+				printf("Cantidad: %d\n",cantdad_des);
+			break;
+			
+			case 3:		
+				modificar_descuento(&des);
+			break;
+			
+			case 4:
+				printf("Id baja:");
+				fgets(id,10,stdin);
+				fflush(stdin);
+				
+				baja_descuentos(&des,&cantdad_des,id);
+			break;
+			
+			default:
+				c = 1;
+			break;
+		}	
+		
+		printf("Continuar pruebas:");
+		scanf("%d",&c);
+	}
 	
-	printf("Antes:%2.f\n",producto.importe);
+	
+	/*printf("Precio antes:%2.f\n",producto.importe);
 	
 	aplicar_descuento(&des[cantdad_des],&producto);
 	
-	printf("Despues:%2.f\n",producto.importe);
+	printf("Despues:%2.f\n",producto.importe);*/
 	
-	return 0;
-	
+	return 0;	
 }
 
 
