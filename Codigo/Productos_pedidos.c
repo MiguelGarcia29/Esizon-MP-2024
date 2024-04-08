@@ -1,7 +1,8 @@
 #include "Productos_pedidos.h"
 #include <time.h>
 #include <string.h>
-
+#include "Productos.h"
+#include "Categoria.h"
 /*Permitir al cliente realizar pedidos controlando los códigos promocionales y/o
 cheques regalo que pueda utilizar en función de si están activos o no y de la aplicabilidad
 que tengan sobre el producto.*/
@@ -24,10 +25,6 @@ entrega y ubicación del locker.*/
 /*Un usuario proveedor podrá acceder únicamente a la información de los pedidos de productos
 que él mismo suministra*/
 
-void flushInputBuffer(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
 
 char* id_generator_pedido(ProductoPedido *pedidos, int tamanio_vector){
 
@@ -118,17 +115,20 @@ void listado_transportista(Transportista *t, int tamanio){
 
 
 // Sirve para seleccionar el producto que se va a pedir.
-Producto *pedir_producto(Producto *productos , int* tamanio_productos, ProductoPedido *pedidos, int* tamanio , char estad_pedido){
+Producto *pedir_producto(Producto *productos , int* tamanio_productos, ProductoPedido *pedidos, int* tamanio){
 
     char producto_pedido[16];
     int respuesta;
+    int coincidencia = 0;
 
+    while(coincidencia == 0){
     printf("Que producto desea comprar?\n");
     fgets(producto_pedido,16,stdin);
     producto_pedido[strcspn(producto_pedido,"\n")] = '\0'; 
 
-    buscador_un_pedidos(pedidos, tamanio , producto_pedido);
+    buscador_un_pedidos(pedidos, tamanio , producto_pedido, &coincidencia);
 
+    }
     printf("Esta seguro que desea comprar ese producto?\n1) SI \n 2) NO \n");
     scanf("%d",&respuesta);
     if(respuesta == 1){
@@ -144,7 +144,7 @@ Producto *pedir_producto(Producto *productos , int* tamanio_productos, ProductoP
 
 
 // Una vez seleccionado el producto que se quiere comprar, se da de alta el pedido correspondiente. Struct de Productos debe pasar como puntero??
-void alta_pedidos(ProductoPedido **pedidos, int* tamanio_vector, Cliente actual_cliente,int tamanio_cliente, Producto producto_seleccionado , int tamanio_produc, Locker *lockers, int* tamanio_lockers, Transportista *transportista, int tamanio_transportistas){
+void alta_pedidos(ProductoPedido **pedidos, int* tamanio_vector, Cliente actual_cliente,int* tamanio_cliente, Producto producto_seleccionado , int* tamanio_produc, Locker *lockers, int* tamanio_lockers, Transportista *transportista, int* tamanio_transportistas){
     
     ProductoPedido nuevo_producto_pedido;
     char fecha_estimada[11];
@@ -186,11 +186,11 @@ void alta_pedidos(ProductoPedido **pedidos, int* tamanio_vector, Cliente actual_
     fgets(id_locker_seleccionada,11,stdin);
     flushInputBuffer();
 
-    ocupados_lockers(lockers,tamanio_lockers,id_locker_seleccionada); // No se si hace falta agragar el pedido al locker o ya lo hace la funcion.
+    ocupados_lockers(lockers,*tamanio_lockers,id_locker_seleccionada); // No se si hace falta agragar el pedido al locker o ya lo hace la funcion.
 
     // Seleccionar transportista, ADMIN SOLO
     char id_transportista_seleccionado[5];
-    listado_transportista(transportista,tamanio_transportistas);
+    listado_transportista(transportista,*tamanio_transportistas);
     // Comprobar que es ADMIN
     printf("Selecione el ID del tranportista que quiere que entregue el producto:\n");
     fgets(id_transportista_seleccionado,11,stdin);
@@ -221,7 +221,7 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
 
         for(int j = i; j < *tamanio - 1; j++) //Reposicionamos las ids posteriores a la dada de baja.
         {
-           pedidos[j] = pedidos[j + 1];
+           (*pedidos)[j] = (*pedidos)[j + 1];
         }
 
         (*tamanio)--; //Reduzco el tamaño del array.
@@ -246,9 +246,7 @@ void listado_Pedido(ProductoPedido *pedidos, int* tamanio){
 }
 
 //buscador de pedido segun su estado
-void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_pedido){
-    
-    int coincidencias = 0;
+void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_pedido, int *coincidencia){
 
     for(int i = 0 ; i < *tamanio ; i++ ){
 
@@ -256,15 +254,19 @@ void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_ped
 
             printf("%s-%s-%d-%s-%.2f-%s\n",pedidos[i].id_pedido,pedidos[i].id_prod,pedidos[i].num_unid,pedidos[i].fecha_entrega_prevista,pedidos[i].importe,pedidos[i].estado_pedido);
             printf("\n");
-            coincidencias++;
+            coincidencia++;
             }
         }
-        if(coincidencias == 0) {
+        if(coincidencia == 0) {
         printf("No se encontraron pedidos (%s).\n", estad_pedido);
     }
 }
 
+void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
+void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
+void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
 
+// Permite modificar ciertas características del producto pedido.
 void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *transportistas, int tamanio_transportistas){
 
     int a;
@@ -352,7 +354,7 @@ void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar)
 }
 
 /* void checkear_descuento(Descuento *descuentos, int* tamanio, char *descuento_buscado); */
-void consultado_estado(ProductoPedido *pedidos, int* tamanio,char id_pedido_buscado){
+void consultar_estado(ProductoPedido *pedidos, int* tamanio, char *id_pedido_buscado){
 
     int coincidencias = 0;
 
@@ -371,34 +373,10 @@ void consultado_estado(ProductoPedido *pedidos, int* tamanio,char id_pedido_busc
     }
 }
 
- // Prototipos de funciones
-void mostrar_menu();
-void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos);
 
-// Función principal
-int main() {
-    // Declaración e inicialización de las variables
-    Cliente clientes[100]; // Se asume un máximo de 100 clientes
-    int tamanio_clientes = 0;
-    Producto productos[100]; // Se asume un máximo de 100 productos
-    int tamanio_productos = 0;
-    ProductoPedido pedidos[100]; // Se asume un máximo de 100 pedidos
-    int tamanio_pedidos = 0;
-    int opcion;
 
-    // Bucle principal del programa
-    do {
-        mostrar_menu();
-        scanf("%d", &opcion);
-        ejecutar_opcion(opcion, clientes, &tamanio_clientes, productos, &tamanio_productos, pedidos, &tamanio_pedidos);
-    } while (opcion != 0);
 
-    return 0;
-}
-void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos);
-void mostrar_menu();
-// Función para mostrar el menú de opciones
-void mostrar_menu() {
+void mostrar_menu(){
     printf("\n----- MENU -----\n");
     printf("1. Alta de pedido\n");
     printf("2. Baja de pedido\n");
@@ -409,26 +387,35 @@ void mostrar_menu() {
 }
 
 // Función para ejecutar la opción seleccionada
-void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos) {
+void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos, Locker *lockers, int *tamanio_lockers, Transportista *transportista, int *tamanio_transportistas){
+    
+    char ID_Cliente[] = "00000001"; // Corrección en la declaración de la variable ID_Cliente
+    char id_baja[8];
+    char id_pedido_buscado[8];
     switch (opcion) {
         case 1:
-            // Llamar a la función de alta de pedido
-            // alta_pedidos(&pedidos, &tamanio_pedidos, ...);
+            Producto *producto_seleccionado = pedir_producto(productos, tamanio_productos, pedidos, tamanio_pedidos); // Corrección en la llamada a pedir_producto
+            alta_pedidos(&pedidos, tamanio_pedidos, *clientes, tamanio_clientes, *producto_seleccionado , tamanio_productos, lockers, tamanio_lockers,  transportista, tamanio_transportistas); // Corrección en la llamada a alta_pedidos
             printf("Opción de alta de pedido seleccionada.\n");
             break;
         case 2:
-            // Llamar a la función de baja de pedido
-            // baja_pedidos(&pedidos, &tamanio_pedidos, ...);
+            printf("A que ID desea dar de baja: \n");
+            listado_Pedido(pedidos, tamanio_pedidos); // Corrección en la llamada a listado_Pedido
+            fgets(id_baja,8,stdin);
+            flushInputBuffer();
+            baja_pedidos(&pedidos, tamanio_pedidos, id_baja); // Corrección en la llamada a baja_pedidos
             printf("Opción de baja de pedido seleccionada.\n");
             break;
         case 3:
-            // Llamar a la función de modificar pedido
-            // modificar_pedidos(pedidos, &tamanio_pedidos, ...);
+            modificar_pedidos(pedidos, tamanio_pedidos, transportista, *tamanio_transportistas); // Corrección en la llamada a modificar_pedidos
             printf("Opción de modificar pedido seleccionada.\n");
             break;
         case 4:
-            // Llamar a la función de consultar estado de pedido
-            // consultar_estado_pedido(pedidos, &tamanio_pedidos, ...);
+            printf("Cual es el ID de su pedido: \n");
+            listado_Pedido(pedidos, tamanio_pedidos); // Corrección en la llamada a listado_Pedido
+            fgets(id_pedido_buscado,8,stdin);
+            flushInputBuffer();
+            consultar_estado(pedidos, tamanio_pedidos, id_pedido_buscado); // Corrección en la llamada a consultar_estado
             printf("Opción de consultar estado de pedido seleccionada.\n");
             break;
         case 0:
@@ -437,4 +424,101 @@ void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Produ
         default:
             printf("Opción no válida. Por favor, seleccione una opción válida.\n");
     }
+}
+
+
+
+// Resto del código...
+//Main ProductosPedidos
+int main(){
+    // Declaración e inicialización de las variables
+    Cliente clientes[100];
+    int tamanio_clientes = 0;
+    Producto productos[100]; // Se asume un máximo de 100 productos
+    int tamanio_productos = 0;
+    ProductoPedido *pedidos = malloc(100 * sizeof(ProductoPedido)); // Se asume un máximo de 100 pedidos
+    int tamanio_pedidos = 0;
+    Locker lockers[100]; // Se asume un máximo de 100 productos
+    int tamanio_lockers = 0;
+    Transportista transportista[100]; // Se asume un máximo de 100 pedidos
+    int tamanio_transportistas = 0;
+    int opcion;
+    Categoria categorias[100]; // Suponiendo que se tienen 100 categorías
+    int tamanio_categorias = 0;
+    Cliente cliente_actual;
+    strcpy(cliente_actual.id_cliente,"0000001");
+    
+     // Registro de categorías
+    printf("Registro de categorias:\n");
+    for (int i = 0; i < 3; i++) {
+        alta_categoria(categorias, &tamanio_categorias);
+    }
+
+    // Registro de productos
+    printf("Registro de productos:\n");
+    for(int i = 0; i < 3; i++) {
+        alta_producto(productos, &tamanio_productos,cliente_actual.id_cliente, categorias, &tamanio_categorias);
+    }
+
+    // Mostrar listado de productos
+    printf("\nListado de productos registrados:\n");
+    listado_producto(productos, &tamanio_productos);
+
+    // Mostrar listado de categorías
+    printf("\nListado de categorías registradas:\n");
+    for (int i = 0; i < tamanio_categorias; i++) {
+        printf("%s - %s\n", categorias[i].id_categ, categorias[i].descrip);
+    }
+
+    // Dar de baja un producto
+    char id_baja[8];
+    printf("\n¿Qué producto desea dar de baja? (Ingrese el ID): ");
+    scanf("%s", id_baja);
+    baja_producto(productos, &tamanio_productos, id_baja);
+
+    // Dar de baja una categoria
+    printf("\n¿Que categoria desea dar de baja? (Ingrese el ID): ");
+    scanf("%s", id_baja);
+    baja_categoria(categorias, &tamanio_categorias, id_baja);
+
+    // Buscar productos por descripción
+    char descripcion_buscada[51];
+    printf("\nIngrese la descripción del producto que desea buscar: ");
+    fflush(stdin);
+    fgets(descripcion_buscada, 51, stdin);
+    descripcion_buscada[strcspn(descripcion_buscada, "\n")] = '\0';
+    busqueda_producto_descr(productos, &tamanio_productos, descripcion_buscada);
+
+    // Buscar productos por categoría
+    char categoria_buscada[51];
+    printf("\nIngrese la categoría del producto que desea buscar: ");
+    fflush(stdin);
+    fgets(categoria_buscada, 51, stdin);
+    categoria_buscada[strcspn(categoria_buscada, "\n")] = '\0';
+    busqueda_producto_categ(productos, &tamanio_productos, categoria_buscada, categorias, &tamanio_categorias);
+
+     // Modificar producto o categoria
+    int select = 0;
+    printf("Pulse:\n 1) Para modificar un producto\n 2) Para modificar una categoria\n");
+    scanf("%d",&select);
+    if (select == 1){
+        char id_prov[4];
+        strcpy(id_prov,"-1");
+        modificar_producto(productos, &tamanio_productos, id_prov);
+    }else{
+        if(select == 2){
+            modificar_categoria(categorias, &tamanio_categorias);
+        }
+    }
+
+    // Bucle principal del programa
+    do {
+        mostrar_menu();
+        scanf("%d", &opcion);
+        ejecutar_opcion(opcion, clientes, &tamanio_clientes, productos, &tamanio_productos, pedidos, &tamanio_pedidos, lockers, &tamanio_lockers, transportista, &tamanio_transportistas);
+    } while (opcion != 0);
+
+    free(pedidos); // Liberar memoria asignada a pedidos
+
+    return 0;
 }

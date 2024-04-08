@@ -99,6 +99,8 @@ char *indicar_categ(Categoria *categ, int* tamanio, char *categoria_productos) {
     return categoriaEncontrada;
 }
 
+void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_modificar);
+
 void modificar_categoria(Categoria *categorias, int* tamanio){
     char id_modificar[8];
 
@@ -122,7 +124,4 @@ void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_mo
     fgets(categorias[i].descrip, 51, stdin);
     categorias[i].descrip[strcspn(categorias[i].descrip, "\n")] = '\0';
     flushInputBuffer();
-}
-int main(){
-    return 0;
 }
