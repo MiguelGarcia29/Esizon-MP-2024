@@ -4,10 +4,12 @@
 
 
 
+char *generar_id_descuentos(Descuento *desc, int cantdad_desc);
 
 
 
 
+//void activar_descuento
 
 //void activo_inactivo();
 
@@ -25,7 +27,7 @@ char *generar_id_descuentos(Descuento *desc, int cantdad_desc)
 	
 	if(cantdad_desc != 0)
 	{
-		id_generada = atoi(desc[cantdad_desc].id_cod);
+		id_generada = atoi(desc[cantdad_desc - 1].id_cod);
 		
 		id_generada++;
 	}
@@ -38,22 +40,22 @@ char *generar_id_descuentos(Descuento *desc, int cantdad_desc)
 		return NULL;
 	}
 	
-	snprintf(id,10,"%010d",id_generada);
+	sprintf(id,"%010d",id_generada);
 	
 	return id;
 }
 
 
-void alta_descuentos(Descuento *desc,int *cantdad_desc,DescuentoCliente *desccli)
+void alta_descuentos(Descuento **desc,int *cantdad_desc)
 {
 	int a;
 	
-	fflush(stdin);
-	strcpy(desc->id_cod,generar_id_descuentos(&desc,*cantdad_desc));
+	Descuento nuevo_descuento;
 	
-	printf("Descripcion: ");
 	fflush(stdin);
-	fgets(desc->descrip,51,stdin);
+	printf("Descripcion: ");
+	fflush(stdin);                                                      
+	fgets(nuevo_descuento.descrip,51,stdin);
 	
 	printf("Tipo: \n");
 	printf("(1) Codigo promocional\n");
@@ -64,15 +66,17 @@ void alta_descuentos(Descuento *desc,int *cantdad_desc,DescuentoCliente *desccli
 	switch(a)
 	{
 		case 1:
-			strcpy(desc->tipo,"codpro\0");
+			strcpy(nuevo_descuento.tipo,"codpro\0");
 		break;
 		
-		case 2:
-			strcpy(desc->tipo,"cheqreg\0");
+		case 2: 
+			strcpy(nuevo_descuento.tipo,"cheqreg\0");
 		break;
-		
+		        
 		default:
-			printf("Error\n");
+			printf("\nError\n\n");
+			
+			exit(EXIT_FAILURE);
 		break;	
 	}
 	
@@ -87,23 +91,25 @@ void alta_descuentos(Descuento *desc,int *cantdad_desc,DescuentoCliente *desccli
 	switch(a)
 	{
 		case 1:
-			strcpy(desc->aplicable,"todos\0");
+			strcpy(nuevo_descuento.aplicable,"todos\0");
 		break;
-		
-		case 2:
-			strcpy(desc->aplicable,"esizon\0");
+		        
+		case 2: 
+			strcpy(nuevo_descuento.aplicable,"esizon\0");
 		break;
-		
+		        
 		default:
-			printf("Error\n");
+			printf("\nError\n\n");
+			
+			exit(EXIT_FAILURE);
 		break;
 	}
 	
 	printf("Importe: ");
 	fflush(stdin);
-	scanf("%f",&desc->importe);
+	scanf("%f",&nuevo_descuento.importe);
 	
-
+             
 	printf("Estado: \n");
 	printf("(1) Activo\n");
 	printf("(2) Inactivo\n");
@@ -114,53 +120,62 @@ void alta_descuentos(Descuento *desc,int *cantdad_desc,DescuentoCliente *desccli
 	switch(a)
 	{
 		case 1:
-			strcpy(desc->estado,"activo\0");
+			strcpy(nuevo_descuento.estado,"activo\0");
 			
-			
-		break;
+			       
+		break;  
 		
 		case 2:
-			strcpy(desc->estado,"inactivo\0");
-			
-			printf("Introduzca la fecha en que quiere que entre en vigor el descuento: ");
-			fflush(stdin);
-			fgets(desccli->fecha_asignacion,10,stdin);
-			
+			strcpy(nuevo_descuento.estado,"inactivo\0");
 		break;
 		
 		default:
+			printf("\nError\n\n");
+			
+			exit(EXIT_FAILURE);
 		break;
 	}
 	
-	printf("Indique la fecha hasta la que estara habilitado este descuento: ");
 	fflush(stdin);
-	fgets(desccli->fecha_caducidad,10,stdin);
+	strcpy(nuevo_descuento.id_cod,generar_id_descuentos(*desc,*cantdad_desc));
+	fflush(stdin);
 	
-	*cantdad_desc++;
+	*desc = (Descuento *)realloc(*desc, (*cantdad_desc + 1) * sizeof(Descuento));
+	
+	(*desc)[*cantdad_desc] = nuevo_descuento;
+	
+	(*cantdad_desc++);
 	
 }
 
-void baja_descuentos(Descuento *desc,int *cantdad_desc,char *id_baja)
+void baja_descuentos(Descuento **desc,int *cantdad_desc,char *id_baja)
 {
 	int encontrado = 0,i,j;
 	
-	for(i = 0;i < *cantdad_desc;i++)
+	for(i = 0;i < *cantdad_desc && encontrado == 0;i++)
 	{
-		if(strcmp(desc[i].id_cod,id_baja) == 0)
+		if(strcmp((*desc)[i].id_cod,id_baja) == 0)
 		{
 			encontrado = 1;
 			
 			for(j = i;j < *cantdad_desc - 1; j++)
 			{
-				desc[j] = desc[j+1];
+				(*desc)[j] = (*desc)[j+1];
 			}
 			
-			*cantdad_desc--;
+			*(cantdad_desc)--;
 			
-			printf("\nBaja efectuada.\n");
+			*desc = realloc(*desc, (*cantdad_desc) * sizeof(Descuento));
+			
+			printf("\nBaja efectuada.\n\n");
 			
 		}
 			
+	}
+	
+	if(encontrado == 0)
+	{
+		printf("\nDescuento no encontrado\n\n");
 	}
 		
 }
@@ -168,33 +183,30 @@ void baja_descuentos(Descuento *desc,int *cantdad_desc,char *id_baja)
 
 int main()
 {
-	Descuento des;
+	int cantdad_des = 0;
 	
-	DescuentoCliente descli;
+	Descuento *des;
 	
-	int cantdad_des = 1;
-	
-	alta_descuentos(&des,&cantdad_des,&descli);
-	
-	printf("%s ",des.descrip);
-	
-	printf("%s \n",des.tipo);
-	
-	printf("%s \n",des.aplicable);
-	
-	printf("%2.f \n",des.importe);
-	
-	printf("%s \n",des.estado);
-	
-	printf("%s",descli.fecha_asignacion);
-	
-	printf("%s",descli.fecha_caducidad);
 
-	printf("%s",des.id_cod);
 	
-	printf("%d",cantdad_des);
+	alta_descuentos(&des,&cantdad_des);
+	
+	printf("Descripcion: %s ",des[cantdad_des].descrip);
+	
+	printf("%s \n",des[cantdad_des].tipo);
+	
+	printf("%s \n",des[cantdad_des].aplicable);
+	
+	printf("Importe: %2.f \n",des[cantdad_des].importe);
+	
+	printf("%s \n",des[cantdad_des].estado);
+
+	printf("%s \n",des[cantdad_des].id_cod);
+	
+	printf("Cantdidad: %d",cantdad_des);
 	
 	return 0;
+	
 }
 
 
