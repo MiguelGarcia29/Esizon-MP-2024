@@ -11,5 +11,6 @@
 
 void alta_descuentos(Descuento **desc, int *cantdad_desc);
 
-
 void baja_descuentos(Descuento **desc,int *cantdad_desc,char *id_baja);
+
+void aplicar_descuento(Descuento *desc, Producto *prod);
