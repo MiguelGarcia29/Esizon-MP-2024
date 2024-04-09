@@ -214,10 +214,25 @@ void aplicar_descuento(Descuento *desc,Producto *prod) //funcion para aplicar lo
 
 
 
-void modificar_descuento(Descuento *desc)
+void modificar_descuento(Descuento *desc,char mod[10],int cantdad_desc)
 {
-	int a,b;
+	int a,b,i,encontrado = 0;
 	
+	for(i = 0; i < cantdad_desc && encontrado == 0; i++)
+	{
+		if(strcmp(desc[i].id_cod,mod) == 0)
+		{
+			encontrado = 1;
+			
+			printf("encontrao\n");
+		}
+	}
+	
+	if(encontrado == 1)
+	{
+	printf("perfe\n");
+	printf("%d\n",i);
+		
 	printf("(1) Modificar estado\n");
 	printf("(2) Modificar importe\n");
 	
@@ -238,11 +253,11 @@ void modificar_descuento(Descuento *desc)
 			switch(a)
 		{
 		case 1:
-			strcpy(desc->estado,"activo");	       
+			strcpy(desc[i].estado,"activo");	       
 		break;  
 		
 		case 2:
-			strcpy(desc->estado,"inactivo");
+			strcpy(desc[i].estado,"inactivo");
 		break;
 		
 		default:
@@ -256,22 +271,32 @@ void modificar_descuento(Descuento *desc)
 		case 2:
 			printf("Introduzca el nuevo importe a descontar");
 			
-			scanf("%f",&desc->importe);
+			scanf("%f",&desc[i].importe);
 		break;
 		
 		default:
 		break;
 	}
+	}
+	else
+	{
+		printf("NOP\n");
+		printf("%d\n",i);
+	}
+	
+
 }
 
 
 
 int main()
 {
-	int c,b,cantdad_des = 0;
+	int c,b,cantdad_des = 1;
 	c = 0;
 	
 	Descuento *des;
+	
+	des = malloc(cantdad_des * sizeof(Descuento));
 	
 	char id[11];
 	
@@ -293,6 +318,8 @@ int main()
 		{
 			case 1:
 				alta_descuentos(&des,&cantdad_des);
+				
+				c = 0;
 			break;
 			
 			case 2:
@@ -309,18 +336,30 @@ int main()
 				printf("Id: %s \n",des[cantdad_des].id_cod);
 	
 				printf("Cantidad: %d\n",cantdad_des);
+				
+				c = 0;
 			break;
 			
-			case 3:		
-				modificar_descuento(&des);
+			case 3:
+				printf("Id a modificar:");
+				fgets(id,10,stdin);
+				id[strcspn(id,"\n")] = '\0';
+				fflush(stdin);
+					
+				modificar_descuento(&des,id,cantdad_des);
+				
+				c = 0;
 			break;
 			
 			case 4:
 				printf("Id baja:");
 				fgets(id,10,stdin);
+				id[strcspn(id,"\n")] = '\0';
 				fflush(stdin);
 				
 				baja_descuentos(&des,&cantdad_des,id);
+				
+				c = 0;
 			break;
 			
 			default:
@@ -328,8 +367,8 @@ int main()
 			break;
 		}	
 		
-		printf("Continuar pruebas:");
-		scanf("%d",&c);
+		//printf("Continuar pruebas:");
+		//scanf("%d",&c);
 	}
 	
 	
