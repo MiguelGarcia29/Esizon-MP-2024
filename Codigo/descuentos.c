@@ -2,7 +2,7 @@
 
 #include"descuentos.h"
 
-
+//funcion para buscar y mostrar
 
 char *generar_id_descuentos(Descuento *desc, int cantdad_desc);
 
@@ -213,78 +213,40 @@ void aplicar_descuento(Descuento *desc,Producto *prod) //funcion para aplicar lo
 }
 
 
+void modificar_descuento(Descuento *desc, int i) {
+    int opcion;
 
-void modificar_descuento(Descuento *desc,char mod[10],int cantdad_desc)
-{
-	int a,b,i,encontrado = 0;
-	
-	for(i = 0; i < cantdad_desc && encontrado == 0; i++)
-	{
-		if(strcmp(desc[i].id_cod,mod) == 0)
-		{
-			encontrado = 1;
-			
-			printf("encontrao\n");
-		}
-	}
-	
-	if(encontrado == 1)
-	{
-	printf("perfe\n");
-	printf("%d\n",i);
-		
-	printf("(1) Modificar estado\n");
-	printf("(2) Modificar importe\n");
-	
-	fflush(stdin);
-	scanf("%d",&b);
-	fflush(stdin);
-	
-	switch(b)
-	{
-		case 1:
-			printf("\nNuevo estado\n\n");
-			printf("(1) Activo\n");
-			printf("(2) Inactivo\n");
-			
-			scanf("%d",&a);
-			fflush(stdin);
-			
-			switch(a)
-		{
-		case 1:
-			strcpy(desc[i].estado,"activo");	       
-		break;  
-		
-		case 2:
-			strcpy(desc[i].estado,"inactivo");
-		break;
-		
-		default:
-			printf("\nError\n\n");
-		break;
-			
-			
-		}
-		break;
-	
-		case 2:
-			printf("Introduzca el nuevo importe a descontar");
-			
-			scanf("%f",&desc[i].importe);
-		break;
-		
-		default:
-		break;
-	}
-	}
-	else
-	{
-		printf("NOP\n");
-		printf("%d\n",i);
-	}
-	
+        printf("\nSeleccione que desea modificar:\n");
+        printf("(1) Estado\n");
+        printf("(2). Importe\n");
+        scanf("%d", &opcion);
 
+        switch (opcion) {
+            case 1:
+                printf("\nNuevo estado\n\n");
+                printf("(1) Activo\n");
+				printf("(2) Inactivo\n");
+			
+                scanf("%d", &opcion);
+                
+                if (opcion == 1)
+                    strcpy(desc[i].estado, "activo");
+                else if (opcion == 2)
+                    strcpy(desc[i].estado, "inactivo");
+                else
+                    printf("\nOpcion invalida\n");
+                break;
+            case 2:
+                printf("\nNuevo importe: ");
+                scanf("%f", &desc[i].importe);
+                break;
+            default:
+                printf("\nOpcion invalida\n");
+                break;
+        }
+    } else {
+        printf("Descuento no encontrado\n");
+    }
 }
 
 
@@ -341,19 +303,15 @@ int main()
 			break;
 			
 			case 3:
-				printf("Id a modificar:");
-				fgets(id,10,stdin);
-				id[strcspn(id,"\n")] = '\0';
-				fflush(stdin);
-					
-				modificar_descuento(&des,id,cantdad_des);
+				modificar_descuento(&des,cantdad_des);
 				
 				c = 0;
 			break;
 			
 			case 4:
 				printf("Id baja:");
-				fgets(id,10,stdin);
+				fflush(stdin);
+				fgets(id,11,stdin);
 				id[strcspn(id,"\n")] = '\0';
 				fflush(stdin);
 				
@@ -367,8 +325,6 @@ int main()
 			break;
 		}	
 		
-		//printf("Continuar pruebas:");
-		//scanf("%d",&c);
 	}
 	
 	
