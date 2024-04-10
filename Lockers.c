@@ -1,7 +1,7 @@
 #include "Lockers.h"
 
 // Función para generar un ID único para un nuevo locker
-char* id_generator(Locker *l, int tamanio_vector) {
+char* id_generator_locker(Locker *l, int tamanio_vector) {
     int id_generada = 1;
 
     // Si hay lockers en el vector, obtiene el último ID y genera uno nuevo incrementándolo
@@ -30,7 +30,7 @@ void alta_locker(Locker **l, int* tamanio_vector){
 
     Locker nuevo_locker;
     // Genera un nuevo ID para el locker
-    char *cadena = id_generator(*l, *tamanio_vector);
+    char *cadena = id_generator_locker(*l, *tamanio_vector);
     strcpy(nuevo_locker.id_locker, cadena);
     free(cadena); // Libera la memoria asignada para el ID generado
 
@@ -108,6 +108,92 @@ void listado_locker(Locker *l, int tamanio){
         printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l[i].num_compt, (l[i].num_compocup-1));
     }
 }
+
+// Guarda el vector de DescuentosClientes en el archivo siguiendo la estructura:
+/*
+    o Identificador del Locker (Id_locker), 10 caracteres máximo.
+    o Población (Localidad), 20 caracteres máximo.
+    o Provincia (Provincia), 20 caracteres máximo.
+    o Ubicación (Ubica), 20 caracteres máximo.
+    o Número de compartimentos total (Num_compT).
+    o Número de compartimentos ocupados actualmente (Num_compOcup).
+*/
+void guardarLockersEnArchivo(Locker *lockers, int numLockers)
+{
+    FILE *archivo = fopen(Lockers_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Lockers.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numLockers; i++)
+    {
+        fprintf(archivo, "%s-%s-%s-%s-%d-%d\n",
+                lockers[i].id_locker,
+                lockers[i].localidad,
+                lockers[i].provincia,
+                lockers[i].ubicacion,
+                lockers[i].num_compt,
+                lockers[i].num_compocup);
+    }
+
+    fclose(archivo);
+}
+
+Locker *iniciarLockersDeArchivo(int *numLock)
+{
+    FILE *archivo = fopen(Lockers_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Lockers_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    Locker *lockers = (Locker *)malloc(count * sizeof(Locker));
+    if (lockers == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Locker.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(lockers[i].id_locker, token, sizeof(lockers[i].id_locker));
+        token = strtok(NULL, "-");
+        strncpy(lockers[i].localidad, token, sizeof(lockers[i].localidad));
+        token = strtok(NULL, "-");
+        strncpy(lockers[i].provincia, token, sizeof(lockers[i].provincia));
+        token = strtok(NULL, "-");
+        strncpy(lockers[i].ubicacion, token, sizeof(lockers[i].ubicacion));
+        token = strtok(NULL, "-");
+        lockers[i].num_compt = atoi(token);
+        token = strtok(NULL, "-");
+        lockers[i].num_compocup = atoi(token);
+        i++;
+    }
+
+    fclose(archivo);
+    *numLock = count;
+    return lockers;
+}
+
 /*
 int main()
 {

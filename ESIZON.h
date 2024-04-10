@@ -1,11 +1,19 @@
 #ifndef ESIZON_H
 #define ESIZON_H
 
-#include "estructuras.h"
-#include "Gestion_Fichero.h"
+#include "Cliente.h"
+#include "Descuentos.h"
+#include "DescuentoCliente.h"
+#include "Lockers.h"
+#include "CompartimentosLockers.h"
 #include "Categoria.h"
 #include "Productos.h"
+#include "Pedidos.h"
+#include "Productos_pedidos.h"
+#include "Devolucion.h"
 #include "Proveedor.h"
+#include "Transportista.h"
+
 //#include "Menu.c"
 
 void accederPrograma();

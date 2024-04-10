@@ -4,8 +4,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "estructuras.h"
 #include "Categoria.h"
+
+typedef struct {
+    char id_prod[8];
+    char nombre[16];
+    char descrip[51];
+    char id_categ[5];
+    char id_gestor[5];
+    int stock;
+    int entrega;
+    float importe;
+}Producto;
 
 
 void alta_producto(Producto **productos, int* tamanio_vector, char* idAlta, Categoria *categ , int* tamanio_categ);
@@ -18,6 +28,7 @@ void modificar_producto(Producto *productos, int* tamanio, char *adminProv);
 char *indicar_categ(Categoria *categ, int* tamanio, char *categoria_productos);
 int productoEsDeProveedor(Producto *productos, int *tamanio, char *idProv, char *idProd);
 void listado_producto_prooved(Producto *productos, int *tamanio, char *idProv);
-
+void guardarProductosEnArchivo(Producto *productos, int numProductos);
+Producto *iniciarProductosDeArchivo(int *numProductos);
 
 #endif

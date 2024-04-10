@@ -117,3 +117,70 @@ void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_mo
     categorias[i].descrip[strcspn(categorias[i].descrip, "\n")] = '\0';
     flushInputBufferC();
 }
+
+// Guarda el vector de Categoria en el archivo siguiendo la estructura:
+/*
+    o Identificador de la categoria (Id_categ), 4 digitos.
+    o Descripción de la categoria (Descrip), 50 caracteres maximo.
+*/
+void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias)
+{
+    FILE *archivo = fopen(Categorias_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Categorias.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numCategorias; i++)
+    {
+        fprintf(archivo, "%s-%s-\n", categorias[i].id_categ, categorias[i].descrip);
+    }
+
+    fclose(archivo);
+}
+
+Categoria *iniciarCategoriasDeArchivo(int *numCat)
+{
+    FILE *archivo = fopen(Categorias_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Categorias_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de categorias
+    Categoria *categorias = (Categoria *)malloc(count * sizeof(Categoria));
+    if (categorias == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de categorias.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(categorias[i].id_categ, token, sizeof(categorias[i].id_categ));
+        token = strtok(NULL, "-");
+        strncpy(categorias[i].descrip, token, sizeof(categorias[i].descrip));
+        i++;
+    }
+
+    fclose(archivo);
+    *numCat = count;
+    return categorias;
+}

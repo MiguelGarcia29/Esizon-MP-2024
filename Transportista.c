@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "estructuras.h"
-#include "Utilidades.h"
+#include "Transportista.h"
 
 char* id_generator_trans(Transportista *t, int tamanio_vector) {
     int id_generada = 1;
@@ -299,3 +295,91 @@ int main() {
     return 0;
 }
 */
+
+// Guarda el vector de Transportitas en el archivo siguiendo la estructura:
+/*
+    o Identificador del transportista (Id_transp), 4 dígitos.
+    o Nombre del transportista (Nombre), 20 caracteres máximo.
+    o Email (email), 30 caracteres máximo, será usado como nombre de usuario para el acceso a la
+    plataforma.
+    o Contraseña para acceder al sistema (Contraseña), con 15 caracteres máximo.
+    o Nombre de la empresa (Nombre), 20 caracteres máximo.
+    o Ciudad de reparto (Ciudad), 20 caracteres máximo.
+*/
+void guardarTransportistasEnArchivo(Transportista *transportistas, int numTransportistas)
+{
+    FILE *archivo = fopen(Transportistas_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Transportistas.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numTransportistas; i++)
+    {
+        fprintf(archivo, "%s-%s-%s-%s-%s-%s-\n",
+                transportistas[i].id_transp,
+                transportistas[i].nombre,
+                transportistas[i].email,
+                transportistas[i].contrasenia,
+                transportistas[i].nombre_empresa,
+                transportistas[i].ciudad_reparto);
+    }
+
+    fclose(archivo);
+    printf("Datos de transportistas guardados en el archivo Transportistas.txt.\n");
+}
+
+Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
+{
+    FILE *archivo = fopen(Transportistas_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Transportistas_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    Transportista *transportistas = (Transportista *)malloc(count * sizeof(Transportista));
+    if (transportistas == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Transportistas.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(transportistas[i].id_transp, token, sizeof(transportistas[i].id_transp));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].nombre, token, sizeof(transportistas[i].nombre));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].email, token, sizeof(transportistas[i].email));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].contrasenia, token, sizeof(transportistas[i].contrasenia));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].nombre_empresa, token, sizeof(transportistas[i].nombre_empresa));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].ciudad_reparto, token, sizeof(transportistas[i].ciudad_reparto));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numTransportista = count;
+    return transportistas;
+}

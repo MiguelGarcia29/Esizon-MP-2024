@@ -10,6 +10,102 @@ void flushInputBufferr()
         ;
 }
 
+
+// Guarda el vector de Produtcos en el archivo siguiendo la estructura:
+/*
+    o Identificador del producto (Id_prod), 7 digitos.
+    o Descripción del producto (Descrip), 50 caracteres maximo.
+    o Id de la categoria a la que pertenece (Id_categ), 4 digitos.
+    o Id del gestor del producto (Id_gestor), 4 digitos. Debera coincidir con el identificador de la
+    empresa administradora o proveedora del producto.
+    o Stock del producto (Stock).
+    o Compromiso de Entrega (Entrega). Indicara el número de dias maximo que transcurrira desde
+    la fecha de realización del pedido hasta la entrega al cliente.
+    o Importe del producto en euros (Importe).
+*/
+void guardarProductosEnArchivo(Producto *productos, int numProductos)
+{
+    FILE *archivo = fopen(Productos_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Productos.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numProductos; i++)
+    {
+        fprintf(archivo, "%s-%s-%s-%s-%s-%d-%d-%.2f\n",
+                productos[i].id_prod,
+                productos[i].nombre,
+                productos[i].descrip,
+                productos[i].id_categ,
+                productos[i].id_gestor,
+                productos[i].stock,
+                productos[i].entrega,
+                productos[i].importe);
+    }
+
+    fclose(archivo);
+}
+
+Producto *iniciarProductosDeArchivo(int *numProductos)
+{
+    FILE *archivo = fopen(Productos_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Productos_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas = productos en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA];
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear vector cliente
+    Producto *productos = (Producto *)malloc(count * sizeof(Producto));
+    if (productos == NULL)
+    {
+        fclose(archivo);
+        printf("No se pudo asignar memoria para el vector de productos.\n");
+        return NULL;
+    }
+
+    // Leer cada linea del archivo y rellenar el vector de productos
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(productos[i].id_prod, token, sizeof(productos[i].id_prod));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].nombre, token, sizeof(productos[i].nombre));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].descrip, token, sizeof(productos[i].descrip));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].id_categ, token, sizeof(productos[i].id_categ));
+        token = strtok(NULL, "-");
+        strncpy(productos[i].id_gestor, token, sizeof(productos[i].id_gestor));
+        token = strtok(NULL, "-");
+        productos[i].stock = atoi(token);
+        token = strtok(NULL, "-");
+        productos[i].entrega = atoi(token); // atoi convierte la cadena en int
+        token = strtok(NULL, "-");
+        productos[i].importe = atof(token); // atof convierte la cadena en Float.
+        i++;
+    }
+
+    fclose(archivo);
+    *numProductos = count;
+    return productos;
+}
+
+
 // El procedimiento se encarga de generar IDs en un vector de 7 digitos para designar a cada producto.
 char *id_generator_prod(Producto *productos, int tamanio_vector)
 {
@@ -103,7 +199,7 @@ void baja_producto(Producto **productos, int *tamanio, char *id_baja)
                 (*productos)[j] = (*productos)[j + 1];
             }
 
-            (*tamanio)--; 
+            (*tamanio)--;
             *productos = realloc(*productos, (*tamanio) * sizeof(Producto));
 
             printf("Producto con ID %s ha sido dado de baja correctamente.\n", id_baja);

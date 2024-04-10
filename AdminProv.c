@@ -1,14 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-typedef struct{
-    char id_empresa[5];
-    char nombre[21];
-    char email[31];
-    char contrasenia[16];
-    char perfil_usuario[14]; // "administrador" o "proveedor"
-} AdminProv;
+#include "AdminProv.h"
 
 char* id_generator(AdminProv *a, int tamanio_vector) {
     int id_generada = 1;
@@ -26,7 +16,7 @@ char* id_generator(AdminProv *a, int tamanio_vector) {
     }
 
     // Formatea la nueva ID y la guarda en el arreglo
-    sprintf(id, "%03d", id_generada); 
+    sprintf(id, "%03d", id_generada);
 
     return id;
 }
@@ -35,10 +25,10 @@ char* id_generator(AdminProv *a, int tamanio_vector) {
 void alta_AdminProv(AdminProv **l, int* tamanio_vector) {
     AdminProv nuevo_adminprov;
     // Genera un nuevo ID para el locker
-    char *cadena = id_generator(*l, *tamanio_vector); 
+    char *cadena = id_generator(*l, *tamanio_vector);
     strcpy(nuevo_adminprov.id_empresa, cadena);
     free(cadena); // Libera la memoria asignada para el ID generado
-    
+
     // Solicita al usuario información sobre el nuevo locker
     int respuesta;
     printf("\nSeleccione nuevo rol:");
@@ -51,7 +41,7 @@ void alta_AdminProv(AdminProv **l, int* tamanio_vector) {
 		   	strcpy(nuevo_adminprov.nombre, "ESIZON");
 		   	strcpy(nuevo_adminprov.perfil_usuario, "administrador");
 		   	break;
-		   	
+
 		case 2:
 			printf("Dime el nombre de la empresa:\n");
 			char empresa[20];
@@ -67,11 +57,11 @@ void alta_AdminProv(AdminProv **l, int* tamanio_vector) {
     printf("\nDime tu correo electronico:");
     scanf("%30s", nuevo_adminprov.email);
     fflush(stdin);
-	
+
 	printf("\nDime tu contrasenia:");
     scanf("%16s", nuevo_adminprov.contrasenia);
     fflush(stdin);
-    
+
     // Realiza una realocación de memoria para agregar el nuevo locker al arreglo
     *l = (AdminProv *)realloc(*l, (*tamanio_vector + 1) * sizeof(AdminProv));
     if (*l == NULL) {
@@ -113,6 +103,89 @@ void listado_adminprov(AdminProv *l, int tamanio) {
     }
 }
 
+// Guarda el vector de AdminYProvs en el archivo siguiendo la estructura:
+/*
+    o Identificador de la empresa administradora o proveedora (Id_empresa), 4 digitos.
+    o Nombre de la empresa (Nombre), seria ESIZON si es administrador, 20 caracteres maximo.
+    o Email (email), 30 caracteres maximo, sera usado como nombre de usuario para el acceso a la
+    plataforma.
+    o Contrasenia para acceder al sistema (Contrasenia), con 15 caracteres maximo.
+    o Perfil del usuario (Perfil_usuario): «administrador» o «proveedor».
+*/
+void guardarAdminProvEnArchivo(AdminProv *admins, int numAdmins)
+{
+    FILE *archivo = fopen(AdminProv_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", AdminProv_txt);
+        return;
+    }
+
+    for (int i = 0; i < numAdmins; i++)
+    {
+        fprintf(archivo, "%s-%s-%s-%s-%s-\n",
+                admins[i].id_empresa,
+                admins[i].nombre,
+                admins[i].email,
+                admins[i].contrasenia,
+                admins[i].perfil_usuario);
+    }
+
+    fclose(archivo);
+}
+
+AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
+{
+    FILE *archivo = fopen(AdminProv_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", AdminProv_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de adminProv
+    AdminProv *adminProvs = (AdminProv *) malloc(count * sizeof(AdminProv));
+    if (adminProvs == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de AdminProv.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(adminProvs[i].id_empresa, token, sizeof(adminProvs[i].id_empresa));
+        token = strtok(NULL, "-");
+        strncpy(adminProvs[i].nombre, token, sizeof(adminProvs[i].nombre));
+        token = strtok(NULL, "-");
+        strncpy(adminProvs[i].email, token, sizeof(adminProvs[i].email));
+        token = strtok(NULL, "-");
+        strncpy(adminProvs[i].contrasenia, token, sizeof(adminProvs[i].contrasenia));
+        token = strtok(NULL, "-");
+        strncpy(adminProvs[i].perfil_usuario, token, sizeof(adminProvs[i].perfil_usuario));
+        i++;
+    }
+
+    fclose(archivo);
+    *numAdmins = count;
+    return adminProvs;
+}
+
+/*
 int main() {
     AdminProv *administradores_proveedores = NULL;
     int tamano_admin_prov = 0;
@@ -151,4 +224,4 @@ int main() {
     free(administradores_proveedores);
 
     return 0;
-}
+}*/

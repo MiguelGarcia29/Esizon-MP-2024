@@ -1,4 +1,3 @@
-
 #include "ESIZON.h"
 
 Cliente *clientes;
@@ -7,35 +6,35 @@ int numClientes;
 AdminProv *adminProvs;
 int numAdminProvs;
 
-Producto *productos;
-int numProductos;
-
 Categoria *categorias;
 int numCategorias;
-
-Descuento *descuentos;
-int numDescuentos;
-
-DescuentoCliente *descuentoClientes;
-int numDescuentoClientes;
-
-Locker *lockers;
-int numLockers;
 
 CompartimentoLocker *compartimentoLockers;
 int numCompartimentoLockers;
 
+DescuentoCliente *descuentoClientes;
+int numDescuentoClientes;
+
+Descuento *descuentos;
+int numDescuentos;
+
+Devolucion *devoluciones;
+int numDevoluciones;
+
+Locker *lockers;
+int numLockers;
+
 Pedido *pedidos;
 int numPedido;
+
+Producto *productos;
+int numProductos;
 
 ProductoPedido *productoPedidos;
 int numProductoPedidos;
 
 Transportista *transportistas;
 int numTransportistas;
-
-Devolucion *devoluciones;
-int numDevoluciones;
 
 int rol;
 int posVectorClienteActual;

@@ -1,15 +1,16 @@
 #include "Productos_pedidos.h"
-#include <time.h>
 #include <string.h>
-#include "Utilidades.c"
 
+void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
+void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
+void modificar_entrega_productoPedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
 
 void fecha_entrega(char *fecha, int dia_entrega)
-{ 
+{
 
     time_t rawtime; // Defino la struct de tiempo.
 
-    // Convertir la fecha actual a time_t 
+    // Convertir la fecha actual a time_t
     time(&rawtime);
 
     // Sumar x días a la fecha actual.
@@ -24,7 +25,7 @@ void fecha_entrega(char *fecha, int dia_entrega)
 char *seleccionar_producto(Producto *productos, int* tamanio, char *productos_select){
 
     char *producto_Encontrado = NULL;  // Iniciamos una variable local como NULL al comienzo de la función
-    int coincidencia;  
+    int coincidencia;
 
     for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++){
         if(strcmp(productos[i].nombre,productos_select) == 0){
@@ -69,7 +70,7 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
 
 void listado_Pedido(ProductoPedido *pedidos, int* tamanio){
 
-    depurarBuffer();
+    flushInputBuffer();
     for(int i = 0 ; i < *tamanio ; i++){
         printf("%s-%s-%d-%s-%.2f-%s\n",pedidos[i].id_pedido,pedidos[i].id_prod,pedidos[i].num_unid,pedidos[i].fecha_entrega_prevista,pedidos[i].importe,pedidos[i].estado_pedido);
     }
@@ -93,18 +94,14 @@ void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_ped
     }
 }
 
-void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
-void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
-void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
-
-// Permite modificar ciertas características del producto pedido.
+/*Permite modificar ciertas características del producto pedido.
 void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *transportistas, int tamanio_transportistas){
 
     int a;
     char ID_producto[8];
-    printf("Ingrese el ID de su producto\n"); 
+    printf("Ingrese el ID de su producto\n");
     fgets(ID_producto,8,stdin);
-    depurarBuffer();
+    flushInputBuffer();
     listado_Pedido(pedidos,tamanio);
 
     if(encontrarID_prod(pedidos, tamanio, ID_producto) != 1){
@@ -133,7 +130,7 @@ void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *tra
                 break;
 
             case 3:
-                modificar_entrega(pedidos, tamanio, ID_producto);
+                modificar_entrega_productoPedido(pedidos, tamanio, ID_producto);
                 break;
 
             default:
@@ -141,7 +138,7 @@ void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *tra
         }
     }
 }
-
+*/
 void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
     int i = 0;
@@ -152,7 +149,7 @@ void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *ID_prod
 
     printf("Escribe el estado del pedido: \n");
 	fgets(pedidos[i].estado_pedido,15,stdin);
-    depurarBuffer();
+    flushInputBuffer();
 }
 
 void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
@@ -166,10 +163,10 @@ void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *ID_pro
     printf("Escribe el nuevo id del transportista: ");
 	fflush(stdin);
 	fgets(pedidos[i].id_transp,5,stdin);
-    depurarBuffer();
+    flushInputBuffer();
 }
 
-void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
+void modificar_entrega_productoPedido(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
     int i = 0;
     int dia_retraso;
@@ -182,7 +179,7 @@ void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
     printf("Escribe el retraso que puede tener el pedido: ");
 	scanf("%d",&dia_retraso);
     fecha_entrega(pedidos[i].fecha_entrega_prevista,dia_retraso); // Comprobar que lo que hace es sumar los dias de retraso a la fecha anteriormente estimada.
-    depurarBuffer();
+    flushInputBuffer();
 }
 
 void consultar_estado(ProductoPedido *pedidos, int* tamanio, char *id_pedido_buscado){
@@ -234,4 +231,118 @@ int encontrarID_prod(ProductoPedido *prodped, int tamanio_prodped, char *ID_prod
         }
     }
     return encontrado;
+}
+
+// Guarda el vector de ProductoPedidos en el archivo siguiendo la estructura:
+/*
+    o Identificador del pedido (Id_pedido), 7 dígitos.
+    o Identificador del producto (Id_prod), 7 dígitos.
+    o Número de unidades (Num_unid)
+    o Fecha prevista de entrega (día, mes y año).
+    o Importe del producto en euros (Importe). Importante que quede constancia del importe al que
+    compra un cliente un producto si la empresa modifica posteriormente su importe.
+    o Estado del pedido: «enPreparación», «enviado», «enReparto», «enLocker», «entregado», «devuelto» o «transportista».
+    o Identificador del transportista (Id_transp), 4 dígitos.
+    o Identificador del locker (Id_locker), 10 caracteres máximo.
+    o Código del locker (Cod_locker).
+    o Fecha de entrega/devolución por el transportista
+*/
+void guardarProductoPedidoEnArchivo(ProductoPedido *productosPedidos, int numProductosPedidos)
+{
+    FILE *archivo = fopen(ProductoPedido_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo ProductosPedidos.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numProductosPedidos; i++)
+    {
+        // SI EL PRODUCTO ES DISTINTO DE "ENLOCKER", ESTABLECE CON ESPACIO LA INFORMACION DEL LOCKER
+        if (strcmp(productosPedidos[i].id_locker, "") == 0)
+            strcpy(productosPedidos[i].id_locker, " ");
+        if (strcmp(productosPedidos[i].cod_locker, "") == 0)
+            strcpy(productosPedidos[i].cod_locker, " ");
+        if (strcmp(productosPedidos[i].id_transp, "") == 0)
+            strcpy(productosPedidos[i].id_transp, " ");
+        if (strcmp(productosPedidos[i].fecha_entrega_devolucion_transp, "") == 0)
+            strcpy(productosPedidos[i].fecha_entrega_devolucion_transp, " ");
+
+        fprintf(archivo, "%s-%s-%d-%s-%.2f-%s-%s-%s-%s-%s-\n",
+                productosPedidos[i].id_pedido,
+                productosPedidos[i].id_prod,
+                productosPedidos[i].num_unid,
+                productosPedidos[i].fecha_entrega_prevista,
+                productosPedidos[i].importe,
+                productosPedidos[i].estado_pedido,
+                productosPedidos[i].id_transp,
+                productosPedidos[i].id_locker,
+                productosPedidos[i].cod_locker,
+                productosPedidos[i].fecha_entrega_devolucion_transp);
+    }
+
+    fclose(archivo);
+    printf("Datos de productos pedidos guardados en el archivo ProductosPedidos.txt.\n");
+}
+
+ProductoPedido *iniciarProductoPedidosDeArchivo(int *numProductos)
+{
+    FILE *archivo = fopen(ProductoPedido_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", ProductoPedido_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    ProductoPedido *prodPed = (ProductoPedido *)malloc(count * sizeof(ProductoPedido));
+    if (prodPed == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de ComportamientoLocker.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(prodPed[i].id_pedido, token, sizeof(prodPed[i].id_pedido));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].id_prod, token, sizeof(prodPed[i].id_prod));
+        token = strtok(NULL, "-");
+        prodPed[i].num_unid = atoi(token);
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].fecha_entrega_prevista, token, sizeof(prodPed[i].fecha_entrega_prevista));
+        token = strtok(NULL, "-");
+        prodPed[i].importe = atof(token);
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].estado_pedido, token, sizeof(prodPed[i].estado_pedido));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].id_transp, token, sizeof(prodPed[i].id_transp));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].id_locker, token, sizeof(prodPed[i].id_locker));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].cod_locker, token, sizeof(prodPed[i].cod_locker));
+        token = strtok(NULL, "-");
+        strncpy(prodPed[i].fecha_entrega_devolucion_transp, token, sizeof(prodPed[i].fecha_entrega_devolucion_transp));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numProductos = count;
+    return prodPed;
 }

@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "estructuras.h"
-#include "Utilidades.h"
+#include "Devolucion.h"
 
 int pedido_existe(ProductoPedido *pedido, int tamanio_pedido, char *id_pedido) {
     for (int i = 0; i < tamanio_pedido; i++) {
@@ -236,3 +232,88 @@ int main() {
     return 0;
 }
 */
+
+void guardarDevolucionesEnArchivo(Devolucion *devoluciones, int numDevoluciones)
+{
+    FILE *archivo = fopen(Devoluciones_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Devoluciones.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numDevoluciones; i++)
+    {
+        if (strcmp(devoluciones[i].fecha_aceptacion, "") == 0)
+            strcpy(devoluciones[i].fecha_aceptacion, " ");
+        if (strcmp(devoluciones[i].fecha_caducidad, "") == 0)
+            strcpy(devoluciones[i].fecha_caducidad, " ");
+        fprintf(archivo, "%s-%s-%s-%s-%s-%s-%s-\n",
+                devoluciones[i].id_pedido,
+                devoluciones[i].id_prod,
+                devoluciones[i].fecha_devolucion,
+                devoluciones[i].motivo,
+                devoluciones[i].estado,
+                devoluciones[i].fecha_aceptacion,
+                devoluciones[i].fecha_caducidad);
+    }
+
+    fclose(archivo);
+    printf("Datos de devoluciones guardados en el archivo Devoluciones.txt.\n");
+}
+
+Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)
+{
+    FILE *archivo = fopen(Devoluciones_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Devoluciones_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Devoluciones
+    Devolucion *devoluciones =(Devolucion *) malloc(count * sizeof(Devolucion));
+    if (devoluciones == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Devoluciones.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(devoluciones[i].id_pedido, token, sizeof(devoluciones[i].id_pedido));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].id_prod, token, sizeof(devoluciones[i].id_prod));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].fecha_devolucion, token, sizeof(devoluciones[i].fecha_devolucion));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].motivo, token, sizeof(devoluciones[i].motivo));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].estado, token, sizeof(devoluciones[i].estado));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].fecha_aceptacion, token, sizeof(devoluciones[i].fecha_aceptacion));
+        token = strtok(NULL, "-");
+        strncpy(devoluciones[i].fecha_caducidad, token, sizeof(devoluciones[i].fecha_caducidad));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numDevolucion = count;
+    return devoluciones;
+}
