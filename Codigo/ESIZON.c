@@ -533,7 +533,9 @@ void mostrarCategorias()
 // Solo puede acceder: Administrador y cliente y proveedores
 void mostrarPedidos()
 {
-    // Implementación de la función pedidos
+    printf("1- Listar pedidos pendientes\n");
+    printf("2- Asignar transportista a pedido\n");
+
 }
 
 // Mediante esta opción el administrador podrá acceder a la información de todos los transportistas dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de transportistas.
