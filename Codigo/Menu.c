@@ -213,7 +213,7 @@ void menutransportista() {
         
         switch (opcion) {
             case 1:
-                perfil();
+                p
                 break;
             case 2:
                 reparto();
