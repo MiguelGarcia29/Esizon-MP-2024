@@ -1,0 +1,61 @@
+int main() {
+    int c, b, cantdad_des = 0;
+    c = 0;
+    
+    Descuento *des;
+    
+    des = malloc(cantdad_des * sizeof(Descuento));
+    
+    char id[11];
+    
+    while (c == 0) {
+        printf("\n(1) Alta\n");
+        printf("(2) Mostrar\n");
+        printf("(3) Modificar\n");
+        printf("(4) Baja\n");
+        printf("(5) Salir\n");
+        scanf("%d", &b);
+        
+        flushInputBuffer();
+        
+        switch (b) {
+            case 1:
+                alta_descuentos(&des, &cantdad_des);
+                
+                c = 0;
+            break;
+            case 2:
+                mostrar_descuento(des, cantdad_des);
+                
+                c = 0;
+            break;
+            case 3:
+                printf("Introduce el ID del descuento que desea modificar: ");
+                scanf("%s", id);
+                flushInputBuffer();
+                
+                modificar_descuento(des, cantdad_des, id);
+                
+                c = 0;
+            break;
+            case 4:
+                printf("Introduce el ID del descuento a dar de baja: ");
+                scanf("%s", id);
+                flushInputBuffer();
+                
+                baja_descuentos(&des, &cantdad_des, id);
+                
+                c = 0;
+            break;
+            case 5:
+                c = 1;
+            break;
+            default:
+                printf("Opción inválida\n");
+            break;
+        }
+    }
+    
+    free(des); // Liberamos la memoria asignada al arreglo de descuentos
+    return 0;
+}
