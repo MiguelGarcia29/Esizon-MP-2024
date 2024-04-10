@@ -1,11 +1,5 @@
 
 *.exe
-/Codigo/.vscode
-.vscode/settings.json
-*.cbp
 *.depend
 *.layout
 /obj
-/Codigo/Datos
-/Datos
-/Codigo/Datos

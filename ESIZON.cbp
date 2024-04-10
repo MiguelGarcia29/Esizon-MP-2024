@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ESIZON" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ESIZON" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ESIZON" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="AdminProv.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Categoria.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Categoria.h" />
+		<Unit filename="Cliente.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Cliente.h" />
+		<Unit filename="CompartimentosLockers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Devoluciones.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ESIZON.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ESIZON.cbp" />
+		<Unit filename="ESIZON.h" />
+		<Unit filename="Gestion_Fichero.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Gestion_Fichero.h" />
+		<Unit filename="Lockers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Lockers.h" />
+		<Unit filename="Menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Menu.h" />
+		<Unit filename="Pedidos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pedidos.h" />
+		<Unit filename="Productos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Productos.h" />
+		<Unit filename="Productos_pedidos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Productos_pedidos.h" />
+		<Unit filename="Proveedor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Proveedor.h" />
+		<Unit filename="Utilidades.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Utilidades.h" />
+		<Unit filename="descuentos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="descuentos.h" />
+		<Unit filename="estructuras.h" />
+		<Unit filename="transportista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
