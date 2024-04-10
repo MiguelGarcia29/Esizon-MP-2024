@@ -44,6 +44,10 @@ int posVectorClienteActual;
 // 3-Proveedor
 // 4-Transportista
 
+
+void inicializarDatos();
+void almacenarDatos();
+
 // CARGA TODO LOS DATOS EN LOS VECTORES
 void inicializarDatos()
 {
@@ -573,3 +577,4 @@ void retornoProducto()
 void salirprograma()
 {
 }
+

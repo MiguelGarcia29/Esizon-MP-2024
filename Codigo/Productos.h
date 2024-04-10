@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "estructuras.h"
-#include "Categoria.c"
+#include "Categoria.h"
 
 
 void alta_producto(Producto **productos, int* tamanio_vector, char* idAlta, Categoria *categ , int* tamanio_categ);

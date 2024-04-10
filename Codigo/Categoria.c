@@ -1,6 +1,6 @@
 #include "Categoria.h"
 
-void flushInputBuffer(){
+void flushInputBufferC(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
@@ -38,7 +38,7 @@ void alta_categoria(Categoria *categoria, int* tamanio_vector /*Cliente actual*/
     categoria[*tamanio_vector] = nueva_categoria;
 
     (*tamanio_vector)++;
- 
+
 }
 
 //Procedimiento da de baja los productos. (Usando la id introducida por user, quizas alla que cambiarlo, o imprimir la lista de productos cada vez que se haga)
@@ -99,7 +99,7 @@ void modificar_categoria(Categoria *categorias, int* tamanio){
     printf("\nIntroduce el ID de la categoria que quieres modificar: ");
     fgets(id_modificar,8,stdin);
     id_modificar[strcspn(id_modificar,"\n")] = '\0';
-    flushInputBuffer();
+    flushInputBufferC();
 
     modificar_descripcion_categ(categorias, tamanio, id_modificar);
 }
@@ -115,5 +115,5 @@ void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_mo
     fflush(stdin);
     fgets(categorias[i].descrip, 51, stdin);
     categorias[i].descrip[strcspn(categorias[i].descrip, "\n")] = '\0';
-    flushInputBuffer();
+    flushInputBufferC();
 }
