@@ -12,4 +12,4 @@ void consultar_estado(ProductoPedido *pedidos, int* tamanio, char *id_pedido_bus
 char *seleccionar_producto(Producto *productos, int* tamanio, char *productos_select);
 void mostrar_menu();
 void ejecutar_opcion(int opcion, Cliente *clientes, int *tamanio_clientes, Producto *productos, int *tamanio_productos, ProductoPedido *pedidos, int *tamanio_pedidos, Locker *lockers, int *tamanio_lockers, Transportista *transportista, int *tamanio_transportistas);
-
+int reducirStock(Producto *productos, int tamProd,char*idProd, int ctdadReducir);

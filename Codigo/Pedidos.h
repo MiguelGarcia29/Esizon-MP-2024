@@ -1,6 +1,7 @@
 #include "estructuras.h"
+#include "Utilidades.c"
 #include "Productos.h"
-#include "Proveedor.h"
+#include "Productos_pedidos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

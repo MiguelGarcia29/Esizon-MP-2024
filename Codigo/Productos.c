@@ -6,8 +6,7 @@ char *id_generator_prod(Producto *productos, int tamanio_vector);
 void flushInputBufferr()
 {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF)
-        ;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 // El procedimiento se encarga de generar IDs en un vector de 7 digitos para designar a cada producto.
