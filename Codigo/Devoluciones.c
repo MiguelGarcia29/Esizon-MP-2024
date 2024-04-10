@@ -1,58 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-
-typedef struct {
-    char id_pedido[8];
-    char id_prod[8];
-    char fecha_devolucion[11];
-    char motivo[51];
-    char estado[10]; // "pendiente", "aceptado", "denegado", "enviado", "recibido"
-    char fecha_aceptacion[11];
-    char fecha_caducidad[11];
-} Devolucion;
-
-typedef struct {
-    char id_pedido[8];
-    char id_prod[8];
-    int num_unid;
-    char fecha_entrega_prevista[11];
-    float importe;
-    char estado_pedido[15]; // "enPreparación", "enviado", "enReparto", "enLocker", "entregado", "devuelto", "transportista"
-    char id_transp[5];
-    char id_locker[11];
-    char cod_locker[11];
-    char fecha_entrega_devolucion_transp[11];
-} ProductoPedido;
-
-typedef struct{
-    char id_pedido[8];
-    char fecha_pedido[11];
-    char id_cliente[8];
-    char lugar_entrega[10]; // "domicilio" o "locker"
-    char id_locker[11];
-    char id_cod[11];
-} Pedido;
-
-typedef struct{
-    char id_cliente[8];
-    char nomb_cliente[21];
-    char dir_cliente[51];
-    char localidad[21];
-    char provincia[21];
-    char email[31];
-    char contrasenia[16];
-    float cartera;
-} Cliente;
-
-void obtener_fecha_actual(char *fecha_actual) {
-    time_t rawtime;
-    struct tm *info;
-    time(&rawtime);
-    info = localtime(&rawtime);
-    strftime(fecha_actual, 11, "%d/%m/%Y", info);
-}
+#include "estructuras.h"
+#include "Utilidades.h"
 
 int pedido_existe(ProductoPedido *pedido, int tamanio_pedido, char *id_pedido) {
     for (int i = 0; i < tamanio_pedido; i++) {
@@ -67,7 +17,7 @@ void alta_devolucion_admin(Devolucion **devoluciones, int *num_devoluciones, Pro
     char id_pedido[8];
     printf("\nIngrese el ID del pedido: ");
     scanf("%s", id_pedido);
-    
+
     if (pedido_existe(pedidos, tamanio_pedidos, id_pedido)) {
         Devolucion nueva_devolucion;
         strcpy(nueva_devolucion.id_pedido, id_pedido);
@@ -95,7 +45,7 @@ void alta_devolucion_cliente(Devolucion **devoluciones, int *num_devoluciones, C
     char id_pedido[8];
     printf("\nIngrese el ID del pedido: ");
     scanf("%s", id_pedido);
-    
+
     if (pedido_existe(pedidos, tamanio_pedidos, id_pedido)) {
         Devolucion nueva_devolucion;
         strcpy(nueva_devolucion.id_pedido, id_pedido);
@@ -124,7 +74,7 @@ void baja_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_
     for (int i = 0; i < *num_devoluciones; i++) {
         if (strcmp((*devoluciones)[i].id_pedido, id_devolucion) == 0) {
             encontrado = 1;
-            
+
             for (int j = i; j < *num_devoluciones - 1; j++) {
                 (*devoluciones)[j] = (*devoluciones)[j + 1];
             }
@@ -188,10 +138,10 @@ void modificar_estado_enviado(Devolucion *devoluciones, int num_devoluciones, ch
         printf("Devolución con ID %s no encontrada.\n", id_devolucion);
     }
 }
-
+/*
 int main() {
     Devolucion *devoluciones = NULL;
-    
+
     Cliente actual;
     strcpy(actual.id_cliente, "0000002");
     int num_devoluciones = 0;
@@ -199,7 +149,7 @@ int main() {
     int usu;
     char id[8];
     ProductoPedido pedidos[10]; // Definir un arreglo de pedidos como ejemplo
-    
+
     do {
         printf("\nMenú de Opciones:\n");
         printf("1. Alta de Devolución\n");
@@ -285,3 +235,4 @@ int main() {
 
     return 0;
 }
+*/

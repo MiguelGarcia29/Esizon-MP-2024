@@ -44,6 +44,10 @@ int posVectorClienteActual;
 // 3-Proveedor
 // 4-Transportista
 
+
+void inicializarDatos();
+void almacenarDatos();
+
 // CARGA TODO LOS DATOS EN LOS VECTORES
 void inicializarDatos()
 {
@@ -82,8 +86,8 @@ int main()
     inicializarDatos();
 
     // ESTRUCTURA DEL PROGRAMA
-    //accederPrograma();
-    listado_producto(productos,&numProductos);
+    accederPrograma();
+    // listado_producto(productos,&numProductos);
 
     almacenarDatos();
 }
@@ -422,17 +426,18 @@ void mostrarPerfil()
     switch (rol)
     {
     case 1:
-        
+
         break;
     case 2:
-        
+
         break;
     case 3:
         mostrar_perfilprov(adminProvs[posVectorClienteActual]);
+        flushInputBuffer();
         modificar_perfilprov(&adminProvs[posVectorClienteActual]);
         break;
     case 4:
-        
+
         break;
     default:
         break;
@@ -457,13 +462,13 @@ void mostrarProveedores()
 // Solo puede acceder: Administrador y cliente y proveedor
 void mostrarProductos()
 {
-      switch (rol)
+    switch (rol)
     {
     case 1:
-        
+
         break;
     case 2:
-        
+
         break;
     case 3:
         seccionProductosProv();
@@ -475,8 +480,46 @@ void mostrarProductos()
     }
 }
 
-void seccionProductosProv(){
-    
+void seccionProductosProv()
+{
+    printf("Tus productos: \n");
+
+    printf("¿Que deseas hacer?\n");
+    printf("1- Listar mis productos\n");
+    printf("2- Alta producto\n");
+    printf("3- Baja producto\n");
+    printf("4- Modificar producto\n");
+    printf("5- Buscar producto\n");
+    printf("6- Salir\n");
+
+    int opcion;
+    scanf("%d", &opcion);
+    flushInputBuffer();
+
+    switch (opcion)
+    {
+    case 1:
+        listado_producto_prooved(productos, &numProductos, adminProvs[posVectorClienteActual].id_empresa);
+        break;
+    case 2:
+        alta_producto(&productos, &numProductos, adminProvs[posVectorClienteActual].id_empresa, categorias, &numCategorias);
+        break;
+    case 3:
+        printf("Introduzca la id del producto a dar de baja:\n");
+        char *prodBaja;
+        fgets(prodBaja, 8, stdin);
+        if (productoEsDeProveedor(productos, &numProductos, adminProvs[posVectorClienteActual].id_empresa, prodBaja) == 1)
+        {
+            baja_producto(&productos, &numProductos, prodBaja);
+        }
+        else
+        {
+            printf("Ese producto no es suyo\n");
+        }
+        break;
+    case 4:
+        modificar_producto(productos,&numProductos,adminProvs[posVectorClienteActual].id_empresa);break;
+    }
 }
 
 // Mediante esta opción el administrador podrá acceder a la información de las categorías dadas de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de categorías. Además podrá generar listados de productos por categoría.
@@ -490,7 +533,9 @@ void mostrarCategorias()
 // Solo puede acceder: Administrador y cliente y proveedores
 void mostrarPedidos()
 {
-    // Implementación de la función pedidos
+    printf("1- Listar pedidos pendientes\n");
+    printf("2- Asignar transportista a pedido\n");
+
 }
 
 // Mediante esta opción el administrador podrá acceder a la información de todos los transportistas dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de transportistas.
@@ -534,3 +579,4 @@ void retornoProducto()
 void salirprograma()
 {
 }
+

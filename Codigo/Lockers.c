@@ -18,7 +18,7 @@ char* id_generator(Locker *l, int tamanio_vector) {
 
     // Formatea la nueva ID y la guarda en el arreglo
     char id2[5];
-    sprintf(id2, "%03d", id_generada); 
+    sprintf(id2, "%03d", id_generada);
     strcpy(id, "Lock");
     strcat(id, id2);
 
@@ -30,10 +30,10 @@ void alta_locker(Locker **l, int* tamanio_vector){
 
     Locker nuevo_locker;
     // Genera un nuevo ID para el locker
-    char *cadena = id_generator(*l, *tamanio_vector); 
+    char *cadena = id_generator(*l, *tamanio_vector);
     strcpy(nuevo_locker.id_locker, cadena);
     free(cadena); // Libera la memoria asignada para el ID generado
-    
+
     // Solicita al usuario información sobre el nuevo locker
     printf("\nDime la localidad:");
     scanf("%20s", nuevo_locker.localidad);
@@ -48,7 +48,7 @@ void alta_locker(Locker **l, int* tamanio_vector){
     flushInputBuffer();
 
     printf("\nDime cuantos lockers hay en total:");
-    scanf("%d", &nuevo_locker.num_compt); 
+    scanf("%d", &nuevo_locker.num_compt);
     // Realiza una realocación de memoria para agregar el nuevo locker al arreglo
     *l = (Locker *)realloc(*l, (*tamanio_vector + 1) * sizeof(Locker));
     (*l)[*tamanio_vector] = nuevo_locker; // Guarda el nuevo locker en el arreglo
@@ -57,7 +57,7 @@ void alta_locker(Locker **l, int* tamanio_vector){
 }
 
 int ocupados_lockers(Locker *l, int tamanio, char *id) {
-    
+
 	for (int i = 0; i < tamanio; i++) {
         if (strcmp(id, l[i].id_locker) == 0) { // Compara el ID dado con el ID del locker en la posición i
             if (l[i].num_compt > l[i].num_compocup) { // Verifica si hay compartimentos disponibles
@@ -108,11 +108,11 @@ void listado_locker(Locker *l, int tamanio){
         printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l[i].num_compt, (l[i].num_compocup-1));
     }
 }
-
+/*
 int main()
 {
-    Locker *lockers = malloc(100 * sizeof(Locker)); 
-    int tamanio_lockers = 0; 
+    Locker *lockers = malloc(100 * sizeof(Locker));
+    int tamanio_lockers = 0;
 
     int opcion;
     char id_baja[11];
@@ -127,7 +127,7 @@ int main()
         printf("5. Salir\n");
         printf("Seleccione una opción: ");
         scanf("%d", &opcion);
-        flushInputBuffer(); 
+        flushInputBuffer();
 
         switch (opcion) {
             case 1:
@@ -135,7 +135,7 @@ int main()
                 break;
             case 2:
                 printf("\nIngrese el ID del Locker a dar de baja: ");
-                scanf("%10s", id_baja); 
+                scanf("%10s", id_baja);
                 flushInputBuffer();
                 baja_locker(lockers, &tamanio_lockers, id_baja);
                 break;
@@ -147,7 +147,7 @@ int main()
                 break;
             case 4:
                 printf("\nListado de Lockers:\n");
-                listado_locker(lockers, tamanio_lockers); 
+                listado_locker(lockers, tamanio_lockers);
                 break;
             case 5:
                 printf("\nSaliendo del programa.\n");
@@ -158,7 +158,7 @@ int main()
         }
     } while (opcion != 5);
 
-    free(lockers); 
+    free(lockers);
 
     return 0;
-}
+}*/

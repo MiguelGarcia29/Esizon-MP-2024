@@ -1,49 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
+#include "estructuras.h"
+#include "Utilidades.h"
 
-typedef struct {
-    char id_transp[5];
-    char nombre[21];
-    char email[31];
-    char contrasenia[16];
-    char nombre_empresa[21];
-    char ciudad_reparto[21];
-} Transportista;
-
-typedef struct {
-    char id_pedido[8];
-    char id_prod[8];
-    int num_unid;
-    char fecha_entrega_prevista[11];
-    float importe;
-    char estado_pedido[15]; // "enPreparacion", "enviado", "enReparto", "enLocker", "entregado", "devuelto", "transportista"
-    char id_transp[5];
-    char id_locker[11];
-    char cod_locker[11];
-    char fecha_entrega_devolucion_transp[11];
-} ProductoPedido;
-
-typedef struct {
-    char id_locker[11];
-    int num_comp;
-    char cod_locker[11];
-    char estado[7]; // "ocupado" o "vacío"
-    char fecha_ocupacion[11];
-    char fecha_caducidad[11];
-} ComportamientoLocker;
-
-void obtener_fecha_actual(char *fecha_actual) 
-{
-    time_t rawtime;
-    struct tm *info;
-    time(&rawtime);
-    info = localtime(&rawtime);
-    strftime(fecha_actual, 11, "%d/%m/%Y", info);
-}
-
-char* id_generator(Transportista *t, int tamanio_vector) {
+char* id_generator_trans(Transportista *t, int tamanio_vector) {
     int id_generada = 1;
 
     if (tamanio_vector != 0) {
@@ -56,7 +17,7 @@ char* id_generator(Transportista *t, int tamanio_vector) {
         exit(EXIT_FAILURE);
     }
 
-    sprintf(id, "%04d", id_generada); 
+    sprintf(id, "%04d", id_generada);
 
     return id;
 }
@@ -64,10 +25,10 @@ char* id_generator(Transportista *t, int tamanio_vector) {
 void alta_transportista(Transportista **t, int* tamanio_vector){
 
     Transportista nuevo_transportista;
-    char *cadena = id_generator(*t, *tamanio_vector); 
+    char *cadena = id_generator_trans(*t, *tamanio_vector);
     strcpy(nuevo_transportista.id_transp, cadena);
     free(cadena);
-    
+
     printf("\nDime el nombre:");
     scanf("%20s", nuevo_transportista.nombre);
     flushInputBuffer();
@@ -79,15 +40,15 @@ void alta_transportista(Transportista **t, int* tamanio_vector){
     printf("\nDime la contraseña para acceder al sistema:");
     scanf("%15s", nuevo_transportista.contrasenia);
     flushInputBuffer();
-    
+
     printf("\nDime el nombre de la empresa:");
     scanf("%20s", nuevo_transportista.nombre_empresa);
     flushInputBuffer();
-    
+
     printf("\nDime la ciudad de reparto:");
     scanf("%20s", nuevo_transportista.ciudad_reparto);
     flushInputBuffer();
-    
+
     *t = (Transportista *)realloc(*t, (*tamanio_vector + 1) * sizeof(Transportista));
     if (*t == NULL) {
         printf("Error al asignar memoria. \n");
@@ -162,11 +123,11 @@ void perfil(Transportista *t, int tamanio, char *id)
             printf("\nDime la contraseña para acceder al sistema:");
             scanf("%15s", t[indice].contrasenia);
             flushInputBuffer();
-    
+
             printf("\nDime el nombre de la empresa:");
             scanf("%20s", t[indice].nombre_empresa);
             flushInputBuffer();
-    
+
             printf("\nDime la ciudad de reparto:");
             scanf("%20s", t[indice].ciudad_reparto);
             flushInputBuffer();
@@ -202,21 +163,21 @@ void fecha_caducidad(char *fecha)
 {
 	time_t rawtime;
     struct tm *info;
-    
+
     // Obtener la fecha y hora actual
     time(&rawtime);
     info = localtime(&rawtime);
-    
+
     // Sumar 7 días
     rawtime += 7 * 24 * 60 * 60; // 7 días en segundos
-    
+
     // Actualizar la estructura tm
     info = localtime(&rawtime);
-    
+
     strftime(fecha, 11, "%d/%m/%Y", info);
 }
 
-void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int num_pedidos, int tamanio_compartimento , char *id_transp)
+void entrega(ProductoPedido *pedidos, CompartimentoLocker *comportamiento, int num_pedidos, int tamanio_compartimento , char *id_transp)
 {
     printf("Dime la id del producto que quieres entregar: ");
     char id_producto[8];
@@ -248,7 +209,7 @@ void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int 
                             strcpy(comportamiento[j].cod_locker, contrasenia_locker);
                             strcpy(comportamiento[j].estado, "ocupado");
                             char fecha[11];
-                            obtener_fecha_actual(fecha); 
+                            obtener_fecha_actual(fecha);
                             strcpy(comportamiento[j].fecha_ocupacion, fecha);
                             printf("Producto entregado exitosamente en el locker.\n");
                             char fecha_vencimiento[11];
@@ -275,7 +236,7 @@ void entrega(ProductoPedido *pedidos, ComportamientoLocker *comportamiento, int 
         printf("No se encuentra esa ID de producto asociada al transportista.\n");
     }
 }
-
+/*
 int main() {
     Transportista *transportistas = NULL;
     int num_transportistas = 0;
@@ -337,3 +298,4 @@ int main() {
 
     return 0;
 }
+*/
