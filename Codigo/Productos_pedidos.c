@@ -4,32 +4,6 @@
 #include "Utilidades.c"
 
 
-/*Permitir al cliente realizar pedidos controlando los códigos promocionales y/o
-cheques regalo que pueda utilizar en función de si están activos o no y de la aplicabilidad
-que tengan sobre el producto.*/
-/*Consultar el estado de cada uno de los productos de su
-pedido. */
-/* A recogida de un pedido que haya sido depositado en
-un ESILocker antes de la fecha de caducidad, para ello se le debe mostrar la opción
-solicitándole el código locker asociado. Una vez introducido, el sistema mostrará un
-mensaje en pantalla indicando el número de compartimento que se ha abierto. El estado
-de los productos recogidos, en consecuencia, se debe actualizar. */
-/* Realizar altas, bajas, búsquedas, listados y
-modificaciones de pedidos. */
-/* Listados habrá que contemplar la posibilidad de listarlos según su estado. Esto es
-necesario para poder localizar rápidamente los pedidos cuya fecha de entrega sea próxima
-y que, por tanto, deben ser procesados con mayor prioridad.*/
-/*Asignación de transportistas a los productos pedidos en
-función de la dirección del cliente y ciudad de reparto*/
-/*Asignación de lockers a los pedidos en base a la localidad de
-entrega y ubicación del locker.*/
-/*Un usuario proveedor podrá acceder únicamente a la información de los pedidos de productos
-que él mismo suministra*/
-
-
-
-
-
 void fecha_entrega(char *fecha, int dia_entrega)
 { 
     
@@ -67,115 +41,6 @@ char *seleccionar_producto(Producto *productos, int* tamanio, char *productos_se
 }
 
 
-/* Una vez seleccionado el producto que se quiere comprar, se da de alta el pedido correspondiente. Struct de Productos debe pasar como puntero??
-void alta_pedidos(ProductoPedido **pedidos, int* tamanio_vector, Cliente actual_cliente,int* tamanio_cliente, Producto *productos,int* tamanio_produc, Locker *lockers, int* tamanio_lockers, Transportista *transportista, int* tamanio_transportistas){
-    
-    ProductoPedido nuevo_producto_pedido;
-    char fecha_estimada[11];
-    char producto_seleccionado[16]; // Nombre del producto seleccionado
-    char id_prod_select[8];
-    int fecha_aux;
-    int cont = 0; 
-    int num_productos;
-
-    printf("Que producto va a comprar: \n");
-    fgets(producto_seleccionado,8,stdin);
-    depurarBuffer();
-
-    printf("Ingrese cantidad de %s que quiere: \n", producto_seleccionado);
-    scanf("%d", &num_productos);
-
-    strcpy(id_prod_select,seleccionar_producto(productos,&tamanio_produc,producto_seleccionado)); // Se encarga de encontrar y devolver el producto encontrado.
-    
-    // Registro del id del producto
-    for(int i = 0 ; i < *tamanio_produc && cont == 0 ; i++){
-
-        if(strcmp(productos[i].id_prod,id_prod_select) == 0){
-
-            nuevo_producto_pedido.importe = productos[i].importe;
-            fecha_aux = productos[i].entrega;
-
-            if(num_productos <= productos[i].stock){
-            
-                productos[i].stock = productos[i].stock - num_productos;
-            }
-            else{
-                printf("No hay suficiente stock para realizar su pedido.\n");
-                printf("El Stock actual disponible de %s es de: %d \n", producto_seleccionado, productos[i].stock);
-                printf("Reingresa un número de productos: \n");
-                scanf("%d", &num_productos);
-                depurarBuffer();
-
-                i = -1; //Reinicia el ciclo para volver a comprobar que es un valor correcto.
-
-            }
-
-            cont++;
-        }
-    }
-    /*strcpy(nuevo_producto_pedido.id_pedido, id_generator_pedido(*pedidos ,*tamanio_vector)); //Damos el id, al pedido mediante la funcion generadora de IDs.
-    depurarBuffer();
-
-    strcpy(nuevo_producto_pedido.id_prod,id_prod_select); // Copia la id del producto en la id de producto pedido. X
-
-
-    fecha_entrega(fecha_estimada,fecha_aux); // Hacemos llamada a la funcion que se encarga de: Fecha entrega = Fecha_Actual + Nº dias entrega.
-
-    strcpy(nuevo_producto_pedido.fecha_entrega_prevista,fecha_estimada); // Copia Fecha entrega en el pedido requerido.
-
-    strcpy(nuevo_producto_pedido.estado_pedido,"enPreparacion"); // Le doy como estado de alta al pedido para su comienzo enPreparacion. dsp se irá modificando.
-
-    // Se debe comprobar que el Locker no esta ocupado. Además quizás necesite una funcion que busque Lockers, a partir de la localidad del cliente.
-    char id_locker_seleccionada[11];
-    printf("Seleccione el ID del Locker que mejor le convenga: \n"); // NO ENTIENDO PQ PRODUCTOS PEDIDOS TIENE IDLOCKER Y QUE OCURRIRIA SI EL PEDIDO VA A DOMICILIO.
-
-    busqueda_locker_localidad(lockers, tamanio_lockers, actual_cliente.localidad);
-    fgets(id_locker_seleccionada,11,stdin);
-    depurarBuffer();
-
-    ocupados_lockers(lockers,*tamanio_lockers,id_locker_seleccionada); // No se si hace falta agragar el pedido al locker o ya lo hace la funcion.
-
-    // Seleccionar transportista, ADMIN SOLO
-    char id_transportista_seleccionado[5];
-    listado_transportista(transportista,*tamanio_transportistas);
-    // Comprobar que es ADMIN
-    printf("Selecione el ID del tranportista que quiere que entregue el producto:\n");
-    fgets(id_transportista_seleccionado,11,stdin);
-    depurarBuffer();
-
-    cont = 0;
-
-    // Registro del ID del Transportista, solo admin o prov.
-    for(int j = 0; j < tamanio_transportistas && cont == 0 ; j++){
-
-        if(strcmp(transportista[j].id_transp,id_transportista_seleccionado) == 0){
-
-           strcpy(nuevo_producto_pedido.id_transp,id_transportista_seleccionado); 
-        }else{
-                printf("No se ha encontrado su ID seleccionada.\n");
-                listado_transportista(transportista,*tamanio_transportistas);
-                printf("Reingresa el ID de su transportista: \n");
-                scanf("%d", &num_productos);
-                depurarBuffer();
-
-                j = -1; //Reinicia el ciclo para volver a comprobar que es un valor correcto.
-
-        }
-
-        cont++;  
-    }
-
-    *pedidos = (ProductoPedido *)realloc(*pedidos, (*tamanio_vector + 1) * sizeof(ProductoPedido));
-    if (*pedidos == NULL) {
-        printf("Error al aumentar el tamaño del vector.\n");
-        return;
-    }
-
-    (*pedidos)[*tamanio_vector] = nuevo_producto_pedido;
-
-    (*tamanio_vector)++;
- 
-}*/
 void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
 
     int encontrado = 0;
@@ -194,12 +59,11 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
         *pedidos = (ProductoPedido *)realloc(*pedidos, (*tamanio) * sizeof(ProductoPedido));
 
         printf("Producto con ID %s ha sido de baja correctamente.\n", id_baja);
-
         }
     }
 
-    if(encontrado != 0){
-        printf("La ID registrada no ha sido encontrada.");
+    if(encontrado == 0){
+        printf("La ID registrada no ha sido encontrada.\n");
     }
 }
 
@@ -212,8 +76,9 @@ void listado_Pedido(ProductoPedido *pedidos, int* tamanio){
 }
 
 //buscador de pedido segun su estado
-void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_pedido, int *coincidencia){
+void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_pedido){
 
+    int coincidencia = 0;
     for(int i = 0 ; i < *tamanio ; i++ ){
 
         if(strcmp(pedidos[i].estado_pedido,estad_pedido) == 0){
@@ -236,64 +101,65 @@ void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar)
 void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *transportistas, int tamanio_transportistas){
 
     int a;
-
+    char ID_producto[8];
+    printf("Ingrese el ID de su producto\n"); 
+    fgets(ID_producto,8,stdin);
+    depurarBuffer();
     listado_Pedido(pedidos,tamanio);
 
-    char id_modificar[8];
-    printf("\nIntroduce el ID del producto que quieres modificar: ");
-    fgets(id_modificar,8,stdin);    
-    id_modificar[strcspn(id_modificar,"\n")] = '\0';
-    depurarBuffer();
+    if(encontrarID_prod(pedidos, tamanio, ID_producto) != 1){
+        printf("El ID ingresado no se ha encontrado.\n");
+    }else{
 
 
-     //SI NO ES ADMIN HAY Q COMPROBAR QUE LA ID DEL PRODUCTO SEA LA MISMA QUE LA ID DEL QUE ESTA HACIENDO LA MODIFICACION -> ES UNA FUNCION NUEVA PERO IGUAL QUE ESTA
+        //SI NO ES ADMIN HAY Q COMPROBAR QUE LA ID DEL PRODUCTO SEA LA MISMA QUE LA ID DEL QUE ESTA HACIENDO LA MODIFICACION -> ES UNA FUNCION NUEVA PERO IGUAL QUE ESTA
 
-    printf("----------\n");
-    printf("(1) Modificar estado\n");
-    printf("(2) Modificar transportista\n");
-    printf("(3) Modificar entrega\n");
-    fflush(stdin);
-    scanf("%d", &a);
-    printf("----------\n\n");
+        printf("----------\n");
+        printf("(1) Modificar estado\n");
+        printf("(2) Modificar transportista\n");
+        printf("(3) Modificar entrega\n");
+        fflush(stdin);
+        scanf("%d", &a);
+        printf("----------\n\n");
 
-    switch (a) {
-        case 1:
-            modificar_estado_pedido(pedidos, tamanio, id_modificar);
-            break;
+        switch (a) {
+            case 1:
+                modificar_estado_pedido(pedidos, tamanio, ID_producto);
+                break;
 
-        case 2:
-            listado_transportista(transportistas,tamanio_transportistas);
-            modificar_transportistas(pedidos, tamanio, id_modificar);
-            break;
+            case 2:
+                listado_transportista(transportistas,tamanio_transportistas);
+                modificar_transportistas(pedidos, tamanio, ID_producto);
+                break;
 
-        case 3:
-            modificar_entrega(pedidos, tamanio, id_modificar);
-            break;
+            case 3:
+                modificar_entrega(pedidos, tamanio, ID_producto);
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
     }
 }
 
-void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar){
+void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
     int i = 0;
     
-    while(i < *tamanio && strcmp(pedidos[i].id_prod,id_modificar) != 0){
+    while(i < *tamanio && strcmp(pedidos[i].id_prod,ID_producto) != 0){
         i++;    // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
-    printf("Escribe el estado del pedido: ");
-	fflush(stdin);
+    printf("Escribe el estado del pedido: \n");
 	fgets(pedidos[i].estado_pedido,15,stdin);
     depurarBuffer();
 }
 
-void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_modificar){
+void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
     int i = 0;
     
-    while(i < *tamanio && strcmp(pedidos[i].id_prod,id_modificar) != 0){
+    while(i < *tamanio && strcmp(pedidos[i].id_prod,ID_producto) != 0){
         i++;    // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
@@ -303,12 +169,12 @@ void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_mod
     depurarBuffer();
 }
 
-void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar){
+void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
     int i = 0;
     int dia_retraso;
     
-    while(i < *tamanio && strcmp(pedidos[i].id_prod,id_modificar) != 0){
+    while(i < *tamanio && strcmp(pedidos[i].id_prod,ID_producto) != 0){
         i++;    // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
@@ -319,12 +185,11 @@ void modificar_entrega(ProductoPedido *pedidos, int* tamanio,char *id_modificar)
     depurarBuffer();
 }
 
-/* void checkear_descuento(Descuento *descuentos, int* tamanio, char *descuento_buscado); */
 void consultar_estado(ProductoPedido *pedidos, int* tamanio, char *id_pedido_buscado){
 
     int coincidencias = 0;
 
-    for(int i = 0 ; i < *tamanio ; i++ ){
+    for(int i = 0 ; i < *tamanio && coincidencias == 0; i++ ){
 
         if(strcmp(pedidos[i].id_pedido,id_pedido_buscado) == 0){
 
@@ -355,4 +220,18 @@ int reducirStock(Producto *productos, int tamProd,char*idProd, int ctdadReducir)
     }
 
     return cambio;
+}
+
+// DEVUELVE 1 si encuentra el ID ingresado
+int encontrarID_prod(ProductoPedido *prodped, int tamanio_prodped, char *ID_producto){
+    
+    int encontrado = 0;
+    
+    for(int i = 0 ; i < tamanio_prodped && encontrado == 0; i++){
+
+        if(strcmp(prodped[i].id_prod,ID_producto)==0){
+            encontrado = 1;
+        }
+    }
+    return encontrado;
 }
