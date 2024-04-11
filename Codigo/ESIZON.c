@@ -1,4 +1,3 @@
-
 #include "ESIZON.h"
 
 Cliente *clientes;
@@ -7,35 +6,35 @@ int numClientes;
 AdminProv *adminProvs;
 int numAdminProvs;
 
-Producto *productos;
-int numProductos;
-
 Categoria *categorias;
 int numCategorias;
-
-Descuento *descuentos;
-int numDescuentos;
-
-DescuentoCliente *descuentoClientes;
-int numDescuentoClientes;
-
-Locker *lockers;
-int numLockers;
 
 CompartimentoLocker *compartimentoLockers;
 int numCompartimentoLockers;
 
+DescuentoCliente *descuentoClientes;
+int numDescuentoClientes;
+
+Descuento *descuentos;
+int numDescuentos;
+
+Devolucion *devoluciones;
+int numDevoluciones;
+
+Locker *lockers;
+int numLockers;
+
 Pedido *pedidos;
 int numPedido;
+
+Producto *productos;
+int numProductos;
 
 ProductoPedido *productoPedidos;
 int numProductoPedidos;
 
 Transportista *transportistas;
 int numTransportistas;
-
-Devolucion *devoluciones;
-int numDevoluciones;
 
 int rol;
 int posVectorClienteActual;
@@ -437,7 +436,9 @@ void mostrarPerfil()
         modificar_perfilprov(&adminProvs[posVectorClienteActual]);
         break;
     case 4:
-
+        mostrarTransportista(transportistas[posVectorClienteActual]);
+        flushInputBuffer();
+        modificar_transportistas(&transportistas[posVectorClienteActual]);
         break;
     default:
         break;
@@ -474,6 +475,7 @@ void mostrarProductos()
         seccionProductosProv();
         break;
     case 4:
+
         break;
     default:
         break;
@@ -563,15 +565,54 @@ void mostrarDevoluciones()
 // Solo puede acceder: transportista
 void enReparto()
 {
+    printf("\nDime la id del transportista(4 digitos):");
+    char id[5];
+    reparto(productoPedidos[posVectorClienteActual],numProductoPedidos, &id);
 }
 
-// El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido recogidos de los lockers en el plazo determinado, permitiéndole consultar todos los lockers por localidad y mostrando sus pedidos. En el momento de la recogida de los productos
+// El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido
+//recogidos de los lockers en el plazo determinado, permitiéndole consultar todos los lockers por localidad y mostrando sus pedidos.
+//En el momento de la recogida de los productos
 // para su retorno, el sistema debe actualizar automáticamente el número de compartimentos
 // ocupados y eliminar el código locker asociado al producto. Así como el estado de los productos
 // y el stock de los mismos para que quede reflejada la operación
 // Solo puede acceder: transportista
 void retornoProducto()
 {
+    if (numDevoluciones > 0)
+    {
+        char id_busqueda[8];
+        printf("\nIngrese el ID de la devolución a buscar: ");
+        scanf("%s", id_busqueda);
+        buscar_devolucion(devoluciones, numDevoluciones, id_busqueda);
+        printf("\nQuieres realizar acciones en este id");
+        int siono;
+        printf("\n1-SI\n2-NO");
+        scanf("%d",&siono);
+        switch(siono)
+        {
+            case 1:
+                printf("Ingrese el ID del comportamiento a dar de baja: ");
+                scanf("%s", id);
+                flushInputBuffer(); // Limpiar el buffer de entrada después de leer una cadena de caracteres
+                printf("Ingrese el código del comportamiento a dar de baja: ");
+                scanf("%s", codigo);
+                flushInputBuffer(); // Limpiar el buffer de entrada después de leer una cadena de caracteres
+                baja_comportamiento(compartimentoLockers, &numCompartimentoLockers, id, codigo);
+                if (num_devoluciones > 0) {
+                    char id_enviado[8];
+                    printf("\nIngrese el ID de la devolución a marcar como 'enviado': ");
+                    scanf("%s", id_enviado);
+                    modificar_estado_enviado(devoluciones, numDevoluciones, id_enviado);
+                } else {
+                    printf("No hay devoluciones para marcar como 'enviado'.\n");
+                }
+        }
+    } else
+    {
+        printf("No hay devoluciones para buscar.\n");
+    }
+
 }
 
 // Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
@@ -579,4 +620,3 @@ void retornoProducto()
 void salirprograma()
 {
 }
-
