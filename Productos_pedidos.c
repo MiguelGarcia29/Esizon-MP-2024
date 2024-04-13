@@ -1,6 +1,6 @@
 #include "Productos_pedidos.h"
 #include <string.h>
-
+#include <time.h>
 void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
 void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
 void modificar_entrega_productoPedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
