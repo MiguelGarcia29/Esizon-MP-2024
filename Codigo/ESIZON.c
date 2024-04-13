@@ -436,9 +436,9 @@ void mostrarPerfil()
         modificar_perfilprov(&adminProvs[posVectorClienteActual]);
         break;
     case 4:
-        mostrarTransportista(transportistas[posVectorClienteActual]);
+        mostrar_perfiltrans(transportistas[posVectorClienteActual]);
         flushInputBuffer();
-        modificar_transportistas(&transportistas[posVectorClienteActual]);
+        modificar_perfiltrnas(&transportistas[posVectorClienteActual]);
         break;
     default:
         break;
@@ -544,6 +544,7 @@ void mostrarPedidos()
 // Solo puede acceder: Administrador
 void mostrarTransportista()
 {
+
     // Implementación de la función transportista
 }
 
@@ -565,9 +566,11 @@ void mostrarDevoluciones()
 // Solo puede acceder: transportista
 void enReparto()
 {
-    printf("\nDime la id del transportista(4 digitos):");
-    char id[5];
-    reparto(productoPedidos[posVectorClienteActual],numProductoPedidos, &id);
+    printf("Ingrese el ID del transportista para realizar el reparto de productos: ");
+    char id_enreparto;
+    scanf("%4s", id_enreparto);
+    flushInputBuffer();
+    reparto(productoPedidos, numProductoPedidos, id_enreparto);
 }
 
 // El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido
@@ -587,19 +590,21 @@ void retornoProducto()
         buscar_devolucion(devoluciones, numDevoluciones, id_busqueda);
         printf("\nQuieres realizar acciones en este id");
         int siono;
-        printf("\n1-SI\n2-NO");
+        printf("\n1-SI\n2-NO\n");
         scanf("%d",&siono);
         switch(siono)
         {
             case 1:
-                printf("Ingrese el ID del comportamiento a dar de baja: ");
+                printf("Ingrese el ID a dar de baja: ");
+                char id;
                 scanf("%s", id);
                 flushInputBuffer(); // Limpiar el buffer de entrada después de leer una cadena de caracteres
                 printf("Ingrese el código del comportamiento a dar de baja: ");
+                char codigo;
                 scanf("%s", codigo);
                 flushInputBuffer(); // Limpiar el buffer de entrada después de leer una cadena de caracteres
                 baja_comportamiento(compartimentoLockers, &numCompartimentoLockers, id, codigo);
-                if (num_devoluciones > 0) {
+                if (numDevoluciones > 0) {
                     char id_enviado[8];
                     printf("\nIngrese el ID de la devolución a marcar como 'enviado': ");
                     scanf("%s", id_enviado);
