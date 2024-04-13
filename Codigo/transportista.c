@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "estructuras.h"
-#include "Utilidades.h"
+#include "Transportista.h"
 
 char* id_generator_trans(Transportista *t, int tamanio_vector) {
     int id_generada = 1;
@@ -87,56 +83,52 @@ void listado_transportista(Transportista *t, int tamanio){
     }
 }
 
-void perfil(Transportista *t, int tamanio, char *id)
+
+void mostrar_perfiltrans(Transportista perfil) //funcion que imprime los datos del usuario
 {
-    int indice = -1;
-    for(int i=0;i<tamanio;i++)
-    {
-        if(strcmp(id, t[i].id_transp) == 0)
-        {
-            printf("ID Transportista - Nombre - Email - Contraseña - Nombre de la empresa - Ciudad de reparto\n");
-            printf("%s - %s - %s - %s - %s - %s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
-            indice = i;
-            break;
-        }
-    }
+	printf("Rol: Transportista\n");
+	printf("Empresa: %s\n",perfil.nombre_empresa);
+	printf("Ciudad de reparto: %s\n",perfil.ciudad_reparto);
+	printf("Email: %s\n",perfil.email);
+	printf("__________\n");
+}
+void cambiar_contrasenia_trans(char nueva[16]) // funcion que cambia la contrasenia
+{
+	printf("Introduzca su nueva contrasena: ");
+	fflush(stdin);
+	fgets(nueva,16,stdin);
+}
 
-    if(indice != -1)
-    {
-        printf("¿Quieres modificar este perfil? \n");
-        printf("1-Si\n");
-        printf("2-No\n");
-        int respuesta;
-        scanf("%d", &respuesta);
-        flushInputBuffer();
 
-        if(respuesta == 1)
-        {
-            printf("\nDime el nombre:");
-            scanf("%20s", t[indice].nombre);
-            flushInputBuffer();
+void cambiar_email_trans(char nuevo[31]) //funcion que cambia el email
+{
+	printf("Introduzca el nuevo email: ");
+	fflush(stdin);
+	fgets(nuevo,31,stdin);
+}
 
-            printf("\nDime el correo:");
-            scanf("%30s", t[indice].email);
-            flushInputBuffer();
+void modificar_perfiltrnas(Transportista *mod) //funcion con un menu segun que se quiera modificar
+{
+	int a;
 
-            printf("\nDime la contraseña para acceder al sistema:");
-            scanf("%15s", t[indice].contrasenia);
-            flushInputBuffer();
+	printf("(1) Cambiar contrasena\n");
+	printf("(2) Cambiar email\n");
+	fflush(stdin);
+	scanf("%d",&a);
 
-            printf("\nDime el nombre de la empresa:");
-            scanf("%20s", t[indice].nombre_empresa);
-            flushInputBuffer();
+		switch(a)
+		{
+			case 1:
+				cambiar_contrasenia_trans(mod->contrasenia); //Si pulsa 1 se camabiara la contrasenia
+			break;
 
-            printf("\nDime la ciudad de reparto:");
-            scanf("%20s", t[indice].ciudad_reparto);
-            flushInputBuffer();
-        }
-    }
-    else
-    {
-        printf("Transportista con ID %s no encontrado.\n", id);
-    }
+			case 2:
+				cambiar_email_trans(mod->email); // Si pulsa 2 se cambia el email
+			break;
+
+			default:
+			break;
+		}
 }
 
 void reparto(ProductoPedido *pedidos, int num_pedidos, char *id_transp) {
@@ -299,3 +291,92 @@ int main() {
     return 0;
 }
 */
+
+// Guarda el vector de Transportitas en el archivo siguiendo la estructura:
+/*
+    o Identificador del transportista (Id_transp), 4 dígitos.
+    o Nombre del transportista (Nombre), 20 caracteres máximo.
+    o Email (email), 30 caracteres máximo, será usado como nombre de usuario para el acceso a la
+    plataforma.
+    o Contraseña para acceder al sistema (Contraseña), con 15 caracteres máximo.
+    o Nombre de la empresa (Nombre), 20 caracteres máximo.
+    o Ciudad de reparto (Ciudad), 20 caracteres máximo.
+*/
+void guardarTransportistasEnArchivo(Transportista *transportistas, int numTransportistas)
+{
+    FILE *archivo = fopen(Transportistas_txt, "w");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo Transportistas.txt.\n");
+        return;
+    }
+
+    for (int i = 0; i < numTransportistas; i++)
+    {
+        fprintf(archivo, "%s-%s-%s-%s-%s-%s-\n",
+                transportistas[i].id_transp,
+                transportistas[i].nombre,
+                transportistas[i].email,
+                transportistas[i].contrasenia,
+                transportistas[i].nombre_empresa,
+                transportistas[i].ciudad_reparto);
+    }
+
+    fclose(archivo);
+    printf("Datos de transportistas guardados en el archivo Transportistas.txt.\n");
+}
+
+Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
+{
+    FILE *archivo = fopen(Transportistas_txt, "r");
+    if (archivo == NULL)
+    {
+        printf("Error al abrir el archivo %s.\n", Transportistas_txt);
+        return NULL;
+    }
+
+    // Contar la cantidad de lineas en el archivo
+    int count = 0;
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        count++;
+    }
+
+    // Regresar al inicio del archivo
+    rewind(archivo);
+
+    // Crear el vector de Locker
+    Transportista *transportistas = (Transportista *)malloc(count * sizeof(Transportista));
+    if (transportistas == NULL)
+    {
+        fclose(archivo);
+        printf("Error: No se pudo asignar memoria para el vector de Transportistas.\n");
+        return NULL;
+    }
+
+    // Leo cada linea y rellenar el vector de adminProv
+    int i = 0;
+    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    {
+        char *token = strtok(buffer, "-");
+        strncpy(transportistas[i].id_transp, token, sizeof(transportistas[i].id_transp));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].nombre, token, sizeof(transportistas[i].nombre));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].email, token, sizeof(transportistas[i].email));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].contrasenia, token, sizeof(transportistas[i].contrasenia));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].nombre_empresa, token, sizeof(transportistas[i].nombre_empresa));
+        token = strtok(NULL, "-");
+        strncpy(transportistas[i].ciudad_reparto, token, sizeof(transportistas[i].ciudad_reparto));
+
+        i++;
+    }
+
+    fclose(archivo);
+    *numTransportista = count;
+    return transportistas;
+}
+
