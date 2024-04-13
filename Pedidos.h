@@ -3,7 +3,7 @@
 
 #include "Utilidades.h"
 #include "Productos.h"
-#include "Productos_pedidos.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,7 +18,6 @@ typedef struct {
 }Pedido;
 
 
-void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int numnProductos, Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds,int *numProdPe, char *idCliente, char *tipoEntrega, char *idLocker, float *costeTotal);
 void guardarPedidoEnArchivo(Pedido *, int );
 Pedido *iniciarPedidosDeArchivo(int *);
 

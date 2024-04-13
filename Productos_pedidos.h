@@ -5,6 +5,7 @@
 #include "Utilidades.h"
 
 #include "Productos.h"
+#include "Pedidos.h"
 #include "Lockers.h"
 
 #include <stdio.h>
@@ -35,5 +36,7 @@ void mostrar_menu();
 int reducirStock(Producto *productos, int tamProd,char*idProd, int ctdadReducir);
 void guardarProductoPedidoEnArchivo(ProductoPedido *, int );
 ProductoPedido *iniciarProductoPedidosDeArchivo(int *);
+void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int numnProductos, Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds,int *numProdPe, char *idCliente, char *tipoEntrega, char *idLocker, float *costeTotal);
+
 
 #endif

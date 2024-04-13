@@ -34,6 +34,7 @@
 		<Unit filename="AdminProv.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="AdminProv.h" />
 		<Unit filename="Categoria.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -45,26 +46,26 @@
 		<Unit filename="CompartimentosLockers.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="CompartimentosLockers.h" />
+		<Unit filename="DescuentoCliente.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="DescuentoCliente.h" />
+		<Unit filename="Descuentos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Devolucion.h" />
 		<Unit filename="Devoluciones.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ESIZON.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="ESIZON.cbp" />
 		<Unit filename="ESIZON.h" />
-		<Unit filename="Gestion_Fichero.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Gestion_Fichero.h" />
 		<Unit filename="Lockers.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Lockers.h" />
-		<Unit filename="Menu.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Menu.h" />
 		<Unit filename="Pedidos.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -81,18 +82,15 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Proveedor.h" />
+		<Unit filename="Transportista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Transportista.h" />
 		<Unit filename="Utilidades.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Utilidades.h" />
-		<Unit filename="descuentos.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="descuentos.h" />
-		<Unit filename="estructuras.h" />
-		<Unit filename="transportista.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
