@@ -83,56 +83,52 @@ void listado_transportista(Transportista *t, int tamanio){
     }
 }
 
-void perfil(Transportista *t, int tamanio, char *id)
+
+void mostrar_perfiltrans(Transportista perfil) //funcion que imprime los datos del usuario
 {
-    int indice = -1;
-    for(int i=0;i<tamanio;i++)
-    {
-        if(strcmp(id, t[i].id_transp) == 0)
-        {
-            printf("ID Transportista - Nombre - Email - Contraseña - Nombre de la empresa - Ciudad de reparto\n");
-            printf("%s - %s - %s - %s - %s - %s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
-            indice = i;
-            break;
-        }
-    }
+	printf("Rol: Transportista\n");
+	printf("Empresa: %s\n",perfil.nombre_empresa);
+	printf("Ciudad de reparto: %s\n",perfil.ciudad_reparto);
+	printf("Email: %s\n",perfil.email);
+	printf("__________\n");
+}
+void cambiar_contrasenia_trans(char nueva[16]) // funcion que cambia la contrasenia
+{
+	printf("Introduzca su nueva contrasena: ");
+	fflush(stdin);
+	fgets(nueva,16,stdin);
+}
 
-    if(indice != -1)
-    {
-        printf("¿Quieres modificar este perfil? \n");
-        printf("1-Si\n");
-        printf("2-No\n");
-        int respuesta;
-        scanf("%d", &respuesta);
-        flushInputBuffer();
 
-        if(respuesta == 1)
-        {
-            printf("\nDime el nombre:");
-            scanf("%20s", t[indice].nombre);
-            flushInputBuffer();
+void cambiar_email_trans(char nuevo[31]) //funcion que cambia el email
+{
+	printf("Introduzca el nuevo email: ");
+	fflush(stdin);
+	fgets(nuevo,31,stdin);
+}
 
-            printf("\nDime el correo:");
-            scanf("%30s", t[indice].email);
-            flushInputBuffer();
+void modificar_perfiltrnas(Transportista *mod) //funcion con un menu segun que se quiera modificar
+{
+	int a;
 
-            printf("\nDime la contraseña para acceder al sistema:");
-            scanf("%15s", t[indice].contrasenia);
-            flushInputBuffer();
+	printf("(1) Cambiar contrasena\n");
+	printf("(2) Cambiar email\n");
+	fflush(stdin);
+	scanf("%d",&a);
 
-            printf("\nDime el nombre de la empresa:");
-            scanf("%20s", t[indice].nombre_empresa);
-            flushInputBuffer();
+		switch(a)
+		{
+			case 1:
+				cambiar_contrasenia_trans(mod->contrasenia); //Si pulsa 1 se camabiara la contrasenia
+			break;
 
-            printf("\nDime la ciudad de reparto:");
-            scanf("%20s", t[indice].ciudad_reparto);
-            flushInputBuffer();
-        }
-    }
-    else
-    {
-        printf("Transportista con ID %s no encontrado.\n", id);
-    }
+			case 2:
+				cambiar_email_trans(mod->email); // Si pulsa 2 se cambia el email
+			break;
+
+			default:
+			break;
+		}
 }
 
 void reparto(ProductoPedido *pedidos, int num_pedidos, char *id_transp) {
