@@ -130,7 +130,7 @@ char *id_generator_prod(Producto *productos, int tamanio_vector)
 
 // Procedimiento da de alta los productos.
 //  En ella se necesita que se hayan dado de alta previamente las categorias.
-void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria *categ, int *tamanio_categ)
+void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria **categ, int tamanio_categ)
 {
 
     Producto nuevo_producto;
@@ -222,13 +222,14 @@ void listado_producto(Producto *productos, int *tamanio)
 }
 
 // Muestra lista de los productos, dados de alta.
-void listado_producto_prooved(Producto *productos, int *tamanio, char *idProv)
+void listado_producto_prooved(Producto **productos, int tamanio, char *idProv)
 {
 
-    for (int i = 0; i < *tamanio; i++)
+    for (int i = 0; i < tamanio; i++)
     {
-        if (strcmp(productos[i].id_gestor, idProv) == 0)
-            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+        if (strcmp((*productos)[i].id_gestor, idProv) == 0)
+            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip,
+                   (*productos)[i].id_categ, (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
     }
 }
 
@@ -273,7 +274,7 @@ void busqueda_producto_descr(Producto *productos, int *tamanio, char *descripcio
 }
 
 // Búsqueda por categoría. Se toma como parametro "categ" aquella categoria que introduce el usuario.
-void busqueda_producto_categ(Producto *productos, int *tamanio, char *categ, Categoria *categorias, int *tamanio_categ)
+void busqueda_producto_categ(Producto **productos, int *tamanio, char *categ, Categoria **categorias, int *tamanio_categ)
 {
     int coincidencias = 0;
 
@@ -283,10 +284,11 @@ void busqueda_producto_categ(Producto *productos, int *tamanio, char *categ, Cat
     {
         for (int j = 0; j < *tamanio_categ; j++)
         {
-            if (strcmp(productos[i].id_categ, categorias[j].id_categ) == 0)
+            if (strcmp((*productos)[i].id_categ, (*categorias)[j].id_categ) == 0)
             {
 
-                printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+                printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip, (*productos)[i].id_categ,
+                        (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
                 printf("\n");
                 coincidencias++;
             }

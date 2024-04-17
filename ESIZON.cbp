@@ -66,6 +66,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Lockers.h" />
+		<Unit filename="Main.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Pedidos.c">
 			<Option compilerVar="CC" />
 		</Unit>

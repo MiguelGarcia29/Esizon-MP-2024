@@ -68,12 +68,12 @@ void baja_categoria(Categoria *categoria , int* tamanio, char *id_baja){
     }
 }
 //Funcion usada para compara categorias con la que ingresara el usuario al dar de alta un producto. Se pasa como parametro el registro de categorias y categoria_productos como aquella categoria que introduce el usuario.
-int check_categ(Categoria *categ, int* tamanio,char *categoria_productos){
+int check_categ(Categoria **categ, int tamanio,char *categoria_productos){
 
     int coincidencia = 0 ;
 
-    for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++){
-    if (strcmp(categ[i].descrip, categoria_productos) == 0) {
+    for(int i = 0 ; i < tamanio && coincidencia == 0 ; i++){
+    if (strcmp((*categ)[i].descrip, categoria_productos) == 0) {
                 coincidencia = 1;
             }
         }

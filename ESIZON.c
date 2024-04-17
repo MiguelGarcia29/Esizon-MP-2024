@@ -1,70 +1,30 @@
 #include "ESIZON.h"
 
-Cliente *clientes;
-int numClientes;
-
-AdminProv *adminProvs;
-int numAdminProvs;
-
-Categoria *categorias;
-int numCategorias;
-
-CompartimentoLocker *compartimentoLockers;
-int numCompartimentoLockers;
-
-DescuentoCliente *descuentoClientes;
-int numDescuentoClientes;
-
-Descuento *descuentos;
-int numDescuentos;
-
-Devolucion *devoluciones;
-int numDevoluciones;
-
-Locker *lockers;
-int numLockers;
-
-Pedido *pedidos;
-int numPedido;
-
-Producto *productos;
-int numProductos;
-
-ProductoPedido *productoPedidos;
-int numProductoPedidos;
-
-Transportista *transportistas;
-int numTransportistas;
-
-int rol;
-int posVectorClienteActual;
-// 1-Administrador
-// 2-Usuario
-// 3-Proveedor
-// 4-Transportista
-
-
-void inicializarDatos();
-void almacenarDatos();
+void almacenarDatos(Cliente *clientes, int numClientes, AdminProv *adminProvs, int numAdminProvs, Categoria *categorias, int numCategorias, CompartimentoLocker *compartimentoLockers, int numCompartimentoLockers, DescuentoCliente *descuentoClientes, int numDescuentoClientes, Descuento *descuentos, int numDescuentos, Devolucion *devoluciones, int numDevoluciones, Locker *lockers, int numLockers, Pedido *pedidos, int numPedido, Producto *productos, int numProductos, ProductoPedido *productoPedidos, int numProductoPedidos, Transportista *transportistas, int numTransportistas) ;
 
 // CARGA TODO LOS DATOS EN LOS VECTORES
-void inicializarDatos()
+void inicializarDatos(Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                      Categoria **categorias, int *numCategorias, CompartimentoLocker **compartimentoLockers, int *numCompartimentoLockers,
+                      DescuentoCliente **descuentoClientes, int *numDescuentoClientes, Descuento **descuentos, int *numDescuentos,
+                      Devolucion **devoluciones, int *numDevoluciones, Locker **lockers, int *numLockers, Pedido **pedidos, int *numPedido,
+                      Producto **productos, int *numProductos, ProductoPedido **productoPedidos, int *numProductoPedidos,
+                      Transportista **transportistas, int *numTransportistas)
 {
-    clientes = iniciarClientesDeArchivo(&numClientes);
-    adminProvs = iniciarAdminProvDeArchivo(&numAdminProvs);
-    productos = iniciarProductosDeArchivo(&numProductos);
-    categorias = iniciarCategoriasDeArchivo(&numCategorias);
-    descuentos = iniciarDescuentosDeArchivo(&numDescuentos);
-    descuentoClientes = iniciarDescuentosClientesDeArchivo(&numDescuentoClientes);
-    lockers = iniciarLockersDeArchivo(&numLockers);
-    compartimentoLockers = iniciarCompartimientoLockersDeArchivo(&numCompartimentoLockers);
-    pedidos = iniciarPedidosDeArchivo(&numPedido);
-    productoPedidos = iniciarProductoPedidosDeArchivo(&numProductoPedidos);
-    transportistas = iniciarTransportistasDeArchivo(&numTransportistas);
-    devoluciones = iniciarDevolucionDeArchivo(&numDevoluciones);
+    *clientes = iniciarClientesDeArchivo(numClientes);
+    *adminProvs = iniciarAdminProvDeArchivo(numAdminProvs);
+    *productos = iniciarProductosDeArchivo(numProductos);
+    *categorias = iniciarCategoriasDeArchivo(numCategorias);
+    *descuentos = iniciarDescuentosDeArchivo(numDescuentos);
+    *descuentoClientes = iniciarDescuentosClientesDeArchivo(numDescuentoClientes);
+    *lockers = iniciarLockersDeArchivo(numLockers);
+    *compartimentoLockers = iniciarCompartimientoLockersDeArchivo(numCompartimentoLockers);
+    *pedidos = iniciarPedidosDeArchivo(numPedido);
+    *productoPedidos = iniciarProductoPedidosDeArchivo(numProductoPedidos);
+    *transportistas = iniciarTransportistasDeArchivo(numTransportistas);
+    *devoluciones = iniciarDevolucionDeArchivo(numDevoluciones);
 }
 
-void almacenarDatos()
+void almacenarDatos(Cliente *clientes, int numClientes, AdminProv *adminProvs, int numAdminProvs, Categoria *categorias, int numCategorias, CompartimentoLocker *compartimentoLockers, int numCompartimentoLockers, DescuentoCliente *descuentoClientes, int numDescuentoClientes, Descuento *descuentos, int numDescuentos, Devolucion *devoluciones, int numDevoluciones, Locker *lockers, int numLockers, Pedido *pedidos, int numPedido, Producto *productos, int numProductos, ProductoPedido *productoPedidos, int numProductoPedidos, Transportista *transportistas, int numTransportistas)
 {
     guardarClientesEnArchivo(clientes, numClientes);
     guardarAdminProvEnArchivo(adminProvs, numAdminProvs);
@@ -80,19 +40,22 @@ void almacenarDatos()
     guardarDevolucionesEnArchivo(devoluciones, numDevoluciones);
 }
 
-int main()
+void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                      Categoria **categorias, int *numCategorias, CompartimentoLocker **compartimentoLockers, int *numCompartimentoLockers,
+                      DescuentoCliente **descuentoClientes, int *numDescuentoClientes, Descuento **descuentos, int *numDescuentos,
+                      Devolucion **devoluciones, int *numDevoluciones, Locker **lockers, int *numLockers, Pedido **pedidos, int *numPedido,
+                      Producto **productos, int *numProductos, ProductoPedido **productoPedidos, int *numProductoPedidos,
+                      Transportista **transportistas, int *numTransportistas)
 {
-    inicializarDatos();
 
-    // ESTRUCTURA DEL PROGRAMA
-    accederPrograma();
-    // listado_producto(productos,&numProductos);
+    int rol;
+    int posVectorClienteActual;
+    // 1-Administrador
+    // 2-Usuario
+    // 3-Proveedor
+    // 4-Transportista
 
-    almacenarDatos();
-}
 
-void accederPrograma()
-{
     printf(" ########  #######   ######     ##########  ##########  ###      ##\n");
     printf(" ##       ##           ##              #    ##      ##  ## #     ##\n");
     printf(" ##       ##           ##             #     ##      ##  ##  #    ##\n");
@@ -111,16 +74,16 @@ void accederPrograma()
     printf("                              #######\n");
 
     // COMPROBAR QUE EL ROL ESTÉ REGISTRADO
-    do
+     do
     {
-        printf("¿Como vas a acceder?\n");
+        printf("¿Cómo vas a acceder?\n");
         printf("1- Administrador\n");
         printf("2- Usuario\n");
         printf("3- Proveedor\n");
         printf("4- Transportista\nIndique rol: ");
         scanf("%d", &rol);
         flushInputBuffer();
-    } while (iniciarSesion() != 0);
+    } while (iniciarSesion(rol,&posVectorClienteActual,*clientes,*numClientes,*adminProvs,*numAdminProvs,*transportistas,*numTransportistas)!=0);
 
     switch (rol)
     {
@@ -131,16 +94,19 @@ void accederPrograma()
         menuusuario();
         break;
     case 3:
-        menuproveedor();
+        menuproveedor(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,*numProductos,categorias,numCategorias);
         break;
     case 4:
         menutransportista();
         break;
     }
+
+
+   // almacenarDatos(clientes, numClientes, adminProvs, numAdminProvs, categorias, numCategorias, compartimentoLockers, numCompartimentoLockers, descuentoClientes, numDescuentoClientes, descuentos, numDescuentos, devoluciones, numDevoluciones, lockers, numLockers, pedidos, numPedido, productos, numProductos, productoPedidos, numProductoPedidos, transportistas, numTransportistas);
 }
 
 // Devuelve 0 si pudo iniciar sesion en el rol indicado y 1 si no,
-int iniciarSesion()
+int iniciarSesion(int rol, int *posVectorActual, Cliente *clientes, int numClientes, AdminProv *adminProvs, int numAdminProvs, Transportista *transportistas, int numTransportistas)
 {
     int encontrado = 1;
     if (rol < 1 || rol > 4)
@@ -166,16 +132,16 @@ int iniciarSesion()
         switch (rol)
         {
         case 1:
-            encontrado = comprobarAdminoProv(correo, contrasenia, "administrador");
+            encontrado = comprobarAdminoProv(correo, contrasenia, "administrador",adminProvs,numAdminProvs,posVectorActual);
             break;
         case 2:
-            encontrado = comprobarUsuario(correo, contrasenia);
+            encontrado = comprobarUsuario(correo, contrasenia,clientes,numClientes,posVectorActual);
             break;
         case 3:
-            encontrado = comprobarAdminoProv(correo, contrasenia, "proveedor");
+            encontrado = comprobarAdminoProv(correo, contrasenia, "proveedor",adminProvs,numAdminProvs,posVectorActual);
             break;
         case 4:
-            encontrado = comprobarTransportista(correo, contrasenia);
+            encontrado = comprobarTransportista(correo, contrasenia,transportistas,numTransportistas, posVectorActual);
             break;
         }
 
@@ -189,22 +155,23 @@ int iniciarSesion()
     return encontrado;
 }
 
-int comprobarAdminoProv(char *email, char *contrasenia, char *rol)
+int comprobarAdminoProv(char *email, char *contrasenia, char *rol, AdminProv *adminProvs, int numAdminProvs, int *posVectorClienteActual)
 {
     int encontrado = 1;
     for (int i = 0; i < numAdminProvs && encontrado == 1; i++)
     {
+
         if (strcmp(adminProvs[i].email, email) == 0 && strcmp(adminProvs[i].contrasenia, contrasenia) == 0 && strcmp(adminProvs[i].perfil_usuario, rol) == 0)
         {
             encontrado = 0;
-            posVectorClienteActual = i;
+            *posVectorClienteActual = i;
         }
     }
 
     return encontrado;
 }
 
-int comprobarUsuario(char *email, char *contrasenia)
+int comprobarUsuario(char *email, char *contrasenia, Cliente * clientes, int numClientes, int *posVectorClienteActual)
 {
     int encontrado = 1;
     for (int i = 0; i < numClientes && encontrado == 1; i++)
@@ -212,14 +179,14 @@ int comprobarUsuario(char *email, char *contrasenia)
         if (strcmp(clientes[i].email, email) == 0 && strcmp(clientes[i].contrasenia, contrasenia) == 0)
         {
             encontrado = 0;
-            posVectorClienteActual = i;
+            *posVectorClienteActual = 2;
         }
     }
 
     return encontrado;
 }
 
-int comprobarTransportista(char *email, char *contrasenia)
+int comprobarTransportista(char *email, char *contrasenia, Transportista *transportistas, int numTransportistas, int *posVectorClienteActual)
 {
     int encontrado = 1;
     for (int i = 0; i < numTransportistas && encontrado == 1; i++)
@@ -227,7 +194,7 @@ int comprobarTransportista(char *email, char *contrasenia)
         if (strcmp(transportistas[i].email, email) == 0 && strcmp(transportistas[i].contrasenia, contrasenia) == 0)
         {
             encontrado = 0;
-            posVectorClienteActual = i;
+            *posVectorClienteActual = i;
         }
     }
 
@@ -242,7 +209,7 @@ void menuadmin()
     do
     {
         printf("--------------------------------------------------------\n");
-        printf("             NOMBRE: %s                                 \n", adminProvs[posVectorClienteActual].nombre);
+        //printf("             NOMBRE: %s                                 \n", adminProvs[posVectorClienteActual].nombre);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Clientes                                            |\n");
@@ -259,7 +226,7 @@ void menuadmin()
         switch (opcion)
         {
         case 1:
-            mostrarPerfil();
+            //mostrarPerfil();
             break;
         case 2:
             mostrarClientes();
@@ -268,7 +235,7 @@ void menuadmin()
             mostrarProveedores();
             break;
         case 4:
-            mostrarProductos();
+            //mostrarProductos();
             break;
         case 5:
             mostrarCategorias();
@@ -304,7 +271,7 @@ void menuusuario()
     do
     {
         printf("--------------------------------------------------------\n");
-        printf("             NOMBRE: %s \n", clientes[posVectorClienteActual].nomb_cliente);
+       // printf("             NOMBRE: %s \n", clientes[posVectorClienteActual].nomb_cliente);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Productos                                           |\n");
@@ -318,10 +285,10 @@ void menuusuario()
         switch (opcion)
         {
         case 1:
-            mostrarPerfil();
+            //mostrarPerfil();
             break;
         case 2:
-            mostrarProductos();
+            //mostrarProductos();
             break;
         case 3:
             mostrarDescuentos();
@@ -343,13 +310,15 @@ void menuusuario()
     } while (opcion != 6);
 }
 
-void menuproveedor()
+void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  numClientes, AdminProv **adminProvs, int numAdminProvs,
+                   Transportista **transportistas, int numTransportistas, Producto **productos, int *numProductos, Categoria ** categorias, int numCategorias)
+
 {
     int opcion;
     do
     {
         printf("--------------------------------------------------------\n");
-        printf("             NOMBRE: %s                                 \n", adminProvs[posVectorClienteActual].nombre);
+        printf("             NOMBRE: %s                                 \n", (*adminProvs)[posVectorClienteActual].nombre);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Productos                                           |\n");
@@ -361,10 +330,12 @@ void menuproveedor()
         switch (opcion)
         {
         case 1:
-            mostrarPerfil();
+            mostrar_perfilprov((*adminProvs)[posVectorClienteActual]);
+            flushInputBuffer();
+            //modificar_perfilprov(&adminProvs[posVectorClienteActual]);
             break;
         case 2:
-            mostrarProductos();
+            seccionProductosProv(productos,&numProductos, categorias, numCategorias,(*adminProvs)[posVectorClienteActual].id_empresa);
             break;
         case 3:
             mostrarPedidos();
@@ -387,7 +358,7 @@ void menutransportista()
     do
     {
         printf("--------------------------------------------------------\n");
-        printf("             NOMBRE: %s                                 \n", transportistas[posVectorClienteActual].nombre);
+        //printf("             NOMBRE: %s                                 \n", transportistas[posVectorClienteActual].nombre);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Repartos                                            |\n");
@@ -399,7 +370,7 @@ void menutransportista()
         switch (opcion)
         {
         case 1:
-            mostrarPerfil();
+            //mostrarPerfil();
             break;
         case 2:
             enReparto();
@@ -419,8 +390,8 @@ void menutransportista()
 }
 
 // Esta opción permitirá a un usuario administrador consultar los datos de su perfil y modificarlos.
-// Solo puede acceder: Administrador y clientes y transportista y proveedores
-void mostrarPerfil()
+/* Solo puede acceder: Administrador y clientes y transportista y proveedores
+void mostrarPerfil(int rol);
 {
     switch (rol)
     {
@@ -431,9 +402,7 @@ void mostrarPerfil()
 
         break;
     case 3:
-        mostrar_perfilprov(adminProvs[posVectorClienteActual]);
-        flushInputBuffer();
-        modificar_perfilprov(&adminProvs[posVectorClienteActual]);
+
         break;
     case 4:
 
@@ -442,7 +411,7 @@ void mostrarPerfil()
         break;
     }
 }
-
+*/
 // Mediante esta opción el administrador podrá acceder a la información de los clientes dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de clientes.
 // Solo puede acceder: Administrador
 void mostrarClientes()
@@ -459,7 +428,7 @@ void mostrarProveedores()
 
 // Mediante esta opción el administrador podrá acceder a la información de los productos dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de productos.
 // Solo puede acceder: Administrador y cliente y proveedor
-void mostrarProductos()
+/*void mostrarProductos()
 {
     switch (rol)
     {
@@ -470,7 +439,7 @@ void mostrarProductos()
 
         break;
     case 3:
-        seccionProductosProv();
+
         break;
     case 4:
         break;
@@ -478,8 +447,8 @@ void mostrarProductos()
         break;
     }
 }
-
-void seccionProductosProv()
+*/
+void seccionProductosProv(Producto **productos,int *numProductos, Categoria **categorias,int numCategorias, char *id)
 {
     printf("Tus productos: \n");
 
@@ -498,16 +467,16 @@ void seccionProductosProv()
     switch (opcion)
     {
     case 1:
-        listado_producto_prooved(productos, &numProductos, adminProvs[posVectorClienteActual].id_empresa);
+        listado_producto_prooved(productos, *numProductos, id);
         break;
     case 2:
-        alta_producto(&productos, &numProductos, adminProvs[posVectorClienteActual].id_empresa, categorias, &numCategorias);
+        alta_producto(productos, numProductos, id, categorias, numCategorias);
         break;
     case 3:
         printf("Introduzca la id del producto a dar de baja:\n");
         char *prodBaja;
         fgets(prodBaja, 8, stdin);
-        if (productoEsDeProveedor(productos, &numProductos, adminProvs[posVectorClienteActual].id_empresa, prodBaja) == 1)
+        if (productoEsDeProveedor(productos, &numProductos, id, prodBaja) == 1)
         {
             baja_producto(&productos, &numProductos, prodBaja);
         }
@@ -517,7 +486,7 @@ void seccionProductosProv()
         }
         break;
     case 4:
-        modificar_producto(productos,&numProductos,adminProvs[posVectorClienteActual].id_empresa);break;
+        modificar_producto(productos,&numProductos,id);break;
     }
 }
 
