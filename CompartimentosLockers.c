@@ -120,6 +120,7 @@ CompartimentoLocker *iniciarCompartimientoLockersDeArchivo(int *numCompLock)
 
     // Crear el vector de Locker
     CompartimentoLocker *comportamientoL = (CompartimentoLocker *)malloc(count * sizeof(CompartimentoLocker));
+
     if (comportamientoL == NULL)
     {
         fclose(archivo);

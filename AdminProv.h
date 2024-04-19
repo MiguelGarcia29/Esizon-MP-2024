@@ -15,6 +15,6 @@ typedef struct{
 } AdminProv;
 
 void guardarAdminProvEnArchivo(AdminProv *admins, int numAdmins);
-AdminProv *iniciarAdminProvDeArchivo(int *numAdmins);
+void *iniciarAdminProvDeArchivo(int *numAdmins, AdminProv **);
 
 #endif // ADMINPROV_H_INCLUDED

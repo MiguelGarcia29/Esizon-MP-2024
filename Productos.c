@@ -130,7 +130,7 @@ char *id_generator_prod(Producto *productos, int tamanio_vector)
 
 // Procedimiento da de alta los productos.
 //  En ella se necesita que se hayan dado de alta previamente las categorias.
-void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria **categ, int tamanio_categ)
+void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria **categ, int * tamanio_categ)
 {
 
     Producto nuevo_producto;
@@ -163,19 +163,17 @@ void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Cate
     fgets(categoria_productos, 51, stdin);                          // Dejo esto para hacer primero dar de alta de categs.
     categoria_productos[strcspn(categoria_productos, "\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
 
-    int encontradoCategoria = check_categ(categ, tamanio_categ, categoria_productos);
-    while (encontradoCategoria == 0)
+    char* encontradoCategoria = indicar_categ(categ, tamanio_categ, categoria_productos);
+    while (strcmp(encontradoCategoria,"") == 0)
     {
         printf("\nCategoria no encontrada.");
         printf("\nIndique la categoria de su producto: ");
         fgets(categoria_productos, 51, stdin);                          // Dejo esto para hacer primero dar de alta de categs.
         categoria_productos[strcspn(categoria_productos, "\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
-        encontradoCategoria = check_categ(categ, tamanio_categ, categoria_productos);
+        encontradoCategoria = indicar_categ(categ, tamanio_categ, categoria_productos);
     }
-    if (encontradoCategoria != 0)
-    {
-        strcpy(nuevo_producto.id_categ, indicar_categ(categ, tamanio_categ, categoria_productos));
-    }
+
+    strcpy(nuevo_producto.id_categ, encontradoCategoria);
 
     strcpy(nuevo_producto.id_gestor, idAlta);
 

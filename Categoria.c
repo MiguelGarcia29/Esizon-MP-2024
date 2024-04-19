@@ -68,11 +68,11 @@ void baja_categoria(Categoria *categoria , int* tamanio, char *id_baja){
     }
 }
 //Funcion usada para compara categorias con la que ingresara el usuario al dar de alta un producto. Se pasa como parametro el registro de categorias y categoria_productos como aquella categoria que introduce el usuario.
-int check_categ(Categoria **categ, int tamanio,char *categoria_productos){
+int check_categ(Categoria **categ, int *tamanio,char *categoria_productos){
 
     int coincidencia = 0 ;
 
-    for(int i = 0 ; i < tamanio && coincidencia == 0 ; i++){
+    for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++){
     if (strcmp((*categ)[i].descrip, categoria_productos) == 0) {
                 coincidencia = 1;
             }
@@ -80,13 +80,16 @@ int check_categ(Categoria **categ, int tamanio,char *categoria_productos){
     return coincidencia;
 }
 
-char *indicar_categ(Categoria *categ, int* tamanio, char *categoria_productos) {
-    char *categoriaEncontrada;
+char *indicar_categ(Categoria **categ, int* tamanio, char *categoria_productos) {
+    char *categoriaEncontrada = "";
     int coincidencia = 0;
 
     for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++) {
-        if (strcmp(categ[i].descrip, categoria_productos) == 0) {
-            categoriaEncontrada = categ[i].id_categ;
+        printf("%s",(*categ)[i].descrip);
+        printf("\n");
+        printf("%s\n",categoria_productos);
+        if (strcmp((*categ)[i].descrip, categoria_productos) == 0) {
+            categoriaEncontrada = (*categ)[i].id_categ;
             coincidencia = 1;
         }
     }

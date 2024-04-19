@@ -10,10 +10,9 @@ void inicializarDatos(Cliente **clientes, int *numClientes, AdminProv **adminPro
                       Producto **productos, int *numProductos, ProductoPedido **productoPedidos, int *numProductoPedidos,
                       Transportista **transportistas, int *numTransportistas)
 {
-    *clientes = iniciarClientesDeArchivo(numClientes);
-    *adminProvs = iniciarAdminProvDeArchivo(numAdminProvs);
+    iniciarClientesDeArchivo(numClientes,clientes);
+    iniciarAdminProvDeArchivo(numAdminProvs,adminProvs);
     *productos = iniciarProductosDeArchivo(numProductos);
-    *categorias = iniciarCategoriasDeArchivo(numCategorias);
     *descuentos = iniciarDescuentosDeArchivo(numDescuentos);
     *descuentoClientes = iniciarDescuentosClientesDeArchivo(numDescuentoClientes);
     *lockers = iniciarLockersDeArchivo(numLockers);
@@ -22,6 +21,7 @@ void inicializarDatos(Cliente **clientes, int *numClientes, AdminProv **adminPro
     *productoPedidos = iniciarProductoPedidosDeArchivo(numProductoPedidos);
     *transportistas = iniciarTransportistasDeArchivo(numTransportistas);
     *devoluciones = iniciarDevolucionDeArchivo(numDevoluciones);
+    *categorias = iniciarCategoriasDeArchivo(numCategorias);
 }
 
 void almacenarDatos(Cliente *clientes, int numClientes, AdminProv *adminProvs, int numAdminProvs, Categoria *categorias, int numCategorias, CompartimentoLocker *compartimentoLockers, int numCompartimentoLockers, DescuentoCliente *descuentoClientes, int numDescuentoClientes, Descuento *descuentos, int numDescuentos, Devolucion *devoluciones, int numDevoluciones, Locker *lockers, int numLockers, Pedido *pedidos, int numPedido, Producto *productos, int numProductos, ProductoPedido *productoPedidos, int numProductoPedidos, Transportista *transportistas, int numTransportistas)
@@ -94,7 +94,7 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
         menuusuario();
         break;
     case 3:
-        menuproveedor(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,*numProductos,categorias,numCategorias);
+        menuproveedor(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias);
         break;
     case 4:
         menutransportista();
@@ -310,8 +310,8 @@ void menuusuario()
     } while (opcion != 6);
 }
 
-void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  numClientes, AdminProv **adminProvs, int numAdminProvs,
-                   Transportista **transportistas, int numTransportistas, Producto **productos, int *numProductos, Categoria ** categorias, int numCategorias)
+void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                   Transportista **transportistas, int* numTransportistas, Producto **productos, int *numProductos, Categoria ** categorias, int *numCategorias)
 
 {
     int opcion;
@@ -335,7 +335,7 @@ void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  n
             //modificar_perfilprov(&adminProvs[posVectorClienteActual]);
             break;
         case 2:
-            seccionProductosProv(productos,&numProductos, categorias, numCategorias,(*adminProvs)[posVectorClienteActual].id_empresa);
+            seccionProductosProv(productos,numProductos, categorias, numCategorias,(*adminProvs)[posVectorClienteActual].id_empresa);
             break;
         case 3:
             mostrarPedidos();
@@ -448,7 +448,7 @@ void mostrarProveedores()
     }
 }
 */
-void seccionProductosProv(Producto **productos,int *numProductos, Categoria **categorias,int numCategorias, char *id)
+void seccionProductosProv(Producto **productos,int *numProductos, Categoria **categorias,int * numCategorias, char *id)
 {
     printf("Tus productos: \n");
 

@@ -17,8 +17,8 @@ typedef struct {
 char* id_generator_categ(Categoria *, int );
 void alta_categoria(Categoria *, int* );
 void baja_categoria(Categoria * , int* , char *);
-int check_categ(Categoria **, int ,char *);
-char *indicar_categ(Categoria *, int* , char *);
+int check_categ(Categoria **, int *,char *);
+char *indicar_categ(Categoria **, int* , char *);
 void modificar_categoria(Categoria *, int* );
 void modificar_descripcion_categ(Categoria *, int* ,char *);
 void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias);

@@ -22,6 +22,6 @@ void mostrar_cliente(Cliente cliente);
 void cambiar_perfil_cliente(Cliente *cliente); //se presentara un menu para que el cliente pueda cambiar los datos que considere necesario
 
 void guardarClientesEnArchivo(Cliente *clientes, int numClientes);
-Cliente *iniciarClientesDeArchivo(int *numClientes);
+void *iniciarClientesDeArchivo(int *numClientes,Cliente **);
 
 #endif // DEVOLUCION_H_INCLUDED
