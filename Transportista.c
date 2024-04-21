@@ -83,77 +83,69 @@ void listado_transportista(Transportista *t, int tamanio){
     }
 }
 
-void perfil(Transportista *t, int tamanio, char *id)
-{
-    int indice = -1;
-    for(int i=0;i<tamanio;i++)
-    {
-        if(strcmp(id, t[i].id_transp) == 0)
-        {
-            printf("ID Transportista - Nombre - Email - Contraseña - Nombre de la empresa - Ciudad de reparto\n");
-            printf("%s - %s - %s - %s - %s - %s\n", t[i].id_transp, t[i].nombre, t[i].email, t[i].contrasenia, t[i].nombre_empresa, t[i].ciudad_reparto);
-            indice = i;
-            break;
-        }
-    }
 
-    if(indice != -1)
+void perfil_t(Transportista t)
+{
+
+
+    printf("ID Transportista: %s\n", t.id_transp);
+    printf("Nombre: %s\n", t.nombre);
+    printf("Contraseña: %s\n", t.contrasenia);
+    printf("Email: %s\n", t.email);
+    printf("Nombre de la empresa: %s\n", t.nombre_empresa);
+    printf("Ciudad de reparto: %s\n", t.ciudad_reparto);
+
+    printf("¿Quieres modificar este perfil? \n");
+    printf("1-Si\n");
+    printf("2-No\n");
+    int respuesta;
+    scanf("%d", &respuesta);
+    flushInputBuffer();
+
+    if(respuesta == 1)
     {
-        printf("¿Quieres modificar este perfil? \n");
-        printf("1-Si\n");
-        printf("2-No\n");
-        int respuesta;
-        scanf("%d", &respuesta);
+        printf("\nDime el nombre:");
+        scanf("%20s", t.nombre);
         flushInputBuffer();
 
-        if(respuesta == 1)
-        {
-            printf("\nDime el nombre:");
-            scanf("%20s", t[indice].nombre);
-            flushInputBuffer();
+        printf("\nDime el correo:");
+        scanf("%30s", t.email);
+        flushInputBuffer();
 
-            printf("\nDime el correo:");
-            scanf("%30s", t[indice].email);
-            flushInputBuffer();
+        printf("\nDime la contraseña para acceder al sistema:");
+        scanf("%15s", t.contrasenia);
+        flushInputBuffer();
 
-            printf("\nDime la contraseña para acceder al sistema:");
-            scanf("%15s", t[indice].contrasenia);
-            flushInputBuffer();
+        printf("\nDime el nombre de la empresa:");
+        scanf("%20s", t.nombre_empresa);
+        flushInputBuffer();
 
-            printf("\nDime el nombre de la empresa:");
-            scanf("%20s", t[indice].nombre_empresa);
-            flushInputBuffer();
-
-            printf("\nDime la ciudad de reparto:");
-            scanf("%20s", t[indice].ciudad_reparto);
-            flushInputBuffer();
-        }
+        printf("\nDime la ciudad de reparto:");
+        scanf("%20s", t.ciudad_reparto);
+        flushInputBuffer();
     }
-    else
-    {
-        printf("Transportista con ID %s no encontrado.\n", id);
     }
-}
 
-void reparto(ProductoPedido *pedidos, int num_pedidos, char *id_transp) {
-    int indice=0;
+
+void reparto(ProductoPedido **pedidos, int num_pedidos, char *id_transp) {
+    int indice = 0;
     for (int i = 0; i < num_pedidos; i++) {
-        if (strcmp(pedidos[i].id_transp, id_transp) == 0 && strcmp(pedidos[i].estado_pedido, "enReparto") == 0) {
-        	printf("Productos asignados para reparto:\n");
-            printf("ID Pedido: %s\n", pedidos[i].id_pedido);
-            printf("ID Producto: %s\n", pedidos[i].id_prod);
-            printf("Cantidad: %d\n", pedidos[i].num_unid);
-            printf("Fecha de entrega prevista: %s\n", pedidos[i].fecha_entrega_prevista);
-            printf("Importe: %.2f\n", pedidos[i].importe);
+        if (strcmp((*pedidos)[i].id_transp, id_transp) == 0 && strcmp((*pedidos)[i].estado_pedido, "enReparto") == 0) {
+            printf("Productos asignados para reparto:\n");
+            printf("ID Pedido: %s\n", (*pedidos)[i].id_pedido);
+            printf("ID Producto: %s\n", (*pedidos)[i].id_prod);
+            printf("Cantidad: %d\n", (*pedidos)[i].num_unid);
+            printf("Fecha de entrega prevista: %s\n", (*pedidos)[i].fecha_entrega_prevista);
+            printf("Importe: %.2f\n", (*pedidos)[i].importe);
             printf("-------------------------------------\n");
-            indice=1;
+            indice = 1;
         }
     }
-    if(indice!=1)
-    {
-    	printf("No se han encontrado pedidos asignados a esa ID\n");
-	}
+    if (indice != 1) {
+        printf("No se han encontrado pedidos asignados a esa ID\n");
+    }
 }
+
 
 void fecha_caducidad(char *fecha)
 {
