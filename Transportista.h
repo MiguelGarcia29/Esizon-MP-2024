@@ -17,6 +17,8 @@ typedef struct {
     char ciudad_reparto[21];
 }Transportista;
 
+
+void perfil_t(Transportista t);
 void guardarTransportistasEnArchivo(Transportista *, int );
 Transportista *iniciarTransportistasDeArchivo(int *);
 
