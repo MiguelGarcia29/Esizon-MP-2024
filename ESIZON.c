@@ -94,10 +94,10 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
         menuusuario();
         break;
     case 3:
-        menuproveedor(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias);
+        menuproveedor(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numPedido);
         break;
     case 4:
-        menutransportista();
+        menutransportista(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
         break;
     }
 
@@ -312,7 +312,6 @@ void menuusuario()
 
 void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *numClientes, AdminProv **adminProvs, int *numAdminProvs,
                    Transportista **transportistas, int* numTransportistas, Producto **productos, int *numProductos, Categoria ** categorias, int *numCategorias)
-
 {
     int opcion;
     do
@@ -351,14 +350,15 @@ void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *
     } while (opcion != 4);
 }
 
-void menutransportista()
+void menutransportista(int rol, int posVectorClienteActual, Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                       Transportista **transportistas, int *numTransportistas, Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias, int *numProductoPedidos)
 {
     int opcion;
 
     do
     {
         printf("--------------------------------------------------------\n");
-        //printf("             NOMBRE: %s                                 \n", transportistas[posVectorClienteActual].nombre);
+        printf("             NOMBRE: %s                                 \n", (*transportistas)[posVectorClienteActual].nombre);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Repartos                                            |\n");
@@ -370,10 +370,10 @@ void menutransportista()
         switch (opcion)
         {
         case 1:
-            //mostrarPerfil();
+            perfil_t((*transportistas)[posVectorClienteActual]);
             break;
         case 2:
-            enReparto();
+            enReparto(transportistas, numProductoPedidos);//no encuentra los pedidos mirar
             break;
         case 3:
             retornoProducto();
@@ -388,6 +388,7 @@ void menutransportista()
         }
     } while (opcion != 4);
 }
+
 
 // Esta opción permitirá a un usuario administrador consultar los datos de su perfil y modificarlos.
 /* Solo puede acceder: Administrador y clientes y transportista y proveedores
@@ -474,9 +475,13 @@ void seccionProductosProv(Producto **productos,int *numProductos, Categoria **ca
         break;
     case 3:
         printf("Introduzca la id del producto a dar de baja:\n");
-        char *prodBaja;
-        fgets(prodBaja, 8, stdin);
-        if (productoEsDeProveedor(productos, &numProductos, id, prodBaja) == 1)
+        char prodBaja[9]; // Definir un arreglo para almacenar la ID del producto
+        scanf("%8s", prodBaja); // Lee la ID del producto (limitada a 8 caracteres)
+        flushInputBuffer();
+
+        int recibidor = productoEsDeProveedor(productos, numProductos, id, prodBaja);
+        printf("%d", recibidor);
+        if (recibidor == 1)
         {
             baja_producto(&productos, &numProductos, prodBaja);
         }
@@ -484,6 +489,7 @@ void seccionProductosProv(Producto **productos,int *numProductos, Categoria **ca
         {
             printf("Ese producto no es suyo\n");
         }
+
         break;
     case 4:
         modificar_producto(productos,&numProductos,id);break;
@@ -529,8 +535,13 @@ void mostrarDevoluciones()
 
 // Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
 // Solo puede acceder: transportista
-void enReparto()
+void enReparto(Transportista **transportistas, int *numProductoPedidos)
 {
+    printf("Dime la id del transportista que quiere saber los productos que tiene asignados:");
+    char id_t[5];
+    scanf("%4s", id_t);
+    flushInputBuffer();
+    reparto(transportistas, *numProductoPedidos, id_t);
 }
 
 // El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido recogidos de los lockers en el plazo determinado, permitiéndole consultar todos los lockers por localidad y mostrando sus pedidos. En el momento de la recogida de los productos
@@ -546,5 +557,96 @@ void retornoProducto()
 // Solo puede acceder: Administrador y clientes y transportista y proveedor
 void salirprograma()
 {
+    printf("\n\n");
+    printf("             XXXXXX\n");
+    printf("             X\n");
+    printf("             X\n");
+    printf("             XXXX\n");
+    printf("             X\n");
+    printf("             X\n");
+    printf("             XXXXXX");
+
+    Sleep(100);
+    system("cls");
+//system("color 79");
+
+    printf("\n\n");
+    printf("             XXXXXX  XXXXXX\n");
+    printf("             X       X\n");
+    printf("             X       X\n");
+    printf("             XXXX    XXXXXX\n");
+    printf("             X            X\n");
+    printf("             X            X\n");
+    printf("             XXXXXX  XXXXXX");
+
+    Sleep(100);
+    system("cls");
+//system("color 7d");
+
+    printf("\n\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX\n");
+    printf("             X       X         XX\n");
+    printf("             X       X         XX\n");
+    printf("             XXXX    XXXXXX    XX\n");
+    printf("             X            X    XX\n");
+    printf("             X            X    XX\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX");
+
+    Sleep(100);
+    system("cls");
+//system("color 79");
+
+    printf("\n\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX\n");
+    printf("             X       X         XX          X \n");
+    printf("             X       X         XX        X   \n");
+    printf("             XXXX    XXXXXX    XX     XXXXXX \n");
+    printf("             X            X    XX      X     \n");
+    printf("             X            X    XX     X      \n");
+    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX");
+
+    Sleep(100);
+    system("cls");
+//system("color 7d");
+
+    printf("\n\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX   XXXXXX \n");
+    printf("             X       X         XX          X   X      X\n");
+    printf("             X       X         XX        X     X      X\n");
+    printf("             XXXX    XXXXXX    XX     XXXXXX   X      X\n");
+    printf("             X            X    XX      X       X      X\n");
+    printf("             X            X    XX     X        X      X\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX   XXXXXX ");
+
+    Sleep(100);
+    system("cls");
+//system("color 79");
+
+    printf("\n\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX   XXXXXX    XX      X\n");
+    printf("             X       X         XX          X   X      X   X X     X\n");
+    printf("             X       X         XX        X     X      X   X  X    X\n");
+    printf("             XXXX    XXXXXX    XX     XXXXXX   X      X   X   X   X\n");
+    printf("             X            X    XX      X       X      X   X    X  X\n");
+    printf("             X            X    XX     X        X      X   X     X X\n");
+    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX   XXXXXX    X      XX ");
+
+    Sleep(600);
+    system("cls");
+    system("color 0f");
+    printf("\n\n               REALIZADOR POR:\n");
+
+    printf("                      +---------------------------------+\n");
+    printf("                      |                                 |\n");
+    printf("                      |    Jesus Miguel Garcia Bernal   |\n");
+    printf("                      |     Manuel Gutierrez Recio      |\n");
+    printf("                      | Carlos Manuel Pedraza Gonzalez  |\n");
+    printf("                      |        Jacobo Caro Luna         |\n");
+    printf("                      |                                 |\n");
+    printf("                      +---------------------------------+\n");
+    system("pause");
+    system("cls");
+
+    return;
 }
 
