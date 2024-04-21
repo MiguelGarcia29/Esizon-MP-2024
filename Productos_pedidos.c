@@ -68,11 +68,11 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
     }
 }
 
-void listado_Pedido(ProductoPedido *pedidos, int* tamanio){
+void listado_Pedido(ProductoPedido **pedidos, int* tamanio){
 
-    flushInputBuffer();
     for(int i = 0 ; i < *tamanio ; i++){
-        printf("%s-%s-%d-%s-%.2f-%s\n",pedidos[i].id_pedido,pedidos[i].id_prod,pedidos[i].num_unid,pedidos[i].fecha_entrega_prevista,pedidos[i].importe,pedidos[i].estado_pedido);
+        printf("%s-%s-%d-%s-%.2f-%s\n",(*pedidos)[i].id_pedido,(*pedidos)[i].id_prod,(*pedidos)[i].num_unid,(*pedidos)[i].fecha_entrega_prevista,
+               (*pedidos)[i].importe,(*pedidos)[i].estado_pedido);
     }
 }
 
@@ -390,3 +390,16 @@ void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int nu
 
     (*costeTotal) = coste;
 }
+
+void listado_pedido_pendiente(ProductoPedido **pedidos, int* tamanio, char *idProd,Producto **productos, int * nProductos){
+
+    for(int i = 0 ; i < *tamanio ; i++){
+            if(strcmp((*pedidos)[i].estado_pedido,"enPreparacion")==0&&productoEsDeProveedor(productos,nProductos,idProd,(*pedidos)[i].id_prod)==1){
+                printf("%s-%s-%d-%s-%.2f-%s\n",(*pedidos)[i].id_pedido,(*pedidos)[i].id_prod,(*pedidos)[i].num_unid,(*pedidos)[i].fecha_entrega_prevista,
+               (*pedidos)[i].importe,(*pedidos)[i].estado_pedido);
+            }
+    }
+
+
+}
+

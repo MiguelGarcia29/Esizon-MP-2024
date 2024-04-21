@@ -54,8 +54,8 @@ int main(){
 
 
     inicializarDatos(&c,&nC,&ap,&nAP,&cL,&numCat,&cL,&numCL,&descCl,&numDesCli,&des,&numDes,&dev,&numDev,&lockers,&numL,&p,&numP,&prod,&numProds,&prodP,&numProdP,&t,&numT);
+
     accederPrograma (&c,&nC,&ap,&nAP,&cL,&numCat,&cL,&numCL,&descCl,&numDesCli,&des,&numDes,&dev,&numDev,&lockers,&numL,&p,&numP,&prod,&numProds,&prodP,&numProdP,&t,&numT);
 
-
-    //almacenarDatos(c,nC,ap,nAP,cat,numCat,cL,numCL,..)
+    almacenarDatos(c,nC,ap,nAP,cat,numCat,cL,numCL,descCl,numDesCli,des,numDes,dev,numDev,lockers,numL,p,numP,prod,numProds,prodP,numProdP,t,numT);
 }

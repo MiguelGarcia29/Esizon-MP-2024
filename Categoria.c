@@ -85,9 +85,6 @@ char *indicar_categ(Categoria **categ, int* tamanio, char *categoria_productos) 
     int coincidencia = 0;
 
     for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++) {
-        printf("%s",(*categ)[i].descrip);
-        printf("\n");
-        printf("%s\n",categoria_productos);
         if (strcmp((*categ)[i].descrip, categoria_productos) == 0) {
             categoriaEncontrada = (*categ)[i].id_categ;
             coincidencia = 1;

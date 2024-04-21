@@ -84,52 +84,50 @@ void listado_transportista(Transportista *t, int tamanio){
 }
 
 
-void perfil_t(Transportista t)
+void perfil_t(Transportista *t)
 {
 
+    printf("ID Transportista: %s\n", t->id_transp);
+    printf("Nombre: %s\n", t->nombre);
+    printf("Contraseña: %s\n", t->contrasenia);
+    printf("Email: %s\n", t->email);
+    printf("Nombre de la empresa: %s\n", t->nombre_empresa);
+    printf("Ciudad de reparto: %s\n", t->ciudad_reparto);
 
-    printf("ID Transportista: %s\n", t.id_transp);
-    printf("Nombre: %s\n", t.nombre);
-    printf("Contraseña: %s\n", t.contrasenia);
-    printf("Email: %s\n", t.email);
-    printf("Nombre de la empresa: %s\n", t.nombre_empresa);
-    printf("Ciudad de reparto: %s\n", t.ciudad_reparto);
-
-    printf("¿Quieres modificar este perfil? \n");
+    printf("¿Quieres modificar este perfil?\n");
     printf("1-Si\n");
     printf("2-No\n");
     int respuesta;
     scanf("%d", &respuesta);
     flushInputBuffer();
 
-    if(respuesta == 1)
-    {
-        printf("\nDime el nombre:");
-        scanf("%20s", t.nombre);
+    if(respuesta == 1) {
+        printf("\nDime el nombre: ");
+        scanf("%29s", t->nombre);
         flushInputBuffer();
 
-        printf("\nDime el correo:");
-        scanf("%30s", t.email);
+        printf("\nDime el correo: ");
+        scanf("%29s", t->email);
         flushInputBuffer();
 
-        printf("\nDime la contraseña para acceder al sistema:");
-        scanf("%15s", t.contrasenia);
+        printf("\nDime la contraseña para acceder al sistema: ");
+        scanf("%15s", t->contrasenia);
         flushInputBuffer();
 
-        printf("\nDime el nombre de la empresa:");
-        scanf("%20s", t.nombre_empresa);
+        printf("\nDime el nombre de la empresa: ");
+        scanf("%19s", t->nombre_empresa);
         flushInputBuffer();
 
-        printf("\nDime la ciudad de reparto:");
-        scanf("%20s", t.ciudad_reparto);
+        printf("\nDime la ciudad de reparto: ");
+        scanf("%19s", t->ciudad_reparto);
         flushInputBuffer();
     }
     }
 
 
-void reparto(ProductoPedido **pedidos, int num_pedidos, char *id_transp) {
+void reparto(ProductoPedido **pedidos, int *num_pedidos, char *id_transp) {
     int indice = 0;
-    for (int i = 0; i < num_pedidos; i++) {
+    for (int i = 0; i < *num_pedidos; i++) {
         if (strcmp((*pedidos)[i].id_transp, id_transp) == 0 && strcmp((*pedidos)[i].estado_pedido, "enReparto") == 0) {
             printf("Productos asignados para reparto:\n");
             printf("ID Pedido: %s\n", (*pedidos)[i].id_pedido);
@@ -375,3 +373,44 @@ Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
     *numTransportista = count;
     return transportistas;
 }
+
+int existeTransportista( Transportista ** trans, int *nTrans, char *idT){
+    int existe = 0;
+    for(int i=1; i<*nTrans && existe==0;i++){
+        if(strcmp((*trans)[i].id_transp,idT)==0)
+            existe = 1;
+    }
+    return existe;
+}
+
+void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Transportista ** trans, int *nTrans, char *idProv, Producto **productos, int * nProductos){
+
+    char idProd[8];
+    printf("\nId del producto en el pedido a asignar: ");
+    fgets(idProd, 8, stdin);
+    idProd[strcspn(idProd, "\n")] = '\0';
+
+    if(productoEsDeProveedor(productos,nProductos,idProv,idProd)==0){
+        printf("Ese producto no es suyo\n");
+    }
+    else{
+    char idT[5];
+    printf("\nId del transportista: ");
+    fgets(idT, 5, stdin);
+    idT[strcspn(idT, "\n")] = '\0';
+
+    if(existeTransportista(trans,nTrans,idT)==0){
+        printf("No existe ese transportista\n");
+    }
+    else{
+        for(int i = 0 ; i < *num_pedidos ; i++){
+                if(strcmp((*pedidos)[i].estado_pedido,"enPreparacion")==0&&strcmp((*pedidos)[i].id_prod,idProd)==0){
+                    strcpy((*pedidos)[i].id_transp,idT);
+                    printf("Transportista asignado\n");
+                }
+        }
+    }
+    }
+
+}
+

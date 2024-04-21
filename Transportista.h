@@ -18,8 +18,12 @@ typedef struct {
 }Transportista;
 
 
-void perfil_t(Transportista t);
+void perfil_t(Transportista *t);
 void guardarTransportistasEnArchivo(Transportista *, int );
 Transportista *iniciarTransportistasDeArchivo(int *);
+void reparto(ProductoPedido **pedidos, int *num_pedidos, char *id_transp);
+void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos);
+int existeTransportista( Transportista ** trans, int *nTrans, char *idT);
+void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Transportista ** trans, int *nTrans, char *idProv, Producto **productos, int * nProductos);
 
 #endif // TRANSPORTISTA_H_INCLUDED

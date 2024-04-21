@@ -232,14 +232,14 @@ void listado_producto_prooved(Producto **productos, int tamanio, char *idProv)
 }
 
 // Muestra lista de los productos, dados de alta.
-int productoEsDeProveedor(Producto *productos, int *tamanio, char *idProv, char *idProd)
+int productoEsDeProveedor(Producto **productos, int *tamanio, char *idProv, char *idProd)
 {
     int encontrado = 0;
 
     for (int i = 0; i < *tamanio && encontrado == 0; i++)
     {
 
-        if (strcmp(productos[i].id_gestor, idProv) == 0 && strcmp(productos[i].id_prod, idProd) == 0)
+        if (strcmp((*productos)[i].id_gestor, idProv) == 0 && strcmp((*productos)[i].id_prod, idProd) == 0)
             encontrado = 1;
     }
 
@@ -298,7 +298,7 @@ void busqueda_producto_categ(Producto **productos, int *tamanio, char *categ, Ca
     }
 }
 // Buscador de un producto. Se toma como parametro "producto_buscado" aquel producto que introduce el usuario.
-void buscador_un_producto(Producto *productos, int *tamanio, char *producto_buscado)
+void buscador_un_producto(Producto **productos, int *tamanio, char *producto_buscado)
 {
 
     int coincidencias = 0;
@@ -306,10 +306,11 @@ void buscador_un_producto(Producto *productos, int *tamanio, char *producto_busc
     for (int i = 0; i < *tamanio; i++)
     {
 
-        if (strcmp(productos[i].nombre, producto_buscado) == 0)
+        if (strcmp((*productos)[i].nombre, producto_buscado) == 0)
         {
 
-            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip,
+                   (*productos)[i].id_categ, (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
             printf("\n");
             coincidencias++;
         }
@@ -320,13 +321,13 @@ void buscador_un_producto(Producto *productos, int *tamanio, char *producto_busc
     }
 }
 
-void modificar_descripcion_prod(Producto *productos, int *tamanio, char *id_modificar);
-void modificar_precio(Producto *productos, int *tamanio, char *id_modificar);
-void modificar_stock(Producto *productos, int *tamanio, char *id_modificar);
-void modificar_entrega(Producto *productos, int *tamanio, char *id_modificar);
+void modificar_descripcion_prod(Producto **productos, int *tamanio, char *id_modificar);
+void modificar_precio(Producto **productos, int *tamanio, char *id_modificar);
+void modificar_stock(Producto **productos, int *tamanio, char *id_modificar);
+void modificar_entrega(Producto **productos, int *tamanio, char *id_modificar);
 
 // idProv == -1 para admins
-void modificar_producto(Producto *productos, int *tamanio, char *idProv)
+void modificar_producto(Producto **productos, int *tamanio, char *idProv)
 {
     int a;
     char producto_buscado[51];
@@ -384,65 +385,65 @@ void modificar_producto(Producto *productos, int *tamanio, char *idProv)
     }
 }
 
-void modificar_descripcion_prod(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_descripcion_prod(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while ((i + 1) < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while ((i + 1) < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Escribe la nueva descripcion: ");
-    fgets(productos[i].descrip, 51, stdin);
-    productos[i].descrip[strcspn(productos[i].descrip, "\n")] = '\0';
+    fgets((*productos)[i].descrip, 51, stdin);
+    (*productos)[i].descrip[strcspn((*productos)[i].descrip, "\n")] = '\0';
 }
 
-void modificar_precio(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_precio(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while (i < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while (i < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Introduce el nuevo importe: ");
     fflush(stdin);
-    scanf("%f", &productos[i].importe);
+    scanf("%f", &(*productos)[i].importe);
     flushInputBufferr();
 }
 
-void modificar_stock(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_stock(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while (i < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while (i < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Cantidad de productos en stock: ");
     fflush(stdin);
-    scanf("%d", &productos[i].stock);
+    scanf("%d", &(*productos)[i].stock);
     flushInputBufferr();
 }
 
-void modificar_entrega(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_entrega(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while (i < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while (i < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Nueva fecha maxima de entrega: ");
     fflush(stdin);
-    scanf("%d", &productos[i].entrega);
+    scanf("%d", &(*productos)[i].entrega);
     flushInputBufferr();
 }

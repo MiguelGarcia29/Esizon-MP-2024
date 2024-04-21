@@ -94,10 +94,11 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
         menuusuario();
         break;
     case 3:
-        menuproveedor(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numPedido);
+
+        menuproveedor(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias,productoPedidos,numProductoPedidos);
         break;
     case 4:
-        menutransportista(rol,posVectorClienteActual,clientes,numCategorias,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
+        menutransportista(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
         break;
     }
 
@@ -241,7 +242,7 @@ void menuadmin()
             mostrarCategorias();
             break;
         case 6:
-            mostrarPedidos();
+            //mostrarPedidos();
             break;
         case 7:
             mostrarTransportista();
@@ -294,7 +295,7 @@ void menuusuario()
             mostrarDescuentos();
             break;
         case 4:
-            mostrarPedidos();
+            //mostrarPedidos();
             break;
         case 5:
             mostrarDevoluciones();
@@ -311,7 +312,7 @@ void menuusuario()
 }
 
 void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *numClientes, AdminProv **adminProvs, int *numAdminProvs,
-                   Transportista **transportistas, int* numTransportistas, Producto **productos, int *numProductos, Categoria ** categorias, int *numCategorias)
+                   Transportista **transportistas, int* numTransportistas, Producto **productos, int *numProductos, Categoria ** categorias, int *numCategorias, ProductoPedido **pedidos, int *tamanioPed)
 {
     int opcion;
     do
@@ -331,13 +332,20 @@ void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *
         case 1:
             mostrar_perfilprov((*adminProvs)[posVectorClienteActual]);
             flushInputBuffer();
-            //modificar_perfilprov(&adminProvs[posVectorClienteActual]);
+            printf("¿Quieres modificarlo?:\n");
+            printf("1- Si\n");
+            printf("2- No\n");
+            int opcion;
+            scanf("%d",&opcion);
+            flushInputBuffer();
+            if(opcion==1)
+                modificar_perfilprov(&adminProvs[posVectorClienteActual]);
             break;
         case 2:
             seccionProductosProv(productos,numProductos, categorias, numCategorias,(*adminProvs)[posVectorClienteActual].id_empresa);
             break;
         case 3:
-            mostrarPedidos();
+            seccionPedidosProv(pedidos,tamanioPed,(*adminProvs)[posVectorClienteActual].id_empresa,productos,numProductos,transportistas,numTransportistas);
             break;
         case 4:
             printf("Hasta pronto, ESIZON\n");
@@ -370,7 +378,7 @@ void menutransportista(int rol, int posVectorClienteActual, Cliente **clientes, 
         switch (opcion)
         {
         case 1:
-            perfil_t((*transportistas)[posVectorClienteActual]);
+            perfil_t(&(*transportistas)[posVectorClienteActual]);
             break;
         case 2:
             enReparto(transportistas, numProductoPedidos);//no encuentra los pedidos mirar
@@ -475,15 +483,15 @@ void seccionProductosProv(Producto **productos,int *numProductos, Categoria **ca
         break;
     case 3:
         printf("Introduzca la id del producto a dar de baja:\n");
-        char prodBaja[9]; // Definir un arreglo para almacenar la ID del producto
-        scanf("%8s", prodBaja); // Lee la ID del producto (limitada a 8 caracteres)
-        flushInputBuffer();
+        char prodBaja[9];
+        fgets(prodBaja, 9, stdin);
+        prodBaja[strcspn(prodBaja, "\n")] = '\0';
 
         int recibidor = productoEsDeProveedor(productos, numProductos, id, prodBaja);
         printf("%d", recibidor);
         if (recibidor == 1)
         {
-            baja_producto(&productos, &numProductos, prodBaja);
+            baja_producto(productos, numProductos, prodBaja);
         }
         else
         {
@@ -492,7 +500,17 @@ void seccionProductosProv(Producto **productos,int *numProductos, Categoria **ca
 
         break;
     case 4:
-        modificar_producto(productos,&numProductos,id);break;
+        modificar_producto(productos,numProductos,id);break;
+    case 5:
+        char producto_buscado[51];
+
+        printf("\nIntroduce el nombre del producto que quieres buscar: ");
+        fflush(stdin);
+        fgets(producto_buscado, 51, stdin);
+        producto_buscado[strcspn(producto_buscado, "\n")] = '\0';
+
+        buscador_un_producto(productos, numProductos, producto_buscado);
+        break;
     }
 }
 
@@ -505,10 +523,25 @@ void mostrarCategorias()
 
 // Mediante esta opción el administrador podrá acceder a la información de los pedidos dados de alta en la plataforma.
 // Solo puede acceder: Administrador y cliente y proveedores
-void mostrarPedidos()
+void seccionPedidosProv(ProductoPedido **pedidos, int* tamanioPed, char *idProv,Producto** productos, int *nProductos,Transportista** trans, int * nTrans)
 {
     printf("1- Listar pedidos pendientes\n");
     printf("2- Asignar transportista a pedido\n");
+     int opcion;
+    scanf("%d", &opcion);
+    flushInputBuffer();
+
+    switch (opcion)
+    {
+    case 1:
+        listado_pedido_pendiente(pedidos,tamanioPed,idProv,productos,nProductos);
+        break;
+
+    case 2:
+        asignarProductoPedidoProv(pedidos,tamanioPed,trans,nTrans,idProv,productos,nProductos);
+
+        break;
+    }
 
 }
 
@@ -541,7 +574,7 @@ void enReparto(Transportista **transportistas, int *numProductoPedidos)
     char id_t[5];
     scanf("%4s", id_t);
     flushInputBuffer();
-    reparto(transportistas, *numProductoPedidos, id_t);
+    reparto(transportistas, numProductoPedidos, id_t);
 }
 
 // El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido recogidos de los lockers en el plazo determinado, permitiéndole consultar todos los lockers por localidad y mostrando sus pedidos. En el momento de la recogida de los productos
