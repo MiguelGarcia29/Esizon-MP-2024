@@ -163,65 +163,99 @@ void fecha_caducidad(char *fecha)
     strftime(fecha, 11, "%d/%m/%Y", info);
 }
 
-void entrega(ProductoPedido *pedidos, CompartimentoLocker *comportamiento, int num_pedidos, int tamanio_compartimento , char *id_transp)
-{
+void entrega(ProductoPedido **pedidos, CompartimentoLocker **comportamiento, int *num_pedidos, int *tamanio_compartimento, char *id_transp) {
+    char id_producto[50]; // Aumentamos el tamaño para permitir IDs más largos
     printf("Dime la id del producto que quieres entregar: ");
-    char id_producto[8];
-    scanf("%s", id_producto);
-    flushInputBuffer();
+    fgets(id_producto, sizeof(id_producto), stdin);
+    id_producto[strcspn(id_producto, "\n")] = '\0'; // Eliminamos el carácter de nueva línea
+    char contrasenia_locker[11];
     int encontrado = 0;
-    for(int i=0;i<num_pedidos && encontrado!=1 ;i++)
-    {
-        if(strcmp(pedidos[i].id_prod, id_producto) == 0 && strcmp(pedidos[i].id_transp, id_transp) == 0)
-        {
+    int i = 0;
+    while (i < *num_pedidos && encontrado == 0) {
+        if (strcmp((*pedidos)[i].id_prod, id_producto) == 0 && strcmp((*pedidos)[i].id_transp, id_transp) == 0) {
             encontrado = 1;
-            printf("Donde lo quieres entregar: \n");
-            printf("1-Locker\n");
-            printf("2-Domicilio\n");
+            printf("¿Dónde lo quieres entregar?\n1-Locker\n2-Domicilio\n");
             int entrega;
             scanf("%d", &entrega);
             flushInputBuffer();
-            switch(entrega)
-            {
+            switch (entrega) {
                 case 1:
-                    for(int j=0;j<tamanio_compartimento;j++)
-                    {
-                        if(strcmp(pedidos[i].id_locker, comportamiento[j].id_locker)==0 && strcmp(comportamiento[j].estado, "vacío")==0)
-                        {
-                            printf("Dime el código numerico asignado al locker (10 digitos): ");
-                            char contrasenia_locker[11];
-                            scanf("%s", contrasenia_locker);
-                            strcpy(pedidos[i].cod_locker, contrasenia_locker);
-                            strcpy(comportamiento[j].cod_locker, contrasenia_locker);
-                            strcpy(comportamiento[j].estado, "ocupado");
+                    for (int j = 0; j < *tamanio_compartimento; j++) {
+                        if (strcmp((*pedidos)[i].id_locker, (*comportamiento)[j].id_locker) == 0 && strcmp((*comportamiento)[j].estado, "vacío") == 0) {
+                            printf("Dime el código numérico asignado al locker (10 dígitos): ");
+                            fgets(contrasenia_locker, sizeof(contrasenia_locker), stdin);
+                            contrasenia_locker[strcspn(contrasenia_locker, "\n")] = '\0'; // Eliminamos el carácter de nueva línea
+
+                            strcpy((*pedidos)[i].cod_locker, contrasenia_locker);
+                            strcpy((*comportamiento)[j].cod_locker, contrasenia_locker);
+                            strcpy((*comportamiento)[j].estado, "ocupado");
                             char fecha[11];
                             obtener_fecha_actual(fecha);
-                            strcpy(comportamiento[j].fecha_ocupacion, fecha);
+                            strcpy((*comportamiento)[j].fecha_ocupacion, fecha);
                             printf("Producto entregado exitosamente en el locker.\n");
                             char fecha_vencimiento[11];
                             fecha_caducidad(fecha_vencimiento);
-                            strcpy(comportamiento[j].fecha_caducidad, fecha_vencimiento);
-                            break;
+                            strcpy((*comportamiento)[j].fecha_caducidad, fecha_vencimiento);
+                            return;
                         }
                     }
+                    printf("No se encontró un locker vacío con la ID especificada.\n");
                     break;
                 case 2:
                     printf("Producto entregado exitosamente en el domicilio.\n");
-                    strcpy(pedidos[i].estado_pedido, "entregado");
-                    break;
+                    strcpy((*pedidos)[i].estado_pedido, "entregado");
+                    return;
                 default:
                     printf("Esa opción no se contempla.\n");
                     break;
             }
             break;
         }
+        i++;
     }
 
-    if(encontrado == 0)
-    {
+    if (encontrado == 0) {
         printf("No se encuentra esa ID de producto asociada al transportista.\n");
     }
 }
+void retornarProductosNoRecogidos(ProductoPedido **productos, int *num_productos, Locker **lockers, int *num_lockers, char *localidad_consulta) {
+    int i, j;
+    char id_producto[50]; // Variable para almacenar el ID del producto a actualizar
+
+    // Solicitar al usuario que ingrese el ID del producto a actualizar
+    printf("Ingrese el ID del producto que desea marcar como devuelto: ");
+    fgets(id_producto, sizeof(id_producto), stdin);
+    id_producto[strcspn(id_producto, "\n")] = '\0'; // Eliminar el carácter de nueva línea
+
+    // Buscar el producto con el ID ingresado y actualizar su estado si se encuentra en estado "enLocker"
+    for (j = 0; j < *num_productos; j++) {
+        if (strcmp((*productos)[j].id_locker, id_producto) == 0 && strcmp((*productos)[j].estado_pedido, "enLocker") == 0) {
+            printf("Producto encontrado en el locker:\n");
+            printf("ID Pedido: %s\n", (*productos)[j].id_pedido);
+            printf("ID Producto: %s\n", (*productos)[j].id_prod);
+            printf("Número de unidades: %d\n", (*productos)[j].num_unid);
+            printf("Fecha de entrega prevista: %s\n", (*productos)[j].fecha_entrega_prevista);
+            printf("Importe: %.2f\n", (*productos)[j].importe);
+
+            // Confirmar con el usuario si desea marcar este producto como devuelto
+            printf("¿Desea marcar este producto como devuelto? (Sí/No): ");
+            char respuesta[4];
+            fgets(respuesta, sizeof(respuesta), stdin);
+            if (strcmp(respuesta, "Sí\n") == 0 || strcmp(respuesta, "Si\n") == 0 || strcmp(respuesta, "sí\n") == 0 || strcmp(respuesta, "si\n") == 0) {
+                strcpy((*productos)[j].estado_pedido, "devuelto");
+                printf("Estado del producto actualizado correctamente.\n");
+                return; // Salir del bucle luego de actualizar el estado del producto
+            } else {
+                printf("El estado del producto no ha sido modificado.\n");
+                return; // Salir del bucle si el usuario no desea marcar el producto como devuelto
+            }
+        }
+    }
+
+    // Si no se encuentra el producto con el ID ingresado o si no está en estado "enLocker"
+    printf("No se encontró ningún producto con el ID especificado o no está en estado 'enLocker'.\n");
+}
+
 /*
 int main() {
     Transportista *transportistas = NULL;
