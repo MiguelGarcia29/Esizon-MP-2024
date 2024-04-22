@@ -92,7 +92,14 @@ void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCl
                 printf("\n\nDescripcion: %s\n", desc[i].descrip);
                 printf("Tipo: %s\n", desc[i].tipo);
                 printf("Aplicabilidad: %s\n", desc[i].aplicable);
-                printf("Importe: %.2f\n", desc[i].importe);
+                if(strcmp(desc[i].tipo,"codpro") == 0)
+                {
+                	printf("Importe: %.0f %% \n", desc[i].importe);
+				}
+                else
+                {
+                	printf("Importe: %.2f \n", desc[i].importe);
+				}
                 printf("Estado: %s\n", desc[i].estado);
                 printf("Codigo del descuento: %s\n", desc_cliente[i].id_cod);
                 printf("Uso: %s\n", desc_cliente[i].estado == 1 ? "Aplicado" : "No aplicado");
@@ -183,7 +190,7 @@ void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli)  //hac
 }
 
 
-void aplicar_descuento()
+void aplicar_descuento(Descuento desc,DescuentoCliente desccli,char id[8])
 {
 	
 }
