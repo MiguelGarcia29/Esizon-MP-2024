@@ -512,6 +512,48 @@ void seccionClienteAdmin(Cliente **clientes, int *numClientes){
 
 }
 
+void mostrarDescuentos(Descuento **descuentos,int *numDescuentos,DescuentoCliente **descuentoClientes,int *numDescuentoClientes,Cliente **clientes,int numClientes){
+	int opcion;
+	do{
+		printf("1- Alta descuento\n");
+		printf("2- Baja descuento\n");
+		printf("3- Listado de descuentos");
+		printf("4- Modificar descuentos");
+		printf("5- Asignar descuento");
+		printf("6- Salir");
+		printf("Seleccione una opcion: ");
+		scanf("%d",&opcion);
+		flushInputBuffer();
+		switch(opcion){
+			case 1:
+				//dar de alta un descuento. A su vez se rellenaria automaticamente descuentoclientes
+				alta_descuentos(des,cantdad_des);
+				rellenar_descuentocliente(descuentos,numDescuentos,descuentoClientes,numDescuentoClientes,Clientes,numClientes);
+				anadir_fecha_caducidad(descuentoClientes[numDescuentoClientes - 1].fecha_caducidad,numDescuentoClientes);
+				break;
+			case 2:
+				//dar de baja un descuento y descuentoclientes
+				char id[11];
+				printf("Introduce el ID del descuento a dar de baja: ");
+                scanf("%s", id);
+                flushInputBuffer();
+                baja_descuentos(descuentos,numDescuentos,id);
+                baja_descuento_clientes(descuentoClientes,numDescuentoClientes,numDescuentos,numClientes,id);
+                break;
+            case 3:
+            	//mostrar los descuentos
+            	break;
+            case 4:
+            	//modificar los descuentos
+            	modificar_descuento(descuentos,numDescuentos);
+            	break;
+            case 5:
+            	//habilitar a un cliente especifico a usar un descuento
+            	asignar_descuento(descuentoClientes,numDescuentoClientes);
+		}
+	}while (opcion != 6);
+}
+
 // Rol de cliente
 // Solo puede acceder: cliente
 void menuusuario()
