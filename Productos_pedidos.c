@@ -42,7 +42,7 @@ char *seleccionar_producto(Producto *productos, int* tamanio, char *productos_se
 }
 
 
-void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
+void baja_prodPed(ProductoPedido **pedidos , int* tamanio, char *id_baja){
 
     int encontrado = 0;
 
@@ -68,7 +68,7 @@ void baja_pedidos(ProductoPedido **pedidos , int* tamanio, char *id_baja){
     }
 }
 
-void listado_Pedido(ProductoPedido **pedidos, int* tamanio){
+void listado_pedido(ProductoPedido **pedidos, int* tamanio){
 
     for(int i = 0 ; i < *tamanio ; i++){
         printf("%s-%s-%d-%s-%.2f-%s\n",(*pedidos)[i].id_pedido,(*pedidos)[i].id_prod,(*pedidos)[i].num_unid,(*pedidos)[i].fecha_entrega_prevista,
@@ -76,22 +76,21 @@ void listado_Pedido(ProductoPedido **pedidos, int* tamanio){
     }
 }
 
-//buscador de pedido segun su estado
-void buscador_un_pedidos(ProductoPedido *pedidos, int* tamanio , char* estad_pedido){
+
+void buscarPedido (ProductoPedido **pedidos, int** tamanio , char* id){
 
     int coincidencia = 0;
     for(int i = 0 ; i < *tamanio ; i++ ){
 
-        if(strcmp(pedidos[i].estado_pedido,estad_pedido) == 0){
+        if(strcmp((*pedidos)[i].id_pedido,id) == 0){
 
-            printf("%s-%s-%d-%s-%.2f-%s\n",pedidos[i].id_pedido,pedidos[i].id_prod,pedidos[i].num_unid,pedidos[i].fecha_entrega_prevista,pedidos[i].importe,pedidos[i].estado_pedido);
+            printf("%s-%s-%d-%s-%.2f-%s\n",(*pedidos)[i].id_pedido,(*pedidos)[i].id_prod,(*pedidos)[i].num_unid,(*pedidos)[i].fecha_entrega_prevista,
+                   (*pedidos)[i].importe,(*pedidos)[i].estado_pedido);
             printf("\n");
             coincidencia++;
             }
         }
-        if(coincidencia == 0) {
-        printf("No se encontraron pedidos (%s).\n", estad_pedido);
-    }
+
 }
 
 /*Permite modificar ciertas características del producto pedido.
@@ -403,3 +402,29 @@ void listado_pedido_pendiente(ProductoPedido **pedidos, int* tamanio, char *idPr
 
 }
 
+void asignarLocker(Pedido **lista_pedidos, ProductoPedido **lista_productos_pedidos, int *num_pedidos, int *num_productos_pedidos) {
+    char id_pedido[8], id_locker[11];
+
+    printf("Ingrese el ID del pedido a asignarLocker: ");
+    fgets(id_pedido, 8, stdin);
+    id_pedido[strcspn(id_pedido, "\n")] = '\0';
+
+    // Buscar el pedido
+    int i;
+    for (i = 0; i < *num_pedidos; i++) {
+        if (strcmp((*lista_pedidos)[i].id_pedido, id_pedido) == 0) {
+
+            // Buscar el producto pedido
+            int j;
+            printf("Ingrese el ID del locker al que desea asignar: ");
+            fgets(id_locker, 11, stdin);
+            id_locker[strcspn(id_locker, "\n")] = '\0';
+            strcpy((*lista_pedidos)[i].id_locker, id_locker);
+            for (j = 0; j < *num_productos_pedidos; j++) {
+                if (strcmp((*lista_productos_pedidos)[j].id_pedido, id_pedido) == 0) {
+                    strcpy((*lista_productos_pedidos)[j].id_locker, id_locker);
+                }
+            }
+        }
+    }
+}

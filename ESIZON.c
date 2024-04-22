@@ -204,13 +204,18 @@ int comprobarTransportista(char *email, char *contrasenia, Transportista *transp
 
 // Rol de administrador
 // Solo puede acceder: Administrador
-void menuadmin()
+void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                      Categoria **categorias, int *numCategorias, CompartimentoLocker **compartimentoLockers, int *numCompartimentoLockers,
+                      DescuentoCliente **descuentoClientes, int *numDescuentoClientes, Descuento **descuentos, int *numDescuentos,
+                      Devolucion **devoluciones, int *numDevoluciones, Locker **lockers, int *numLockers, Pedido **pedidos, int *numPedido,
+                      Producto **productos, int *numProductos, ProductoPedido **productoPedidos, int *numProductoPedidos,
+                      Transportista **transportistas, int *numTransportistas)
 {
     int opcion;
     do
     {
         printf("--------------------------------------------------------\n");
-        //printf("             NOMBRE: %s                                 \n", adminProvs[posVectorClienteActual].nombre);
+        printf("             NOMBRE: %s                                 \n", (*adminProvs)[posVectorClienteActual].nombre);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Clientes                                            |\n");
@@ -227,19 +232,27 @@ void menuadmin()
         switch (opcion)
         {
         case 1:
-            //mostrarPerfil();
+            mostrar_perfilprov((*adminProvs)[posVectorClienteActual]);
+            flushInputBuffer();
+            printf("¿Quieres modificarlo?:\n");
+            printf("1- Si\n");
+            printf("2- No\n");
+            int opcion;
+            scanf("%d",&opcion);
+            flushInputBuffer();
+            if(opcion==1)
+                modificar_perfilprov(&adminProvs[posVectorClienteActual]);
             break;
         case 2:
-            mostrarClientes();
-            break;
+            seccionClienteAdmin(clientes,numClientes);
         case 3:
-            mostrarProveedores();
+            mostrarProveedoresAdmin(adminProvs,numAdminProvs);
             break;
         case 4:
-            //mostrarProductos();
+            mostrarProductosAdmin(productos, numProductos,categorias,numCategorias,(*adminProvs)[posVectorClienteActual].id_empresa);
             break;
         case 5:
-            mostrarCategorias();
+            mostrarCategoriasAdmin(categorias,numCategorias,productos,numProductos);
             break;
         case 6:
             //mostrarPedidos();
@@ -262,6 +275,208 @@ void menuadmin()
             break;
         }
     } while (opcion != 10);
+}
+
+void mostrarCategoriasAdmin(Categoria **categorias, int *numCategorias,Producto **productos, int *numProductos){
+    int opcion;
+    do {
+        printf("1- Alta categoría                                     |\n");
+        printf("2- Baja categoría                                     |\n");
+        printf("3- Buscar categoría                                   |\n");
+        printf("4- Listar categorías                                  |\n");
+        printf("5- Modificar categoría                                |\n");
+        printf("6- Listar productos por categoría                     |\n");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                alta_categoria(categorias, numCategorias);
+                break;
+            case 2:
+                baja_categoria(categorias, numCategorias);
+                break;
+            case 3:
+                buscarCategoria(categorias, numCategorias);
+                break;
+            case 4:
+                listarCategorias(categorias, numCategorias);
+                break;
+            case 5:
+                modificarCategoria(categorias, numCategorias);
+                break;
+            case 6:
+                listarProductosPorCategoria(productos,numProductos,categorias,numCategorias);
+                break;
+        }
+    } while (opcion != 7);
+}
+
+void mostrarProductosAdmin(Producto **productos, int *numProductos, Categoria ** categorias, int *numCategorias, char * id){
+
+    int opcion;
+    do {
+
+        printf("1- Alta producto                                      \n");
+        printf("2- Baja producto                                      \n");
+        printf("3- Buscar producto                                    \n");
+        printf("4- Listar productos                                   \n");
+        printf("5- Modificar producto                                 \n");
+        printf("6- Salir                          \n");
+        printf("Ingrese una opción: ");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                alta_producto(productos, numProductos, id, categorias, numCategorias);
+        break;
+                break;
+            case 2:
+                printf("Introduzca la id del producto a dar de baja:\n");
+                char prodBaja[9];
+                fgets(prodBaja, 9, stdin);
+                prodBaja[strcspn(prodBaja, "\n")] = '\0';
+                baja_producto(productos, numProductos, prodBaja);
+                break;
+            case 3:
+              char producto_buscado[51];
+
+                printf("\nIntroduce el nombre del producto que quieres buscar: ");
+                fflush(stdin);
+                fgets(producto_buscado, 51, stdin);
+                producto_buscado[strcspn(producto_buscado, "\n")] = '\0';
+
+                buscador_un_producto(productos, numProductos, producto_buscado);
+                break;
+            case 4:
+                listado_producto(productos, numProductos);
+                break;
+            case 5:
+                modificar_producto(productos,numProductos,"-1");
+                break;
+        }
+    } while (opcion != 6);
+
+
+}
+
+void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos, Pedido **ped, int * numPed){
+
+    int opcion;
+    do {
+        printf("1- Alta de pedido\n");
+        printf("2- Baja de pedido\n");
+        printf("3- Buscar pedido\n");
+        printf("4- Listar pedidos\n");
+        printf("5- Asignar transportista a pedido\n");
+        printf("6- Asignar locker a pedido\n");
+        printf("7. Salir\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                // Lógica para dar de alta un pedido
+                break;
+            case 2:
+                printf("Introduzca la id del pedido a dar de baja:\n");
+                char idPed[8];
+                fgets(idPed, 8, stdin);
+                idPed[strcspn(idPed, "\n")] = '\0';
+                baja_prodPed(pedidos,tamPedidos,idPed);
+                baja_pedido(ped,numPed,idPed);
+                break;
+            case 3:
+                printf("Introduzca la id del pedido a buscar:\n");
+                fgets(idPed, 8, stdin);
+                idPed[strcspn(idPed, "\n")] = '\0';
+                buscarPedido(pedidos,tamPedidos,idPed);
+                break;
+            case 4:
+                listado_pedido(pedidos,tamPedidos);
+                break;
+            case 5:
+                asignarProductoPedidoProv(pedidos, tamPedidos,  trans, nTrans,idProv, productos, nProductos);
+                break;
+            case 6:
+                asignarLocker(pedidos,ped,numPed,tamPedidos);
+                break;
+
+        }
+    } while (opcion != 7);
+
+}
+
+void mostrarProveedoresAdmin(AdminProv **proveedores, int* numProveedores){
+int opcion;
+    do {
+
+        printf("1- Alta proveedor\n");
+        printf("2- Baja proveedor\n");
+        printf("3- Buscar proveedor\n");
+        printf("4- Listar proveedores\n");
+        printf("5- Modificar proveedor\n");
+        printf("6- Volver al menú anterior\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+    flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                altaProveedor(proveedores, numProveedores);
+                break;
+            case 2:
+                bajaProveedor(proveedores, numProveedores);
+                break;
+            case 3:
+                buscarProveedor(proveedores, numProveedores);
+                break;
+            case 4:
+                listarProveedores(proveedores, numProveedores);
+                break;
+            case 5:
+                modificarProveedor(proveedores, numProveedores);
+                break;
+
+        }
+    } while (opcion != 6);}
+
+void seccionClienteAdmin(Cliente **clientes, int *numClientes){
+    printf("1- Alta de cliente\n");
+    printf("2- Baja de cliente\n");
+    printf("3- Busqueda de cliente\n");
+    printf("4- Listado de clientes\n");
+    printf("5- Modificación de cliente\n");
+    printf("Seleccione una opción: ");
+    int opcionClientes;
+    scanf("%d", &opcionClientes);
+    flushInputBuffer();
+    switch (opcionClientes) {
+        case 1:
+            // Dar de alta un cliente
+            altaCliente(clientes, numClientes);
+            break;
+        case 2:
+            // Dar de baja un cliente
+            bajaCliente(clientes, numClientes);
+            break;
+        case 3:
+            // Buscar un cliente
+            buscarCliente(clientes, numClientes);
+            break;
+        case 4:
+            // Listar todos los clientes
+            listarClientes(clientes, numClientes);
+            break;
+        case 5:
+            // Modificar un cliente
+            modificarCliente(clientes, numClientes);
+            break;
+
+    }
+
 }
 
 // Rol de cliente

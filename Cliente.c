@@ -3,22 +3,6 @@
 #include "cliente.h"
 
 
-void cambiar_contrasenia_cliente(char nueva[16]); // funcion que cambia la contrasenia
-
-void cambiar_email_cliente(char nuevo[31]); //funcion que cambia el email
-
-void cambiar_direccion_cliente(char direccion[51], char provincia[21], char localidad[21]); //funcion que cambia direccion, provincia y localidad
-
-void cartera(float *saldo);
-
-void anadir_saldo(float *saldo);
-
-void extraer_saldo(float *saldo);
-
-int corroborar_contrasenia(char cad[16]);
-
-
-
 
 void mostrar_cliente(Cliente client)
 {
@@ -277,27 +261,145 @@ void *iniciarClientesDeArchivo(int *numClientes, Cliente **clientesV)
     *clientesV = clientes;
 }
 
+char *id_generator_cl(Cliente **clientes, int *tamanio_vector)
+{
 
+    int id_generada = 1;
 
+    if (*tamanio_vector != 0)
+    { // Si no hay nada en el vector, la primer id es 0000011.
+        id_generada = atoi((*clientes)[*tamanio_vector - 1].id_cliente);
+        id_generada++;
+    }
+    char *id = malloc(8 * sizeof(char));
+    if (id == NULL)
+    {
+        printf("Error al guardar memoria\n");
+        exit(EXIT_FAILURE);
+    }
 
+    sprintf(id, "%07d", id_generada);
+    return id;
+}
 
+void altaCliente(Cliente **clientes, int *numClientes) {
+    Cliente nuevoCliente;
+    strcpy(nuevoCliente.id_cliente, id_generator_cl(clientes, numClientes));
 
+    printf("Ingrese el nombre del cliente: ");
+    fgets(nuevoCliente.nomb_cliente, 21, stdin);
+    nuevoCliente.nomb_cliente[strcspn(nuevoCliente.nomb_cliente, "\n")] = '\0';
 
+    printf("Ingrese la dirección del cliente: ");
+    fgets(nuevoCliente.dir_cliente, 51, stdin);
+    nuevoCliente.dir_cliente[strcspn(nuevoCliente.dir_cliente, "\n")] = '\0';
 
+    printf("Ingrese la localidad del cliente: ");
+    fgets(nuevoCliente.localidad, 21, stdin);
+    nuevoCliente.localidad[strcspn(nuevoCliente.localidad, "\n")] = '\0';
 
+    printf("Ingrese la provincia del cliente: ");
+    fgets(nuevoCliente.provincia, 21, stdin);
+    nuevoCliente.provincia[strcspn(nuevoCliente.provincia, "\n")] = '\0';
 
+    printf("Ingrese el email del cliente: ");
+    fgets(nuevoCliente.email, 31, stdin);
+    nuevoCliente.email[strcspn(nuevoCliente.email, "\n")] = '\0';
 
+    printf("Ingrese la contraseña del cliente: ");
+    fgets(nuevoCliente.contrasenia, 16, stdin);
+    nuevoCliente.contrasenia[strcspn(nuevoCliente.contrasenia, "\n")] = '\0';
 
+    printf("Ingrese el saldo de la cartera del cliente: ");
+    scanf("%f", &nuevoCliente.cartera);
+    flushInputBuffer();
 
+    *clientes = (Cliente *)realloc(*clientes, ((*numClientes) + 1) * sizeof(Cliente));
+    if (*clientes == NULL) {
+        printf("Error al asignar memoria.\n");
+        exit(1);
+    }
 
+    (*clientes)[*numClientes] = nuevoCliente;
+    (*numClientes)++;
+}
 
+void bajaCliente(Cliente **clientes, int *numClientes) {
+    char id[8];
+    int encontrado = 0;
+    printf("Ingrese el ID del cliente a buscar: ");
+    fgets(id, 8, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numClientes; i++) {
+        if (strcmp((*clientes)[i].id_cliente, id) == 0) {
+            encontrado = 1;
+            // Eliminar el cliente moviendo los elementos hacia adelante
+            for (int j = i; j < *numClientes - 1; j++) {
+                (*clientes)[j] = (*clientes)[j + 1];
+            }
+            // Reducir el tamaño del array
+            *clientes = (Cliente *)realloc(*clientes, ((*numClientes) - 1) * sizeof(Cliente));
+            if (*clientes == NULL) {
+                printf("Error al liberar memoria.\n");
+                exit(1);
+            }
+            (*numClientes)--;
+            printf("Cliente eliminado exitosamente.\n");
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Cliente no encontrado.\n");
+    }
+}
 
+void buscarCliente(Cliente **clientes, int *numClientes) {
+    char id[8];
+    int encontrado = 0;
+    printf("Ingrese el ID del cliente a buscar: ");
+    fgets(id, 8, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numClientes; i++) {
+        if (strcmp((*clientes)[i].id_cliente, id) == 0) {
+            encontrado = 1;
+            printf("Cliente encontrado:\n");
+            printf("ID: %s, Nombre: %s, Dirección: %s, Localidad: %s, Provincia: %s, Email: %s, Cartera: %.2f\n",
+                   (*clientes)[i].id_cliente, (*clientes)[i].nomb_cliente, (*clientes)[i].dir_cliente,
+                   (*clientes)[i].localidad, (*clientes)[i].provincia, (*clientes)[i].email, (*clientes)[i].cartera);
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Cliente no encontrado.\n");
+    }
+}
 
+void listarClientes(Cliente **clientes, int *numClientes) {
+    printf("Listado de clientes:\n");
+    for (int i = 0; i < *numClientes; i++) {
+        printf("ID: %s, Nombre: %s, Dirección: %s, Localidad: %s, Provincia: %s, Email: %s, Cartera: %.2f\n",
+               (*clientes)[i].id_cliente, (*clientes)[i].nomb_cliente, (*clientes)[i].dir_cliente,
+               (*clientes)[i].localidad, (*clientes)[i].provincia, (*clientes)[i].email, (*clientes)[i].cartera);
+    }
+}
 
-
-
-
-
+void modificarCliente(Cliente **clientes, int *numClientes) {
+    char id[8];
+    int encontrado = 0;
+    printf("Ingrese el ID del cliente a buscar: ");
+    fgets(id, 8, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numClientes; i++) {
+        if (strcmp((*clientes)[i].id_cliente, id) == 0) {
+            encontrado = 1;
+            cambiar_perfil_cliente(&(*clientes)[i]);
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Cliente no encontrado.\n");
+    }
+}
 
 
 

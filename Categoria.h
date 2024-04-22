@@ -15,13 +15,14 @@ typedef struct {
 
 //En las altas y bajas habra que añadir id cliente dependiendo sea proveedor o admin o cliente.
 char* id_generator_categ(Categoria *, int );
-void alta_categoria(Categoria *, int* );
-void baja_categoria(Categoria * , int* , char *);
+void alta_categoria(Categoria **categoria, int* tamanio_vector);
+void baja_categoria(Categoria **categorias, int *numCategorias);
 int check_categ(Categoria **, int *,char *);
 char *indicar_categ(Categoria **, int* , char *);
-void modificar_categoria(Categoria *, int* );
-void modificar_descripcion_categ(Categoria *, int* ,char *);
+void modificarCategoria(Categoria **categorias, int *numCategorias);
 void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias);
 Categoria *iniciarCategoriasDeArchivo(int *numCat);
+void listarCategorias(Categoria **categorias, int *numCategorias);
+void buscarCategoria(Categoria **categorias, int *numCategorias);
 
 #endif

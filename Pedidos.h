@@ -20,5 +20,5 @@ typedef struct {
 
 void guardarPedidoEnArchivo(Pedido *, int );
 Pedido *iniciarPedidosDeArchivo(int *);
-
+void baja_pedido(Pedido **pedidos, int *npedidos, char *id_pedido_baja);
 #endif

@@ -118,3 +118,20 @@ Pedido *iniciarPedidosDeArchivo(int *numPedidos)
     *numPedidos = count;
     return pedidos;
 }
+
+void baja_pedido(Pedido **pedidos, int *npedidos, char *id_pedido_baja) {
+    int i, j;
+    for (i = 0; i < *npedidos; i++) {
+        if (strcmp((*pedidos)[i].id_pedido, id_pedido_baja) == 0) {
+            // Si se encuentra el pedido, se eliminan los datos de esa posición
+            for (j = i; j < *npedidos - 1; j++) {
+                (*pedidos)[j] = (*pedidos)[j + 1];
+            }
+            (*npedidos)--; // Se reduce la cantidad de pedidos
+            printf("Pedido dado de baja.\n" );
+            return;
+        }
+    }
+    printf("No se encontro ningun pedido con el ID.\n");
+}
+

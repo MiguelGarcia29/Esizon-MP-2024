@@ -113,3 +113,108 @@ int encontrar_producto(Producto *prod,char id[8],AdminProv prov,int cantdad_prod
 
 	return mio; //si devuelve 0 el producto es provisto por el proveedor
 }
+
+void altaProveedor(AdminProv **proveedores, int *numProveedores) {
+    AdminProv nuevoProveedor;
+    printf("Ingrese el ID de la empresa: ");
+    fgets(nuevoProveedor.id_empresa, 5, stdin);
+    nuevoProveedor.id_empresa[strcspn(nuevoProveedor.id_empresa, "\n")] = '\0';
+
+    printf("Ingrese el nombre de la empresa : ");
+    fgets(nuevoProveedor.nombre, 21, stdin);
+    nuevoProveedor.nombre[strcspn(nuevoProveedor.nombre, "\n")] = '\0';
+
+    printf("Ingrese el email de la empresa: ");
+    fgets(nuevoProveedor.email, 31, stdin);
+    nuevoProveedor.email[strcspn(nuevoProveedor.email, "\n")] = '\0';
+
+    printf("Ingrese la contraseña de la empresa: ");
+    fgets(nuevoProveedor.contrasenia, 16, stdin);
+    nuevoProveedor.contrasenia[strcspn(nuevoProveedor.contrasenia, "\n")] = '\0';
+
+    strcpy(nuevoProveedor.perfil_usuario, "proveedor");
+
+    *proveedores = (AdminProv *)realloc(*proveedores, ((*numProveedores) + 1) * sizeof(AdminProv));
+    if (*proveedores == NULL) {
+        printf("Error al asignar memoria.\n");
+        exit(1);
+    }
+
+    (*proveedores)[*numProveedores] = nuevoProveedor;
+    (*numProveedores)++;
+}
+
+void bajaProveedor(AdminProv **proveedores, int *numProveedores) {
+    char id[5];
+    int encontrado = 0;
+    printf("Ingrese la ID: ");
+    fgets(id, 5, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numProveedores; i++) {
+        if (strcmp((*proveedores)[i].id_empresa, id) == 0) {
+            encontrado = 1;
+            // Eliminar el proveedor moviendo los elementos hacia adelante
+            for (int j = i; j < *numProveedores - 1; j++) {
+                (*proveedores)[j] = (*proveedores)[j + 1];
+            }
+            // Reducir el tamaño del array
+            *proveedores = (AdminProv *)realloc(*proveedores, ((*numProveedores) - 1) * sizeof(AdminProv));
+            if (*proveedores == NULL) {
+                printf("Error al liberar memoria.\n");
+                exit(1);
+            }
+            (*numProveedores)--;
+            printf("Proveedor eliminado exitosamente.\n");
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Proveedor no encontrado.\n");
+    }
+}
+
+void buscarProveedor(AdminProv **proveedores, int *numProveedores) {
+    char id[5];
+    int encontrado = 0;
+    printf("Ingrese el ID: ");
+    fgets(id, 5, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numProveedores; i++) {
+        if (strcmp((*proveedores)[i].id_empresa, id) == 0) {
+            encontrado = 1;
+            printf("Proveedor encontrado:\n");
+            printf("ID: %s\nNombre: \nEmail: %s\n",
+                   (*proveedores)[i].id_empresa, (*proveedores)[i].nombre, (*proveedores)[i].email);
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Proveedor no encontrado.\n");
+    }
+}
+
+void listarProveedores(AdminProv **proveedores, int *numProveedores) {
+    printf("Listado de proveedores:\n");
+    for (int i = 0; i < *numProveedores; i++) {
+        printf("ID: %s, Nombre: %s, Email: %s\n",
+               (*proveedores)[i].id_empresa, (*proveedores)[i].nombre, (*proveedores)[i].email);
+    }
+}
+
+void modificarProveedor(AdminProv **proveedores, int *numProveedores) {
+    char id[5];
+    int encontrado = 0;
+    printf("Ingrese el ID: ");
+    fgets(id, 5, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numProveedores; i++) {
+        if (strcmp((*proveedores)[i].id_empresa, id) == 0) {
+            encontrado = 1;
+            modificar_perfilprov(&(*proveedores)[i]);
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Proveedor no encontrado.\n");
+    }
+}

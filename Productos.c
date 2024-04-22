@@ -447,3 +447,74 @@ void modificar_entrega(Producto **productos, int *tamanio, char *id_modificar)
     scanf("%d", &(*productos)[i].entrega);
     flushInputBufferr();
 }
+
+void listarProductosPorCategoria(Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias) {
+
+    for (int i = 0; i < *numCategorias; i++) {
+        printf("Categoria: %s - %s\n", (*categorias)[i].id_categ, (*categorias)[i].descrip);
+        int encontrados = 0;
+        for (int j = 0; j < *numProductos; j++) {
+            if (strcmp((*productos)[j].id_categ, (*categorias)[i].id_categ) == 0) {
+                encontrados = 1;
+                printf("ID del producto: %s\n", (*productos)[j].id_prod);
+                printf("Nombre: %s\n", (*productos)[j].nombre);
+                printf("Descripcion: %s\n", (*productos)[j].descrip);
+                printf("Stock: %d\n", (*productos)[j].stock);
+                printf("Tiempo de entrega: %d\n", (*productos)[j].entrega);
+                printf("Importe: %.2f\n", (*productos)[j].importe);
+                printf("\n");
+            }
+        }
+        if (!encontrados) {
+            printf("No hay productos asociados a esta categoría.\n");
+        }
+    }
+}
+
+Producto** agregar_a_cesta(Producto **catalogo, int *num_productos) {
+    int capacidad = 1; // Capacidad inicial de la cesta de la compra
+    int num_seleccionados = 0; // Número de productos seleccionados para la cesta
+    Producto **cesta = malloc(capacidad * sizeof(Producto*));
+
+
+    char nombre_producto[16];
+    while (1) {
+        printf("Ingrese el nombre del producto que desea agregar a la cesta (o escriba 'fin' para salir): ");
+        scanf("%s", nombre_producto);
+        if (strcmp(nombre_producto, "fin") == 0) {
+            break;
+        }
+
+        // Buscar el producto en el catálogo
+        int i;
+        for (i = 0; i < *num_productos; i++) {
+            if (strcmp(catalogo[i]->nombre, nombre_producto) == 0) {
+                // Agregar el producto a la cesta
+                if (num_seleccionados == capacidad) {
+                    // Aumentar la capacidad de la cesta si es necesario
+                    capacidad *= 2;
+                    cesta = realloc(cesta, capacidad * sizeof(Producto*));
+                    if (cesta == NULL) {
+                        printf("Error: No se pudo asignar memoria para la cesta de la compra.\n");
+                        exit(1);
+                    }
+                }
+                cesta[num_seleccionados] = catalogo[i];
+                num_seleccionados++;
+                break;
+            }
+        }
+        if (i == *num_productos) {
+            printf("No se encontró ningún producto con el nombre %s en el catálogo.\n", nombre_producto);
+        }
+    }
+
+    // Redimensionar la cesta al tamaño justo
+    cesta = realloc(cesta, num_seleccionados * sizeof(Producto*));
+    if (cesta == NULL) {
+        printf("Error: No se pudo ajustar la memoria para la cesta de la compra.\n");
+        exit(1);
+    }
+
+    return cesta;
+}
