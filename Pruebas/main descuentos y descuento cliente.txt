@@ -1,0 +1,80 @@
+int main() {
+    int c = 0;
+    int cantdad_des = 0;
+    int cantdad_descli = 0;
+    int cantdad_cli = 1;
+
+    Descuento *des;
+    Cliente cli;
+    DescuentoCliente *descli;
+
+    strcpy(cli.id_cliente, "0000001");
+
+    des = malloc(cantdad_des * sizeof(Descuento));
+
+    char id[11];
+
+    while (c == 0) {
+        printf("\n(1) Alta\n");
+        printf("(2) Mostrar\n");
+        printf("(3) Modificar\n");
+        printf("(4) Baja\n");
+        printf("(5) Asignar descuento\n");
+        printf("(6) Salir\n");
+
+
+        int b;
+        scanf("%d", &b);
+        flushInputBuffer();
+
+        switch (b) {
+            case 1:
+                alta_descuentos(&des, &cantdad_des);
+                
+				rellenar_descuentocliente(des,&cli,&descli,cantdad_des,cantdad_cli,&cantdad_descli);
+				
+				anadir_fecha_caducidad(&descli[cantdad_descli - 1].fecha_caducidad,cantdad_descli);
+				                
+                c = 0;
+            break;
+            case 2:
+                mostrar_descuentos_cliente(cli.id_cliente, des, descli, cantdad_des, cantdad_descli);
+                c = 0;
+            break;
+            case 3:
+                printf("Introduce el ID del descuento que desea modificar: ");
+                scanf("%s", id);
+                flushInputBuffer();
+                modificar_descuento(des, cantdad_des, id);
+                c = 0;
+            break;
+            case 4:
+                printf("Introduce el ID del descuento a dar de baja: ");
+                scanf("%s", id);
+                flushInputBuffer();
+                
+                baja_descuentos(&des, &cantdad_des, id);
+                
+                baja_descuento_clientes(&descli,&cantdad_descli,cantdad_des,cantdad_cli,id);
+                
+                c = 0;
+            break;
+            case 5:
+
+    			// Llamar a la función para marcar el descuento como no utilizado para el cliente dado
+    			asignar_descuento(descli, cantdad_descli);
+    
+    			c = 0;
+    		break;                
+            case 6:
+                c = 1;
+            break;
+            default:
+                printf("Opción inválida\n");
+            break;
+        }
+    }
+
+    free(des); // Liberamos la memoria asignada al arreglo de descuentos
+    return 0;
+}
