@@ -152,9 +152,48 @@ void baja_descuentos(Descuento **desc, int *cantdad_desc, char *id_baja)
 }
 
 
-void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) 
+void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCliente *desc_cliente, int cant_desc, int cant_desc_cli) 
+{
+	printf("\nDescuentos del cliente con ID: %s\n", id_cliente);
+	
+    for (int i = 0; i < cant_desc_cli; i++) 
+	{
+        if (strcmp(desc_cliente[i].id_cliente, id_cliente) == 0) 
+		{
+            
+                printf("\n\nDescripcion: %s\n", desc[i].descrip);
+                printf("Tipo: %s\n", desc[i].tipo);
+                printf("Aplicabilidad: %s\n", desc[i].aplicable);
+                if(strcmp(desc[i].tipo,"codpro") == 0)
+                {
+                	printf("Importe: %.0f %% \n", desc[i].importe);
+				}
+                else
+                {
+                	printf("Importe: %.2f \n", desc[i].importe);
+				}
+                printf("Estado: %s\n", desc[i].estado);
+                printf("Codigo del descuento: %s\n", desc_cliente[i].id_cod);
+                printf("Uso: %s\n", desc_cliente[i].estado == 1 ? "Aplicado" : "No aplicado");
+                printf("%d",desc_cliente[i].estado);
+            	printf("Fecha de asignacion: %s\n", desc_cliente[i].fecha_asignacion);
+            	printf("Fecha de caducidad: %s\n", desc_cliente[i].fecha_caducidad);
+
+            printf("------------------------------------\n");
+        }
+    }
+}
+
+
+void modificar_descuento(Descuento *desc, int cantdad_desc) 
 {
     int opcion, i;
+    
+    char id[11];
+    
+    printf("Introduce el ID del descuento que desea modificar: ");
+    scanf("%s", id);
+    flushInputBuffer();
     
     i = encontrar_descuento(cantdad_desc, desc, id);
     
