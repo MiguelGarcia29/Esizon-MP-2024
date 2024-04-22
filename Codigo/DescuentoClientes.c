@@ -4,6 +4,16 @@
 
 void flushInputBuffer();
 
+int todos_esizon(Descuento desc,Producto *prod,int numprodpe);
+
+int activo_inactivo(Descuento desc);
+
+int aplicado(Descuento desc);
+
+int cheq_cod(Descuento desc,int numprodpe);
+
+int descontar(Descuento desc,float *precio);
+
 
 void flushInputBuffer()
 {
@@ -190,7 +200,162 @@ void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli)  //hac
 }
 
 
-void aplicar_descuento(Descuento desc,DescuentoCliente desccli,char id[8])
+int todos_esizon(Descuento desc,Producto *prod,int numprodpe)
 {
+	int res = 1,esizon = 0,i;
 	
+	for(i = 0; i < numprodpe && esizon == 0;i++)
+	{
+		if(strcmp(prod[i].id_gestor,"0000" == 0))
+		{
+			esizon = 1
+		}
+	}
+	
+	if(strcmp(desc.aplicable,"todos") == 0)
+	{
+		res = 0;
+	}
+	
+	if(strcmp(desc.aplicable,"esizon") == 0 && esizon == 1)
+	{
+			res = 0;
+	}
+	
+	return res;
+}
+
+
+int activo_inactivo(Descuento desc)
+{
+	int res;
+	
+	if(strcmp(desc.estado,"activo") == 0)
+	{
+		res = 0;
+	}
+	else
+	{
+		res = 1;
+	}
+	
+	return res;
+}
+
+
+int aplicado(DescuentoCliente desc)
+{
+	int res;
+	
+	if(desc.estado == 0)
+	{
+		res = 0;
+	}
+	else
+	{
+		res = 1;
+	}
+	
+	return res;
+}
+
+
+int cheq_cod(Descuento desc,int numprodpe)
+{
+	int res = 1;
+	
+	if(strcmp(desc.tipo,"cheqreg") == 0)
+	{
+		res = 0;
+	}
+	if(strcmp(desc.tipo,"codpro") == 0 && numprodpe == 1)
+	{
+		res = 0;
+	}
+}
+
+
+void descontar(Descuento desc,float *precio)
+{
+	if(strcmp(desc.tipo,"cheqreg") == 0)
+	{
+		*precio = *precio - desc.importe;
+	}
+	else
+	{
+		*precio = *precio * desc.importe /(float)100;
+	}
+}
+
+
+void aplicar_descuento(float *precio,Descuento *desc,DescuentoCliente *desccli,char id_cliente[8],Producto *prod,int cantdad_desc,int cantdad_desccli,int numprodpe)
+{
+	int a,i,j,encontrado = 0;
+	
+	char id_desc[11];
+	
+	Descuento elegido;
+	DescuentoCliente elegidocliente;
+	
+	printf("\n\nUtilizar un codigo de descuento:\n\n");
+	printf("(1) Si");
+	printf("(2) En otra ocasion\n");
+	
+	scanf("%d",&a);
+	
+	if(a == 1)
+	{
+		mostrar_descuentos_cliente(id_cliente[8],*desc,*desccli,cantdad_desc,cantdad_desccli);
+		
+		printf("\n\n\nIntroduzca el codigo que desea utilizar: ");
+		scanf("%11s",id_desc);
+	}
+	else
+	{
+		return;
+	}
+	
+	for(i = 0; i < cantdad_desccli && encontrado == 0;i++)
+	{
+		if(strcmp(desccli[i].id_cod,id_desc) == 0 && strcmp(desccli[i].id_cliente,id_cliente) == 0)
+		{
+			elegidocliente = desccli[i];
+			
+			encontrado = 1;
+		}
+	}
+	
+	if(encontrado == 0)
+	{
+		printf("\nDescuento no encontrado\n");
+		return;
+	}
+	
+	encontrado = 0;
+	
+	for(i = 0; i < cantdad_desc && encontrado == 0; i++)
+	{
+		if(strcmp(id_desc,desc[i].id_cod) == 0)
+		{
+			elegido = desc[i];
+			
+			encontrado = 1;
+		}
+	}
+	
+	if(encontrado == 0)
+	{
+		printf("\nProducto no encontrado\n\n");
+		return;
+	}
+	
+	if(todos_esizon(elegido,*prod,numprodpe) == 0 && activo_inactivo(elegido) == 0 && aplicado(elegidocliente) == 0 && cheq_cod(elegido,numprodpe) == 0)
+	{
+		descontar(elegido,precio);
+	}
+	else
+	{
+		printf("Descuento no disponible.\n");
+	}
+	printf("%f",*precio);
 }
