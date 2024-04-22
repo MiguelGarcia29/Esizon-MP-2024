@@ -361,7 +361,7 @@ void mostrarProductosAdmin(Producto **productos, int *numProductos, Categoria **
 
 }
 
-void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos, Pedido **ped, int * numPed){
+void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos, Pedido **ped, int * numPed, char*id){
 
     int opcion;
     do {
@@ -378,7 +378,38 @@ void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transporti
 
         switch (opcion) {
             case 1:
-                // Lógica para dar de alta un pedido
+                float coste;
+                int tamLista;
+                Producto *cesta = agregar_a_cesta(productos,nProductos,&coste,&tamLista);
+
+                printf("¿Dónde desea que se entregue su pedido?\n");
+                printf("1. Domicilio\n");
+                printf("2. Locker\n");
+
+                int opc;
+                printf("Ingrese su opción (1 o 2): ");
+                scanf("%d", &opc);
+                flushInputBuffer();
+                char opcion[10];
+                char idLocker[11];
+                switch (opc) {
+                    case 1:
+                        strcpy(opcion,"domicilio");
+                        strcpy(idLocker," ");
+                        break;
+                    case 2:
+                        strcpy(opcion,"locker");
+                        printf("Ingrese la ID del locker donde desea enviar su pedido: ");
+                        fgets(idLocker, 11, stdin);
+                        idLocker[strcspn(idLocker, "\n")] = '\0';
+                        break;
+
+                }
+
+                hacerPedido(&cesta, tamLista,productos, nProductos,
+                 ped, numPed, pedidos,tamPedidos, id,
+                  opcion, idLocker);
+
                 break;
             case 2:
                 printf("Introduzca la id del pedido a dar de baja:\n");

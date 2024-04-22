@@ -347,7 +347,9 @@ ProductoPedido *iniciarProductoPedidosDeArchivo(int *numProductos)
 }
 
 //Hace un pedido recibiendo previamente una lista de los productos que desea comprar el usuario, hay que buscar algo para que no de error
-void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int numnProductos, Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds,int *numProdPe, char *idCliente, char *tipoEntrega, char *idLocker, float *costeTotal)
+void hacerPedido(Producto **listaCompra, int *tamLista,Producto **productos, int *numnProductos,
+                 Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds,int *numProdPe, char *idCliente,
+                  char *tipoEntrega, char *idLocker)
 {
 
     // CREO EL NUEVO PEDIDO
@@ -369,15 +371,15 @@ void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int nu
     {
         ProductoPedido prodPed;
         strcpy(prodPed.id_pedido, nuevo.id_pedido);
-        strcpy(prodPed.id_prod, listaCompra[i].id_prod);
+        strcpy(prodPed.id_prod, (*listaCompra)[i].id_prod);
 
         do{
-        printf("Cuantas unidades quieres de %s:", listaCompra[i].nombre);
+        printf("Cuantas unidades quieres de %s:", (*listaCompra)[i].nombre);
         scanf("%d", &prodPed.num_unid);
         flushInputBuffer();
         }while(prodPed.num_unid <= 0 || reducirStock(productos,&numPedidos,prodPed.id_prod,prodPed.num_unid)!=0); //
 
-        prodPed.importe = prodPed.num_unid * listaCompra[i].importe;
+        prodPed.importe = prodPed.num_unid * (*listaCompra)[i].importe;
         coste += prodPed.importe;
         strcpy(prodPed.estado_pedido, "enPreparacion");
         strcpy(prodPed.id_locker, idLocker);
@@ -387,7 +389,6 @@ void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int nu
         (*numProdPe)++;
     }
 
-    (*costeTotal) = coste;
 }
 
 void listado_pedido_pendiente(ProductoPedido **pedidos, int* tamanio, char *idProd,Producto **productos, int * nProductos){

@@ -33,7 +33,9 @@ char *seleccionar_producto(Producto *productos, int* tamanio, char *productos_se
 int reducirStock(Producto *productos, int tamProd,char*idProd, int ctdadReducir);
 void guardarProductoPedidoEnArchivo(ProductoPedido *, int );
 ProductoPedido *iniciarProductoPedidosDeArchivo(int *);
-void hacerPedido(Producto *listaCompra, int tamLista,Producto *productos, int numnProductos, Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds,int *numProdPe, char *idCliente, char *tipoEntrega, char *idLocker, float *costeTotal);
+void hacerPedido(Producto **listaCompra, int *tamLista,Producto **productos, int *numnProductos,
+                 Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds,int *numProdPe, char *idCliente,
+                  char *tipoEntrega, char *idLocker);
 void listado_pedido_pendiente(ProductoPedido **pedidos, int* tamanio, char *idProd,Producto **productos, int * nProductos);
 
 

@@ -31,5 +31,6 @@ void listado_producto_prooved(Producto **productos, int tamanio, char *idProv);
 void guardarProductosEnArchivo(Producto *productos, int numProductos);
 Producto *iniciarProductosDeArchivo(int *numProductos);
 void listarProductosPorCategoria(Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias);
+Producto* agregar_a_cesta(Producto **catalogo, int *num_productos, float *coste, int *tamLista);
 
 #endif
