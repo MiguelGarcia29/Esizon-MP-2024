@@ -98,7 +98,7 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
         menuproveedor(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias,productoPedidos,numProductoPedidos);
         break;
     case 4:
-        menutransportista(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
+        menutransportista(rol,posVectorClienteActual,lockers,numLockers, clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos, productoPedidos, compartimentoLockers,numCompartimentoLockers);
         break;
     }
 
@@ -606,10 +606,11 @@ void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *
     } while (opcion != 4);
 }
 
-void menutransportista(int rol, int posVectorClienteActual, Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
-                       Transportista **transportistas, int *numTransportistas, Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias, int *numProductoPedidos)
+void menutransportista(int rol, int posVectorClienteActual, Locker **lockers,int *numLockers ,Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                       Transportista **transportistas, int *numTransportistas, Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias, int *numProductoPedidos, ProductoPedido **productoPedidos, CompartimentoLocker **compartimentoLockers, int *numCompartimentoLockers)
 {
     int opcion;
+    char id_t[7]; // Incrementamos el tamaño para incluir el carácter nulo
 
     do
     {
@@ -622,6 +623,7 @@ void menutransportista(int rol, int posVectorClienteActual, Cliente **clientes, 
         printf("|4-Salir del sistema                                   |\n");
         printf("--------------------------------------------------------\n");
         scanf("%d", &opcion);
+        getchar(); // Consumir el carácter de nueva línea residual del búfer de entrada
 
         switch (opcion)
         {
@@ -629,10 +631,11 @@ void menutransportista(int rol, int posVectorClienteActual, Cliente **clientes, 
             perfil_t(&(*transportistas)[posVectorClienteActual]);
             break;
         case 2:
-            enReparto(transportistas, numProductoPedidos);//no encuentra los pedidos mirar
+            reparto(productoPedidos, numProductoPedidos, (*transportistas)[posVectorClienteActual].id_transp);
+            enReparto(productoPedidos, numProductoPedidos, compartimentoLockers, numCompartimentoLockers, id_t);
             break;
         case 3:
-            retornoProducto();
+            retornoProducto(lockers,productos,numProductos, numLockers, (*lockers)[posVectorClienteActual].localidad);
             break;
         case 4:
             printf("Hasta pronto, ESIZON\n");
@@ -892,22 +895,45 @@ void mostrarDevolucionesAdmin(Devolucion** devoluciones, int *num_devoluciones, 
 
 // Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
 // Solo puede acceder: transportista
-void enReparto(Transportista **transportistas, int *numProductoPedidos)
-{
-    printf("Dime la id del transportista que quiere saber los productos que tiene asignados:");
-    char id_t[5];
-    scanf("%4s", id_t);
-    flushInputBuffer();
-    reparto(transportistas, numProductoPedidos, id_t);
+void enReparto(ProductoPedido **pedidos, int *num_pedidos, CompartimentoLocker **compartimiento, int *tamanio_compartimento, char *id_t) {
+    // Verificar si se encontraron pedidos asignados al transportista
+    int encontrado = 0;
+    int i;
+    for (i = 0; i < *num_pedidos; i++) {
+        if (strcmp((*pedidos)[i].id_transp, id_t) == 0 && strcmp((*pedidos)[i].estado_pedido, "enReparto") == 0) {
+            encontrado = 1;
+            break;
+        }
+    }
+
+    // Si se encontraron pedidos, preguntar si se desea realizar una entrega
+    if (encontrado == 1) {
+        printf("¿Quieres realizar alguna entrega?\n1-Sí\n2-No\n");
+        int respuesta_enreparto;
+        scanf("%d", &respuesta_enreparto);
+        flushInputBuffer();
+        switch (respuesta_enreparto) {
+            case 1:
+                entrega(pedidos, compartimiento, num_pedidos, tamanio_compartimento, id_t);
+
+                break;
+            case 2:
+                break;
+            default:
+                printf("Opción no válida.\n");
+                break;
+        }
+    }
 }
+
 
 // El sistema facilitará al transportista la tarea de retornar a origen todos los productos que nohayan sido recogidos de los lockers en el plazo determinado, permitiéndole consultar todos los lockers por localidad y mostrando sus pedidos. En el momento de la recogida de los productos
 // para su retorno, el sistema debe actualizar automáticamente el número de compartimentos
 // ocupados y eliminar el código locker asociado al producto. Así como el estado de los productos
 // y el stock de los mismos para que quede reflejada la operación
 // Solo puede acceder: transportista
-void retornoProducto()
-{
+void retornoProducto(Locker **lockers, Producto **productos, int *numProductos, int *numLockers, char *loca) {
+    retornarProductosNoRecogidos(productos, numProductos, lockers, numLockers, loca); // No necesitas desreferenciar los punteros aquí
 }
 
 // Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
