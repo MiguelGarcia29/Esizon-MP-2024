@@ -264,7 +264,7 @@ void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numCl
             mostrarDescuentos();
             break;
         case 9:
-            mostrarDevoluciones();
+            mostrarDevolucionesAdmin(devoluciones,numDevoluciones,productoPedidos,numProductoPedidos);
             break;
         case 10:
             printf("Hasta pronto, ESIZON\n");
@@ -816,13 +816,13 @@ void mostrarTransportista(Transportista **transportista, int *nTrans)
                 agregar_transportista(transportista, nTrans);
                 break;
             case 3:
-                buscar_transportista_por_id(transportista, nTrans);
+                buscar_transportista(transportista, nTrans);
                 break;
             case 4:
-                modificar_transportista_por_id(transportista, nTrans);
+                modificar_transportista(transportista, nTrans);
                 break;
             case 5:
-                dar_de_baja_transportista_por_id(transportista, nTrans);
+                dar_de_baja_transportista(transportista, nTrans);
                 break;
 
 
@@ -844,6 +844,48 @@ void mostrarDescuentos()
 void mostrarDevoluciones()
 {
     // Implementación de la función mostrarDevoluciones()
+}
+
+void mostrarDevolucionesAdmin(Devolucion** devoluciones, int *num_devoluciones, ProductoPedido ** productoPedidos, int *prodPeds){
+ int opcion;
+
+    do {
+        printf("1- Listar devoluciones\n");
+        printf("2- Alta devolución\n");
+        printf("3- Buscar devolución por ID\n");
+        printf("4- Devoluciones pendiente de confirmacion\n");
+        printf("5- Dar de baja devolución por ID\n");
+        printf("6- Salir\n");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                listar_devoluciones(devoluciones, num_devoluciones);
+                break;
+            case 2:
+                alta_devolucion_admin(devoluciones, num_devoluciones, productoPedidos, prodPeds);
+                break;
+            case 3:
+                printf("Introduzca la id de la devolucion buscada:\n");
+                char idD[8];
+                fgets(idD, 8, stdin);
+                idD[strcspn(idD, "\n")] = '\0';
+                buscar_devolucion(devoluciones,num_devoluciones,idD);
+                break;
+            case 4:
+                modifYConsultarDevPedAdmin(devoluciones, num_devoluciones);
+                break;
+            case 5:
+                printf("Introduzca la id de la devolucion a dar de baja:\n");
+                fgets(idD, 8, stdin);
+                idD[strcspn(idD, "\n")] = '\0';
+                buscar_devolucion(devoluciones,num_devoluciones,idD);
+                break;
+
+        }
+    } while (opcion != 6);
+
 }
 
 // Esta opción permitirá al transportista consultar la lista de productos que tiene asignados para su entrega así como la fecha prevista para la misma, lo que le permite realizar su ruta de reparto.
@@ -870,66 +912,6 @@ void retornoProducto()
 // Solo puede acceder: Administrador y clientes y transportista y proveedor
 void salirprograma()
 {
-    printf("\n\n");
-    printf("             XXXXXX\n");
-    printf("             X\n");
-    printf("             X\n");
-    printf("             XXXX\n");
-    printf("             X\n");
-    printf("             X\n");
-    printf("             XXXXXX");
-
-    Sleep(100);
-    system("cls");
-//system("color 79");
-
-    printf("\n\n");
-    printf("             XXXXXX  XXXXXX\n");
-    printf("             X       X\n");
-    printf("             X       X\n");
-    printf("             XXXX    XXXXXX\n");
-    printf("             X            X\n");
-    printf("             X            X\n");
-    printf("             XXXXXX  XXXXXX");
-
-    Sleep(100);
-    system("cls");
-//system("color 7d");
-
-    printf("\n\n");
-    printf("             XXXXXX  XXXXXX  XXXXXX\n");
-    printf("             X       X         XX\n");
-    printf("             X       X         XX\n");
-    printf("             XXXX    XXXXXX    XX\n");
-    printf("             X            X    XX\n");
-    printf("             X            X    XX\n");
-    printf("             XXXXXX  XXXXXX  XXXXXX");
-
-    Sleep(100);
-    system("cls");
-//system("color 79");
-
-    printf("\n\n");
-    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX\n");
-    printf("             X       X         XX          X \n");
-    printf("             X       X         XX        X   \n");
-    printf("             XXXX    XXXXXX    XX     XXXXXX \n");
-    printf("             X            X    XX      X     \n");
-    printf("             X            X    XX     X      \n");
-    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX");
-
-    Sleep(100);
-    system("cls");
-//system("color 7d");
-
-    printf("\n\n");
-    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX   XXXXXX \n");
-    printf("             X       X         XX          X   X      X\n");
-    printf("             X       X         XX        X     X      X\n");
-    printf("             XXXX    XXXXXX    XX     XXXXXX   X      X\n");
-    printf("             X            X    XX      X       X      X\n");
-    printf("             X            X    XX     X        X      X\n");
-    printf("             XXXXXX  XXXXXX  XXXXXX  XXXXXXXX   XXXXXX ");
 
     Sleep(100);
     system("cls");

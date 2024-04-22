@@ -1,20 +1,20 @@
 #include "Devolucion.h"
 
-int pedido_existe(ProductoPedido *pedido, int tamanio_pedido, char *id_pedido) {
-    for (int i = 0; i < tamanio_pedido; i++) {
-        if (strcmp(pedido[i].id_pedido, id_pedido) == 0) {
+int pedido_existe(ProductoPedido **pedido, int *tamanio_pedido, char *id_pedido) {
+    for (int i = 0; i < *tamanio_pedido; i++) {
+        if (strcmp((*pedido)[i].id_pedido, id_pedido) == 0) {
             return 1; // El pedido existe
         }
     }
     return 0; // El pedido no existe
 }
 
-void alta_devolucion_admin(Devolucion **devoluciones, int *num_devoluciones, ProductoPedido *pedidos, int tamanio_pedidos) {
+void alta_devolucion_admin(Devolucion **devoluciones, int *num_devoluciones, ProductoPedido **pedidos, int *tamanio_pedidos) {
     char id_pedido[8];
     printf("\nIngrese el ID del pedido: ");
     scanf("%s", id_pedido);
 
-    if (pedido_existe(pedidos, tamanio_pedidos, id_pedido)) {
+    if (pedido_existe((*pedidos), *tamanio_pedidos, id_pedido)) {
         Devolucion nueva_devolucion;
         strcpy(nueva_devolucion.id_pedido, id_pedido);
         printf("Ingrese el ID del producto: ");
@@ -84,15 +84,15 @@ void baja_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_
     }
 }
 
-void buscar_devolucion(Devolucion *devoluciones, int num_devoluciones, char *id_devolucion) {
+void buscar_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_devolucion) {
     int encontrado = 0;
-    for (int i = 0; i < num_devoluciones; i++) {
-        if (strcmp(devoluciones[i].id_pedido, id_devolucion) == 0) {
-            printf("ID del pedido: %s\n", devoluciones[i].id_pedido);
-            printf("ID del producto: %s\n", devoluciones[i].id_prod);
-            printf("Fecha de devolución: %s\n", devoluciones[i].fecha_devolucion);
-            printf("Motivo: %s\n", devoluciones[i].motivo);
-            printf("Estado: %s\n", devoluciones[i].estado);
+    for (int i = 0; i < *num_devoluciones; i++) {
+        if (strcmp((*devoluciones)[i].id_pedido, id_devolucion) == 0) {
+            printf("ID del pedido: %s\n", (*devoluciones)[i].id_pedido);
+            printf("ID del producto: %s\n", (*devoluciones)[i].id_prod);
+            printf("Fecha de devolución: %s\n", (*devoluciones)[i].fecha_devolucion);
+            printf("Motivo: %s\n", (*devoluciones)[i].motivo);
+            printf("Estado: %s\n", (*devoluciones)[i].estado);
             encontrado = 1;
             break;
         }
@@ -102,10 +102,10 @@ void buscar_devolucion(Devolucion *devoluciones, int num_devoluciones, char *id_
     }
 }
 
-void listar_devoluciones(Devolucion *devoluciones, int num_devoluciones) {
+void listar_devoluciones(Devolucion **devoluciones, int *num_devoluciones) {
     printf("\nListado de Devoluciones:\n");
-    for (int i = 0; i < num_devoluciones; i++) {
-       printf("%s-%s-%s-%s-%s\n", devoluciones[i].id_pedido,devoluciones[i].id_prod,devoluciones[i].fecha_devolucion,devoluciones[i].motivo,devoluciones[i].estado);
+    for (int i = 0; i < *num_devoluciones; i++) {
+       printf("%s-%s-%s-%s-%s\n", (*devoluciones)[i].id_pedido,(*devoluciones)[i].id_prod,(*devoluciones)[i].fecha_devolucion,(*devoluciones)[i].motivo,(*devoluciones)[i].estado);
     }
 }
 
@@ -134,6 +134,61 @@ void modificar_estado_enviado(Devolucion *devoluciones, int num_devoluciones, ch
         printf("Devolución con ID %s no encontrada.\n", id_devolucion);
     }
 }
+// Función para consultar y modificar el estado de las devoluciones pendientes de aceptación
+void modifYConsultarDevPedAdmin(Devolucion **lista_devoluciones, int *num_devoluciones) {
+    printf("Devoluciones pendientes de aceptación:\n");
+    int contador = 0;
+
+    for (int i = 0; i < *num_devoluciones; i++) {
+        if (strcmp((*lista_devoluciones)[i].estado, "pendiente") == 0) {
+            printf("ID Pedido: %s, ID Producto: %s, Estado: %s\n",
+                   (*lista_devoluciones)[i].id_pedido,
+                   (*lista_devoluciones)[i].id_prod,
+                   (*lista_devoluciones)[i].estado);
+            contador++;
+        }
+    }
+
+    if (contador == 0) {
+        printf("No hay devoluciones pendientes de aceptación.\n");
+        return;
+    }
+
+    char opcion;
+    printf("¿Desea modificar el estado de alguna devolución? (s/n): ");
+    scanf(" %c", &opcion);
+
+    if (opcion == 's' || opcion == 'S') {
+        char id[8];
+        printf("Ingrese el ID de la devolución que desea modificar: ");
+        scanf("%s", id);
+
+        for (int i = 0; i < *num_devoluciones; i++) {
+            if (strcmp((*lista_devoluciones)[i].id_pedido, id) == 0) {
+                if (strcmp((*lista_devoluciones)[i].estado, "pendiente") == 0) {
+                    printf("¿Aceptar la devolución? (s/n): ");
+                    scanf(" %c", &opcion);
+                    if (opcion == 's' || opcion == 'S') {
+                        strcpy((*lista_devoluciones)[i].estado, "aceptada");
+                        printf("Devolución aceptada correctamente.\n");
+                        printf("Ingrese la fecha de aceptación (DD/MM/AAAA): ");
+                        scanf("%s", (*lista_devoluciones)[i].fecha_aceptacion);
+                        printf("Ingrese la nueva fecha de caducidad (DD/MM/AAAA): ");
+                        scanf("%s", (*lista_devoluciones)[i].fecha_caducidad);
+                    } else {
+                        printf("Devolución rechazada.\n");
+                    }
+                } else {
+                    printf("Esta devolución ya ha sido aceptada o rechazada.\n");
+                }
+                return;
+            }
+        }
+        printf("No se encontró ninguna devolución con el ID especificado.\n");
+    }
+}
+
+
 /*
 int main() {
     Devolucion *devoluciones = NULL;

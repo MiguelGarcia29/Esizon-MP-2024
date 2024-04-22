@@ -19,5 +19,9 @@ typedef struct {
 
 void guardarDevolucionesEnArchivo(Devolucion *, int );
 Devolucion *iniciarDevolucionDeArchivo(int *);
-
+void alta_devolucion_admin(Devolucion **devoluciones, int *num_devoluciones, ProductoPedido **pedidos, int *tamanio_pedidos);
+void listar_devoluciones(Devolucion **devoluciones, int *num_devoluciones);
+void buscar_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_devolucion);
+void baja_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_devolucion);
+void modifYConsultarDevPedAdmin(Devolucion **lista_devoluciones, int *num_devoluciones);
 #endif // DEVOLUCION_H_INCLUDED
