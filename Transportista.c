@@ -414,3 +414,125 @@ void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Trans
 
 }
 
+void listar_transportistas(Transportista **lista_transportistas, int *num_transportistas) {
+    printf("Lista de transportistas:\n");
+    for (int i = 0; i < *num_transportistas; i++) {
+        printf("ID: %s, Nombre: %s, Email: %s, Empresa: %s, Ciudad de Reparto: %s\n",
+               (*lista_transportistas)[i].id_transp, (*lista_transportistas)[i].nombre,
+               (*lista_transportistas)[i].email, (*lista_transportistas)[i].nombre_empresa,
+               (*lista_transportistas)[i].ciudad_reparto);
+    }
+}
+
+void agregar_transportista(Transportista **lista_transportistas, int *num_transportistas) {
+    char id[9], nombre[21], email[31], contrasenia[16], nombre_empresa[21], ciudad_reparto[21];
+
+    printf("Ingrese el ID del transportista: ");
+    fgets(id, 9, stdin);
+    id[strcspn(id, "\n")] = '\0';
+
+    printf("Ingrese el nombre del transportista: ");
+    fgets(nombre, 21, stdin);
+    nombre[strcspn(nombre, "\n")] = '\0';
+
+    printf("Ingrese el email del transportista: ");
+    fgets(email, 31, stdin);
+    email[strcspn(email, "\n")] = '\0';
+
+    printf("Ingrese la contraseña del transportista: ");
+    fgets(contrasenia, 16, stdin);
+    contrasenia[strcspn(contrasenia, "\n")] = '\0';
+
+    printf("Ingrese el nombre de la empresa del transportista: ");
+    fgets(nombre_empresa, 21, stdin);
+    nombre_empresa[strcspn(nombre_empresa, "\n")] = '\0';
+
+    printf("Ingrese la ciudad de reparto del transportista: ");
+    fgets(ciudad_reparto, 21, stdin);
+    ciudad_reparto[strcspn(ciudad_reparto, "\n")] = '\0';
+
+    (*num_transportistas)++;
+    *lista_transportistas = realloc(*lista_transportistas, (*num_transportistas) * sizeof(Transportista));
+    if (*lista_transportistas == NULL) {
+        printf("Error: No se pudo asignar memoria para el nuevo transportista.\n");
+        exit(1);
+    }
+
+    Transportista nuevo_transportista = {id, nombre, email, contrasenia, nombre_empresa, ciudad_reparto};
+    (*lista_transportistas)[(*num_transportistas) - 1] = nuevo_transportista;
+
+}
+
+
+void buscar_transportista(Transportista **lista_transportistas, int *num_transportistas) {
+    char id[5];
+    printf("Ingrese el ID del transportista que desea buscar: ");
+    scanf("%s", id);
+
+    for (int i = 0; i < *num_transportistas; i++) {
+        if (strcmp((*lista_transportistas)[i].id_transp, id) == 0) {
+            printf("Transportista encontrado:\n");
+            printf("ID: %s, Nombre: %s, Email: %s, Empresa: %s, Ciudad de Reparto: %s\n",
+                   (*lista_transportistas)[i].id_transp, (*lista_transportistas)[i].nombre,
+                   (*lista_transportistas)[i].email, (*lista_transportistas)[i].nombre_empresa,
+                   (*lista_transportistas)[i].ciudad_reparto);
+            return;
+        }
+    }
+    printf("No se encontró ningún transportista con el ID especificado.\n");
+}
+
+void modificar_transportista(Transportista **lista_transportistas, int *num_transportistas) {
+    char id[9];
+    printf("Ingrese el ID del transportista a modificar: ");
+    fgets(id, 9, stdin);
+    id[strcspn(id, "\n")] = '\0';
+
+    for (int i = 0; i < *num_transportistas; i++) {
+        if (strcmp((*lista_transportistas)[i].id_transp, id) == 0) {
+            printf("Ingrese el nuevo nombre del transportista: ");
+            fgets((*lista_transportistas)[i].nombre, sizeof((*lista_transportistas)[i].nombre), stdin);
+            (*lista_transportistas)[i].nombre[strcspn((*lista_transportistas)[i].nombre, "\n")] = '\0';
+
+            printf("Ingrese el nuevo email del transportista: ");
+            fgets((*lista_transportistas)[i].email, sizeof((*lista_transportistas)[i].email), stdin);
+            (*lista_transportistas)[i].email[strcspn((*lista_transportistas)[i].email, "\n")] = '\0';
+
+            printf("Ingrese la nueva contraseña del transportista: ");
+            fgets((*lista_transportistas)[i].contrasenia, sizeof((*lista_transportistas)[i].contrasenia), stdin);
+            (*lista_transportistas)[i].contrasenia[strcspn((*lista_transportistas)[i].contrasenia, "\n")] = '\0';
+
+            printf("Ingrese el nuevo nombre de la empresa del transportista: ");
+            fgets((*lista_transportistas)[i].nombre_empresa, sizeof((*lista_transportistas)[i].nombre_empresa), stdin);
+            (*lista_transportistas)[i].nombre_empresa[strcspn((*lista_transportistas)[i].nombre_empresa, "\n")] = '\0';
+
+            printf("Ingrese la nueva ciudad de reparto del transportista: ");
+            fgets((*lista_transportistas)[i].ciudad_reparto, sizeof((*lista_transportistas)[i].ciudad_reparto), stdin);
+            (*lista_transportistas)[i].ciudad_reparto[strcspn((*lista_transportistas)[i].ciudad_reparto, "\n")] = '\0';
+
+            printf("Transportista modificado correctamente.\n");
+            return;
+        }
+    }
+    printf("No se encontró ningún transportista con el ID especificado.\n");
+}
+
+void dar_de_baja_transportista(Transportista **lista_transportistas, int *num_transportistas) {
+    char id[5];
+    printf("Ingrese el ID del transportista que desea dar de baja: ");
+   fgets(id, 9, stdin);
+        id[strcspn(id, "\n")] = '\0';
+
+    for (int i = 0; i < *num_transportistas; i++) {
+        if (strcmp((*lista_transportistas)[i].id_transp, id) == 0) {
+            for (int j = i; j < *num_transportistas - 1; j++) {
+                (*lista_transportistas)[j] = (*lista_transportistas)[j + 1];
+            }
+            (*num_transportistas)--;
+            *lista_transportistas = realloc(*lista_transportistas, (*num_transportistas) * sizeof(Transportista));
+            printf("Transportista dado de baja correctamente.\n");
+
+        }
+    }
+}
+

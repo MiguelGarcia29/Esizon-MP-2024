@@ -25,5 +25,10 @@ void reparto(ProductoPedido **pedidos, int *num_pedidos, char *id_transp);
 void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos);
 int existeTransportista( Transportista ** trans, int *nTrans, char *idT);
 void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Transportista ** trans, int *nTrans, char *idProv, Producto **productos, int * nProductos);
+void dar_de_baja_transportista(Transportista **lista_transportistas, int *num_transportistas);
+void modificar_transportista(Transportista **lista_transportistas, int *num_transportistas);
+void buscar_transportista(Transportista **lista_transportistas, int *num_transportistas);
+void listar_transportistas(Transportista **lista_transportistas, int *num_transportistas);
+void agregar_transportista(Transportista **lista_transportistas, int *num_transportistas);
 
 #endif // TRANSPORTISTA_H_INCLUDED

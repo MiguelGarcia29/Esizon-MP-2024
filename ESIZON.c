@@ -255,10 +255,10 @@ void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numCl
             mostrarCategoriasAdmin(categorias,numCategorias,productos,numProductos);
             break;
         case 6:
-            //mostrarPedidos();
+            mostrarPedidosAdmin(productoPedidos,numProductoPedidos,transportistas,numTransportistas,(*adminProvs)[posVectorClienteActual].id_empresa,productos,numProductos,pedidos,numPedido);
             break;
         case 7:
-            mostrarTransportista();
+            mostrarTransportista(transportistas,numTransportistas);
             break;
         case 8:
             mostrarDescuentos();
@@ -361,7 +361,7 @@ void mostrarProductosAdmin(Producto **productos, int *numProductos, Categoria **
 
 }
 
-void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos, Pedido **ped, int * numPed, char*id){
+void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transportista ** trans, int *nTrans,char *idProv, Producto **productos, int * nProductos, Pedido **ped, int * numPed){
 
     int opcion;
     do {
@@ -407,7 +407,7 @@ void mostrarPedidosAdmin(ProductoPedido ** pedidos, int * tamPedidos, Transporti
                 }
 
                 hacerPedido(&cesta, tamLista,productos, nProductos,
-                 ped, numPed, pedidos,tamPedidos, id,
+                 ped, numPed, pedidos,tamPedidos, idProv,
                   opcion, idLocker);
 
                 break;
@@ -793,9 +793,43 @@ void seccionPedidosProv(ProductoPedido **pedidos, int* tamanioPed, char *idProv,
 
 // Mediante esta opción el administrador podrá acceder a la información de todos los transportistas dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de transportistas.
 // Solo puede acceder: Administrador
-void mostrarTransportista()
+void mostrarTransportista(Transportista **transportista, int *nTrans)
 {
-    // Implementación de la función transportista
+
+     int opcion;
+
+    do {
+        printf("1- Listar transportistas\n");
+        printf("2- Agregar transportista\n");
+        printf("3- Buscar transportista por ID\n");
+        printf("4- Modificar transportista por ID\n");
+        printf("5- Dar de baja transportista por ID\n");
+        printf("6- Salir\n");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                listar_transportistas(transportista, nTrans);
+                break;
+            case 2:
+                agregar_transportista(transportista, nTrans);
+                break;
+            case 3:
+                buscar_transportista_por_id(transportista, nTrans);
+                break;
+            case 4:
+                modificar_transportista_por_id(transportista, nTrans);
+                break;
+            case 5:
+                dar_de_baja_transportista_por_id(transportista, nTrans);
+                break;
+
+
+        }
+    } while (opcion != 6);
+
+
 }
 
 // Mediante esta opción el administrador podrá acceder a la información de todos los códigos promocionales y/o cheques regalo dados de alta en la plataforma.
