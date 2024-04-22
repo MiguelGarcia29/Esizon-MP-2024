@@ -88,7 +88,7 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
     switch (rol)
     {
     case 1:
-        menuadmin();
+        menuadmin(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
         break;
     case 2:
         menuusuario();
@@ -280,12 +280,14 @@ void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numCl
 void mostrarCategoriasAdmin(Categoria **categorias, int *numCategorias,Producto **productos, int *numProductos){
     int opcion;
     do {
-        printf("1- Alta categoría                                     |\n");
-        printf("2- Baja categoría                                     |\n");
-        printf("3- Buscar categoría                                   |\n");
-        printf("4- Listar categorías                                  |\n");
-        printf("5- Modificar categoría                                |\n");
-        printf("6- Listar productos por categoría                     |\n");
+        printf("1- Alta categoría                                     \n");
+        printf("2- Baja categoría                                     \n");
+        printf("3- Buscar categoría                                   \n");
+        printf("4- Listar categorías                                  \n");
+        printf("5- Modificar categoría                                \n");
+        printf("6- Listar productos por categoría                     \n");
+        printf("7- Salir\n");
+
         scanf("%d", &opcion);
         flushInputBuffer();
 
@@ -317,12 +319,12 @@ void mostrarProductosAdmin(Producto **productos, int *numProductos, Categoria **
     int opcion;
     do {
 
-        printf("1- Alta producto                                      \n");
-        printf("2- Baja producto                                      \n");
-        printf("3- Buscar producto                                    \n");
-        printf("4- Listar productos                                   \n");
-        printf("5- Modificar producto                                 \n");
-        printf("6- Salir                          \n");
+        printf("1- Alta producto\n");
+        printf("2- Baja producto\n");
+        printf("3- Buscar producto\n");
+        printf("4- Listar productos\n");
+        printf("5- Modificar producto\n");
+        printf("6- Salir\n");
         printf("Ingrese una opción: ");
         scanf("%d", &opcion);
         flushInputBuffer();

@@ -210,12 +210,13 @@ void baja_producto(Producto **productos, int *tamanio, char *id_baja)
 }
 
 // Muestra lista de los productos, dados de alta.
-void listado_producto(Producto *productos, int *tamanio)
+void listado_producto(Producto **productos, int *tamanio)
 {
 
     for (int i = 0; i < *tamanio; i++)
     {
-        printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+        printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip,
+                   (*productos)[i].id_categ, (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
     }
 }
 
