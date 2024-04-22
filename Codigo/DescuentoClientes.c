@@ -31,7 +31,7 @@ void rellenar_descuentocliente(Descuento *desc, Cliente *clientes, DescuentoClie
         
     } else 
 	{
-        // Si ya se ha asignado memoria, aumentar el tamaño del bloque de memoria
+        // Si ya se ha asignado memoria, aumentar el tamano del bloque de memoria
         *desccliente = realloc(*desccliente, (*cantdad_desccli) * sizeof(DescuentoCliente));
         if (*desccliente == NULL) 
 		{
@@ -118,7 +118,7 @@ void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli,in
                 (*desccli)[j] = (*desccli)[j + 1]; //Reposicionar las estructuras
             }
 
-            *cantdad_desccli = cantdad_desc * cantdad_cli; //memoria dinamica
+            *cantdad_desccli = cantdad_desc * cantdad_cli; //Memoria dinamica
             *desccli = realloc(*desccli, (*cantdad_desccli) * sizeof(DescuentoCliente));
             encontrado = 1;
         }
@@ -160,11 +160,11 @@ void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli)  //hac
 	int encontrado = 0;
 	
 	printf("Introduce el ID del cliente: ");
-   	scanf("%s", id_cliente);
+   	scanf("%8s", id_cliente);
    	flushInputBuffer();
 
     printf("Introduce el ID del descuento: ");
-    scanf("%s", id_descuento);
+    scanf("%11s", id_descuento);
     flushInputBuffer();
 	
     for (int i = 0; i < cant_desc_cli && encontrado == 0; i++) {
