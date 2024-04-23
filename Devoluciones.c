@@ -102,6 +102,7 @@ void buscar_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *i
     }
 }
 
+
 void listar_devoluciones(Devolucion **devoluciones, int *num_devoluciones) {
     printf("\nListado de Devoluciones:\n");
     for (int i = 0; i < *num_devoluciones; i++) {

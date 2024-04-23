@@ -91,7 +91,7 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
         menuadmin(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
         break;
     case 2:
-        menuusuario();
+        menuusuario(rol,posVectorClienteActual,clientes,numClientes,adminProvs,numAdminProvs,transportistas,numTransportistas,productos,numProductos,categorias,numCategorias, numProductoPedidos);
         break;
     case 3:
 
@@ -229,11 +229,11 @@ void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numCl
         printf("|10-Salir del sistema                                  |\n");
         printf("--------------------------------------------------------\n");
         scanf("%d", &opcion);
+        flushInputBuffer();
         switch (opcion)
         {
         case 1:
             mostrar_perfilprov((*adminProvs)[posVectorClienteActual]);
-            flushInputBuffer();
             printf("¿Quieres modificarlo?:\n");
             printf("1- Si\n");
             printf("2- No\n");
@@ -261,7 +261,7 @@ void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numCl
             mostrarTransportista(transportistas,numTransportistas);
             break;
         case 8:
-            mostrarDescuentos();
+            mostrarDescuentosAdmin(descuentos,numDescuentos,descuentoClientes,numDescuentoClientes,clientes,numClientes);
             break;
         case 9:
             mostrarDevolucionesAdmin(devoluciones,numDevoluciones,productoPedidos,numProductoPedidos);
@@ -512,7 +512,7 @@ void seccionClienteAdmin(Cliente **clientes, int *numClientes){
 
 }
 
-void mostrarDescuentos(Descuento **descuentos,int *numDescuentos,DescuentoCliente **descuentoClientes,int *numDescuentoClientes,Cliente **clientes,int numClientes){
+void mostrarDescuentosAdmin(Descuento **descuentos,int *numDescuentos,DescuentoCliente **descuentoClientes,int *numDescuentoClientes,Cliente **clientes,int numClientes){
 	int opcion;
 	do{
 		printf("1- Alta descuento\n");
@@ -527,21 +527,23 @@ void mostrarDescuentos(Descuento **descuentos,int *numDescuentos,DescuentoClient
 		switch(opcion){
 			case 1:
 				//dar de alta un descuento. A su vez se rellenaria automaticamente descuentoclientes
-				alta_descuentos(des,cantdad_des);
-				rellenar_descuentocliente(descuentos,numDescuentos,descuentoClientes,numDescuentoClientes,Clientes,numClientes);
-				anadir_fecha_caducidad(descuentoClientes[numDescuentoClientes - 1].fecha_caducidad,numDescuentoClientes);
+				alta_descuentos(descuentos,numDescuentos);
+				rellenar_descuentocliente(descuentos,numDescuentos,descuentoClientes,numDescuentoClientes,clientes,numClientes);
+                anadir_fecha_caducidad((*descuentoClientes)[(*numDescuentoClientes)-1 ].fecha_caducidad,*numDescuentoClientes);
 				break;
 			case 2:
 				//dar de baja un descuento y descuentoclientes
 				char id[11];
 				printf("Introduce el ID del descuento a dar de baja: ");
-                scanf("%s", id);
+                fgets(id, 11, stdin);
+                id[strcspn(id, "\n")] = '\0';
                 flushInputBuffer();
                 baja_descuentos(descuentos,numDescuentos,id);
                 baja_descuento_clientes(descuentoClientes,numDescuentoClientes,numDescuentos,numClientes,id);
                 break;
             case 3:
             	//mostrar los descuentos
+                listar_descuentos(descuentos,numDescuentos);
             	break;
             case 4:
             	//modificar los descuentos
@@ -556,13 +558,18 @@ void mostrarDescuentos(Descuento **descuentos,int *numDescuentos,DescuentoClient
 
 // Rol de cliente
 // Solo puede acceder: cliente
-void menuusuario()
+void menuusuario(int rol,int posVectorClienteActual,Cliente **clientes, int *numClientes, AdminProv **adminProvs, int *numAdminProvs,
+                      Categoria **categorias, int *numCategorias, CompartimentoLocker **compartimentoLockers, int *numCompartimentoLockers,
+                      DescuentoCliente **descuentoClientes, int *numDescuentoClientes, Descuento **descuentos, int *numDescuentos,
+                      Devolucion **devoluciones, int *numDevoluciones, Locker **lockers, int *numLockers, Pedido **pedidos, int *numPedido,
+                      Producto **productos, int *numProductos, ProductoPedido **productoPedidos, int *numProductoPedidos,
+                      Transportista **transportistas, int *numTransportistas)
 {
     int opcion;
     do
     {
         printf("--------------------------------------------------------\n");
-       // printf("             NOMBRE: %s \n", clientes[posVectorClienteActual].nomb_cliente);
+       printf("             NOMBRE: %s \n", (*clientes)[posVectorClienteActual].nomb_cliente);
         printf("--------------------------------------------------------\n");
         printf("|1-Perfil                                              |\n");
         printf("|2-Productos                                           |\n");
@@ -572,23 +579,31 @@ void menuusuario()
         printf("|6-Salir del sistema                                   |\n");
         printf("--------------------------------------------------------\n");
         scanf("%d", &opcion);
-
+        flushInputBufferr();
         switch (opcion)
         {
         case 1:
-            //mostrarPerfil();
+            mostrar_cliente((*clientes)[posVectorClienteActual]);
+             printf("¿Quieres modificarlo?:\n");
+            printf("1- Si\n");
+            printf("2- No\n");
+            int opcion;
+            scanf("%d",&opcion);
+            flushInputBuffer();
+            if(opcion==1)
+                cambiar_perfil_cliente(&clientes[posVectorClienteActual]);
             break;
         case 2:
-            //mostrarProductos();
+            mostrarProductosCliente(productos,numProductos);
             break;
         case 3:
             mostrarDescuentos();
             break;
         case 4:
-            //mostrarPedidos();
+            mostrarPedidosClientes(productoPedidos,numProductoPedidos,productos,numProductos,pedidos,numPedido,clientes,posVectorClienteActual);
             break;
         case 5:
-            mostrarDevoluciones();
+            mostrarDevoluciones(devoluciones,numDevoluciones,clientes,posVectorClienteActual,pedidos,numPedido);
             break;
         case 6:
             printf("Hasta pronto, ESIZON\n");
@@ -599,6 +614,136 @@ void menuusuario()
             break;
         }
     } while (opcion != 6);
+}
+
+void mostrarDevoluciones(Devolucion **devoluciones, int *numDevo,Cliente **clientes, int posVectorClienteActual, Pedido ** pedidos, int * numPedidos){
+int opcion;
+    do {
+        printf("1- Alta devolucion\n");
+        printf("2- Consultar devolucion\n");
+        printf("3. Salir\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                alta_devolucion_cliente(devoluciones,numDevo,(*clientes)[posVectorClienteActual],pedidos,*numPedidos);
+                break;
+            case 2:
+                printf("Introduzca la id de la devolucion:\n");
+                char idD[8];
+                fgets(idD, 8, stdin);
+                idD[strcspn(idD, "\n")] = '\0';
+                buscar_devolucion(devoluciones,numDevo,idD);
+                break;
+        }
+    } while (opcion != 3);
+
+}
+
+void mostrarPedidosClientes(ProductoPedido ** pedidos, int * tamPedidos, Producto **productos, int * nProductos, Pedido **ped, int * numPed, Cliente **clientes, int posVectorClienteActual){
+
+    int opcion;
+    do {
+        printf("1- Alta de pedido\n");
+        printf("2- Buscar pedido\n");
+        printf("3- Listar pedidos\n");
+        printf("4. Salir\n");
+        printf("Seleccione una opcion: ");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+            case 1:
+                float coste;
+                int tamLista;
+                Producto *cesta = agregar_a_cesta(productos,nProductos,&coste,&tamLista);
+
+                if(coste>(*clientes)[posVectorClienteActual].cartera){
+                    printf("Saldo insuficiente");
+                }else{
+
+                printf("¿Dónde desea que se entregue su pedido?\n");
+                printf("1. Domicilio\n");
+                printf("2. Locker\n");
+
+                int opc;
+                printf("Ingrese su opción (1 o 2): ");
+                scanf("%d", &opc);
+                flushInputBuffer();
+                char opcion[10];
+                char idLocker[11];
+                switch (opc) {
+                    case 1:
+                        strcpy(opcion,"domicilio");
+                        strcpy(idLocker," ");
+                        break;
+                    case 2:
+                        strcpy(opcion,"locker");
+                        printf("Ingrese la ID del locker donde desea enviar su pedido: ");
+                        fgets(idLocker, 11, stdin);
+                        idLocker[strcspn(idLocker, "\n")] = '\0';
+                        break;
+
+                }
+
+                hacerPedido(&cesta, tamLista,productos, nProductos,
+                 ped, numPed, pedidos,tamPedidos, (*clientes)[posVectorClienteActual].id_cliente,
+                  opcion, idLocker);
+                (*clientes)[posVectorClienteActual].cartera -=coste;
+                }
+                break;
+            case 2:
+
+                printf("Introduzca la id del pedido a buscar:\n");
+                char idPed[8];
+                fgets(idPed, 8, stdin);
+                idPed[strcspn(idPed, "\n")] = '\0';
+                buscar_pedido_cliente(ped,numPed,(*clientes)[posVectorClienteActual].id_cliente,idPed);
+                break;
+            case 3:
+                listado_pedido_cliente(ped,numPed,(*clientes)[posVectorClienteActual].id_cliente);
+                break;
+
+
+        }
+    } while (opcion != 4);
+
+}
+
+void mostrarProductosCliente(Producto **productos, int *numProductos){
+
+    int opcion;
+    do {
+
+        printf("1- Buscar producto\n");
+        printf("2- Listar productos\n");
+        printf("3- Salir\n");
+        printf("Ingrese una opcion: ");
+        scanf("%d", &opcion);
+        flushInputBuffer();
+
+        switch (opcion) {
+
+            case 1:
+              char producto_buscado[51];
+
+                printf("\nIntroduce el nombre del producto que quieres buscar: ");
+                fflush(stdin);
+                fgets(producto_buscado, 51, stdin);
+                producto_buscado[strcspn(producto_buscado, "\n")] = '\0';
+
+                buscador_un_producto(productos, numProductos, producto_buscado);
+                break;
+            case 2:
+                listado_producto(productos, numProductos);
+                break;
+
+        }
+    } while (opcion != 3);
+
+
 }
 
 void menuproveedor(int rol,int posVectorClienteActual,Cliente **clientes, int  *numClientes, AdminProv **adminProvs, int *numAdminProvs,
@@ -884,13 +1029,6 @@ void mostrarTransportista(Transportista **transportista, int *nTrans)
 void mostrarDescuentos()
 {
     // Implementación de la función descuentos
-}
-
-// Mediante esta opción el administrador podrá acceder a la información de todas las mostrarDevoluciones() de productos.
-// Solo puede acceder: Administrador y cliente
-void mostrarDevoluciones()
-{
-    // Implementación de la función mostrarDevoluciones()
 }
 
 void mostrarDevolucionesAdmin(Devolucion** devoluciones, int *num_devoluciones, ProductoPedido ** productoPedidos, int *prodPeds){

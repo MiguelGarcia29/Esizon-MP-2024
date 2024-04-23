@@ -21,4 +21,6 @@ typedef struct {
 void guardarPedidoEnArchivo(Pedido *, int );
 Pedido *iniciarPedidosDeArchivo(int *);
 void baja_pedido(Pedido **pedidos, int *npedidos, char *id_pedido_baja);
+void listado_pedido_cliente(Pedido **pedidos, int* tamanio, char *idC);
+void buscar_pedido_cliente(Pedido **pedidos, int* tamanio, char *idC, char *idProducto);
 #endif

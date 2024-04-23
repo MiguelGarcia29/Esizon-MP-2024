@@ -135,3 +135,31 @@ void baja_pedido(Pedido **pedidos, int *npedidos, char *id_pedido_baja) {
     printf("No se encontro ningun pedido con el ID.\n");
 }
 
+void listado_pedido_cliente(Pedido **pedidos, int* tamanio, char *idC) {
+    for (int i = 0; i < *tamanio; i++) {
+        if (strcmp((*pedidos)[i].id_cliente, idC) == 0) {
+            printf("ID Pedido: %s\n", (*pedidos)[i].id_pedido);
+            printf("Fecha Pedido: %s\n", (*pedidos)[i].fecha_pedido);
+            printf("ID Cliente: %s\n", (*pedidos)[i].id_cliente);
+            printf("Lugar de Entrega: %s\n", (*pedidos)[i].lugar_entrega);
+            printf("ID Locker: %s\n", (*pedidos)[i].id_locker);
+            printf("ID COD: %s\n", (*pedidos)[i].id_cod);
+        }
+    }
+}
+
+void buscar_pedido_cliente(Pedido **pedidos, int* tamanio, char *idC, char *idProducto) {
+    for (int i = 0; i < *tamanio; i++) {
+
+        if (strcmp((*pedidos)[i].id_cliente, idC) == 0 && strcmp((*pedidos)[i].id_cod, idProducto) == 0) {
+            // Si coincide, imprimir los detalles del pedido
+            printf("ID Pedido: %s\n", (*pedidos)[i].id_pedido);
+            printf("Fecha Pedido: %s\n", (*pedidos)[i].fecha_pedido);
+            printf("ID Cliente: %s\n", (*pedidos)[i].id_cliente);
+            printf("Lugar de Entrega: %s\n", (*pedidos)[i].lugar_entrega);
+            printf("ID Locker: %s\n", (*pedidos)[i].id_locker);
+            printf("ID COD: %s\n", (*pedidos)[i].id_cod);
+        }
+    }
+}
+

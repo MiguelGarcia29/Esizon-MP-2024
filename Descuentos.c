@@ -1,6 +1,6 @@
 //Descuentos
 
-#include"descuentos.h"
+#include "descuentos.h"
 
 char *generar_id_descuentos(Descuento *desc, int cantdad_desc);
 
@@ -128,56 +128,75 @@ void baja_descuentos(Descuento **desc, int *cantdad_desc, char *id_baja) {
     }
 }
 
-
-void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) {
+void modificar_descuento(Descuento *desc, int cantdad_desc)
+{
     int opcion, i;
+
+    char id[11];
+
+    printf("Introduce el ID del descuento que desea modificar: ");
+    scanf("%s", id);
+    flushInputBuffer();
 
     i = encontrar_descuento(cantdad_desc, desc, id);
 
-    if (i != -1) {
+    if (i != -1)
+	{
         printf("\nSeleccione que desea modificar:\n");
         printf("(1) Estado\n");
         printf("(2) Importe\n");
         scanf("%d", &opcion);
-                        flushInputBuffer();
+        flushInputBuffer();
 
-        switch (opcion) {
+        switch (opcion)
+		{
             case 1:
                 printf("\nNuevo estado\n\n");
                 printf("(1) Activo\n");
                 printf("(2) Inactivo\n");
                 scanf("%d", &opcion);
                 flushInputBuffer();
+
                 if (opcion == 1)
                     strcpy(desc[i].estado, "activo");
+
                 else if (opcion == 2)
                     strcpy(desc[i].estado, "inactivo");
+
                 else
                     printf("\nOpcion invalida\n");
             break;
+
             case 2:
                 printf("\nNuevo importe: ");
                 scanf("%f", &desc[i].importe);
             break;
+
             default:
                 printf("\nOpcion invalida\n");
             break;
         }
-    } else {
+    }
+	else
+	{
         printf("Descuento no encontrado\n");
     }
 }
 
 
-int encontrar_descuento(int cantdad_desc, Descuento *desc, char *id) {
+int encontrar_descuento(int cantdad_desc, Descuento *desc, char *id)
+{
     int i, encontrado = 0;
 
-    for (i = 0; i < cantdad_desc && encontrado == 0; i++) {
-        if (strcmp(desc[i].id_cod, id) == 0) {
+    for (i = 0; i < cantdad_desc && encontrado == 0; i++)
+	{
+        if (strcmp(desc[i].id_cod, id) == 0)
+		{
             encontrado = 1;
         }
     }
-    if (encontrado == 0) {
+    if (encontrado == 0)
+	{
         i = 0;
     }
 
@@ -269,4 +288,18 @@ Descuento *iniciarDescuentosDeArchivo(int *numDesc)
     fclose(archivo);
     *numDesc = count;
     return descuentos;
+}
+
+void listar_descuentos(Descuento **descuentos, int *tamano) {
+    printf("Lista de descuentos:\n");
+    for (int i = 0; i < *tamano; i++) {
+        printf("Descuento %d:\n", i + 1);
+        printf("ID Código: %s\n", (*descuentos)[i].id_cod);
+        printf("Descripción: %s\n", (*descuentos)[i].descrip);
+        printf("Tipo: %s\n", (*descuentos)[i].tipo);
+        printf("Estado: %s\n", (*descuentos)[i].estado);
+        printf("Importe: %.2f\n", (*descuentos)[i].importe);
+        printf("Aplicable: %s\n", (*descuentos)[i].aplicable);
+        printf("\n");
+    }
 }

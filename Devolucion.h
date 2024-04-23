@@ -24,4 +24,5 @@ void listar_devoluciones(Devolucion **devoluciones, int *num_devoluciones);
 void buscar_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_devolucion);
 void baja_devolucion(Devolucion **devoluciones, int *num_devoluciones, char *id_devolucion);
 void modifYConsultarDevPedAdmin(Devolucion **lista_devoluciones, int *num_devoluciones);
+void alta_devolucion_cliente(Devolucion **devoluciones, int *num_devoluciones, Cliente actual, ProductoPedido *pedidos, int tamanio_pedidos) ;
 #endif // DEVOLUCION_H_INCLUDED
