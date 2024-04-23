@@ -171,9 +171,9 @@ Locker *iniciarLockersDeArchivo(int *numLock)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(lockers[i].id_locker, token, sizeof(lockers[i].id_locker));
         token = strtok(NULL, "-");
@@ -186,7 +186,7 @@ Locker *iniciarLockersDeArchivo(int *numLock)
         lockers[i].num_compt = atoi(token);
         token = strtok(NULL, "-");
         lockers[i].num_compocup = atoi(token);
-        i++;
+        }
     }
 
     fclose(archivo);

@@ -90,9 +90,9 @@ Pedido *iniciarPedidosDeArchivo(int *numPedidos)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(pedidos[i].id_pedido, token, sizeof(pedidos[i].id_pedido));
         token = strtok(NULL, "-");
@@ -110,7 +110,7 @@ Pedido *iniciarPedidosDeArchivo(int *numPedidos)
         token = strtok(NULL, "-");
         strncpy(pedidos[i].id_cod, token, sizeof(pedidos[i].id_cod));
 
-        i++;
+        }
     }
 
     fclose(archivo);

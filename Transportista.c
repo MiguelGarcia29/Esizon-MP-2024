@@ -383,9 +383,9 @@ Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(transportistas[i].id_transp, token, sizeof(transportistas[i].id_transp));
         token = strtok(NULL, "-");
@@ -399,9 +399,8 @@ Transportista *iniciarTransportistasDeArchivo(int *numTransportista)
         token = strtok(NULL, "-");
         strncpy(transportistas[i].ciudad_reparto, token, sizeof(transportistas[i].ciudad_reparto));
 
-        i++;
+        }
     }
-
     fclose(archivo);
     *numTransportista = count;
     return transportistas;

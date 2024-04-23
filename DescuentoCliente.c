@@ -411,9 +411,9 @@ DescuentoCliente *iniciarDescuentosClientesDeArchivo(int *numDescC)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(descuentos[i].id_cliente, token, sizeof(descuentos[i].id_cliente));
         token = strtok(NULL, "-");
@@ -424,7 +424,7 @@ DescuentoCliente *iniciarDescuentosClientesDeArchivo(int *numDescC)
         strncpy(descuentos[i].fecha_caducidad, token, sizeof(descuentos[i].fecha_caducidad));
         token = strtok(NULL, "-");
         descuentos[i].estado = atoi(token);
-        i++;
+        }
     }
 
     fclose(archivo);

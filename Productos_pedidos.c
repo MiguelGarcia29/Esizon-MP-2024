@@ -255,10 +255,10 @@ ProductoPedido *iniciarProductoPedidosDeArchivo(int *numProductos)
         return NULL;
     }
 
-    // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    // Leo cada linea y rellenar el vector
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(prodPed[i].id_pedido, token, sizeof(prodPed[i].id_pedido));
         token = strtok(NULL, "-");
@@ -280,7 +280,7 @@ ProductoPedido *iniciarProductoPedidosDeArchivo(int *numProductos)
         token = strtok(NULL, "-");
         strncpy(prodPed[i].fecha_entrega_devolucion_transp, token, sizeof(prodPed[i].fecha_entrega_devolucion_transp));
 
-        i++;
+        }
     }
 
     fclose(archivo);

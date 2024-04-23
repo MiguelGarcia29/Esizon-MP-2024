@@ -148,7 +148,7 @@ void bajaProveedor(AdminProv **proveedores, int *numProveedores,char *id) {
 
     int encontrado = 0;
 
-    for (int i = 0; i < *numProveedores; i++) {
+    for (int i = 0; i < *numProveedores && encontrado == 0; i++) {
         if (strcmp((*proveedores)[i].id_empresa, id) == 0) {
             encontrado = 1;
             // Eliminar el proveedor moviendo los elementos hacia adelante

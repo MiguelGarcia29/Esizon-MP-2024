@@ -152,15 +152,15 @@ Categoria *iniciarCategoriasDeArchivo(int *numCat)
         return NULL;
     }
 
-    // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    // Leo cada linea y rellenar el vector
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(categorias[i].id_categ, token, sizeof(categorias[i].id_categ));
         token = strtok(NULL, "-");
         strncpy(categorias[i].descrip, token, sizeof(categorias[i].descrip));
-        i++;
+        }
     }
 
     fclose(archivo);

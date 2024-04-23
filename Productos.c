@@ -78,9 +78,9 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
     }
 
     // Leer cada linea del archivo y rellenar el vector de productos
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(productos[i].id_prod, token, sizeof(productos[i].id_prod));
         token = strtok(NULL, "-");
@@ -97,7 +97,7 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
         productos[i].entrega = atoi(token); // atoi convierte la cadena en int
         token = strtok(NULL, "-");
         productos[i].importe = atof(token); // atof convierte la cadena en Float.
-        i++;
+        }
     }
 
     fclose(archivo);

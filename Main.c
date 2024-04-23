@@ -13,9 +13,7 @@
 
 #include "Esizon.h"
 
-
 int main(){
-
     Cliente *c;
     int nC;
 

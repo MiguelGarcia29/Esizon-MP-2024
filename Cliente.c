@@ -231,8 +231,9 @@ Cliente *iniciarClientesDeArchivo(int *numClientes)
 
     // Leer cada linea del archivo y rellenar el vector de clientes
     int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         // Strtok sirve para dividir la cadena en subcadenas por "-"
         // - OS ADJUNTO DOCUMENTACION CONSULTADA: https://www.ibm.com/docs/es/i/7.5?topic=functions-strtok-tokenize-string
         // - VIDEO QUE LO EXPLICA CON SUMA: https://www.youtube.com/watch?v=jHdbmHCVQ2c
@@ -252,7 +253,7 @@ Cliente *iniciarClientesDeArchivo(int *numClientes)
         strncpy(clientes[i].contrasenia, token, sizeof(clientes[i].contrasenia));
         token = strtok(NULL, "-");
         clientes[i].cartera = atof(token); // atof convierte la cadena en Float.
-        i++;
+        }
     }
 
     fclose(archivo);

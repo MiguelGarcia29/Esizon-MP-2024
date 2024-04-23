@@ -129,9 +129,9 @@ CompartimentoLocker *iniciarCompartimientoLockersDeArchivo(int *numCompLock)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(comportamientoL[i].id_locker, token, sizeof(comportamientoL[i].id_locker));
         token = strtok(NULL, "-");
@@ -145,7 +145,7 @@ CompartimentoLocker *iniciarCompartimientoLockersDeArchivo(int *numCompLock)
         token = strtok(NULL, "-");
         strncpy(comportamientoL[i].fecha_caducidad, token, sizeof(comportamientoL[i].fecha_caducidad));
 
-        i++;
+        }
     }
 
     fclose(archivo);

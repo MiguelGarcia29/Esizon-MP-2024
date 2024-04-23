@@ -346,10 +346,10 @@ Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)
         return NULL;
     }
 
-    // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    // Leo cada linea y rellenar el vector
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(devoluciones[i].id_pedido, token, sizeof(devoluciones[i].id_pedido));
         token = strtok(NULL, "-");
@@ -365,7 +365,7 @@ Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)
         token = strtok(NULL, "-");
         strncpy(devoluciones[i].fecha_caducidad, token, sizeof(devoluciones[i].fecha_caducidad));
 
-        i++;
+        }
     }
 
     fclose(archivo);

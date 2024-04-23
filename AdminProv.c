@@ -164,9 +164,9 @@ AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(adminProvs[i].id_empresa, token, sizeof(adminProvs[i].id_empresa));
         token = strtok(NULL, "-");
@@ -177,7 +177,8 @@ AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
         strncpy(adminProvs[i].contrasenia, token, sizeof(adminProvs[i].contrasenia));
         token = strtok(NULL, "-");
         strncpy(adminProvs[i].perfil_usuario, token, sizeof(adminProvs[i].perfil_usuario));
-        i++;
+
+        }
     }
 
     fclose(archivo);
