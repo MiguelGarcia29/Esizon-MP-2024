@@ -20,7 +20,7 @@ int mi_pedido(ProductoPedido *pedidos,char busc[8],Producto *prod,AdminProv prov
 //el perfil del proveedor
 
 void altaProveedor(AdminProv **proveedores, int *numProveedores);
-void bajaProveedor(AdminProv **proveedores, int *numProveedores);
+void bajaProveedor(AdminProv **proveedores, int *numProveedores,char *id);
 void buscarProveedor(AdminProv **proveedores, int *numProveedores);
 void listarProveedores(AdminProv **proveedores, int *numProveedores);
 void modificarProveedor(AdminProv **proveedores, int *numProveedores);

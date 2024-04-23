@@ -226,6 +226,7 @@ void menuadmin(int rol,int posVectorClienteActual,Cliente **clientes, int *numCl
             break;
         case 2:
             seccionClienteAdmin(clientes,numClientes);
+            break;
         case 3:
             mostrarProveedoresAdmin(adminProvs,numAdminProvs);
             break;
@@ -326,7 +327,6 @@ void mostrarProductosAdmin(Producto **productos, int *numProductos, Categoria **
               char producto_buscado[51];
 
                 printf("\nIntroduce el nombre del producto que quieres buscar: ");
-                fflush(stdin);
                 fgets(producto_buscado, 51, stdin);
                 producto_buscado[strcspn(producto_buscado, "\n")] = '\0';
 
@@ -442,7 +442,11 @@ int opcion;
                 altaProveedor(proveedores, numProveedores);
                 break;
             case 2:
-                bajaProveedor(proveedores, numProveedores);
+                char idP[5];
+                printf("Ingrese la ID: ");
+                fgets(idP, 5, stdin);
+                idP[strcspn(idP, "\n")] = '\0';
+                bajaProveedor(proveedores, numProveedores,idP);
                 break;
             case 3:
                 buscarProveedor(proveedores, numProveedores);
@@ -458,38 +462,43 @@ int opcion;
     } while (opcion != 6);}
 
 void seccionClienteAdmin(Cliente **clientes, int *numClientes){
-    printf("1- Alta de cliente\n");
-    printf("2- Baja de cliente\n");
-    printf("3- Busqueda de cliente\n");
-    printf("4- Listado de clientes\n");
-    printf("5- Modificación de cliente\n");
-    printf("Seleccione una opción: ");
-    int opcionClientes;
-    scanf("%d", &opcionClientes);
-    flushInputBuffer();
-    switch (opcionClientes) {
-        case 1:
-            // Dar de alta un cliente
-            altaCliente(clientes, numClientes);
-            break;
-        case 2:
-            // Dar de baja un cliente
-            bajaCliente(clientes, numClientes);
-            break;
-        case 3:
-            // Buscar un cliente
-            buscarCliente(clientes, numClientes);
-            break;
-        case 4:
-            // Listar todos los clientes
-            listarClientes(clientes, numClientes);
-            break;
-        case 5:
-            // Modificar un cliente
-            modificarCliente(clientes, numClientes);
-            break;
+        int opcionClientes;
 
-    }
+
+    do{
+        printf("1- Alta de cliente\n");
+        printf("2- Baja de cliente\n");
+        printf("3- Busqueda de cliente\n");
+        printf("4- Listado de clientes\n");
+        printf("5- Modificación de cliente\n");
+        printf("6- Salir\n");
+
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcionClientes);
+        flushInputBuffer();
+        switch (opcionClientes) {
+            case 1:
+                // Dar de alta un cliente
+                altaCliente(clientes, numClientes);
+                break;
+            case 2:
+                // Dar de baja un cliente
+                bajaCliente(clientes, numClientes);
+                break;
+            case 3:
+                // Buscar un cliente
+                buscarCliente(clientes, numClientes);
+                break;
+            case 4:
+                // Listar todos los clientes
+                listarClientes(clientes, numClientes);
+                break;
+            case 5:
+                // Modificar un cliente
+                modificarCliente(clientes, numClientes);
+                break;
+        }
+    }while(opcionClientes!=6);
 
 }
 
@@ -711,7 +720,6 @@ void mostrarProductosCliente(Producto **productos, int *numProductos){
               char producto_buscado[51];
 
                 printf("\nIntroduce el nombre del producto que quieres buscar: ");
-                fflush(stdin);
                 fgets(producto_buscado, 51, stdin);
                 producto_buscado[strcspn(producto_buscado, "\n")] = '\0';
 
@@ -817,65 +825,6 @@ void menutransportista(int rol, int posVectorClienteActual, Locker **lockers,int
 }
 
 
-// Esta opción permitirá a un usuario administrador consultar los datos de su perfil y modificarlos.
-/* Solo puede acceder: Administrador y clientes y transportista y proveedores
-void mostrarPerfil(int rol);
-{
-    switch (rol)
-    {
-    case 1:
-
-        break;
-    case 2:
-
-        break;
-    case 3:
-
-        break;
-    case 4:
-
-        break;
-    default:
-        break;
-    }
-}
-*/
-// Mediante esta opción el administrador podrá acceder a la información de los clientes dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de clientes.
-// Solo puede acceder: Administrador
-void mostrarClientes()
-{
-    // Implementación de la función clientes
-}
-
-// Mediante esta opción el administrador podrá acceder a la información de los proveedores, deproductos externos, dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de proveedores.
-// Solo puede acceder: Administrador
-void mostrarProveedores()
-{
-    // Implementación de la función proveedores
-}
-
-// Mediante esta opción el administrador podrá acceder a la información de los productos dados de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de productos.
-// Solo puede acceder: Administrador y cliente y proveedor
-/*void mostrarProductos()
-{
-    switch (rol)
-    {
-    case 1:
-
-        break;
-    case 2:
-
-        break;
-    case 3:
-
-        break;
-    case 4:
-        break;
-    default:
-        break;
-    }
-}
-*/
 void seccionProductosProv(Producto **productos,int *numProductos, Categoria **categorias,int * numCategorias, char *id)
 {
     printf("Tus productos: \n");
@@ -921,10 +870,8 @@ void seccionProductosProv(Producto **productos,int *numProductos, Categoria **ca
     case 4:
         modificar_producto(productos,numProductos,id);break;
     case 5:
-        char producto_buscado[51];
-
         printf("\nIntroduce el nombre del producto que quieres buscar: ");
-        fflush(stdin);
+        char producto_buscado[51];
         fgets(producto_buscado, 51, stdin);
         producto_buscado[strcspn(producto_buscado, "\n")] = '\0';
 

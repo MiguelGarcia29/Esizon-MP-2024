@@ -26,8 +26,8 @@ int verificar_contrasenia(char contrasena[16])// para modificar los datos del us
 	int a;
 
 	printf("Contrasena: ");
-	fflush(stdin);
 	fgets(verificacion,16,stdin);// Se introduce la contrasenia
+    verificacion[strcspn(verificacion, "\n")] = '\0';
 
 	a = strcmp(verificacion,contrasena); // Compara si la contrasenia introducida y la del usuario son iguales
 
@@ -144,12 +144,10 @@ void altaProveedor(AdminProv **proveedores, int *numProveedores) {
     (*numProveedores)++;
 }
 
-void bajaProveedor(AdminProv **proveedores, int *numProveedores) {
-    char id[5];
+void bajaProveedor(AdminProv **proveedores, int *numProveedores,char *id) {
+
     int encontrado = 0;
-    printf("Ingrese la ID: ");
-    fgets(id, 5, stdin);
-    id[strcspn(id, "\n")] = '\0';
+
     for (int i = 0; i < *numProveedores; i++) {
         if (strcmp((*proveedores)[i].id_empresa, id) == 0) {
             encontrado = 1;

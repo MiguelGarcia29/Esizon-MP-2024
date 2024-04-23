@@ -45,10 +45,10 @@ void alta_AdminProv(AdminProv **l, int* tamanio_vector) {
 		case 2:
 			printf("Dime el nombre de la empresa:\n");
 			char empresa[20];
-			scanf("%s", empresa);
+            fgets(empresa, 20, stdin);
+            empresa[strcspn(empresa, "\n")] = '\0';
 			strcpy(nuevo_adminprov.nombre, empresa);
 			strcpy(nuevo_adminprov.perfil_usuario, "proveedor");
-			fflush(stdin);
 			break;
 		default:
 			printf("Esa opcion es incorrecta\n");
@@ -56,11 +56,11 @@ void alta_AdminProv(AdminProv **l, int* tamanio_vector) {
 
     printf("\nDime tu correo electronico:");
     scanf("%30s", nuevo_adminprov.email);
-    fflush(stdin);
+    nuevo_adminprov.email[strcspn(nuevo_adminprov.email, "\n")] = '\0';
 
 	printf("\nDime tu contrasenia:");
     scanf("%16s", nuevo_adminprov.contrasenia);
-    fflush(stdin);
+    nuevo_adminprov.contrasenia[strcspn(nuevo_adminprov.contrasenia, "\n")] = '\0';
 
     // Realiza una realocación de memoria para agregar el nuevo locker al arreglo
     *l = (AdminProv *)realloc(*l, (*tamanio_vector + 1) * sizeof(AdminProv));

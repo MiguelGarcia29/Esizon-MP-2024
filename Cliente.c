@@ -58,31 +58,30 @@ void cambiar_perfil_cliente(Cliente *client) //se presentara un menu para que el
 void cambiar_contrasenia_cliente(char nueva[16]) // funcion que cambia la contrasenia
 {
 	printf("Introduzca su nueva contrasenia: ");
-	fflush(stdin);
 	fgets(nueva,16,stdin);
+	nueva[strcspn(nueva, "\n")] = '\0';
 }
 
 void cambiar_email_cliente(char nuevo[31]) //funcion que cambia el email
 {
 	printf("Introduzca el nuevo email: ");
-	fflush(stdin);
 	fgets(nuevo,31,stdin);
+	nuevo[strcspn(nuevo, "\n")] = '\0';
 }
 
 void cambiar_direccion_cliente(char direccion[51], char provincia[21], char localidad[21]) //funcion que cambia direccion, provincia y localidad
 {
 
 	printf("Provincia: ");
-	fflush(stdin);
 	fgets(provincia,21,stdin);
+    provincia[strcspn(provincia, "\n")] = '\0';
 
 	printf("Localidad: ");
-	fflush(stdin);
 	fgets(localidad,21,stdin);
 	localidad[strcspn(localidad,"\n")] = '\0';
 
+
 	printf("Direccion: ");
-	fflush(stdin);
 	fgets(direccion,51,stdin);
 	direccion[strcspn(direccion,"\n")] = '\0';
 
@@ -95,8 +94,8 @@ int corroborar_contrasenia(char cad[16])// para modificar los datos del usuario 
 	int a;
 
 	printf("Contrasenia: ");
-	fflush(stdin);
 	fgets(verificacion,16,stdin);// Se introduce la contrasenia
+    verificacion[strcspn(verificacion, "\n")] = '\0';
 
 	a = strcmp(verificacion,cad);
 

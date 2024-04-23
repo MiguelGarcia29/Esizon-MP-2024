@@ -2,7 +2,6 @@
 #include <string.h>
 #include <time.h>
 void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
-void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
 void modificar_entrega_productoPedido(ProductoPedido *pedidos, int* tamanio,char *id_modificar);
 
 void fecha_entrega(char *fecha, int dia_entrega)
@@ -93,51 +92,7 @@ void buscarPedido (ProductoPedido **pedidos, int** tamanio , char* id){
 
 }
 
-/*Permite modificar ciertas características del producto pedido.
-void modificar_pedidos(ProductoPedido *pedidos, int* tamanio, Transportista *transportistas, int tamanio_transportistas){
 
-    int a;
-    char ID_producto[8];
-    printf("Ingrese el ID de su producto\n");
-    fgets(ID_producto,8,stdin);
-    flushInputBuffer();
-    listado_Pedido(pedidos,tamanio);
-
-    if(encontrarID_prod(pedidos, tamanio, ID_producto) != 1){
-        printf("El ID ingresado no se ha encontrado.\n");
-    }else{
-
-
-        //SI NO ES ADMIN HAY Q COMPROBAR QUE LA ID DEL PRODUCTO SEA LA MISMA QUE LA ID DEL QUE ESTA HACIENDO LA MODIFICACION -> ES UNA FUNCION NUEVA PERO IGUAL QUE ESTA
-
-        printf("----------\n");
-        printf("(1) Modificar estado\n");
-        printf("(2) Modificar transportista\n");
-        printf("(3) Modificar entrega\n");
-        fflush(stdin);
-        scanf("%d", &a);
-        printf("----------\n\n");
-
-        switch (a) {
-            case 1:
-                modificar_estado_pedido(pedidos, tamanio, ID_producto);
-                break;
-
-            case 2:
-                listado_transportista(transportistas,tamanio_transportistas);
-                modificar_transportistas(pedidos, tamanio, ID_producto);
-                break;
-
-            case 3:
-                modificar_entrega_productoPedido(pedidos, tamanio, ID_producto);
-                break;
-
-            default:
-                break;
-        }
-    }
-}
-*/
 void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
     int i = 0;
@@ -151,19 +106,7 @@ void modificar_estado_pedido(ProductoPedido *pedidos, int* tamanio,char *ID_prod
     flushInputBuffer();
 }
 
-void modificar_transportistas(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
-    int i = 0;
-
-    while(i < *tamanio && strcmp(pedidos[i].id_prod,ID_producto) != 0){
-        i++;    // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
-    }
-
-    printf("Escribe el nuevo id del transportista: ");
-	fflush(stdin);
-	fgets(pedidos[i].id_transp,5,stdin);
-    flushInputBuffer();
-}
 
 void modificar_entrega_productoPedido(ProductoPedido *pedidos, int* tamanio,char *ID_producto){
 
