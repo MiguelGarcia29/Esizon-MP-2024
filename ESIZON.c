@@ -1064,12 +1064,6 @@ void seccionProductosProv(Producto **productos, int *numProductos, Categoria **c
     }
 }
 
-// Mediante esta opción el administrador podrá acceder a la información de las categorías dadas de alta en la plataforma. Mediante el menú correspondiente podrá realizar altas, bajas, búsquedas, listados y modificaciones de categorías. Además podrá generar listados de productos por categoría.
-// Solo puede acceder: Administrador
-void mostrarCategorias()
-{
-    // Implementación de la función categorias
-}
 
 // Mediante esta opción el administrador podrá acceder a la información de los pedidos dados de alta en la plataforma.
 // Solo puede acceder: Administrador y cliente y proveedores
