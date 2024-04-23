@@ -4,22 +4,12 @@
 
 // Funciones de prototipo
 int todos_esizon(Descuento desc, Producto *prod, int numprodpe);
-int activo_inactivo(Descuento desc);
-int aplicado(DescuentoCliente desc);
-int cheq_cod(Descuento desc, int numprodpe);
-void descontar(Descuento desc, float *precio);
-void rellenar_descuentocliente(Descuento *desc, Cliente *clientes, DescuentoCliente **desccliente, int cantdad_desc, int cantdad_cli, int *cantdad_desccli);
-void anadir_fecha_caducidad(char *caducidad, int cantdad_descli);
-void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCliente *desc_cliente, int cant_desc, int cant_desc_cli);
-void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli, int cantdad_desc, int cantdad_cli, char *id_baja);
-void actualizar_estado_descuentos_vencidos(Descuento *desc, DescuentoCliente *desccli, int cant_desc);
-void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli);
 
 // Función para verificar si todos son esizon
 int todos_esizon(Descuento desc, Producto *prod, int numprodpe) {
     int res = 1, esizon = 0, i=0;
 
-    if(strcmp(prod[i].id_gestor, "0000") == 0) {
+    if(strcmp(prod[i].id_gestor, "0002") == 0) {
         esizon = 1;
     }
 
@@ -133,23 +123,27 @@ void anadir_fecha_caducidad(char *caducidad, int cantdad_descli) {
 }
 
 // Función para mostrar los descuentos del cliente
-void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCliente *desc_cliente, int cant_desc, int cant_desc_cli) {
+void mostrar_descuentos_cliente(char *id_cliente, Descuento **desc, DescuentoCliente **desc_cliente, int *cant_desc, int *cant_desc_cli) {
     printf("\nDescuentos del cliente con ID: %s\n", id_cliente);
-    for (int i = 0; i < cant_desc_cli; i++) {
-        if (strcmp(desc_cliente[i].id_cliente, id_cliente) == 0) {
-            printf("\n\nDescripcion: %s\n", desc[i].descrip);
-            printf("Tipo: %s\n", desc[i].tipo);
-            printf("Aplicabilidad: %s\n", desc[i].aplicable);
-            if(strcmp(desc[i].tipo, "codpro") == 0) {
-                printf("Importe: %.0f %% \n", desc[i].importe);
-            } else {
-                printf("Importe: %.2f \n", desc[i].importe);
-            }
-            printf("Estado: %s\n", desc[i].estado);
-            printf("Codigo del descuento: %s\n", desc_cliente[i].id_cod);
-            printf("Uso: %s\n", desc_cliente[i].estado == 1 ? "Aplicado" : "No aplicado");
-            printf("Fecha de asignacion: %s\n", desc_cliente[i].fecha_asignacion);
-            printf("Fecha de caducidad: %s\n", desc_cliente[i].fecha_caducidad);
+    for (int i = 0; i < *cant_desc_cli; i++) {
+        if (strcmp((*desc_cliente)[i].id_cliente, id_cliente) == 0) {
+                for(int j = 0; j< *cant_desc;j++){
+                    if (strcmp((*desc)[j].id_cod, (*desc_cliente)[i].id_cod) == 0) {
+                    printf("\n\nDescripcion: %s\n", (*desc)[j].descrip);
+                    printf("Tipo: %s\n",(*desc)[j].tipo);
+                    printf("Aplicabilidad: %s\n", (*desc)[j].aplicable);
+                    if(strcmp((*desc)[j].tipo, "codpro") == 0) {
+                        printf("Importe: %.0f %% \n", (*desc)[j].importe);
+                    } else {
+                        printf("Importe: %.2f \n", (*desc)[j].importe);
+                    }
+                    printf("Estado: %s\n", (*desc)[j].estado);
+                    }
+                }
+            printf("Codigo del descuento: %s\n", (*desc_cliente)[i].id_cod);
+            printf("Uso: %s\n", (*desc_cliente)[i].estado == 1 ? "Aplicado" : "No aplicado");
+            printf("Fecha de asignacion: %s\n", (*desc_cliente)[i].fecha_asignacion);
+            printf("Fecha de caducidad: %s\n", (*desc_cliente)[i].fecha_caducidad);
             printf("------------------------------------\n");
         }
     }

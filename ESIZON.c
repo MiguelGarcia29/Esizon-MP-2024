@@ -198,7 +198,7 @@ int comprobarTransportista(char *email, char *contrasenia, Transportista *transp
 {
     // Variable para indicar si se ha encontrado una coincidencia de credenciales
     int encontrado = 1;
-	
+
     // Recorre el arreglo de transportistas
     for (int i = 0; i < numTransportistas && encontrado == 1; i++)
     {
@@ -622,7 +622,7 @@ void mostrarDescuentosAdmin(Descuento **descuentos, int *numDescuentos, Descuent
             case 1:
                 // Dar de alta un nuevo descuento y asignarlo automáticamente a los clientes
                 alta_descuentos(descuentos, numDescuentos);
-                rellenar_descuentocliente(descuentos, numDescuentos, descuentoClientes, numDescuentoClientes, clientes, numClientes);
+                rellenar_descuentocliente(descuentos, clientes, descuentoClientes, numDescuentos, numClientes, numDescuentoClientes);
                 anadir_fecha_caducidad((*descuentoClientes)[(*numDescuentoClientes) - 1].fecha_caducidad, *numDescuentoClientes);
                 break;
             case 2:
@@ -701,11 +701,11 @@ void menuusuario(int rol, int posVectorClienteActual, Cliente **clientes, int *n
             break;
         case 3:
             // Mostrar los descuentos disponibles
-            mostrarDescuentos();
+            mostrar_descuentos_cliente((*clientes)[posVectorClienteActual].id_cliente,descuentos,descuentoClientes,numDescuentos,numDescuentoClientes);
             break;
         case 4:
             // Acceder a la sección de gestión de pedidos del cliente
-            mostrarPedidosClientes(productoPedidos, numProductoPedidos, productos, numProductos, pedidos, numPedido, clientes, posVectorClienteActual);
+            mostrarPedidosClientes(productoPedidos, numProductoPedidos, productos, numProductos, pedidos, numPedido, clientes, posVectorClienteActual,descuentos,descuentoClientes,numDescuentos,numDescuentoClientes);
             break;
         case 5:
             // Acceder a la sección de gestión de devoluciones del cliente
@@ -762,7 +762,8 @@ void mostrarDevoluciones(Devolucion **devoluciones, int *numDevo, Cliente **clie
 
 // Función mostrarPedidosClientes:
 // Permite a un cliente interactuar con el sistema para gestionar sus pedidos.
-void mostrarPedidosClientes(ProductoPedido ** pedidos, int * tamPedidos, Producto **productos, int * nProductos, Pedido **ped, int * numPed, Cliente **clientes, int posVectorClienteActual){
+void mostrarPedidosClientes(ProductoPedido ** pedidos, int * tamPedidos, Producto **productos, int * nProductos, Pedido **ped,
+                             int * numPed, Cliente **clientes, int posVectorClienteActual,Descuento **descuentos, DescuentoCliente **descuentosClientes, int *cantdadDesc, int*cantidadDescCli){
 
     int opcion;
     // Bucle para mostrar el menú y procesar la selección del cliente
@@ -789,6 +790,8 @@ void mostrarPedidosClientes(ProductoPedido ** pedidos, int * tamPedidos, Product
             case 1:
                 // Agregar un nuevo pedido al sistema
                 cesta = agregar_a_cesta(productos,nProductos,&coste,&tamLista);
+
+                aplicar_descuento(&coste,*descuentos,*descuentosClientes,(*clientes)[posVectorClienteActual].id_cliente,cesta,*cantdadDesc,*cantidadDescCli,nProductos);
 
                 // Verificar si el cliente tiene suficiente saldo en su cartera
                 if(coste > (*clientes)[posVectorClienteActual].cartera){
@@ -1139,12 +1142,6 @@ void mostrarTransportista(Transportista **transportista, int *nTrans)
     } while (opcion != 6); // Continuar mostrando el menú hasta que el usuario seleccione la opción "Salir"
 }
 
-// Mediante esta opción el administrador podrá acceder a la información de todos los códigos promocionales y/o cheques regalo dados de alta en la plataforma.
-// Solo puede acceder: Administrador y cliente
-void mostrarDescuentos()
-{
-    // Implementación de la función descuentos
-}
 
 // Función mostrarDevolucionesAdmin:
 // Permite a un administrador gestionar las devoluciones realizadas.
