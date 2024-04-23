@@ -24,7 +24,7 @@ void anadir_fecha_caducidad(char *caducidad, int cantdad_descli);
 
 void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli,int candtdad_desc,int cantdad_cli, char *id_baja);
 
-void actualizar_estado_descuentos_caducados(Descuento *desc,DescuentoCliente *desccli, int cant_desc);
+void actualizar_estado_descuentos_vencidos(Descuento *desc,DescuentoCliente *desccli, int cant_desc);
 
 void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli);
 

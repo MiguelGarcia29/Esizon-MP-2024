@@ -8,11 +8,11 @@ int todos_esizon(Descuento desc,Producto *prod,int numprodpe);
 
 int activo_inactivo(Descuento desc);
 
-int aplicado(Descuento desc);
+int aplicado(DescuentoCliente desc);
 
 int cheq_cod(Descuento desc,int numprodpe);
 
-int descontar(Descuento desc,float *precio);
+void descontar(Descuento desc,float *precio);
 
 
 void flushInputBuffer()
@@ -22,15 +22,14 @@ void flushInputBuffer()
 }
 
 
-void rellenar_descuentocliente(Descuento *desc, Cliente *clientes, DescuentoCliente **desccliente, int cantdad_desc, int cantdad_cli, int *cantdad_desccli) //anade la info de descuento cliente
-{
-    int indice; // Indice para recorrer los structs de DescuentoCliente
+void rellenar_descuentocliente(Descuento *desc, Cliente *clientes, DescuentoCliente **desccliente, int cantdad_desc, int cantdad_cli, int *cantdad_desccli) {
+    int indice; // Indice para recorrer el arreglo de DescuentoCliente
 	
 	indice = *cantdad_desccli;
 	
-	*cantdad_desccli = cantdad_desc * cantdad_cli; 
+	*cantdad_desccli = cantdad_desc * cantdad_cli;
     
-    if (*desccliente == NULL)	//Memoria dinamica
+    if (*desccliente == NULL)
 	{
         *desccliente = malloc((*cantdad_desccli) * sizeof(DescuentoCliente));
         if (*desccliente == NULL) 
@@ -61,11 +60,11 @@ void rellenar_descuentocliente(Descuento *desc, Cliente *clientes, DescuentoClie
     for (int i = 0; i < cantdad_cli; i++) {
             strcpy((*desccliente)[indice].id_cliente, clientes[i].id_cliente); // Asignar el ID del cliente
             
-            strcpy((*desccliente)[indice].id_cod, desc[cantdad_desc - 1].id_cod);//Asignar el ID del codigo
+            strcpy((*desccliente)[indice].id_cod, desc[cantdad_desc - 1].id_cod);
             
             strftime((*desccliente)[indice].fecha_asignacion, 11, "%d-%m-%Y", info); // Asignar la fecha de asignacion
 
-            (*desccliente)[indice].estado = 0; // Establecer el estado como no aplicado
+            (*desccliente)[indice].estado = 0; // Establecer el estado como no aplicado (0)
             
             indice++;
         }
@@ -73,7 +72,7 @@ void rellenar_descuentocliente(Descuento *desc, Cliente *clientes, DescuentoClie
 	
 	
 
-void anadir_fecha_caducidad(char *caducidad, int cantdad_descli) //anade la fecha de caducidad al struct
+void anadir_fecha_caducidad(char *caducidad, int cantdad_descli)
 {
 	time_t rawtime;
     struct tm *current_time;
@@ -84,19 +83,19 @@ void anadir_fecha_caducidad(char *caducidad, int cantdad_descli) //anade la fech
     time_t caducidad_seconds = rawtime + (2 * 7 * 24 * 60 * 60); // Dos semanas en segundos
     struct tm *caducidad_info = localtime(&caducidad_seconds);
 
-    // Introducir la fecha en la cadena proporcionada
+    // Formatear la fecha en la cadena proporcionada
     strftime(caducidad, 11, "%d-%m-%Y", caducidad_info);
 }
 
 
 
-void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCliente *desc_cliente, int cant_desc, int cant_desc_cli) //Muestra los descuentos que posee el cliente
+void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCliente *desc_cliente, int cant_desc, int cant_desc_cli) 
 {
-    printf("\nDescuentos del cliente con ID: %s\n", id_cliente);
-
+	printf("\nDescuentos del cliente con ID: %s\n", id_cliente);
+	
     for (int i = 0; i < cant_desc_cli; i++) 
 	{
-        if (strcmp(desc_cliente[i].id_cliente, id_cliente) == 0) //si coincide el id del cliente de la sesion con el de descuento cliente lo muestra en pantalla
+        if (strcmp(desc_cliente[i].id_cliente, id_cliente) == 0) 
 		{
             
                 printf("\n\nDescripcion: %s\n", desc[i].descrip);
@@ -113,7 +112,6 @@ void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCl
                 printf("Estado: %s\n", desc[i].estado);
                 printf("Codigo del descuento: %s\n", desc_cliente[i].id_cod);
                 printf("Uso: %s\n", desc_cliente[i].estado == 1 ? "Aplicado" : "No aplicado");
-                printf("%d",desc_cliente[i].estado);
             	printf("Fecha de asignacion: %s\n", desc_cliente[i].fecha_asignacion);
             	printf("Fecha de caducidad: %s\n", desc_cliente[i].fecha_caducidad);
 
@@ -123,7 +121,7 @@ void mostrar_descuentos_cliente(char id_cliente[8], Descuento *desc, DescuentoCl
 }
 
 
-void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli,int cantdad_desc,int cantdad_cli, char *id_baja) //Cuando un descuento se da de baja tambien lo hace descuento cliente
+void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli,int cantdad_desc,int cantdad_cli, char *id_baja) 
 {
     int encontrado = 0, i, j;
 
@@ -132,10 +130,10 @@ void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli,in
             
 
             for (j = i; j < *cantdad_desccli - 1; j++) {
-                (*desccli)[j] = (*desccli)[j + 1]; //Reposicionar las estructuras
+                (*desccli)[j] = (*desccli)[j + 1];
             }
 
-            *cantdad_desccli = cantdad_desc * cantdad_cli; //Memoria dinamica
+            *cantdad_desccli = cantdad_desc * cantdad_cli;
             *desccli = realloc(*desccli, (*cantdad_desccli) * sizeof(DescuentoCliente));
             encontrado = 1;
         }
@@ -144,7 +142,7 @@ void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli,in
 }
 
 
-void actualizar_estado_descuentos_caducados(Descuento *desc,DescuentoCliente *desccli, int cant_desc) //cuando pase la fecha de caducidad el desuento pasara a estar inactivo
+void actualizar_estado_descuentos_vencidos(Descuento *desc,DescuentoCliente *desccli, int cant_desc) 
 {
     // Obtener la fecha actual
     time_t rawtime;
@@ -164,24 +162,24 @@ void actualizar_estado_descuentos_caducados(Descuento *desc,DescuentoCliente *de
 
         // Comparar las fechas
         if (strcmp(fecha_actual, fecha_caducidad) > 0) {
-            // La fecha actual es posterior a la fecha de caducidad, por lo que el descuento esta caducado
+            // La fecha actual es posterior a la fecha de caducidad, por lo que el descuento esta vencido
             strcpy(desc[i].estado, "inactivo"); // Establecer el estado como inactivo
         }
     }
 }
 
 
-void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli)  //hace que un admin pueda hacer aplicable el descuento de un cliente en especifico
+void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli) 
 {
 	char id_cliente[8],id_descuento[11];
 	int encontrado = 0;
 	
 	printf("Introduce el ID del cliente: ");
-   	scanf("%8s", id_cliente);
+   	scanf("%s", id_cliente);
    	flushInputBuffer();
 
     printf("Introduce el ID del descuento: ");
-    scanf("%11s", id_descuento);
+    scanf("%s", id_descuento);
     flushInputBuffer();
 	
     for (int i = 0; i < cant_desc_cli && encontrado == 0; i++) {
@@ -191,7 +189,7 @@ void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli)  //hac
             encontrado = 1;
         }
     }
-    // Si no se encuentra el descuento para el cliente especificado se mostrara el mensaje de error
+    // Si no se encuentra el descuento para el cliente especificado
     if(encontrado == 0)
     {
     	printf("No se encontro el descuento %s para el cliente %s.\n", id_descuento, id_cliente);
@@ -204,13 +202,11 @@ int todos_esizon(Descuento desc,Producto *prod,int numprodpe)
 {
 	int res = 1,esizon = 0,i;
 	
-	for(i = 0; i < numprodpe && esizon == 0;i++)
-	{
-		if(strcmp(prod[i].id_gestor,"0000" == 0))
+		if(strcmp(prod[i].id_gestor,"0000") == 0)
 		{
-			esizon = 1
+			esizon = 1;
 		}
-	}
+	
 	
 	if(strcmp(desc.aplicable,"todos") == 0)
 	{
@@ -268,7 +264,7 @@ int cheq_cod(Descuento desc,int numprodpe)
 	{
 		res = 0;
 	}
-	if(strcmp(desc.tipo,"codpro") == 0 && numprodpe == 1)
+	else if(strcmp(desc.tipo,"codpro") == 0 && numprodpe == 1)
 	{
 		res = 0;
 	}
@@ -283,7 +279,7 @@ void descontar(Descuento desc,float *precio)
 	}
 	else
 	{
-		*precio = *precio * desc.importe /(float)100;
+		*precio = *precio - (*precio * desc.importe/(float)100);
 	}
 }
 
@@ -297,17 +293,20 @@ void aplicar_descuento(float *precio,Descuento *desc,DescuentoCliente *desccli,c
 	Descuento elegido;
 	DescuentoCliente elegidocliente;
 	
-	printf("\n\nUtilizar un codigo de descuento:\n\n");
-	printf("(1) Si");
+	printf("\n\nUtilizar un codigo de descuento\n\n");
+	printf("(1) Si\n");
 	printf("(2) En otra ocasion\n");
 	
+	flushInputBuffer();
 	scanf("%d",&a);
+	
 	
 	if(a == 1)
 	{
-		mostrar_descuentos_cliente(id_cliente[8],*desc,*desccli,cantdad_desc,cantdad_desccli);
+		mostrar_descuentos_cliente(id_cliente,desc,desccli,cantdad_desc,cantdad_desccli);
 		
 		printf("\n\n\nIntroduzca el codigo que desea utilizar: ");
+		flushInputBuffer();
 		scanf("%11s",id_desc);
 	}
 	else
@@ -319,8 +318,8 @@ void aplicar_descuento(float *precio,Descuento *desc,DescuentoCliente *desccli,c
 	{
 		if(strcmp(desccli[i].id_cod,id_desc) == 0 && strcmp(desccli[i].id_cliente,id_cliente) == 0)
 		{
-			elegidocliente = desccli[i];
-			
+        	elegidocliente = desccli[i];
+        
 			encontrado = 1;
 		}
 	}
@@ -349,7 +348,7 @@ void aplicar_descuento(float *precio,Descuento *desc,DescuentoCliente *desccli,c
 		return;
 	}
 	
-	if(todos_esizon(elegido,*prod,numprodpe) == 0 && activo_inactivo(elegido) == 0 && aplicado(elegidocliente) == 0 && cheq_cod(elegido,numprodpe) == 0)
+	if(todos_esizon(elegido,prod,numprodpe) == 0 && activo_inactivo(elegido) == 0 && aplicado(elegidocliente) == 0 && cheq_cod(elegido,numprodpe) == 0)
 	{
 		descontar(elegido,precio);
 	}
@@ -357,5 +356,4 @@ void aplicar_descuento(float *precio,Descuento *desc,DescuentoCliente *desccli,c
 	{
 		printf("Descuento no disponible.\n");
 	}
-	printf("%f",*precio);
 }
