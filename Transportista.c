@@ -351,7 +351,6 @@ void guardarTransportistasEnArchivo(Transportista *transportistas, int numTransp
     }
 
     fclose(archivo);
-    printf("Datos de transportistas guardados en el archivo Transportistas.txt.\n");
 }
 
 Transportista *iniciarTransportistasDeArchivo(int *numTransportista)

@@ -281,7 +281,6 @@ void guardarProductoPedidoEnArchivo(ProductoPedido *productosPedidos, int numPro
     }
 
     fclose(archivo);
-    printf("Datos de productos pedidos guardados en el archivo ProductosPedidos.txt.\n");
 }
 
 ProductoPedido *iniciarProductoPedidosDeArchivo(int *numProductos)

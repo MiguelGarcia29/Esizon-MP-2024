@@ -201,7 +201,7 @@ void guardarClientesEnArchivo(Cliente *clientes, int numClientes)
 }
 
 // LE PASO COMO PUNTERO EL NUM DE CLIENTES PARA LUEGO PODER ALMACENARLO EN EL PROGRAMA (MAIN) -> MISMA LOGICA PARA LAS DEMAS LECTURAS
-void *iniciarClientesDeArchivo(int *numClientes, Cliente **clientesV)
+Cliente *iniciarClientesDeArchivo(int *numClientes)
 {
     FILE *archivo = fopen(Clientes_txt, "r");
     if (archivo == NULL)
@@ -258,7 +258,7 @@ void *iniciarClientesDeArchivo(int *numClientes, Cliente **clientesV)
 
     fclose(archivo);
     *numClientes = count;
-    *clientesV = clientes;
+    return clientes;
 }
 
 char *id_generator_cl(Cliente **clientes, int *tamanio_vector)

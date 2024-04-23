@@ -10,8 +10,8 @@ void inicializarDatos(Cliente **clientes, int *numClientes, AdminProv **adminPro
                       Producto **productos, int *numProductos, ProductoPedido **productoPedidos, int *numProductoPedidos,
                       Transportista **transportistas, int *numTransportistas)
 {
-    iniciarClientesDeArchivo(numClientes,clientes);
-    iniciarAdminProvDeArchivo(numAdminProvs,adminProvs);
+    *clientes = iniciarClientesDeArchivo(numClientes);
+    *adminProvs=iniciarAdminProvDeArchivo(numAdminProvs);
     *productos = iniciarProductosDeArchivo(numProductos);
     *descuentos = iniciarDescuentosDeArchivo(numDescuentos);
     *descuentoClientes = iniciarDescuentosClientesDeArchivo(numDescuentoClientes);
@@ -48,7 +48,7 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
                       Transportista **transportistas, int *numTransportistas)
 {
 
-    int rol;
+    int rol=6;
     int posVectorClienteActual;
     // 1-Administrador
     // 2-Usuario
@@ -76,14 +76,20 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
     // COMPROBAR QUE EL ROL ESTÉ REGISTRADO
      do
     {
-        printf("¿Cómo vas a acceder?\n");
-        printf("1- Administrador\n");
-        printf("2- Usuario\n");
-        printf("3- Proveedor\n");
-        printf("4- Transportista\nIndique rol: ");
-        scanf("%d", &rol);
-        flushInputBuffer();
-    } while (iniciarSesion(rol,&posVectorClienteActual,*clientes,*numClientes,*adminProvs,*numAdminProvs,*transportistas,*numTransportistas)!=0);
+        printf("Correo electronico: ");
+        char correo[31];
+        fgets(correo, 31, stdin);
+        // Elimina el \n
+        correo[strcspn(correo, "\n")] = 0;
+
+        printf("Clave de acceso: ");
+        char contrasenia[16];
+        fgets(contrasenia, 16, stdin);
+        contrasenia[strcspn(contrasenia, "\n")] = 0;
+
+        rol = iniciarSesion(&posVectorClienteActual,*clientes,*numClientes,*adminProvs,*numAdminProvs,*transportistas,*numTransportistas,correo,contrasenia);
+
+    } while (rol==6);
 
     switch (rol)
     {
@@ -103,57 +109,32 @@ void accederPrograma(Cliente **clientes, int *numClientes, AdminProv **adminProv
     }
 
 
-   // almacenarDatos(clientes, numClientes, adminProvs, numAdminProvs, categorias, numCategorias, compartimentoLockers, numCompartimentoLockers, descuentoClientes, numDescuentoClientes, descuentos, numDescuentos, devoluciones, numDevoluciones, lockers, numLockers, pedidos, numPedido, productos, numProductos, productoPedidos, numProductoPedidos, transportistas, numTransportistas);
 }
 
 // Devuelve 0 si pudo iniciar sesion en el rol indicado y 1 si no,
-int iniciarSesion(int rol, int *posVectorActual, Cliente *clientes, int numClientes, AdminProv *adminProvs, int numAdminProvs, Transportista *transportistas, int numTransportistas)
+int iniciarSesion(int *posVectorActual,Cliente *clientes, int numClientes, AdminProv *adminProvs, int numAdminProvs, Transportista *transportistas, int numTransportistas, char *correo, char *contrasenia)
 {
-    int encontrado = 1;
-    if (rol < 1 || rol > 4)
-    {
-        printf("Ese rol no existe\n");
-    }
-    else
-    {
-        printf("Correo electronico: ");
-        char correo[31];
-        fgets(correo, 31, stdin);
-        // Elimina el \n
-        correo[strcspn(correo, "\n")] = 0;
+    int rol=6;
 
-        printf("Clave de acceso: ");
-        char contrasenia[16];
-        fgets(contrasenia, 16, stdin);
-        contrasenia[strcspn(contrasenia, "\n")] = 0;
-        // 1-Administrador
-        // 2-Usuario
-        // 3-Proveedor
-        // 4-Transportista
-        switch (rol)
-        {
-        case 1:
-            encontrado = comprobarAdminoProv(correo, contrasenia, "administrador",adminProvs,numAdminProvs,posVectorActual);
-            break;
-        case 2:
-            encontrado = comprobarUsuario(correo, contrasenia,clientes,numClientes,posVectorActual);
-            break;
-        case 3:
-            encontrado = comprobarAdminoProv(correo, contrasenia, "proveedor",adminProvs,numAdminProvs,posVectorActual);
-            break;
-        case 4:
-            encontrado = comprobarTransportista(correo, contrasenia,transportistas,numTransportistas, posVectorActual);
-            break;
-        }
 
-        // Mensaje de error si no accede
-        if (encontrado == 1)
-        {
-            printf("Algún dato es incorrecto\n");
-        }
+    if(comprobarAdminoProv(correo, contrasenia, "administrador",adminProvs,numAdminProvs,posVectorActual)==0)
+        rol= 1;
+    if(comprobarUsuario(correo, contrasenia,clientes,numClientes,posVectorActual)==0)
+        rol= 2;
+    if(comprobarAdminoProv(correo, contrasenia, "proveedor",adminProvs,numAdminProvs,posVectorActual)==0)
+        rol = 3;
+    if (comprobarTransportista(correo, contrasenia,transportistas,numTransportistas, posVectorActual)==0)
+        rol = 4;
+
+
+    // Mensaje de error si no accede
+    if (rol == 6)
+    {
+        printf("Algún dato es incorrecto\n");
     }
 
-    return encontrado;
+
+    return rol;
 }
 
 int comprobarAdminoProv(char *email, char *contrasenia, char *rol, AdminProv *adminProvs, int numAdminProvs, int *posVectorClienteActual)

@@ -58,7 +58,6 @@ void guardarPedidoEnArchivo(Pedido *pedidos, int numPedidos)
     }
 
     fclose(archivo);
-    printf("Datos de pedidos guardados en el archivo Pedidos.txt.\n");
 }
 
 Pedido *iniciarPedidosDeArchivo(int *numPedidos)

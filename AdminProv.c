@@ -134,7 +134,7 @@ void guardarAdminProvEnArchivo(AdminProv *admins, int numAdmins)
     fclose(archivo);
 }
 
-void *iniciarAdminProvDeArchivo(int *numAdmins,AdminProv **pr)
+AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
 {
     FILE *archivo = fopen(AdminProv_txt, "r");
     if (archivo == NULL)
@@ -182,7 +182,7 @@ void *iniciarAdminProvDeArchivo(int *numAdmins,AdminProv **pr)
 
     fclose(archivo);
     *numAdmins = count;
-    *pr = adminProvs;
+    return adminProvs;
 }
 
 /*

@@ -315,7 +315,6 @@ void guardarDevolucionesEnArchivo(Devolucion *devoluciones, int numDevoluciones)
     }
 
     fclose(archivo);
-    printf("Datos de devoluciones guardados en el archivo Devoluciones.txt.\n");
 }
 
 Devolucion *iniciarDevolucionDeArchivo(int *numDevolucion)

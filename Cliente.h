@@ -23,7 +23,7 @@ void mostrar_cliente(Cliente cliente);
 void cambiar_perfil_cliente(Cliente *cliente); //se presentara un menu para que el cliente pueda cambiar los datos que considere necesario
 
 void guardarClientesEnArchivo(Cliente *clientes, int numClientes);
-void *iniciarClientesDeArchivo(int *numClientes,Cliente **);
+Cliente *iniciarClientesDeArchivo(int *numClientes);
 void cambiar_contrasenia_cliente(char nueva[16]); // funcion que cambia la contrasenia
 void cambiar_email_cliente(char nuevo[31]); //funcion que cambia el email
 void cambiar_direccion_cliente(char direccion[51], char provincia[21], char localidad[21]); //funcion que cambia direccion, provincia y localidad
