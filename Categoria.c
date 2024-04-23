@@ -127,7 +127,7 @@ void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias)
 // Función para iniciar las categorías desde un archivo
 Categoria *iniciarCategoriasDeArchivo(int *numCat)
 {
-    FILE *archivo = fopen("Categorias.txt", "r");
+    FILE *archivo = fopen(Categorias_txt, "r");
     if (archivo == NULL)
     {
         printf("Error al abrir el archivo Categorias.txt.\n");

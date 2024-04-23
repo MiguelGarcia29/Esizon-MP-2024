@@ -135,7 +135,7 @@ void guardarAdminProvEnArchivo(AdminProv *admins, int numAdmins)
 // Función para iniciar el vector de administradores o proveedores desde un archivo
 AdminProv *iniciarAdminProvDeArchivo(int *numAdmins)
 {
-    FILE *archivo = fopen("AdminProv.txt", "r");
+    FILE *archivo = fopen(AdminProv_txt, "r");
     if (archivo == NULL)
     {
         printf("Error al abrir el archivo AdminProv.txt.\n");

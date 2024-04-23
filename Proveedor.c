@@ -159,7 +159,6 @@ void bajaProveedor(AdminProv **proveedores, int *numProveedores,char *id) {
             *proveedores = (AdminProv *)realloc(*proveedores, ((*numProveedores) - 1) * sizeof(AdminProv));
             if (*proveedores == NULL) {
                 printf("Error al liberar memoria.\n");
-                exit(1);
             }else{
                 (*numProveedores)--;
                 printf("Proveedor eliminado exitosamente.\n");
