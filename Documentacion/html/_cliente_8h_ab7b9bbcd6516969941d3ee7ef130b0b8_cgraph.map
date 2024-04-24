@@ -1,0 +1,7 @@
+<map id="altaCliente" name="altaCliente">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,88,57"/>
+<area shape="rect" id="Node000002" href="$_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="136,5,245,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,34,120,28,121,34,89,39"/>
+<area shape="rect" id="Node000003" href="$_cliente_8c.html#a8207982d5eb4f87ace603076a3b4dffb" title=" " alt="" coords="136,56,245,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="89,49,121,54,120,60,88,54"/>
+</map>

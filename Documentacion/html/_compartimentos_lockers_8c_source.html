@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente CompartimentosLockers.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">CompartimentosLockers.c</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_compartimentos_lockers_8c.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_compartimentos_lockers_8h.html">CompartimentosLockers.h</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Función para obtener la fecha de caducidad de un compartimento</span></div>
+<div class="foldopen" id="foldopen00004" data-start="{" data-end="}">
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="_compartimentos_lockers_8c.html#af653f7a5c9299853821f6f3722587833">    4</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_compartimentos_lockers_8c.html#af653f7a5c9299853821f6f3722587833">fecha_caducidad_compartimento</a>(<span class="keywordtype">char</span> *fecha) {</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    time_t rawtime;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    <span class="keyword">struct </span>tm *info;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="comment">// Obtener la fecha y hora actual</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    time(&amp;rawtime);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    rawtime += 7 * 24 * 60 * 60; <span class="comment">// 7 días en segundos</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    info = localtime(&amp;rawtime);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    strftime(fecha, 11, <span class="stringliteral">&quot;%d/%m/%Y&quot;</span>, info);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Función para dar de alta un nuevo compartimento</span></div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="_compartimentos_lockers_8c.html#a3751dd3e4f5377530cddc39ce8ca0933">   17</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_compartimentos_lockers_8c.html#a3751dd3e4f5377530cddc39ce8ca0933">alta_comportimiento</a>(<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> **l, <span class="keywordtype">int</span>* tamanio_vector) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> nuevo_compartimento;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">char</span> fecha[11];</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="_utilidades_8c.html#a00f0e4685c0837a08b16474234bd0cb8">obtener_fecha_actual</a>(fecha);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    strcpy(nuevo_compartimento.<a class="code hl_variable" href="struct_compartimento_locker.html#a19ced471f252e4237965ffaafa6af53b">fecha_ocupacion</a>, fecha);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">char</span> fechacaducidad[11];</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_function" href="_compartimentos_lockers_8c.html#af653f7a5c9299853821f6f3722587833">fecha_caducidad_compartimento</a>(fechacaducidad);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    strcpy(nuevo_compartimento.<a class="code hl_variable" href="struct_compartimento_locker.html#ae30a39d4079d3aaae539e60a508e5ffa">fecha_caducidad</a>, fechacaducidad);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    strcpy(nuevo_compartimento.<a class="code hl_variable" href="struct_compartimento_locker.html#a73581a2beca140130049e39481cbf765">estado</a>, <span class="stringliteral">&quot;ocupado&quot;</span>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">// Realiza una realocación de memoria para agregar el nuevo compartimento al arreglo</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    *l = (<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *)realloc(*l, (*tamanio_vector + 1) * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a>));</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (*l == NULL) {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        printf(<span class="stringliteral">&quot;Error al asignar memoria para el nuevo compartimento. \n&quot;</span>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    (*l)[*tamanio_vector] = nuevo_compartimento; <span class="comment">// Guarda el nuevo compartimento en el arreglo</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    (*tamanio_vector)++;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// Función para dar de baja un compartimiento</span></div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="_compartimentos_lockers_8c.html#a543547d0202eabb0045b42e88043c57f">   40</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_compartimentos_lockers_8c.html#a543547d0202eabb0045b42e88043c57f">baja_comportamiento</a>(<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *l, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *id_baja, <span class="keywordtype">char</span> *codigo_de_baja) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">int</span> encontrado = 0;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// Busca el compartimento con el ID y código dados y lo elimina del arreglo</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; *tamanio; i++) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">if</span> (strcmp(l[i].id_locker, id_baja) == 0 &amp;&amp; strcmp(l[i].cod_locker, codigo_de_baja) == 0) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            encontrado = 1;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="comment">// Reorganiza el arreglo para eliminar el compartimento encontrado</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i; j &lt; *tamanio - 1; j++) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                l[j] = l[j + 1];</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            (*tamanio)--; <span class="comment">// Reduce el tamaño del arreglo</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            printf(<span class="stringliteral">&quot;Compartimento ha sido dado de baja correctamente.\n&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">break</span>; <span class="comment">// Sale del bucle una vez encontrado y eliminado el compartimento</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (encontrado == 0) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        printf(<span class="stringliteral">&quot;La ID registrada no ha sido encontrada.\n&quot;</span>);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">// Función para mostrar un listado de compartimientos</span></div>
+<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="_compartimentos_lockers_8c.html#addfb0559951a7436f91f37796c443c58">   65</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_compartimentos_lockers_8c.html#addfb0559951a7436f91f37796c443c58">listado_comportamiento</a>(<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *l, <span class="keywordtype">int</span> tamanio) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// Recorre el arreglo de compartimientos y muestra la información de cada uno</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; tamanio; i++) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        printf(<span class="stringliteral">&quot;%s-%d-%s-%s-%s-%s\n&quot;</span>, l[i].id_locker, l[i].num_comp, l[i].cod_locker, l[i].estado, l[i].fecha_ocupacion,l[i].<a class="code hl_function" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a> );</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">// Guarda el vector de ComportamientoLocker en el archivo siguiendo la estructura:</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">    o Identificador del locker (Id_locker), 10 caracteres máximo.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">    o Número de compartimento (Num_comp).</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">    o Código del locker (Cod_locker).</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    o Estado: «ocupado» o «vacío»</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    o Fecha ocupación (día, mes y año).</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">    o Fecha caducidad (día, mes y año).</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">*/</span></div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="_compartimentos_lockers_8c.html#ac934c1d5fd592e35e5fce98558c2c6fa">   82</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_compartimentos_lockers_8c.html#ac934c1d5fd592e35e5fce98558c2c6fa">guardarCompartimentoLockerEnArchivo</a>(<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *comportamientos, <span class="keywordtype">int</span> numComportamientos)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>{</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    FILE *archivo = fopen(<a class="code hl_define" href="_utilidades_8h.html#ab6d84846d5d2ca4c0a560d9eda3b1101">CompartimentoLocker_txt</a>, <span class="stringliteral">&quot;w&quot;</span>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (archivo == NULL)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        printf(<span class="stringliteral">&quot;Error al abrir el archivo CompartimentosLockers.txt.\n&quot;</span>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numComportamientos; i++)</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        fprintf(archivo, <span class="stringliteral">&quot;%s-%d-%s-%s-%s-%s-\n&quot;</span>,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                comportamientos[i].id_locker,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                comportamientos[i].num_comp,</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                comportamientos[i].cod_locker,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                comportamientos[i].estado,</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                comportamientos[i].fecha_ocupacion,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                comportamientos[i].<a class="code hl_function" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a>);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    fclose(archivo);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
+</div>
+<div class="foldopen" id="foldopen00104" data-start="{" data-end="}">
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="_compartimentos_lockers_8c.html#a263bd5bb0661c0004d238c4b00e1b9c4">  104</a></span><a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *<a class="code hl_function" href="_compartimentos_lockers_8c.html#a263bd5bb0661c0004d238c4b00e1b9c4">iniciarCompartimientoLockersDeArchivo</a>(<span class="keywordtype">int</span> *numCompLock)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>{</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    FILE *archivo = fopen(<a class="code hl_define" href="_utilidades_8h.html#ab6d84846d5d2ca4c0a560d9eda3b1101">CompartimentoLocker_txt</a>, <span class="stringliteral">&quot;r&quot;</span>); <span class="comment">// Abre el archivo en modo lectura</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordflow">if</span> (archivo == NULL)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        printf(<span class="stringliteral">&quot;Error al abrir el archivo %s.\n&quot;</span>, <a class="code hl_define" href="_utilidades_8h.html#ab6d84846d5d2ca4c0a560d9eda3b1101">CompartimentoLocker_txt</a>);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="comment">// Contar la cantidad de líneas en el archivo</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">char</span> buffer[<a class="code hl_define" href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a>]; <span class="comment">// Longitud máxima de línea</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">while</span> (fgets(buffer, <a class="code hl_define" href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a>, archivo) != NULL)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        count++;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">// Regresar al inicio del archivo</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    rewind(archivo);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="comment">// Crear el vector de Locker</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *comportamientoL = (<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> *)malloc(count * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a>));</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">if</span> (comportamientoL == NULL)</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        fclose(archivo);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        printf(<span class="stringliteral">&quot;Error: No se pudo asignar memoria para el vector de ComportamientoLocker.\n&quot;</span>);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="comment">// Leer cada línea y rellenar el vector de comportamientoL</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;count;i++)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">if</span>(fgets(buffer, <a class="code hl_define" href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a>, archivo) != NULL){</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordtype">char</span> *token = strtok(buffer, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        strncpy(comportamientoL[i].id_locker, token, <span class="keyword">sizeof</span>(comportamientoL[i].id_locker));</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        comportamientoL[i].<a class="code hl_variable" href="struct_compartimento_locker.html#a4fc7ee329ebe06ba6d217219665aa71a">num_comp</a> = atoi(token);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        strncpy(comportamientoL[i].cod_locker, token, <span class="keyword">sizeof</span>(comportamientoL[i].cod_locker));</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        strncpy(comportamientoL[i].estado, token, <span class="keyword">sizeof</span>(comportamientoL[i].estado));</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        strncpy(comportamientoL[i].fecha_ocupacion, token, <span class="keyword">sizeof</span>(comportamientoL[i].fecha_ocupacion));</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        strncpy(comportamientoL[i].<a class="code hl_function" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a>, token, <span class="keyword">sizeof</span>(comportamientoL[i].<a class="code hl_function" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a>));</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        }</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    fclose(archivo);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    *numCompLock = count; <span class="comment">// Actualiza el número total de compartimentos</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordflow">return</span> comportamientoL; <span class="comment">// Retorna el arreglo de compartimentos</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">int main() {</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">    CompartimentoLocker *lockers = NULL; // Arreglo dinámico de lockers</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">    int tamanio_vector = 0; // Tamaño inicial del vector</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment"></span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">    int opcion;</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment">    char id[11];</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment">    char codigo[11];</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"></span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">    do {</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="comment">        printf(&quot;\nMenú:\n&quot;);</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="comment">        printf(&quot;1. Alta de comportamiento\n&quot;);</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment">        printf(&quot;2. Baja de comportamiento\n&quot;);</span></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">        printf(&quot;3. Listado de comportamiento\n&quot;);</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">        printf(&quot;4. Salir\n&quot;);</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment">        printf(&quot;Ingrese su opción: &quot;);</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment">        scanf(&quot;%d&quot;, &amp;opcion);</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment"></span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">        switch (opcion) {</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">            case 1:</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">                alta_comportimiento(&amp;lockers, &amp;tamanio_vector);</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">                break;</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">            case 2:</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">                printf(&quot;Ingrese el ID del comportamiento a dar de baja: &quot;);</span></div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="comment">                scanf(&quot;%s&quot;, id);</span></div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">                flushInputBuffer(); // Limpiar el buffer de entrada después de leer una cadena de caracteres</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">                printf(&quot;Ingrese el código del comportamiento a dar de baja: &quot;);</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">                scanf(&quot;%s&quot;, codigo);</span></div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">                flushInputBuffer(); // Limpiar el buffer de entrada después de leer una cadena de caracteres</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">                baja_comportamiento(lockers, &amp;tamanio_vector, id, codigo);</span></div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">                break;</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment">            case 3:</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">                listado_comportamiento(lockers, tamanio_vector);</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">                break;</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">            case 4:</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment">                printf(&quot;Saliendo del programa...\n&quot;);</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment">                break;</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">            default:</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">                printf(&quot;Opción inválida. Por favor, ingrese una opción válida.\n&quot;);</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="comment">        }</span></div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="comment">    } while (opcion != 4);</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment"></span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">    // Liberar memoria asignada para los lockers</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">    if (lockers != NULL) {</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">        free(lockers);</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">        lockers = NULL;</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment">    }</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment"></span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">    return 0;</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment">}*/</span></div>
+<div class="ttc" id="a_compartimentos_lockers_8c_html_a263bd5bb0661c0004d238c4b00e1b9c4"><div class="ttname"><a href="_compartimentos_lockers_8c.html#a263bd5bb0661c0004d238c4b00e1b9c4">iniciarCompartimientoLockersDeArchivo</a></div><div class="ttdeci">CompartimentoLocker * iniciarCompartimientoLockersDeArchivo(int *numCompLock)</div><div class="ttdef"><b>Definition</b> <a href="#l00104">CompartimentosLockers.c:104</a></div></div>
+<div class="ttc" id="a_compartimentos_lockers_8c_html_a3751dd3e4f5377530cddc39ce8ca0933"><div class="ttname"><a href="_compartimentos_lockers_8c.html#a3751dd3e4f5377530cddc39ce8ca0933">alta_comportimiento</a></div><div class="ttdeci">void alta_comportimiento(CompartimentoLocker **l, int *tamanio_vector)</div><div class="ttdef"><b>Definition</b> <a href="#l00017">CompartimentosLockers.c:17</a></div></div>
+<div class="ttc" id="a_compartimentos_lockers_8c_html_a543547d0202eabb0045b42e88043c57f"><div class="ttname"><a href="_compartimentos_lockers_8c.html#a543547d0202eabb0045b42e88043c57f">baja_comportamiento</a></div><div class="ttdeci">void baja_comportamiento(CompartimentoLocker *l, int *tamanio, char *id_baja, char *codigo_de_baja)</div><div class="ttdef"><b>Definition</b> <a href="#l00040">CompartimentosLockers.c:40</a></div></div>
+<div class="ttc" id="a_compartimentos_lockers_8c_html_ac934c1d5fd592e35e5fce98558c2c6fa"><div class="ttname"><a href="_compartimentos_lockers_8c.html#ac934c1d5fd592e35e5fce98558c2c6fa">guardarCompartimentoLockerEnArchivo</a></div><div class="ttdeci">void guardarCompartimentoLockerEnArchivo(CompartimentoLocker *comportamientos, int numComportamientos)</div><div class="ttdef"><b>Definition</b> <a href="#l00082">CompartimentosLockers.c:82</a></div></div>
+<div class="ttc" id="a_compartimentos_lockers_8c_html_addfb0559951a7436f91f37796c443c58"><div class="ttname"><a href="_compartimentos_lockers_8c.html#addfb0559951a7436f91f37796c443c58">listado_comportamiento</a></div><div class="ttdeci">void listado_comportamiento(CompartimentoLocker *l, int tamanio)</div><div class="ttdef"><b>Definition</b> <a href="#l00065">CompartimentosLockers.c:65</a></div></div>
+<div class="ttc" id="a_compartimentos_lockers_8c_html_af653f7a5c9299853821f6f3722587833"><div class="ttname"><a href="_compartimentos_lockers_8c.html#af653f7a5c9299853821f6f3722587833">fecha_caducidad_compartimento</a></div><div class="ttdeci">void fecha_caducidad_compartimento(char *fecha)</div><div class="ttdef"><b>Definition</b> <a href="#l00004">CompartimentosLockers.c:4</a></div></div>
+<div class="ttc" id="a_compartimentos_lockers_8h_html"><div class="ttname"><a href="_compartimentos_lockers_8h.html">CompartimentosLockers.h</a></div></div>
+<div class="ttc" id="a_transportista_8c_html_a14d937d00bc62ac1a0dfd81912053bef"><div class="ttname"><a href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a></div><div class="ttdeci">void fecha_caducidad(char *fecha)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00164">Transportista.c:164</a></div></div>
+<div class="ttc" id="a_utilidades_8c_html_a00f0e4685c0837a08b16474234bd0cb8"><div class="ttname"><a href="_utilidades_8c.html#a00f0e4685c0837a08b16474234bd0cb8">obtener_fecha_actual</a></div><div class="ttdeci">void obtener_fecha_actual(char *fecha_actual)</div><div class="ttdef"><b>Definition</b> <a href="_utilidades_8c_source.html#l00011">Utilidades.c:11</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html_a7ed421561768d4651e6c2347eb875bb4"><div class="ttname"><a href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a></div><div class="ttdeci">#define TAMANIO_MAXIMO_LINEA</div><div class="ttdef"><b>Definition</b> <a href="_utilidades_8h_source.html#l00008">Utilidades.h:8</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html_ab6d84846d5d2ca4c0a560d9eda3b1101"><div class="ttname"><a href="_utilidades_8h.html#ab6d84846d5d2ca4c0a560d9eda3b1101">CompartimentoLocker_txt</a></div><div class="ttdeci">#define CompartimentoLocker_txt</div><div class="ttdef"><b>Definition</b> <a href="_utilidades_8h_source.html#l00016">Utilidades.h:16</a></div></div>
+<div class="ttc" id="astruct_compartimento_locker_html"><div class="ttname"><a href="struct_compartimento_locker.html">CompartimentoLocker</a></div><div class="ttdef"><b>Definition</b> <a href="_compartimentos_lockers_8h_source.html#l00010">CompartimentosLockers.h:10</a></div></div>
+<div class="ttc" id="astruct_compartimento_locker_html_a19ced471f252e4237965ffaafa6af53b"><div class="ttname"><a href="struct_compartimento_locker.html#a19ced471f252e4237965ffaafa6af53b">CompartimentoLocker::fecha_ocupacion</a></div><div class="ttdeci">char fecha_ocupacion[11]</div><div class="ttdef"><b>Definition</b> <a href="_compartimentos_lockers_8h_source.html#l00015">CompartimentosLockers.h:15</a></div></div>
+<div class="ttc" id="astruct_compartimento_locker_html_a4fc7ee329ebe06ba6d217219665aa71a"><div class="ttname"><a href="struct_compartimento_locker.html#a4fc7ee329ebe06ba6d217219665aa71a">CompartimentoLocker::num_comp</a></div><div class="ttdeci">int num_comp</div><div class="ttdef"><b>Definition</b> <a href="_compartimentos_lockers_8h_source.html#l00012">CompartimentosLockers.h:12</a></div></div>
+<div class="ttc" id="astruct_compartimento_locker_html_a73581a2beca140130049e39481cbf765"><div class="ttname"><a href="struct_compartimento_locker.html#a73581a2beca140130049e39481cbf765">CompartimentoLocker::estado</a></div><div class="ttdeci">char estado[8]</div><div class="ttdef"><b>Definition</b> <a href="_compartimentos_lockers_8h_source.html#l00014">CompartimentosLockers.h:14</a></div></div>
+<div class="ttc" id="astruct_compartimento_locker_html_ae30a39d4079d3aaae539e60a508e5ffa"><div class="ttname"><a href="struct_compartimento_locker.html#ae30a39d4079d3aaae539e60a508e5ffa">CompartimentoLocker::fecha_caducidad</a></div><div class="ttdeci">char fecha_caducidad[11]</div><div class="ttdef"><b>Definition</b> <a href="_compartimentos_lockers_8h_source.html#l00016">CompartimentosLockers.h:16</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

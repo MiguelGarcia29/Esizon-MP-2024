@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente Productos_pedidos.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Productos_pedidos.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_productos__pedidos_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef Producto_Pedido_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define Producto_Pedido_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_cliente_8h.html">Cliente.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="_utilidades_8h.html">Utilidades.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="_productos_8h.html">Productos.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_pedidos_8h.html">Pedidos.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_lockers_8h.html">Lockers.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html">   15</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#af057e51f19210eb2ed2779a3ffa400c7">   16</a></span>    <span class="keywordtype">char</span> id_pedido[8];</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#a93c93b618b7ad8fbed89203cd7c46503">   17</a></span>    <span class="keywordtype">char</span> id_prod[8];</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#aec4f6d0cd879ac50cba2f42c5e9a4f69">   18</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_producto_pedido.html#aec4f6d0cd879ac50cba2f42c5e9a4f69">num_unid</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#accbea61a7f97b1f51290df1cc1995bfb">   19</a></span>    <span class="keywordtype">char</span> fecha_entrega_prevista[11];</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#a758f4498ebafcd076b47d494855c7dd5">   20</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_producto_pedido.html#a758f4498ebafcd076b47d494855c7dd5">importe</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#a48509720e8e167797df30bc509b13e57">   21</a></span>    <span class="keywordtype">char</span> estado_pedido[15]; <span class="comment">// &quot;enPreparacion&quot;, &quot;enviado&quot;, &quot;enReparto&quot;, &quot;enLocker&quot;, &quot;entregado&quot;, &quot;devuelto&quot;, &quot;transportista&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#a2b7f3c996a591c65fca688cfac2de2cb">   22</a></span>    <span class="keywordtype">char</span> id_transp[5];</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#adc061f67d76193d52f807e02bc62a928">   23</a></span>    <span class="keywordtype">char</span> id_locker[11];</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#afe23005cb18c2e65289e935faf0b2be5">   24</a></span>    <span class="keywordtype">char</span> cod_locker[11];</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="struct_producto_pedido.html#adee2e084f5daf73ace74fe33d7e7bdf5">   25</a></span>    <span class="keywordtype">char</span> fecha_entrega_devolucion_transp[11];</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a>;</div>
+</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#ad02acd510f60ab3f11104a3845137ea6">baja_prodPed</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos , <span class="keywordtype">int</span>* tamanioProP, <span class="keywordtype">char</span> *id_baja);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#aa9a920d935bb7027a0f0c7d0785b0038">listado_pedido</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <span class="keywordtype">int</span>* tamanio);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#a8001c8e1bdc9b062745ff188ea1f2e5c">buscarPedido</a> (<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <span class="keywordtype">int</span>** tamanio , <span class="keywordtype">char</span>* <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#a1b5e3d650381c7019afc31ef2d056e69">consultar_estado</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> *pedidos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *id_pedido_buscado);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">char</span> *<a class="code hl_function" href="_productos__pedidos_8h.html#a3c4b77ba97eeb68578624722d95e19e5">seleccionar_producto</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> *productos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *productos_select);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">int</span> <a class="code hl_function" href="_productos__pedidos_8h.html#a2277795b4eab873a90164d143c966b2f">reducirStock</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> *productos, <span class="keywordtype">int</span> tamProd,<span class="keywordtype">char</span>*idProd, <span class="keywordtype">int</span> ctdadReducir);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#a4f207351316ed5b3c356dd00bf75c68d">guardarProductoPedidoEnArchivo</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> *, <span class="keywordtype">int</span> );</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> *<a class="code hl_function" href="_productos__pedidos_8h.html#a5a58cf63efb585aa8f3300c1496da57e">iniciarProductoPedidosDeArchivo</a>(<span class="keywordtype">int</span> *);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#aceb34c4aa99ac73c36395890fe654be2">hacerPedido</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **listaCompra, <span class="keywordtype">int</span> *tamLista,<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> *numnProductos,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                 <a class="code hl_struct" href="struct_pedido.html">Pedido</a> **pedidos, <span class="keywordtype">int</span> *numPedidos, <a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **prodPeds,<span class="keywordtype">int</span> *numProdPe, <span class="keywordtype">char</span> *idCliente,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                  <span class="keywordtype">char</span> *tipoEntrega, <span class="keywordtype">char</span> *idLocker);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos__pedidos_8h.html#a64ad6418ed8914334b2872f22f787263">listado_pedido_pendiente</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *idProd,<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> * nProductos);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_cliente_8h_html"><div class="ttname"><a href="_cliente_8h.html">Cliente.h</a></div></div>
+<div class="ttc" id="a_lockers_8h_html"><div class="ttname"><a href="_lockers_8h.html">Lockers.h</a></div></div>
+<div class="ttc" id="a_pedidos_8h_html"><div class="ttname"><a href="_pedidos_8h.html">Pedidos.h</a></div></div>
+<div class="ttc" id="a_productos_8h_html"><div class="ttname"><a href="_productos_8h.html">Productos.h</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a1b5e3d650381c7019afc31ef2d056e69"><div class="ttname"><a href="_productos__pedidos_8h.html#a1b5e3d650381c7019afc31ef2d056e69">consultar_estado</a></div><div class="ttdeci">void consultar_estado(ProductoPedido *pedidos, int *tamanio, char *id_pedido_buscado)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00127">Productos_pedidos.c:127</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a2277795b4eab873a90164d143c966b2f"><div class="ttname"><a href="_productos__pedidos_8h.html#a2277795b4eab873a90164d143c966b2f">reducirStock</a></div><div class="ttdeci">int reducirStock(Producto *productos, int tamProd, char *idProd, int ctdadReducir)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00147">Productos_pedidos.c:147</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a3c4b77ba97eeb68578624722d95e19e5"><div class="ttname"><a href="_productos__pedidos_8h.html#a3c4b77ba97eeb68578624722d95e19e5">seleccionar_producto</a></div><div class="ttdeci">char * seleccionar_producto(Producto *productos, int *tamanio, char *productos_select)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00024">Productos_pedidos.c:24</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a4f207351316ed5b3c356dd00bf75c68d"><div class="ttname"><a href="_productos__pedidos_8h.html#a4f207351316ed5b3c356dd00bf75c68d">guardarProductoPedidoEnArchivo</a></div><div class="ttdeci">void guardarProductoPedidoEnArchivo(ProductoPedido *, int)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00192">Productos_pedidos.c:192</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a5a58cf63efb585aa8f3300c1496da57e"><div class="ttname"><a href="_productos__pedidos_8h.html#a5a58cf63efb585aa8f3300c1496da57e">iniciarProductoPedidosDeArchivo</a></div><div class="ttdeci">ProductoPedido * iniciarProductoPedidosDeArchivo(int *)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00229">Productos_pedidos.c:229</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a64ad6418ed8914334b2872f22f787263"><div class="ttname"><a href="_productos__pedidos_8h.html#a64ad6418ed8914334b2872f22f787263">listado_pedido_pendiente</a></div><div class="ttdeci">void listado_pedido_pendiente(ProductoPedido **pedidos, int *tamanio, char *idProd, Producto **productos, int *nProductos)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00336">Productos_pedidos.c:336</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_a8001c8e1bdc9b062745ff188ea1f2e5c"><div class="ttname"><a href="_productos__pedidos_8h.html#a8001c8e1bdc9b062745ff188ea1f2e5c">buscarPedido</a></div><div class="ttdeci">void buscarPedido(ProductoPedido **pedidos, int **tamanio, char *id)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00079">Productos_pedidos.c:79</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_aa9a920d935bb7027a0f0c7d0785b0038"><div class="ttname"><a href="_productos__pedidos_8h.html#aa9a920d935bb7027a0f0c7d0785b0038">listado_pedido</a></div><div class="ttdeci">void listado_pedido(ProductoPedido **pedidos, int *tamanio)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00070">Productos_pedidos.c:70</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_aceb34c4aa99ac73c36395890fe654be2"><div class="ttname"><a href="_productos__pedidos_8h.html#aceb34c4aa99ac73c36395890fe654be2">hacerPedido</a></div><div class="ttdeci">void hacerPedido(Producto **listaCompra, int *tamLista, Producto **productos, int *numnProductos, Pedido **pedidos, int *numPedidos, ProductoPedido **prodPeds, int *numProdPe, char *idCliente, char *tipoEntrega, char *idLocker)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00292">Productos_pedidos.c:292</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html_ad02acd510f60ab3f11104a3845137ea6"><div class="ttname"><a href="_productos__pedidos_8h.html#ad02acd510f60ab3f11104a3845137ea6">baja_prodPed</a></div><div class="ttdeci">void baja_prodPed(ProductoPedido **pedidos, int *tamanioProP, char *id_baja)</div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8c_source.html#l00044">Productos_pedidos.c:44</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html"><div class="ttname"><a href="_utilidades_8h.html">Utilidades.h</a></div></div>
+<div class="ttc" id="astruct_pedido_html"><div class="ttname"><a href="struct_pedido.html">Pedido</a></div><div class="ttdef"><b>Definition</b> <a href="_pedidos_8h_source.html#l00011">Pedidos.h:11</a></div></div>
+<div class="ttc" id="astruct_producto_html"><div class="ttname"><a href="struct_producto.html">Producto</a></div><div class="ttdef"><b>Definition</b> <a href="_productos_8h_source.html#l00009">Productos.h:9</a></div></div>
+<div class="ttc" id="astruct_producto_pedido_html"><div class="ttname"><a href="struct_producto_pedido.html">ProductoPedido</a></div><div class="ttdef"><b>Definition</b> <a href="#l00015">Productos_pedidos.h:15</a></div></div>
+<div class="ttc" id="astruct_producto_pedido_html_a758f4498ebafcd076b47d494855c7dd5"><div class="ttname"><a href="struct_producto_pedido.html#a758f4498ebafcd076b47d494855c7dd5">ProductoPedido::importe</a></div><div class="ttdeci">float importe</div><div class="ttdef"><b>Definition</b> <a href="#l00020">Productos_pedidos.h:20</a></div></div>
+<div class="ttc" id="astruct_producto_pedido_html_aec4f6d0cd879ac50cba2f42c5e9a4f69"><div class="ttname"><a href="struct_producto_pedido.html#aec4f6d0cd879ac50cba2f42c5e9a4f69">ProductoPedido::num_unid</a></div><div class="ttdeci">int num_unid</div><div class="ttdef"><b>Definition</b> <a href="#l00018">Productos_pedidos.h:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

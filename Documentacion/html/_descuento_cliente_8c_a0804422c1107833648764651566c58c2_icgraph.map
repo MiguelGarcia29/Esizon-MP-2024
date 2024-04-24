@@ -1,0 +1,14 @@
+<map id="mostrar_descuentos_cliente" name="mostrar_descuentos_cliente">
+<area shape="rect" id="Node000001" title=" " alt="" coords="799,23,938,65"/>
+<area shape="rect" id="Node000002" href="$_descuento_cliente_8c.html#aeaa7d543dac50961bda585bad8a09d2c" title=" " alt="" coords="625,5,751,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="783,35,751,30,752,25,784,29"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8c.html#a5d31eb2ee236bc4cefb79fb71f0e9947" title=" " alt="" coords="274,31,369,57"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="783,47,370,47,370,41,783,41"/>
+<area shape="rect" id="Node000003" href="$_e_s_i_z_o_n_8c.html#a4f9c31e227a795a720339535d2fdf73b" title=" " alt="" coords="417,5,577,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="609,21,577,21,577,16,609,16"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="402,35,370,40,369,35,402,30"/>
+<area shape="rect" id="Node000005" href="$_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,31,226,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="259,47,227,47,227,41,259,41"/>
+<area shape="rect" id="Node000006" href="$_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="87,47,55,47,55,41,87,41"/>
+</map>

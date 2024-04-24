@@ -1,0 +1,16 @@
+<map id="AdminProv.h" name="AdminProv.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="63,5,157,32"/>
+<area shape="rect" id="Node000002" href="$_admin_prov_8c.html" title=" " alt="" coords="5,80,100,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,46,64,81,60,78,88,43"/>
+<area shape="rect" id="Node000003" href="$_proveedor_8h.html" title=" " alt="" coords="124,80,213,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,43,160,78,156,81,128,46"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8h.html" title=" " alt="" coords="52,155,131,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="146,119,106,156,103,152,142,116"/>
+<area shape="rect" id="Node000006" href="$_main_8c.html" title=" " alt="" coords="138,229,199,256"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="171,122,171,229,166,229,166,122"/>
+<area shape="rect" id="Node000007" href="$_proveedor_8c.html" title=" " alt="" coords="207,155,296,181"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="196,115,239,152,235,156,193,119"/>
+<area shape="rect" id="Node000005" href="$_e_s_i_z_o_n_8c.html" title=" " alt="" coords="35,229,115,256"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="88,197,81,230,75,228,82,196"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="118,190,157,227,153,231,114,194"/>
+</map>

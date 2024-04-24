@@ -1,0 +1,18 @@
+<map id="modificar_precio" name="modificar_precio">
+<area shape="rect" id="Node000001" title=" " alt="" coords="818,31,933,57"/>
+<area shape="rect" id="Node000002" href="$_productos_8c.html#a0e15eb3004cf6b22a17f738a986d9f58" title=" " alt="" coords="640,31,770,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="802,47,771,47,771,41,802,41"/>
+<area shape="rect" id="Node000003" href="$_e_s_i_z_o_n_8c.html#abc66d0806fe06a96d4c07b304cebf2a0" title=" " alt="" coords="430,5,592,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="624,36,592,32,593,27,625,31"/>
+<area shape="rect" id="Node000007" href="$_e_s_i_z_o_n_8c.html#a560c17dcc66ecdd1f7eb06b1ead1e3a4" title=" " alt="" coords="436,56,586,83"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="625,57,587,62,586,57,624,52"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="284,5,372,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="415,21,373,21,373,16,415,16"/>
+<area shape="rect" id="Node000005" href="$_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,31,226,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="269,30,227,37,226,32,268,25"/>
+<area shape="rect" id="Node000006" href="$_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="87,47,55,47,55,41,87,41"/>
+<area shape="rect" id="Node000008" href="$_e_s_i_z_o_n_8c.html#a42f1df92612d04212079ca51cc9fab66" title=" " alt="" coords="274,56,382,83"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="420,72,383,72,383,67,420,67"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="258,61,226,56,227,51,259,56"/>
+</map>

@@ -1,0 +1,843 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Referencia del archivo Productos_pedidos.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo Productos_pedidos.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="_productos__pedidos_8h_source.html">Productos_pedidos.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en Productos_pedidos.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c__incl.png" border="0" usemap="#a_productos__pedidos_8c" alt=""/></div>
+<map name="a_productos__pedidos_8c" id="a_productos__pedidos_8c">
+<area shape="rect" title=" " alt="" coords="960,5,1104,32"/>
+<area shape="rect" href="_productos__pedidos_8h.html" title=" " alt="" coords="415,80,558,107"/>
+<area shape="poly" title=" " alt="" coords="960,32,574,83,573,78,960,27"/>
+<area shape="rect" title=" " alt="" coords="797,453,862,480"/>
+<area shape="poly" title=" " alt="" coords="1035,33,1035,167,1035,319,1030,346,1018,371,1001,392,978,410,927,438,878,456,876,451,925,433,975,406,997,388,1014,368,1025,345,1029,318,1029,167,1029,33"/>
+<area shape="rect" title=" " alt="" coords="1070,80,1127,107"/>
+<area shape="poly" title=" " alt="" coords="1046,31,1079,67,1075,70,1042,34"/>
+<area shape="rect" href="_cliente_8h.html" title=" " alt="" coords="173,304,246,331"/>
+<area shape="poly" title=" " alt="" coords="443,110,394,129,346,157,308,189,275,226,227,292,223,289,271,222,305,185,342,152,392,124,441,105"/>
+<area shape="rect" title=" " alt="" coords="127,453,188,480"/>
+<area shape="poly" title=" " alt="" coords="415,104,294,120,160,148,100,166,52,188,19,213,11,227,8,242,8,318,11,340,18,360,45,395,80,423,115,444,113,449,77,427,41,398,14,362,6,341,3,319,3,241,6,225,15,210,49,184,98,161,159,143,294,115,414,99"/>
+<area shape="rect" title=" " alt="" coords="443,453,506,480"/>
+<area shape="poly" title=" " alt="" coords="507,105,553,140,606,193,628,224,644,258,652,294,648,331,632,374,603,407,564,435,522,453,520,448,561,430,600,403,628,371,643,330,646,294,639,260,623,227,601,196,550,144,504,109"/>
+<area shape="poly" title=" " alt="" coords="559,98,683,114,822,141,885,160,936,182,971,209,981,225,984,241,984,319,981,341,973,362,946,398,910,427,874,449,871,444,907,423,942,395,968,360,976,340,979,318,979,242,976,227,967,213,933,187,883,165,821,146,682,119,558,104"/>
+<area shape="rect" href="_utilidades_8h.html" title=" " alt="" coords="347,379,437,405"/>
+<area shape="poly" title=" " alt="" coords="474,109,454,130,437,156,417,211,404,268,395,363,390,363,399,268,412,210,432,153,450,126,470,105"/>
+<area shape="rect" href="_productos_8h.html" title=" " alt="" coords="524,229,615,256"/>
+<area shape="poly" title=" " alt="" coords="502,105,522,127,541,153,555,184,565,214,560,215,550,186,536,156,517,130,498,109"/>
+<area shape="rect" href="_pedidos_8h.html" title=" " alt="" coords="447,155,526,181"/>
+<area shape="poly" title=" " alt="" coords="489,107,489,139,484,139,484,107"/>
+<area shape="rect" href="_lockers_8h.html" title=" " alt="" coords="270,304,349,331"/>
+<area shape="poly" title=" " alt="" coords="444,110,404,128,385,141,369,156,347,188,331,224,315,289,310,288,326,222,342,186,365,153,382,137,402,124,442,105"/>
+<area shape="poly" title=" " alt="" coords="207,332,169,440,164,438,202,330"/>
+<area shape="poly" title=" " alt="" coords="223,329,263,365,316,403,373,430,429,450,427,455,371,435,313,408,259,369,219,333"/>
+<area shape="poly" title=" " alt="" coords="247,325,259,328,783,452,781,457,258,333,245,330"/>
+<area shape="poly" title=" " alt="" coords="242,329,347,370,345,375,240,334"/>
+<area shape="poly" title=" " alt="" coords="352,408,203,454,201,449,350,403"/>
+<area shape="poly" title=" " alt="" coords="408,404,451,441,447,445,405,408"/>
+<area shape="poly" title=" " alt="" coords="438,398,782,455,782,460,437,403"/>
+<area shape="poly" title=" " alt="" coords="523,246,433,248,324,257,272,264,225,275,188,289,163,306,153,320,147,336,142,372,145,407,151,438,146,439,139,408,136,372,142,335,149,318,159,302,185,284,223,270,271,259,323,251,432,243,523,241"/>
+<area shape="poly" title=" " alt="" coords="589,255,610,275,628,303,631,317,628,332,608,370,579,402,546,428,515,448,512,443,543,424,575,398,603,367,623,330,626,317,623,305,606,279,585,258"/>
+<area shape="poly" title=" " alt="" coords="587,255,647,302,806,441,803,445,644,306,584,259"/>
+<area shape="rect" href="_categoria_8h.html" title=" " alt="" coords="526,304,613,331"/>
+<area shape="poly" title=" " alt="" coords="572,257,572,288,567,288,567,257"/>
+<area shape="poly" title=" " alt="" coords="558,333,513,370,483,391,450,408,385,431,318,448,203,465,203,459,317,442,384,426,448,403,480,386,509,366,554,329"/>
+<area shape="poly" title=" " alt="" coords="571,331,563,367,546,407,529,428,508,446,505,442,525,425,542,404,558,365,565,330"/>
+<area shape="poly" title=" " alt="" coords="593,329,795,443,793,448,590,333"/>
+<area shape="poly" title=" " alt="" coords="539,334,438,375,436,370,537,329"/>
+<area shape="poly" title=" " alt="" coords="447,174,379,184,295,206,252,223,211,245,174,272,143,306,135,321,130,337,129,373,136,408,147,438,142,440,131,410,124,374,125,336,130,319,139,302,171,268,209,240,250,218,293,201,378,179,446,169"/>
+<area shape="poly" title=" " alt="" coords="489,182,478,438,473,438,484,182"/>
+<area shape="poly" title=" " alt="" coords="528,179,577,199,628,227,690,279,743,338,786,394,816,439,812,442,782,397,739,341,686,283,625,232,575,204,526,184"/>
+<area shape="poly" title=" " alt="" coords="484,183,406,366,401,364,479,181"/>
+<area shape="poly" title=" " alt="" coords="503,180,545,217,542,221,499,184"/>
+<area shape="poly" title=" " alt="" coords="298,333,183,444,179,441,295,329"/>
+<area shape="poly" title=" " alt="" coords="312,330,318,366,325,386,337,404,357,421,380,435,429,454,427,459,378,440,354,426,333,407,321,388,313,368,307,331"/>
+<area shape="poly" title=" " alt="" coords="350,322,461,343,595,376,784,445,782,450,594,381,460,349,349,328"/>
+<area shape="poly" title=" " alt="" coords="325,329,368,366,365,370,322,333"/>
+</map>
+</div>
+</div>
+<p><a href="_productos__pedidos_8c_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a3ec82c1b4c3e0a4dfe716a148c4261f1" id="r_a3ec82c1b4c3e0a4dfe716a148c4261f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ec82c1b4c3e0a4dfe716a148c4261f1">modificar_estado_pedido</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *pedidos, int *tamanio, char *id_modificar)</td></tr>
+<tr class="separator:a3ec82c1b4c3e0a4dfe716a148c4261f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bf6e7653abc107964dfd4fd0327c0b9" id="r_a5bf6e7653abc107964dfd4fd0327c0b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bf6e7653abc107964dfd4fd0327c0b9">modificar_entrega_productoPedido</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *pedidos, int *tamanio, char *id_modificar)</td></tr>
+<tr class="separator:a5bf6e7653abc107964dfd4fd0327c0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c97ac487c26732221bf6fe4e013000" id="r_aa3c97ac487c26732221bf6fe4e013000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3c97ac487c26732221bf6fe4e013000">fecha_entrega</a> (char *fecha, int dia_entrega)</td></tr>
+<tr class="separator:aa3c97ac487c26732221bf6fe4e013000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c4b77ba97eeb68578624722d95e19e5" id="r_a3c4b77ba97eeb68578624722d95e19e5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c4b77ba97eeb68578624722d95e19e5">seleccionar_producto</a> (<a class="el" href="struct_producto.html">Producto</a> *productos, int *tamanio, char *productos_select)</td></tr>
+<tr class="separator:a3c4b77ba97eeb68578624722d95e19e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76d6d27d8558514cf29ee527dc4213d8" id="r_a76d6d27d8558514cf29ee527dc4213d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76d6d27d8558514cf29ee527dc4213d8">baja_prodPed</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, int *tamanio, char *id_baja)</td></tr>
+<tr class="separator:a76d6d27d8558514cf29ee527dc4213d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9a920d935bb7027a0f0c7d0785b0038" id="r_aa9a920d935bb7027a0f0c7d0785b0038"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9a920d935bb7027a0f0c7d0785b0038">listado_pedido</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, int *tamanio)</td></tr>
+<tr class="separator:aa9a920d935bb7027a0f0c7d0785b0038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8001c8e1bdc9b062745ff188ea1f2e5c" id="r_a8001c8e1bdc9b062745ff188ea1f2e5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8001c8e1bdc9b062745ff188ea1f2e5c">buscarPedido</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, int **tamanio, char *id)</td></tr>
+<tr class="separator:a8001c8e1bdc9b062745ff188ea1f2e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b5e3d650381c7019afc31ef2d056e69" id="r_a1b5e3d650381c7019afc31ef2d056e69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b5e3d650381c7019afc31ef2d056e69">consultar_estado</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *pedidos, int *tamanio, char *id_pedido_buscado)</td></tr>
+<tr class="separator:a1b5e3d650381c7019afc31ef2d056e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2277795b4eab873a90164d143c966b2f" id="r_a2277795b4eab873a90164d143c966b2f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2277795b4eab873a90164d143c966b2f">reducirStock</a> (<a class="el" href="struct_producto.html">Producto</a> *productos, int tamProd, char *idProd, int ctdadReducir)</td></tr>
+<tr class="separator:a2277795b4eab873a90164d143c966b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4eb7fee6739fbb63c7275de46921316" id="r_aa4eb7fee6739fbb63c7275de46921316"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4eb7fee6739fbb63c7275de46921316">encontrarID_prod</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *prodped, int tamanio_prodped, char *ID_producto)</td></tr>
+<tr class="separator:aa4eb7fee6739fbb63c7275de46921316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac998d7a308aed601929ad0b649302e49" id="r_ac998d7a308aed601929ad0b649302e49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac998d7a308aed601929ad0b649302e49">guardarProductoPedidoEnArchivo</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *productosPedidos, int numProductosPedidos)</td></tr>
+<tr class="separator:ac998d7a308aed601929ad0b649302e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab283823baa611ebb527eb1cb87fc6e92" id="r_ab283823baa611ebb527eb1cb87fc6e92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab283823baa611ebb527eb1cb87fc6e92">iniciarProductoPedidosDeArchivo</a> (int *numProductos)</td></tr>
+<tr class="separator:ab283823baa611ebb527eb1cb87fc6e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb34c4aa99ac73c36395890fe654be2" id="r_aceb34c4aa99ac73c36395890fe654be2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aceb34c4aa99ac73c36395890fe654be2">hacerPedido</a> (<a class="el" href="struct_producto.html">Producto</a> **listaCompra, int *tamLista, <a class="el" href="struct_producto.html">Producto</a> **productos, int *numnProductos, <a class="el" href="struct_pedido.html">Pedido</a> **pedidos, int *numPedidos, <a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **prodPeds, int *numProdPe, char *idCliente, char *tipoEntrega, char *idLocker)</td></tr>
+<tr class="separator:aceb34c4aa99ac73c36395890fe654be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64ad6418ed8914334b2872f22f787263" id="r_a64ad6418ed8914334b2872f22f787263"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64ad6418ed8914334b2872f22f787263">listado_pedido_pendiente</a> (<a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, int *tamanio, char *idProd, <a class="el" href="struct_producto.html">Producto</a> **productos, int *nProductos)</td></tr>
+<tr class="separator:a64ad6418ed8914334b2872f22f787263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa15fb4ffbfb0e612e92e791a0514a632" id="r_aa15fb4ffbfb0e612e92e791a0514a632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa15fb4ffbfb0e612e92e791a0514a632">asignarLocker</a> (<a class="el" href="struct_pedido.html">Pedido</a> **lista_pedidos, <a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **lista_productos_pedidos, int *num_pedidos, int *num_productos_pedidos)</td></tr>
+<tr class="separator:aa15fb4ffbfb0e612e92e791a0514a632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="aa15fb4ffbfb0e612e92e791a0514a632" name="aa15fb4ffbfb0e612e92e791a0514a632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa15fb4ffbfb0e612e92e791a0514a632">&#9670;&#160;</a></span>asignarLocker()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void asignarLocker </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_pedido.html">Pedido</a> **</td>          <td class="paramname"><span class="paramname"><em>lista_pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **</td>          <td class="paramname"><span class="paramname"><em>lista_productos_pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>num_pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>num_productos_pedidos</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00348">348</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_aa15fb4ffbfb0e612e92e791a0514a632_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_aa15fb4ffbfb0e612e92e791a0514a632_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_aa15fb4ffbfb0e612e92e791a0514a632_icgraph" id="a_productos__pedidos_8c_aa15fb4ffbfb0e612e92e791a0514a632_icgraph">
+<area shape="rect" title=" " alt="" coords="608,5,710,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="410,5,560,32"/>
+<area shape="poly" title=" " alt="" coords="592,21,560,21,560,16,592,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a76d6d27d8558514cf29ee527dc4213d8" name="a76d6d27d8558514cf29ee527dc4213d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76d6d27d8558514cf29ee527dc4213d8">&#9670;&#160;</a></span>baja_prodPed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void baja_prodPed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id_baja</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00044">44</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a76d6d27d8558514cf29ee527dc4213d8_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_a76d6d27d8558514cf29ee527dc4213d8_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a76d6d27d8558514cf29ee527dc4213d8_icgraph" id="a_productos__pedidos_8c_a76d6d27d8558514cf29ee527dc4213d8_icgraph">
+<area shape="rect" title=" " alt="" coords="608,5,708,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="410,5,560,32"/>
+<area shape="poly" title=" " alt="" coords="592,21,560,21,560,16,592,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8001c8e1bdc9b062745ff188ea1f2e5c" name="a8001c8e1bdc9b062745ff188ea1f2e5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8001c8e1bdc9b062745ff188ea1f2e5c">&#9670;&#160;</a></span>buscarPedido()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void buscarPedido </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int **</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00079">79</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a8001c8e1bdc9b062745ff188ea1f2e5c_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_a8001c8e1bdc9b062745ff188ea1f2e5c_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a8001c8e1bdc9b062745ff188ea1f2e5c_icgraph" id="a_productos__pedidos_8c_a8001c8e1bdc9b062745ff188ea1f2e5c_icgraph">
+<area shape="rect" title=" " alt="" coords="608,5,708,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="410,5,560,32"/>
+<area shape="poly" title=" " alt="" coords="592,21,560,21,560,16,592,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1b5e3d650381c7019afc31ef2d056e69" name="a1b5e3d650381c7019afc31ef2d056e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b5e3d650381c7019afc31ef2d056e69">&#9670;&#160;</a></span>consultar_estado()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void consultar_estado </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id_pedido_buscado</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00127">127</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+
+</div>
+</div>
+<a id="aa4eb7fee6739fbb63c7275de46921316" name="aa4eb7fee6739fbb63c7275de46921316"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4eb7fee6739fbb63c7275de46921316">&#9670;&#160;</a></span>encontrarID_prod()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int encontrarID_prod </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *</td>          <td class="paramname"><span class="paramname"><em>prodped</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>tamanio_prodped</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>ID_producto</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00165">165</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+
+</div>
+</div>
+<a id="aa3c97ac487c26732221bf6fe4e013000" name="aa3c97ac487c26732221bf6fe4e013000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c97ac487c26732221bf6fe4e013000">&#9670;&#160;</a></span>fecha_entrega()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fecha_entrega </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>fecha</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>dia_entrega</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00007">7</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_aa3c97ac487c26732221bf6fe4e013000_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_aa3c97ac487c26732221bf6fe4e013000_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_aa3c97ac487c26732221bf6fe4e013000_icgraph" id="a_productos__pedidos_8c_aa3c97ac487c26732221bf6fe4e013000_icgraph">
+<area shape="rect" title=" " alt="" coords="234,13,336,40"/>
+<area shape="rect" href="_productos__pedidos_8c.html#a5bf6e7653abc107964dfd4fd0327c0b9" title=" " alt="" coords="5,5,186,48"/>
+<area shape="poly" title=" " alt="" coords="218,29,186,29,186,24,218,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac998d7a308aed601929ad0b649302e49" name="ac998d7a308aed601929ad0b649302e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac998d7a308aed601929ad0b649302e49">&#9670;&#160;</a></span>guardarProductoPedidoEnArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void guardarProductoPedidoEnArchivo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *</td>          <td class="paramname"><span class="paramname"><em>productosPedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numProductosPedidos</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00192">192</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_ac998d7a308aed601929ad0b649302e49_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_ac998d7a308aed601929ad0b649302e49_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_ac998d7a308aed601929ad0b649302e49_icgraph" id="a_productos__pedidos_8c_ac998d7a308aed601929ad0b649302e49_icgraph">
+<area shape="rect" title=" " alt="" coords="266,5,480,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a35abc4450146d3aae8de62a433f9290b" title=" " alt="" coords="103,5,218,32"/>
+<area shape="poly" title=" " alt="" coords="250,21,218,21,218,16,250,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aceb34c4aa99ac73c36395890fe654be2" name="aceb34c4aa99ac73c36395890fe654be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceb34c4aa99ac73c36395890fe654be2">&#9670;&#160;</a></span>hacerPedido()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hacerPedido </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto.html">Producto</a> **</td>          <td class="paramname"><span class="paramname"><em>listaCompra</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamLista</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_producto.html">Producto</a> **</td>          <td class="paramname"><span class="paramname"><em>productos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>numnProductos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_pedido.html">Pedido</a> **</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>numPedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **</td>          <td class="paramname"><span class="paramname"><em>prodPeds</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>numProdPe</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>idCliente</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>tipoEntrega</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>idLocker</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00292">292</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_cgraph.png" border="0" usemap="#a_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_cgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_cgraph" id="a_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,81,99,108"/>
+<area shape="rect" href="_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="164,5,274,32"/>
+<area shape="poly" title=" " alt="" coords="75,78,146,42,160,35,162,40,148,46,78,83"/>
+<area shape="rect" href="_pedidos_8c.html#a0a4c9829120956fbdd4f1e881c863373" title=" " alt="" coords="150,56,288,83"/>
+<area shape="poly" title=" " alt="" coords="99,85,135,79,135,85,99,90"/>
+<area shape="rect" href="_utilidades_8c.html#a00f0e4685c0837a08b16474234bd0cb8" title=" " alt="" coords="147,107,291,133"/>
+<area shape="poly" title=" " alt="" coords="99,99,132,104,131,109,99,104"/>
+<area shape="rect" href="_productos__pedidos_8c.html#a2277795b4eab873a90164d143c966b2f" title=" " alt="" coords="172,157,266,184"/>
+<area shape="poly" title=" " alt="" coords="78,106,148,143,162,149,160,154,146,148,75,111"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_icgraph" id="a_productos__pedidos_8c_aceb34c4aa99ac73c36395890fe654be2_icgraph">
+<area shape="rect" title=" " alt="" coords="625,31,718,57"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="422,5,572,32"/>
+<area shape="poly" title=" " alt="" coords="609,38,572,32,572,27,610,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a4f9c31e227a795a720339535d2fdf73b" title=" " alt="" coords="417,56,577,83"/>
+<area shape="poly" title=" " alt="" coords="610,56,578,60,577,55,609,50"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="278,5,366,32"/>
+<area shape="poly" title=" " alt="" coords="407,21,366,21,366,16,407,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,31,226,57"/>
+<area shape="poly" title=" " alt="" coords="262,31,227,37,226,31,261,26"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" title=" " alt="" coords="87,47,55,47,55,41,87,41"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a5d31eb2ee236bc4cefb79fb71f0e9947" title=" " alt="" coords="274,56,369,83"/>
+<area shape="poly" title=" " alt="" coords="402,72,370,72,370,67,402,67"/>
+<area shape="poly" title=" " alt="" coords="258,62,226,57,227,51,259,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab283823baa611ebb527eb1cb87fc6e92" name="ab283823baa611ebb527eb1cb87fc6e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab283823baa611ebb527eb1cb87fc6e92">&#9670;&#160;</a></span>iniciarProductoPedidosDeArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> * iniciarProductoPedidosDeArchivo </td>
+          <td>(</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>numProductos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00229">229</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_ab283823baa611ebb527eb1cb87fc6e92_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_ab283823baa611ebb527eb1cb87fc6e92_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_ab283823baa611ebb527eb1cb87fc6e92_icgraph" id="a_productos__pedidos_8c_ab283823baa611ebb527eb1cb87fc6e92_icgraph">
+<area shape="rect" title=" " alt="" coords="260,5,430,48"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2cdbba72c2510dbd1ff8146bd896e897" title=" " alt="" coords="103,13,212,40"/>
+<area shape="poly" title=" " alt="" coords="244,29,212,29,212,24,244,24"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,55,40"/>
+<area shape="poly" title=" " alt="" coords="87,29,55,29,55,24,87,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa9a920d935bb7027a0f0c7d0785b0038" name="aa9a920d935bb7027a0f0c7d0785b0038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a920d935bb7027a0f0c7d0785b0038">&#9670;&#160;</a></span>listado_pedido()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void listado_pedido </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00070">70</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_aa9a920d935bb7027a0f0c7d0785b0038_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_aa9a920d935bb7027a0f0c7d0785b0038_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_aa9a920d935bb7027a0f0c7d0785b0038_icgraph" id="a_productos__pedidos_8c_aa9a920d935bb7027a0f0c7d0785b0038_icgraph">
+<area shape="rect" title=" " alt="" coords="608,5,712,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="410,5,560,32"/>
+<area shape="poly" title=" " alt="" coords="592,21,560,21,560,16,592,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a64ad6418ed8914334b2872f22f787263" name="a64ad6418ed8914334b2872f22f787263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64ad6418ed8914334b2872f22f787263">&#9670;&#160;</a></span>listado_pedido_pendiente()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void listado_pedido_pendiente </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> **</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>idProd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_producto.html">Producto</a> **</td>          <td class="paramname"><span class="paramname"><em>productos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>nProductos</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00336">336</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_cgraph.png" border="0" usemap="#a_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_cgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_cgraph" id="a_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,173,32"/>
+<area shape="rect" href="_productos_8c.html#a7d1244bf9eca2dcd5924122174b86cc3" title=" " alt="" coords="221,5,381,32"/>
+<area shape="poly" title=" " alt="" coords="173,16,205,16,205,21,173,21"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_icgraph" id="a_productos__pedidos_8c_a64ad6418ed8914334b2872f22f787263_icgraph">
+<area shape="rect" title=" " alt="" coords="617,5,784,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a4db26bc93c17e5d5836c9b27a6e2ef76" title=" " alt="" coords="430,5,569,32"/>
+<area shape="poly" title=" " alt="" coords="601,21,569,21,569,16,601,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a42f1df92612d04212079ca51cc9fab66" title=" " alt="" coords="274,5,382,32"/>
+<area shape="poly" title=" " alt="" coords="415,21,383,21,383,16,415,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,227,21,227,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5bf6e7653abc107964dfd4fd0327c0b9" name="a5bf6e7653abc107964dfd4fd0327c0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bf6e7653abc107964dfd4fd0327c0b9">&#9670;&#160;</a></span>modificar_entrega_productoPedido()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void modificar_entrega_productoPedido </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id_modificar</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00111">111</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a5bf6e7653abc107964dfd4fd0327c0b9_cgraph.png" border="0" usemap="#a_productos__pedidos_8c_a5bf6e7653abc107964dfd4fd0327c0b9_cgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a5bf6e7653abc107964dfd4fd0327c0b9_cgraph" id="a_productos__pedidos_8c_a5bf6e7653abc107964dfd4fd0327c0b9_cgraph">
+<area shape="rect" title=" " alt="" coords="5,23,186,65"/>
+<area shape="rect" href="_productos__pedidos_8c.html#aa3c97ac487c26732221bf6fe4e013000" title=" " alt="" coords="237,5,340,32"/>
+<area shape="poly" title=" " alt="" coords="185,30,222,25,222,30,186,35"/>
+<area shape="rect" href="_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="234,56,343,83"/>
+<area shape="poly" title=" " alt="" coords="186,53,219,58,218,63,185,58"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3ec82c1b4c3e0a4dfe716a148c4261f1" name="a3ec82c1b4c3e0a4dfe716a148c4261f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ec82c1b4c3e0a4dfe716a148c4261f1">&#9670;&#160;</a></span>modificar_estado_pedido()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void modificar_estado_pedido </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto_pedido.html">ProductoPedido</a> *</td>          <td class="paramname"><span class="paramname"><em>pedidos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id_modificar</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00096">96</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a3ec82c1b4c3e0a4dfe716a148c4261f1_cgraph.png" border="0" usemap="#a_productos__pedidos_8c_a3ec82c1b4c3e0a4dfe716a148c4261f1_cgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a3ec82c1b4c3e0a4dfe716a148c4261f1_cgraph" id="a_productos__pedidos_8c_a3ec82c1b4c3e0a4dfe716a148c4261f1_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,170,32"/>
+<area shape="rect" href="_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="218,5,327,32"/>
+<area shape="poly" title=" " alt="" coords="170,16,202,16,202,21,170,21"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2277795b4eab873a90164d143c966b2f" name="a2277795b4eab873a90164d143c966b2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2277795b4eab873a90164d143c966b2f">&#9670;&#160;</a></span>reducirStock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int reducirStock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto.html">Producto</a> *</td>          <td class="paramname"><span class="paramname"><em>productos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>tamProd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>idProd</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ctdadReducir</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00147">147</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_productos__pedidos_8c_a2277795b4eab873a90164d143c966b2f_icgraph.png" border="0" usemap="#a_productos__pedidos_8c_a2277795b4eab873a90164d143c966b2f_icgraph" alt=""/></div>
+<map name="a_productos__pedidos_8c_a2277795b4eab873a90164d143c966b2f_icgraph" id="a_productos__pedidos_8c_a2277795b4eab873a90164d143c966b2f_icgraph">
+<area shape="rect" title=" " alt="" coords="766,31,860,57"/>
+<area shape="rect" href="_productos__pedidos_8c.html#aceb34c4aa99ac73c36395890fe654be2" title=" " alt="" coords="625,31,718,57"/>
+<area shape="poly" title=" " alt="" coords="751,47,718,47,718,41,751,41"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="422,5,572,32"/>
+<area shape="poly" title=" " alt="" coords="609,38,572,32,572,27,610,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a4f9c31e227a795a720339535d2fdf73b" title=" " alt="" coords="417,56,577,83"/>
+<area shape="poly" title=" " alt="" coords="610,56,578,60,577,55,609,50"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="278,5,366,32"/>
+<area shape="poly" title=" " alt="" coords="407,21,366,21,366,16,407,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,31,226,57"/>
+<area shape="poly" title=" " alt="" coords="262,31,227,37,226,31,261,26"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" title=" " alt="" coords="87,47,55,47,55,41,87,41"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a5d31eb2ee236bc4cefb79fb71f0e9947" title=" " alt="" coords="274,56,369,83"/>
+<area shape="poly" title=" " alt="" coords="402,72,370,72,370,67,402,67"/>
+<area shape="poly" title=" " alt="" coords="258,62,226,57,227,51,259,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3c4b77ba97eeb68578624722d95e19e5" name="a3c4b77ba97eeb68578624722d95e19e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4b77ba97eeb68578624722d95e19e5">&#9670;&#160;</a></span>seleccionar_producto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * seleccionar_producto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_producto.html">Producto</a> *</td>          <td class="paramname"><span class="paramname"><em>productos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>tamanio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>productos_select</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_productos__pedidos_8c_source.html#l00024">24</a> del archivo <a class="el" href="_productos__pedidos_8c_source.html">Productos_pedidos.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

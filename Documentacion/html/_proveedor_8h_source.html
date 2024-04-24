@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente Proveedor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Proveedor.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_proveedor_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//proveedor</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include&lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include&lt;string.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_admin_prov_8h.html">AdminProv.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="_productos__pedidos_8h.html">Productos_pedidos.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="_productos_8h.html">Productos.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#afd0e0f4d2d25584e2ccf3d125807cd7c">modificar_perfilprov</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> *mod); <span class="comment">//modifica el perfil del proveedor. Recibe el estruct del perfil del proveedor</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#a0a389d077dbfbb589f16b7b9a6fef58d">mostrar_perfilprov</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> perfil); <span class="comment">//muestran el perfil del proveedor. Recibe el estruct del perfil del proveedor</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">int</span> <a class="code hl_function" href="_proveedor_8h.html#abfe549a03ba2931d638991dacfc584cf">verificar_contrasenia</a>(<span class="keywordtype">char</span> cad[16]); <span class="comment">//pide al usuario que introduzca su contrasenia y corrobora si la contrasenia es o no correcta.</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Recibe la contrasenia del proveedor</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">int</span> <a class="code hl_function" href="_proveedor_8h.html#ace7136d225b317470f6b81319ddcad37">mi_producto</a>(<span class="keywordtype">char</span> empresa[5],<span class="keywordtype">char</span> gestor[5]); <span class="comment">//Corrobora que el producto sobre el que se quiere hacer algo es provisto por el proveedor. Entra el id de la empresa</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// del proveedor y el id del gestor del producto</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">int</span> <a class="code hl_function" href="_proveedor_8h.html#a701db199ea6551f46d3e50597c3d2405">mi_pedido</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> *pedidos,<span class="keywordtype">char</span> busc[8],<a class="code hl_struct" href="struct_producto.html">Producto</a> *prod,<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> prov,<span class="keywordtype">int</span> cantdad_productospedidos,<span class="keywordtype">int</span> cantdad_prod); <span class="comment">//Corrobora que el pedido sobre el que se quiere</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//hacer algo es provisto por el proveedor. Recibe todos los estructs de pedidos, el id del pedido que se quiere manipular, todos los estructs de productos y</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//el perfil del proveedor</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#a4606f36d31df18355d7daf55ccc91bfe">altaProveedor</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> **proveedores, <span class="keywordtype">int</span> *numProveedores);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#a7ad5ab04e34ddaf4cde02fe40cb683d6">bajaProveedor</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> **proveedores, <span class="keywordtype">int</span> *numProveedores,<span class="keywordtype">char</span> *<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#aca2ab8de9111e8bdbddb1885715f0807">buscarProveedor</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> **proveedores, <span class="keywordtype">int</span> *numProveedores);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#acee12bbae42f1d7b6df19764ebf23223">listarProveedores</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> **proveedores, <span class="keywordtype">int</span> *numProveedores);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="_proveedor_8h.html#affbdff2143ebdac1bf0e11cbc9c5bd6a">modificarProveedor</a>(<a class="code hl_struct" href="struct_admin_prov.html">AdminProv</a> **proveedores, <span class="keywordtype">int</span> *numProveedores);</div>
+<div class="ttc" id="a_admin_prov_8h_html"><div class="ttname"><a href="_admin_prov_8h.html">AdminProv.h</a></div></div>
+<div class="ttc" id="a_productos_8h_html"><div class="ttname"><a href="_productos_8h.html">Productos.h</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html"><div class="ttname"><a href="_productos__pedidos_8h.html">Productos_pedidos.h</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_a0a389d077dbfbb589f16b7b9a6fef58d"><div class="ttname"><a href="_proveedor_8h.html#a0a389d077dbfbb589f16b7b9a6fef58d">mostrar_perfilprov</a></div><div class="ttdeci">void mostrar_perfilprov(AdminProv perfil)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00013">Proveedor.c:13</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_a4606f36d31df18355d7daf55ccc91bfe"><div class="ttname"><a href="_proveedor_8h.html#a4606f36d31df18355d7daf55ccc91bfe">altaProveedor</a></div><div class="ttdeci">void altaProveedor(AdminProv **proveedores, int *numProveedores)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00117">Proveedor.c:117</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_a701db199ea6551f46d3e50597c3d2405"><div class="ttname"><a href="_proveedor_8h.html#a701db199ea6551f46d3e50597c3d2405">mi_pedido</a></div><div class="ttdeci">int mi_pedido(ProductoPedido *pedidos, char busc[8], Producto *prod, AdminProv prov, int cantdad_productospedidos, int cantdad_prod)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00075">Proveedor.c:75</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_a7ad5ab04e34ddaf4cde02fe40cb683d6"><div class="ttname"><a href="_proveedor_8h.html#a7ad5ab04e34ddaf4cde02fe40cb683d6">bajaProveedor</a></div><div class="ttdeci">void bajaProveedor(AdminProv **proveedores, int *numProveedores, char *id)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00147">Proveedor.c:147</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_abfe549a03ba2931d638991dacfc584cf"><div class="ttname"><a href="_proveedor_8h.html#abfe549a03ba2931d638991dacfc584cf">verificar_contrasenia</a></div><div class="ttdeci">int verificar_contrasenia(char cad[16])</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00023">Proveedor.c:23</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_aca2ab8de9111e8bdbddb1885715f0807"><div class="ttname"><a href="_proveedor_8h.html#aca2ab8de9111e8bdbddb1885715f0807">buscarProveedor</a></div><div class="ttdeci">void buscarProveedor(AdminProv **proveedores, int *numProveedores)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00173">Proveedor.c:173</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_ace7136d225b317470f6b81319ddcad37"><div class="ttname"><a href="_proveedor_8h.html#ace7136d225b317470f6b81319ddcad37">mi_producto</a></div><div class="ttdeci">int mi_producto(char empresa[5], char gestor[5])</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00065">Proveedor.c:65</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_acee12bbae42f1d7b6df19764ebf23223"><div class="ttname"><a href="_proveedor_8h.html#acee12bbae42f1d7b6df19764ebf23223">listarProveedores</a></div><div class="ttdeci">void listarProveedores(AdminProv **proveedores, int *numProveedores)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00193">Proveedor.c:193</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_afd0e0f4d2d25584e2ccf3d125807cd7c"><div class="ttname"><a href="_proveedor_8h.html#afd0e0f4d2d25584e2ccf3d125807cd7c">modificar_perfilprov</a></div><div class="ttdeci">void modificar_perfilprov(AdminProv *mod)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00038">Proveedor.c:38</a></div></div>
+<div class="ttc" id="a_proveedor_8h_html_affbdff2143ebdac1bf0e11cbc9c5bd6a"><div class="ttname"><a href="_proveedor_8h.html#affbdff2143ebdac1bf0e11cbc9c5bd6a">modificarProveedor</a></div><div class="ttdeci">void modificarProveedor(AdminProv **proveedores, int *numProveedores)</div><div class="ttdef"><b>Definition</b> <a href="_proveedor_8c_source.html#l00201">Proveedor.c:201</a></div></div>
+<div class="ttc" id="astruct_admin_prov_html"><div class="ttname"><a href="struct_admin_prov.html">AdminProv</a></div><div class="ttdef"><b>Definition</b> <a href="_admin_prov_8h_source.html#l00009">AdminProv.h:9</a></div></div>
+<div class="ttc" id="astruct_producto_html"><div class="ttname"><a href="struct_producto.html">Producto</a></div><div class="ttdef"><b>Definition</b> <a href="_productos_8h_source.html#l00009">Productos.h:9</a></div></div>
+<div class="ttc" id="astruct_producto_pedido_html"><div class="ttname"><a href="struct_producto_pedido.html">ProductoPedido</a></div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8h_source.html#l00015">Productos_pedidos.h:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente Transportista.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Transportista.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_transportista_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TRANSPORTISTA_H_INCLUDED</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TRANSPORTISTA_H_INCLUDED</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="_utilidades_8h.html">Utilidades.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="_productos__pedidos_8h.html">Productos_pedidos.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_compartimentos_lockers_8h.html">CompartimentosLockers.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_transportista.html">   11</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_transportista.html#a2b7f3c996a591c65fca688cfac2de2cb">   12</a></span>    <span class="keywordtype">char</span> id_transp[5];</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct_transportista.html#ae5d3c6e3a1adf19202fa8d88bb325673">   13</a></span>    <span class="keywordtype">char</span> nombre[21];</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_transportista.html#a7635d004a2a38f1b8810bf4d99441f39">   14</a></span>    <span class="keywordtype">char</span> email[31];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_transportista.html#a8000c2266a446e14dfba20db9e556f80">   15</a></span>    <span class="keywordtype">char</span> contrasenia[16];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_transportista.html#aef7c368f9b894930780b7fe280faf7c2">   16</a></span>    <span class="keywordtype">char</span> nombre_empresa[21];</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_transportista.html#a1b352c75ec519eb0292d6a6f48a032e1">   17</a></span>    <span class="keywordtype">char</span> ciudad_reparto[21];</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}<a class="code hl_struct" href="struct_transportista.html">Transportista</a>;</div>
+</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a5560672ef51ada5e5d86995c56f0c5c2">perfil_t</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> *t);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a1db4ce701a62fde01f5fdd4e02b3f5d7">guardarTransportistasEnArchivo</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> *, <span class="keywordtype">int</span> );</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><a class="code hl_struct" href="struct_transportista.html">Transportista</a> *<a class="code hl_function" href="_transportista_8h.html#a08a44d1d0677b969b373f79f688a2d5a">iniciarTransportistasDeArchivo</a>(<span class="keywordtype">int</span> *);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#ab47a53f3bb1cb641c8c6c8b6d1281018">retornarProductosNoRecogidos</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **productos, <span class="keywordtype">int</span> *num_productos, <a class="code hl_struct" href="struct_locker.html">Locker</a> **lockers, <span class="keywordtype">int</span> *num_lockers, <span class="keywordtype">char</span> *localidad_consulta);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#af80624a8565e76375e84618c6f82a1d7">reparto</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <span class="keywordtype">int</span> *num_pedidos, <span class="keywordtype">char</span> *id_transp);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a76bb7439636c7b044a746c01ffe24ecd">asignarProductoPedidoProv</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <span class="keywordtype">int</span> *num_pedidos, <a class="code hl_struct" href="struct_transportista.html">Transportista</a> ** trans, <span class="keywordtype">int</span> *nTrans,<span class="keywordtype">char</span> *idProv, <a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> * nProductos);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">int</span> <a class="code hl_function" href="_transportista_8h.html#a245c93c5d0e7d1cd2c5dc4c710164409">existeTransportista</a>( <a class="code hl_struct" href="struct_transportista.html">Transportista</a> ** trans, <span class="keywordtype">int</span> *nTrans, <span class="keywordtype">char</span> *idT);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a76bb7439636c7b044a746c01ffe24ecd">asignarProductoPedidoProv</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <span class="keywordtype">int</span> *num_pedidos, <a class="code hl_struct" href="struct_transportista.html">Transportista</a> ** trans, <span class="keywordtype">int</span> *nTrans, <span class="keywordtype">char</span> *idProv, <a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> * nProductos);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a6c48b161b0113ad196c8b7ad719d8f9f">dar_de_baja_transportista</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> **lista_transportistas, <span class="keywordtype">int</span> *num_transportistas);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a401cab07a55890b5fd860108bfc8ac56">modificar_transportista</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> **lista_transportistas, <span class="keywordtype">int</span> *num_transportistas);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a946afd25983d5c46e26c591f9c2cd626">buscar_transportista</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> **lista_transportistas, <span class="keywordtype">int</span> *num_transportistas);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a94e8a731fe544344855cbc88e558f17a">listar_transportistas</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> **lista_transportistas, <span class="keywordtype">int</span> *num_transportistas);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a23c0409396eea89d55615bb6ab663bed">agregar_transportista</a>(<a class="code hl_struct" href="struct_transportista.html">Transportista</a> **lista_transportistas, <span class="keywordtype">int</span> *num_transportistas);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="_transportista_8h.html#a6809b2335ceb4f1860bb0108257eb06b">entrega</a>(<a class="code hl_struct" href="struct_producto_pedido.html">ProductoPedido</a> **pedidos, <a class="code hl_struct" href="struct_compartimento_locker.html">CompartimentoLocker</a> **comportamiento, <span class="keywordtype">int</span> *num_pedidos, <span class="keywordtype">int</span> *tamanio_compartimento, <span class="keywordtype">char</span> *id_transp);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif </span><span class="comment">// TRANSPORTISTA_H_INCLUDED</span></div>
+<div class="ttc" id="a_compartimentos_lockers_8h_html"><div class="ttname"><a href="_compartimentos_lockers_8h.html">CompartimentosLockers.h</a></div></div>
+<div class="ttc" id="a_productos__pedidos_8h_html"><div class="ttname"><a href="_productos__pedidos_8h.html">Productos_pedidos.h</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a08a44d1d0677b969b373f79f688a2d5a"><div class="ttname"><a href="_transportista_8h.html#a08a44d1d0677b969b373f79f688a2d5a">iniciarTransportistasDeArchivo</a></div><div class="ttdeci">Transportista * iniciarTransportistasDeArchivo(int *)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00455">Transportista.c:455</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a1db4ce701a62fde01f5fdd4e02b3f5d7"><div class="ttname"><a href="_transportista_8h.html#a1db4ce701a62fde01f5fdd4e02b3f5d7">guardarTransportistasEnArchivo</a></div><div class="ttdeci">void guardarTransportistasEnArchivo(Transportista *, int)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00432">Transportista.c:432</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a23c0409396eea89d55615bb6ab663bed"><div class="ttname"><a href="_transportista_8h.html#a23c0409396eea89d55615bb6ab663bed">agregar_transportista</a></div><div class="ttdeci">void agregar_transportista(Transportista **lista_transportistas, int *num_transportistas)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00558">Transportista.c:558</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a245c93c5d0e7d1cd2c5dc4c710164409"><div class="ttname"><a href="_transportista_8h.html#a245c93c5d0e7d1cd2c5dc4c710164409">existeTransportista</a></div><div class="ttdeci">int existeTransportista(Transportista **trans, int *nTrans, char *idT)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00508">Transportista.c:508</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a401cab07a55890b5fd860108bfc8ac56"><div class="ttname"><a href="_transportista_8h.html#a401cab07a55890b5fd860108bfc8ac56">modificar_transportista</a></div><div class="ttdeci">void modificar_transportista(Transportista **lista_transportistas, int *num_transportistas)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00294">Transportista.c:294</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a5560672ef51ada5e5d86995c56f0c5c2"><div class="ttname"><a href="_transportista_8h.html#a5560672ef51ada5e5d86995c56f0c5c2">perfil_t</a></div><div class="ttdeci">void perfil_t(Transportista *t)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00094">Transportista.c:94</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a6809b2335ceb4f1860bb0108257eb06b"><div class="ttname"><a href="_transportista_8h.html#a6809b2335ceb4f1860bb0108257eb06b">entrega</a></div><div class="ttdeci">void entrega(ProductoPedido **pedidos, CompartimentoLocker **comportamiento, int *num_pedidos, int *tamanio_compartimento, char *id_transp)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00184">Transportista.c:184</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a6c48b161b0113ad196c8b7ad719d8f9f"><div class="ttname"><a href="_transportista_8h.html#a6c48b161b0113ad196c8b7ad719d8f9f">dar_de_baja_transportista</a></div><div class="ttdeci">void dar_de_baja_transportista(Transportista **lista_transportistas, int *num_transportistas)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00334">Transportista.c:334</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a76bb7439636c7b044a746c01ffe24ecd"><div class="ttname"><a href="_transportista_8h.html#a76bb7439636c7b044a746c01ffe24ecd">asignarProductoPedidoProv</a></div><div class="ttdeci">void asignarProductoPedidoProv(ProductoPedido **pedidos, int *num_pedidos, Transportista **trans, int *nTrans, char *idProv, Producto **productos, int *nProductos)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00517">Transportista.c:517</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a946afd25983d5c46e26c591f9c2cd626"><div class="ttname"><a href="_transportista_8h.html#a946afd25983d5c46e26c591f9c2cd626">buscar_transportista</a></div><div class="ttdeci">void buscar_transportista(Transportista **lista_transportistas, int *num_transportistas)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00598">Transportista.c:598</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_a94e8a731fe544344855cbc88e558f17a"><div class="ttname"><a href="_transportista_8h.html#a94e8a731fe544344855cbc88e558f17a">listar_transportistas</a></div><div class="ttdeci">void listar_transportistas(Transportista **lista_transportistas, int *num_transportistas)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00548">Transportista.c:548</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_ab47a53f3bb1cb641c8c6c8b6d1281018"><div class="ttname"><a href="_transportista_8h.html#ab47a53f3bb1cb641c8c6c8b6d1281018">retornarProductosNoRecogidos</a></div><div class="ttdeci">void retornarProductosNoRecogidos(ProductoPedido **productos, int *num_productos, Locker **lockers, int *num_lockers, char *localidad_consulta)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00254">Transportista.c:254</a></div></div>
+<div class="ttc" id="a_transportista_8h_html_af80624a8565e76375e84618c6f82a1d7"><div class="ttname"><a href="_transportista_8h.html#af80624a8565e76375e84618c6f82a1d7">reparto</a></div><div class="ttdeci">void reparto(ProductoPedido **pedidos, int *num_pedidos, char *id_transp)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00137">Transportista.c:137</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html"><div class="ttname"><a href="_utilidades_8h.html">Utilidades.h</a></div></div>
+<div class="ttc" id="astruct_compartimento_locker_html"><div class="ttname"><a href="struct_compartimento_locker.html">CompartimentoLocker</a></div><div class="ttdef"><b>Definition</b> <a href="_compartimentos_lockers_8h_source.html#l00010">CompartimentosLockers.h:10</a></div></div>
+<div class="ttc" id="astruct_locker_html"><div class="ttname"><a href="struct_locker.html">Locker</a></div><div class="ttdef"><b>Definition</b> <a href="_lockers_8h_source.html#l00009">Lockers.h:9</a></div></div>
+<div class="ttc" id="astruct_producto_html"><div class="ttname"><a href="struct_producto.html">Producto</a></div><div class="ttdef"><b>Definition</b> <a href="_productos_8h_source.html#l00009">Productos.h:9</a></div></div>
+<div class="ttc" id="astruct_producto_pedido_html"><div class="ttname"><a href="struct_producto_pedido.html">ProductoPedido</a></div><div class="ttdef"><b>Definition</b> <a href="_productos__pedidos_8h_source.html#l00015">Productos_pedidos.h:15</a></div></div>
+<div class="ttc" id="astruct_transportista_html"><div class="ttname"><a href="struct_transportista.html">Transportista</a></div><div class="ttdef"><b>Definition</b> <a href="#l00011">Transportista.h:11</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente Productos.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Productos.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_productos_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PRODUCTOS_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PRODUCTOS_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="_categoria_8h.html">Categoria.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_producto.html">    9</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_producto.html#a93c93b618b7ad8fbed89203cd7c46503">   10</a></span>    <span class="keywordtype">char</span> id_prod[8];</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_producto.html#a25ce4732661daf523c66326dde414e31">   11</a></span>    <span class="keywordtype">char</span> nombre[16];</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_producto.html#ab31b1b8606acfbbbfc46bd310c9d837c">   12</a></span>    <span class="keywordtype">char</span> descrip[51];</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct_producto.html#a5d654e0afc7f623b2801115ec06cf272">   13</a></span>    <span class="keywordtype">char</span> id_categ[5];</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_producto.html#ac751e3f0756ead1036430a18492abb07">   14</a></span>    <span class="keywordtype">char</span> id_gestor[5];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_producto.html#a9f6b1d8f565c649873cd57896391b2aa">   15</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_producto.html#a9f6b1d8f565c649873cd57896391b2aa">stock</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_producto.html#a761c843d08b8945d0cbbfe3c820c82ba">   16</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_producto.html#a761c843d08b8945d0cbbfe3c820c82ba">entrega</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_producto.html#a758f4498ebafcd076b47d494855c7dd5">   17</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_producto.html#a758f4498ebafcd076b47d494855c7dd5">importe</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}<a class="code hl_struct" href="struct_producto.html">Producto</a>;</div>
+</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a6bc96f01a268e4a6ef119520b1155314">alta_producto</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span>* tamanio_vector, <span class="keywordtype">char</span>* idAlta, <a class="code hl_struct" href="struct_categoria.html">Categoria</a> **categ , <span class="keywordtype">int</span>* tamanio_categ);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a29eff662c6c1909f1c7ed4f0bda6802e">baja_producto</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos , <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *id_baja);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#ab2a7f3449deab0098ccb635f9e852b59">listado_producto</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span>* tamanio);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a6d8c04d0fd82c0bcbb09e14935ae1af7">busqueda_producto_descr</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> *productos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *descripcion);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a82b9955c8132a07bbde6feffeb6d28c4">busqueda_producto_categ</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> *tamanio, <span class="keywordtype">char</span> *categ, <a class="code hl_struct" href="struct_categoria.html">Categoria</a> **categorias, <span class="keywordtype">int</span> *tamanio_categ);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a9999cd2afb872ca6ffe7592a7e104e79">buscador_un_producto</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span>* tamanio , <span class="keywordtype">char</span> *producto_buscado);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a38e2158ab97821cc3335fe2096d1d937">modificar_producto</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *adminProv);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">char</span> *<a class="code hl_function" href="_productos_8h.html#ab26042d667d2cba9140f27ce1c93d334">indicar_categ</a>(<a class="code hl_struct" href="struct_categoria.html">Categoria</a> **categ, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *categoria_productos);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">int</span> <a class="code hl_function" href="_productos_8h.html#a7d1244bf9eca2dcd5924122174b86cc3">productoEsDeProveedor</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> *tamanio, <span class="keywordtype">char</span> *idProv, <span class="keywordtype">char</span> *idProd);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#a5a489a4420d46f9e8028ac93342a7674">listado_producto_prooved</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> tamanio, <span class="keywordtype">char</span> *idProv);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#af4b30cd804e8409b81351b81ffb001dd">guardarProductosEnArchivo</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> *productos, <span class="keywordtype">int</span> numProductos);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><a class="code hl_struct" href="struct_producto.html">Producto</a> *<a class="code hl_function" href="_productos_8h.html#ae95152cad1b9e5f0b2e4f6937b4c8b7e">iniciarProductosDeArchivo</a>(<span class="keywordtype">int</span> *numProductos);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">void</span> <a class="code hl_function" href="_productos_8h.html#ac504927515d919cd26ec976da2005f88">listarProductosPorCategoria</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **productos, <span class="keywordtype">int</span> *numProductos, <a class="code hl_struct" href="struct_categoria.html">Categoria</a> **categorias, <span class="keywordtype">int</span> *numCategorias);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><a class="code hl_struct" href="struct_producto.html">Producto</a>* <a class="code hl_function" href="_productos_8h.html#a13660a1c76cfcdc593f5cf88bfc17505">agregar_a_cesta</a>(<a class="code hl_struct" href="struct_producto.html">Producto</a> **catalogo, <span class="keywordtype">int</span> *num_productos, <span class="keywordtype">float</span> *coste, <span class="keywordtype">int</span> *tamLista);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_categoria_8h_html"><div class="ttname"><a href="_categoria_8h.html">Categoria.h</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a13660a1c76cfcdc593f5cf88bfc17505"><div class="ttname"><a href="_productos_8h.html#a13660a1c76cfcdc593f5cf88bfc17505">agregar_a_cesta</a></div><div class="ttdeci">Producto * agregar_a_cesta(Producto **catalogo, int *num_productos, float *coste, int *tamLista)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00475">Productos.c:475</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a29eff662c6c1909f1c7ed4f0bda6802e"><div class="ttname"><a href="_productos_8h.html#a29eff662c6c1909f1c7ed4f0bda6802e">baja_producto</a></div><div class="ttdeci">void baja_producto(Producto **productos, int *tamanio, char *id_baja)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00188">Productos.c:188</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a38e2158ab97821cc3335fe2096d1d937"><div class="ttname"><a href="_productos_8h.html#a38e2158ab97821cc3335fe2096d1d937">modificar_producto</a></div><div class="ttdeci">void modificar_producto(Producto **productos, int *tamanio, char *adminProv)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00331">Productos.c:331</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a5a489a4420d46f9e8028ac93342a7674"><div class="ttname"><a href="_productos_8h.html#a5a489a4420d46f9e8028ac93342a7674">listado_producto_prooved</a></div><div class="ttdeci">void listado_producto_prooved(Producto **productos, int tamanio, char *idProv)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00224">Productos.c:224</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a6bc96f01a268e4a6ef119520b1155314"><div class="ttname"><a href="_productos_8h.html#a6bc96f01a268e4a6ef119520b1155314">alta_producto</a></div><div class="ttdeci">void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria **categ, int *tamanio_categ)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00133">Productos.c:133</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a6d8c04d0fd82c0bcbb09e14935ae1af7"><div class="ttname"><a href="_productos_8h.html#a6d8c04d0fd82c0bcbb09e14935ae1af7">busqueda_producto_descr</a></div><div class="ttdeci">void busqueda_producto_descr(Producto *productos, int *tamanio, char *descripcion)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00251">Productos.c:251</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a7d1244bf9eca2dcd5924122174b86cc3"><div class="ttname"><a href="_productos_8h.html#a7d1244bf9eca2dcd5924122174b86cc3">productoEsDeProveedor</a></div><div class="ttdeci">int productoEsDeProveedor(Producto **productos, int *tamanio, char *idProv, char *idProd)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00236">Productos.c:236</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a82b9955c8132a07bbde6feffeb6d28c4"><div class="ttname"><a href="_productos_8h.html#a82b9955c8132a07bbde6feffeb6d28c4">busqueda_producto_categ</a></div><div class="ttdeci">void busqueda_producto_categ(Producto **productos, int *tamanio, char *categ, Categoria **categorias, int *tamanio_categ)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00276">Productos.c:276</a></div></div>
+<div class="ttc" id="a_productos_8h_html_a9999cd2afb872ca6ffe7592a7e104e79"><div class="ttname"><a href="_productos_8h.html#a9999cd2afb872ca6ffe7592a7e104e79">buscador_un_producto</a></div><div class="ttdeci">void buscador_un_producto(Producto **productos, int *tamanio, char *producto_buscado)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00302">Productos.c:302</a></div></div>
+<div class="ttc" id="a_productos_8h_html_ab26042d667d2cba9140f27ce1c93d334"><div class="ttname"><a href="_productos_8h.html#ab26042d667d2cba9140f27ce1c93d334">indicar_categ</a></div><div class="ttdeci">char * indicar_categ(Categoria **categ, int *tamanio, char *categoria_productos)</div><div class="ttdef"><b>Definition</b> <a href="_categoria_8c_source.html#l00096">Categoria.c:96</a></div></div>
+<div class="ttc" id="a_productos_8h_html_ab2a7f3449deab0098ccb635f9e852b59"><div class="ttname"><a href="_productos_8h.html#ab2a7f3449deab0098ccb635f9e852b59">listado_producto</a></div><div class="ttdeci">void listado_producto(Producto **productos, int *tamanio)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00213">Productos.c:213</a></div></div>
+<div class="ttc" id="a_productos_8h_html_ac504927515d919cd26ec976da2005f88"><div class="ttname"><a href="_productos_8h.html#ac504927515d919cd26ec976da2005f88">listarProductosPorCategoria</a></div><div class="ttdeci">void listarProductosPorCategoria(Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00452">Productos.c:452</a></div></div>
+<div class="ttc" id="a_productos_8h_html_ae95152cad1b9e5f0b2e4f6937b4c8b7e"><div class="ttname"><a href="_productos_8h.html#ae95152cad1b9e5f0b2e4f6937b4c8b7e">iniciarProductosDeArchivo</a></div><div class="ttdeci">Producto * iniciarProductosDeArchivo(int *numProductos)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00051">Productos.c:51</a></div></div>
+<div class="ttc" id="a_productos_8h_html_af4b30cd804e8409b81351b81ffb001dd"><div class="ttname"><a href="_productos_8h.html#af4b30cd804e8409b81351b81ffb001dd">guardarProductosEnArchivo</a></div><div class="ttdeci">void guardarProductosEnArchivo(Producto *productos, int numProductos)</div><div class="ttdef"><b>Definition</b> <a href="_productos_8c_source.html#l00026">Productos.c:26</a></div></div>
+<div class="ttc" id="astruct_categoria_html"><div class="ttname"><a href="struct_categoria.html">Categoria</a></div><div class="ttdef"><b>Definition</b> <a href="_categoria_8h_source.html#l00010">Categoria.h:10</a></div></div>
+<div class="ttc" id="astruct_producto_html"><div class="ttname"><a href="struct_producto.html">Producto</a></div><div class="ttdef"><b>Definition</b> <a href="#l00009">Productos.h:9</a></div></div>
+<div class="ttc" id="astruct_producto_html_a758f4498ebafcd076b47d494855c7dd5"><div class="ttname"><a href="struct_producto.html#a758f4498ebafcd076b47d494855c7dd5">Producto::importe</a></div><div class="ttdeci">float importe</div><div class="ttdef"><b>Definition</b> <a href="#l00017">Productos.h:17</a></div></div>
+<div class="ttc" id="astruct_producto_html_a761c843d08b8945d0cbbfe3c820c82ba"><div class="ttname"><a href="struct_producto.html#a761c843d08b8945d0cbbfe3c820c82ba">Producto::entrega</a></div><div class="ttdeci">int entrega</div><div class="ttdef"><b>Definition</b> <a href="#l00016">Productos.h:16</a></div></div>
+<div class="ttc" id="astruct_producto_html_a9f6b1d8f565c649873cd57896391b2aa"><div class="ttname"><a href="struct_producto.html#a9f6b1d8f565c649873cd57896391b2aa">Producto::stock</a></div><div class="ttdeci">int stock</div><div class="ttdef"><b>Definition</b> <a href="#l00015">Productos.h:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

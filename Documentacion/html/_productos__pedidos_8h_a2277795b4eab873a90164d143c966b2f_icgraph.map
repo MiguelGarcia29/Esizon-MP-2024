@@ -1,0 +1,18 @@
+<map id="reducirStock" name="reducirStock">
+<area shape="rect" id="Node000001" title=" " alt="" coords="766,31,860,57"/>
+<area shape="rect" id="Node000002" href="$_productos__pedidos_8c.html#aceb34c4aa99ac73c36395890fe654be2" title=" " alt="" coords="625,31,718,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="751,47,718,47,718,41,751,41"/>
+<area shape="rect" id="Node000003" href="$_e_s_i_z_o_n_8c.html#a2fa7e6aee930e578ac2153dc0693bed3" title=" " alt="" coords="422,5,572,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="609,38,572,32,572,27,610,32"/>
+<area shape="rect" id="Node000007" href="$_e_s_i_z_o_n_8c.html#a4f9c31e227a795a720339535d2fdf73b" title=" " alt="" coords="417,56,577,83"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="610,56,578,60,577,55,609,50"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="278,5,366,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="407,21,366,21,366,16,407,16"/>
+<area shape="rect" id="Node000005" href="$_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,31,226,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="262,31,227,37,226,31,261,26"/>
+<area shape="rect" id="Node000006" href="$_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="87,47,55,47,55,41,87,41"/>
+<area shape="rect" id="Node000008" href="$_e_s_i_z_o_n_8c.html#a5d31eb2ee236bc4cefb79fb71f0e9947" title=" " alt="" coords="274,56,369,83"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="402,72,370,72,370,67,402,67"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="258,62,226,57,227,51,259,57"/>
+</map>

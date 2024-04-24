@@ -1,0 +1,12 @@
+<map id="Devolucion.h" name="Devolucion.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="130,5,224,32"/>
+<area shape="rect" id="Node000002" href="$_devoluciones_8c.html" title=" " alt="" coords="5,80,114,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,43,81,82,79,77,142,38"/>
+<area shape="rect" id="Node000003" href="$_e_s_i_z_o_n_8h.html" title=" " alt="" coords="137,80,217,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,48,180,80,174,80,174,48"/>
+<area shape="rect" id="Node000005" href="$_main_8c.html" title=" " alt="" coords="224,155,284,181"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="203,42,231,79,247,119,255,154,250,155,242,121,227,81,199,45"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8c.html" title=" " alt="" coords="121,155,201,181"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="173,123,166,155,161,154,168,122"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="203,116,243,152,239,156,200,119"/>
+</map>

@@ -1,0 +1,30 @@
+<map id="Productos_pedidos.h" name="Productos_pedidos.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="335,5,478,32"/>
+<area shape="rect" id="Node000002" href="$_devolucion_8h.html" title=" " alt="" coords="128,80,223,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="352,40,217,82,215,77,351,35"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8h.html" title=" " alt="" coords="189,155,269,181"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="370,42,309,82,269,121,240,156,236,153,265,117,306,78,367,37"/>
+<area shape="rect" id="Node000006" href="$_main_8c.html" title=" " alt="" coords="284,229,344,256"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="426,44,442,73,455,109,459,147,455,165,447,183,426,206,399,222,371,233,345,239,344,234,370,228,397,217,423,202,443,180,450,164,453,147,449,110,437,76,421,46"/>
+<area shape="rect" id="Node000007" href="$_productos__pedidos_8c.html" title=" " alt="" coords="620,80,763,107"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="471,34,642,77,641,82,470,39"/>
+<area shape="rect" id="Node000008" href="$_proveedor_8h.html" title=" " alt="" coords="320,80,410,107"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="394,47,374,81,370,78,389,44"/>
+<area shape="rect" id="Node000010" href="$_transportista_8h.html" title=" " alt="" coords="489,80,596,107"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="445,37,520,77,517,82,442,42"/>
+<area shape="rect" id="Node000003" href="$_devoluciones_8c.html" title=" " alt="" coords="5,155,114,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="144,118,81,156,78,152,141,113"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="196,118,222,153,218,156,192,121"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="171,122,170,152,173,167,179,180,195,193,222,207,284,230,283,235,220,212,192,198,175,183,168,168,165,152,166,122"/>
+<area shape="rect" id="Node000005" href="$_e_s_i_z_o_n_8c.html" title=" " alt="" coords="181,229,261,256"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="228,197,225,229,220,229,223,196"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="257,189,301,227,298,231,253,194"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="329,117,254,156,251,152,326,112"/>
+<area shape="poly" id="edge12_Node000008_Node000006" title=" " alt="" coords="351,121,334,156,323,196,318,230,313,229,318,195,329,154,346,119"/>
+<area shape="rect" id="Node000009" href="$_proveedor_8c.html" title=" " alt="" coords="344,155,434,181"/>
+<area shape="poly" id="edge13_Node000008_Node000009" title=" " alt="" coords="376,121,387,153,382,155,371,123"/>
+<area shape="poly" id="edge15_Node000010_Node000004" title=" " alt="" coords="474,113,270,160,268,155,472,108"/>
+<area shape="poly" id="edge16_Node000010_Node000006" title=" " alt="" coords="535,122,518,154,492,183,456,206,416,223,345,240,344,235,415,218,453,202,488,179,513,151,530,120"/>
+<area shape="rect" id="Node000011" href="$_transportista_8c.html" title=" " alt="" coords="559,155,667,181"/>
+<area shape="poly" id="edge17_Node000010_Node000011" title=" " alt="" coords="567,116,603,152,599,156,563,120"/>
+</map>

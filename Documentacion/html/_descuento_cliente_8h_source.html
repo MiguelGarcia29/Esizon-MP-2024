@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente DescuentoCliente.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">DescuentoCliente.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_descuento_cliente_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef DESCUENTOCLIENTE_H_INCLUDED</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define DESCUENTOCLIENTE_H_INCLUDED</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include&quot;<a class="code" href="descuentos_8h.html">descuentos.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include&quot;<a class="code" href="_cliente_8h.html">Cliente.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include&quot;<a class="code" href="_productos_8h.html">Productos.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_descuento_cliente.html">   12</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct_descuento_cliente.html#a62577099c447655c2fee680e5c06700d">   13</a></span>    <span class="keywordtype">char</span> id_cliente[8];</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_descuento_cliente.html#ab14cd34145838ef17436e76a37747de5">   14</a></span>    <span class="keywordtype">char</span> id_cod[11];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_descuento_cliente.html#a44df86b192b2258ec8ef0bb2132ac7c9">   15</a></span>    <span class="keywordtype">char</span> fecha_asignacion[11];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_descuento_cliente.html#ae30a39d4079d3aaae539e60a508e5ffa">   16</a></span>    <span class="keywordtype">char</span> <a class="code hl_function" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a>[11];</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_descuento_cliente.html#a876d08c1d21086e4fd228744da10d028">   17</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_descuento_cliente.html#a876d08c1d21086e4fd228744da10d028">estado</a>; <span class="comment">// 1 (Aplicado) o 0 (No aplicado)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}<a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a>;</div>
+</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="_descuento_cliente_8h.html#a4baa6d310a95db3ea830c2d36143e9b5">   20</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#a4baa6d310a95db3ea830c2d36143e9b5">rellenar_descuentocliente</a>(<a class="code hl_struct" href="struct_descuento.html">Descuento</a> desc[], <a class="code hl_struct" href="struct_cliente.html">Cliente</a> clientes[], <a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> **desccliente, <span class="keywordtype">int</span> cantdad_desc, <span class="keywordtype">int</span> cantdad_cli, <span class="keywordtype">int</span> *cantdad_desccli);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#a0804422c1107833648764651566c58c2">mostrar_descuentos_cliente</a>(<span class="keywordtype">char</span> *id_cliente, <a class="code hl_struct" href="struct_descuento.html">Descuento</a> **desc, <a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> **desc_cliente, <span class="keywordtype">int</span> *cant_desc, <span class="keywordtype">int</span> *cant_desc_cli);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#a7167ce53b7de5f64e930ea000a89690c">anadir_fecha_caducidad</a>(<span class="keywordtype">char</span> *caducidad, <span class="keywordtype">int</span> cantdad_descli);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#a42b22582d1fe7393e40079603dfb4373">baja_descuento_clientes</a>(<a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> **desccli, <span class="keywordtype">int</span> *cantdad_desccli,<span class="keywordtype">int</span> candtdad_desc,<span class="keywordtype">int</span> cantdad_cli, <span class="keywordtype">char</span> *id_baja);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#a63d7528656f29e0988a276bc46627e41">actualizar_estado_descuentos_vencidos</a>(<a class="code hl_struct" href="struct_descuento.html">Descuento</a> *desc,<a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> *desccli, <span class="keywordtype">int</span> cant_desc);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#ab9a01c23b6b14006eb8d14c98252ccff">asignar_descuento</a>(<a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> *desc_cliente, <span class="keywordtype">int</span> cant_desc_cli);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#aeaa7d543dac50961bda585bad8a09d2c">aplicar_descuento</a>(<span class="keywordtype">float</span> *precio,<a class="code hl_struct" href="struct_descuento.html">Descuento</a> *desc,<a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> *desccli,<span class="keywordtype">char</span> id_cliente[8],<a class="code hl_struct" href="struct_producto.html">Producto</a> *prod,<span class="keywordtype">int</span> cantdad_desc,<span class="keywordtype">int</span> cantdad_desccli,<span class="keywordtype">int</span> numprodpe);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="_descuento_cliente_8h.html#adf89575e3e3fd04d96dfbd6f1c7d5455">guardarDescuentosClientesEnArchivo</a>(<a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> *, <span class="keywordtype">int</span> );</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><a class="code hl_struct" href="struct_descuento_cliente.html">DescuentoCliente</a> *<a class="code hl_function" href="_descuento_cliente_8h.html#a558596dcd54da7f920eacb485f03bd62">iniciarDescuentosClientesDeArchivo</a>(<span class="keywordtype">int</span> *);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif </span><span class="comment">// DESCUENTOCLIENTE_H_INCLUDED</span></div>
+<div class="ttc" id="a_cliente_8h_html"><div class="ttname"><a href="_cliente_8h.html">Cliente.h</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_a0804422c1107833648764651566c58c2"><div class="ttname"><a href="_descuento_cliente_8h.html#a0804422c1107833648764651566c58c2">mostrar_descuentos_cliente</a></div><div class="ttdeci">void mostrar_descuentos_cliente(char *id_cliente, Descuento **desc, DescuentoCliente **desc_cliente, int *cant_desc, int *cant_desc_cli)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00126">DescuentoCliente.c:126</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_a42b22582d1fe7393e40079603dfb4373"><div class="ttname"><a href="_descuento_cliente_8h.html#a42b22582d1fe7393e40079603dfb4373">baja_descuento_clientes</a></div><div class="ttdeci">void baja_descuento_clientes(DescuentoCliente **desccli, int *cantdad_desccli, int candtdad_desc, int cantdad_cli, char *id_baja)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00153">DescuentoCliente.c:153</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_a4baa6d310a95db3ea830c2d36143e9b5"><div class="ttname"><a href="_descuento_cliente_8h.html#a4baa6d310a95db3ea830c2d36143e9b5">rellenar_descuentocliente</a></div><div class="ttdeci">void rellenar_descuentocliente(Descuento desc[], Cliente clientes[], DescuentoCliente **desccliente, int cantdad_desc, int cantdad_cli, int *cantdad_desccli)</div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_a558596dcd54da7f920eacb485f03bd62"><div class="ttname"><a href="_descuento_cliente_8h.html#a558596dcd54da7f920eacb485f03bd62">iniciarDescuentosClientesDeArchivo</a></div><div class="ttdeci">DescuentoCliente * iniciarDescuentosClientesDeArchivo(int *)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00307">DescuentoCliente.c:307</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_a63d7528656f29e0988a276bc46627e41"><div class="ttname"><a href="_descuento_cliente_8h.html#a63d7528656f29e0988a276bc46627e41">actualizar_estado_descuentos_vencidos</a></div><div class="ttdeci">void actualizar_estado_descuentos_vencidos(Descuento *desc, DescuentoCliente *desccli, int cant_desc)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00168">DescuentoCliente.c:168</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_a7167ce53b7de5f64e930ea000a89690c"><div class="ttname"><a href="_descuento_cliente_8h.html#a7167ce53b7de5f64e930ea000a89690c">anadir_fecha_caducidad</a></div><div class="ttdeci">void anadir_fecha_caducidad(char *caducidad, int cantdad_descli)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00111">DescuentoCliente.c:111</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_ab9a01c23b6b14006eb8d14c98252ccff"><div class="ttname"><a href="_descuento_cliente_8h.html#ab9a01c23b6b14006eb8d14c98252ccff">asignar_descuento</a></div><div class="ttdeci">void asignar_descuento(DescuentoCliente *desc_cliente, int cant_desc_cli)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00194">DescuentoCliente.c:194</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_adf89575e3e3fd04d96dfbd6f1c7d5455"><div class="ttname"><a href="_descuento_cliente_8h.html#adf89575e3e3fd04d96dfbd6f1c7d5455">guardarDescuentosClientesEnArchivo</a></div><div class="ttdeci">void guardarDescuentosClientesEnArchivo(DescuentoCliente *, int)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00285">DescuentoCliente.c:285</a></div></div>
+<div class="ttc" id="a_descuento_cliente_8h_html_aeaa7d543dac50961bda585bad8a09d2c"><div class="ttname"><a href="_descuento_cliente_8h.html#aeaa7d543dac50961bda585bad8a09d2c">aplicar_descuento</a></div><div class="ttdeci">void aplicar_descuento(float *precio, Descuento *desc, DescuentoCliente *desccli, char id_cliente[8], Producto *prod, int cantdad_desc, int cantdad_desccli, int numprodpe)</div><div class="ttdef"><b>Definition</b> <a href="_descuento_cliente_8c_source.html#l00220">DescuentoCliente.c:220</a></div></div>
+<div class="ttc" id="a_productos_8h_html"><div class="ttname"><a href="_productos_8h.html">Productos.h</a></div></div>
+<div class="ttc" id="a_transportista_8c_html_a14d937d00bc62ac1a0dfd81912053bef"><div class="ttname"><a href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef">fecha_caducidad</a></div><div class="ttdeci">void fecha_caducidad(char *fecha)</div><div class="ttdef"><b>Definition</b> <a href="_transportista_8c_source.html#l00164">Transportista.c:164</a></div></div>
+<div class="ttc" id="adescuentos_8h_html"><div class="ttname"><a href="descuentos_8h.html">descuentos.h</a></div></div>
+<div class="ttc" id="astruct_cliente_html"><div class="ttname"><a href="struct_cliente.html">Cliente</a></div><div class="ttdef"><b>Definition</b> <a href="_cliente_8h_source.html#l00011">Cliente.h:11</a></div></div>
+<div class="ttc" id="astruct_descuento_cliente_html"><div class="ttname"><a href="struct_descuento_cliente.html">DescuentoCliente</a></div><div class="ttdef"><b>Definition</b> <a href="#l00012">DescuentoCliente.h:12</a></div></div>
+<div class="ttc" id="astruct_descuento_cliente_html_a876d08c1d21086e4fd228744da10d028"><div class="ttname"><a href="struct_descuento_cliente.html#a876d08c1d21086e4fd228744da10d028">DescuentoCliente::estado</a></div><div class="ttdeci">int estado</div><div class="ttdef"><b>Definition</b> <a href="#l00017">DescuentoCliente.h:17</a></div></div>
+<div class="ttc" id="astruct_descuento_html"><div class="ttname"><a href="struct_descuento.html">Descuento</a></div><div class="ttdef"><b>Definition</b> <a href="descuentos_8h_source.html#l00011">descuentos.h:11</a></div></div>
+<div class="ttc" id="astruct_producto_html"><div class="ttname"><a href="struct_producto.html">Producto</a></div><div class="ttdef"><b>Definition</b> <a href="_productos_8h_source.html#l00009">Productos.h:9</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

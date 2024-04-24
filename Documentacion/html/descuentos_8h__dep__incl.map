@@ -1,0 +1,18 @@
+<map id="descuentos.h" name="descuentos.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="210,5,309,32"/>
+<area shape="rect" id="Node000002" href="$_descuento_cliente_8h.html" title=" " alt="" coords="141,80,275,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,46,219,81,214,78,240,43"/>
+<area shape="rect" id="Node000004" href="$_e_s_i_z_o_n_8h.html" title=" " alt="" coords="5,155,85,181"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="210,40,170,59,131,82,88,120,57,156,53,152,84,116,127,78,168,54,208,36"/>
+<area shape="rect" id="Node000006" href="$_main_8c.html" title=" " alt="" coords="250,229,310,256"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="276,45,289,79,294,122,293,165,285,229,280,229,288,165,289,123,284,81,271,47"/>
+<area shape="rect" id="Node000007" href="$_descuentos_8c.html" title=" " alt="" coords="368,80,469,107"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="302,36,392,77,389,82,300,41"/>
+<area shape="rect" id="Node000003" href="$_descuento_cliente_8c.html" title=" " alt="" coords="109,155,243,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="198,122,184,155,179,153,194,120"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="167,116,75,156,72,152,164,111"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="232,117,257,153,272,194,280,228,275,230,267,195,252,156,227,120"/>
+<area shape="rect" id="Node000005" href="$_e_s_i_z_o_n_8c.html" title=" " alt="" coords="5,229,85,256"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="48,197,48,229,42,229,42,197"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="100,183,250,229,248,234,98,189"/>
+</map>

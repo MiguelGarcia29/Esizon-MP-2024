@@ -1,0 +1,7 @@
+<map id="asignarProductoPedidoProv" name="asignarProductoPedidoProv">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,186,57"/>
+<area shape="rect" id="Node000002" href="$_transportista_8c.html#a245c93c5d0e7d1cd2c5dc4c710164409" title=" " alt="" coords="248,5,380,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,31,233,25,233,31,186,36"/>
+<area shape="rect" id="Node000003" href="$_productos_8c.html#a7d1244bf9eca2dcd5924122174b86cc3" title=" " alt="" coords="234,56,394,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,52,218,56,218,61,185,57"/>
+</map>

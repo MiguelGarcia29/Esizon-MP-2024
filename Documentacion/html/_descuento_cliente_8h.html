@@ -1,0 +1,652 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Referencia del archivo DescuentoCliente.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo DescuentoCliente.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="descuentos_8h_source.html">descuentos.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_cliente_8h_source.html">Cliente.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_productos_8h_source.html">Productos.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependencias incluidas en DescuentoCliente.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h__incl.png" border="0" usemap="#a_descuento_cliente_8h" alt=""/></div>
+<map name="a_descuento_cliente_8h" id="a_descuento_cliente_8h">
+<area shape="rect" title=" " alt="" coords="120,5,255,32"/>
+<area shape="rect" title=" " alt="" coords="5,304,66,331"/>
+<area shape="poly" title=" " alt="" coords="152,35,115,54,81,82,49,124,31,161,24,203,26,256,32,288,26,289,21,256,19,203,26,160,45,121,78,78,112,49,150,30"/>
+<area shape="rect" title=" " alt="" coords="523,304,588,331"/>
+<area shape="poly" title=" " alt="" coords="256,25,349,43,399,58,447,78,501,106,541,135,571,173,594,229,596,246,593,263,578,293,573,291,588,261,591,246,589,230,566,176,538,139,499,110,445,82,397,63,347,48,255,30"/>
+<area shape="rect" title=" " alt="" coords="248,304,311,331"/>
+<area shape="poly" title=" " alt="" coords="168,35,132,61,95,96,80,116,71,137,69,159,75,180,89,202,107,222,148,256,193,281,235,299,232,304,191,286,145,260,103,226,85,205,70,182,64,159,66,136,76,114,91,93,128,56,165,30"/>
+<area shape="rect" title=" " alt="" coords="159,80,216,107"/>
+<area shape="poly" title=" " alt="" coords="190,33,190,64,185,64,185,33"/>
+<area shape="rect" href="descuentos_8h.html" title=" " alt="" coords="205,155,304,181"/>
+<area shape="poly" title=" " alt="" coords="200,31,231,79,251,139,246,140,226,81,196,34"/>
+<area shape="rect" href="_cliente_8h.html" title=" " alt="" coords="85,155,157,181"/>
+<area shape="poly" title=" " alt="" coords="180,34,150,81,129,141,124,139,145,79,176,31"/>
+<area shape="rect" href="_productos_8h.html" title=" " alt="" coords="343,80,435,107"/>
+<area shape="poly" title=" " alt="" coords="223,30,340,72,338,77,222,35"/>
+<area shape="poly" title=" " alt="" coords="229,184,145,232,62,296,59,291,142,227,227,180"/>
+<area shape="poly" title=" " alt="" coords="290,179,405,227,469,261,524,294,522,298,467,266,402,232,288,184"/>
+<area shape="poly" title=" " alt="" coords="259,181,277,288,272,289,254,182"/>
+<area shape="rect" href="_utilidades_8h.html" title=" " alt="" coords="302,229,391,256"/>
+<area shape="poly" title=" " alt="" coords="272,180,320,218,317,222,269,184"/>
+<area shape="poly" title=" " alt="" coords="302,257,81,308,80,303,300,252"/>
+<area shape="poly" title=" " alt="" coords="383,254,509,297,508,302,382,259"/>
+<area shape="poly" title=" " alt="" coords="337,258,303,294,299,291,333,255"/>
+<area shape="poly" title=" " alt="" coords="96,184,68,203,45,231,36,259,35,288,29,288,30,258,40,228,64,199,93,180"/>
+<area shape="poly" title=" " alt="" coords="142,179,207,216,291,254,349,272,407,287,509,306,508,312,406,292,347,277,289,258,205,221,140,184"/>
+<area shape="poly" title=" " alt="" coords="136,180,257,291,253,295,133,184"/>
+<area shape="poly" title=" " alt="" coords="158,179,293,222,291,227,157,184"/>
+<area shape="poly" title=" " alt="" coords="343,101,196,121,123,137,95,146,74,157,51,177,37,199,32,224,31,256,34,288,29,289,26,256,26,223,32,197,47,174,71,152,93,141,122,132,195,116,343,96"/>
+<area shape="poly" title=" " alt="" coords="422,105,460,123,502,150,543,185,560,205,574,228,579,244,579,260,571,290,566,289,574,260,573,245,569,230,556,209,539,188,499,154,457,128,420,110"/>
+<area shape="poly" title=" " alt="" coords="408,105,430,126,447,154,450,183,443,215,427,258,405,277,379,292,327,310,326,305,377,287,402,273,423,254,438,214,445,182,442,156,426,129,404,109"/>
+<area shape="rect" href="_categoria_8h.html" title=" " alt="" coords="345,155,433,181"/>
+<area shape="poly" title=" " alt="" coords="392,107,392,139,386,139,386,107"/>
+<area shape="poly" title=" " alt="" coords="360,184,81,300,79,295,358,179"/>
+<area shape="poly" title=" " alt="" coords="433,170,464,177,496,187,526,204,551,228,559,242,563,258,563,288,558,288,557,258,554,244,547,231,523,208,494,192,462,182,432,176"/>
+<area shape="poly" title=" " alt="" coords="398,181,411,216,412,237,406,257,390,276,370,291,327,309,325,304,367,286,386,272,401,255,407,237,406,217,393,182"/>
+<area shape="poly" title=" " alt="" coords="384,183,363,217,359,215,379,181"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h__dep__incl.png" border="0" usemap="#a_descuento_cliente_8hdep" alt=""/></div>
+<map name="a_descuento_cliente_8hdep" id="a_descuento_cliente_8hdep">
+<area shape="rect" title=" " alt="" coords="136,5,270,32"/>
+<area shape="rect" href="_descuento_cliente_8c.html" title=" " alt="" coords="5,80,140,107"/>
+<area shape="poly" title=" " alt="" coords="168,42,97,82,94,77,166,38"/>
+<area shape="rect" href="_e_s_i_z_o_n_8h.html" title=" " alt="" coords="164,80,243,107"/>
+<area shape="poly" title=" " alt="" coords="206,48,206,80,201,80,201,48"/>
+<area shape="rect" href="_main_8c.html" title=" " alt="" coords="250,155,311,181"/>
+<area shape="poly" title=" " alt="" coords="230,42,257,79,273,119,281,154,276,155,268,121,253,81,225,45"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html" title=" " alt="" coords="148,155,227,181"/>
+<area shape="poly" title=" " alt="" coords="200,123,193,155,187,154,194,122"/>
+<area shape="poly" title=" " alt="" coords="230,116,269,152,265,156,226,119"/>
+</map>
+</div>
+</div>
+<p><a href="_descuento_cliente_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a4baa6d310a95db3ea830c2d36143e9b5" id="r_a4baa6d310a95db3ea830c2d36143e9b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4baa6d310a95db3ea830c2d36143e9b5">rellenar_descuentocliente</a> (<a class="el" href="struct_descuento.html">Descuento</a> desc[], <a class="el" href="struct_cliente.html">Cliente</a> clientes[], <a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> **desccliente, int cantdad_desc, int cantdad_cli, int *cantdad_desccli)</td></tr>
+<tr class="separator:a4baa6d310a95db3ea830c2d36143e9b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0804422c1107833648764651566c58c2" id="r_a0804422c1107833648764651566c58c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0804422c1107833648764651566c58c2">mostrar_descuentos_cliente</a> (char *id_cliente, <a class="el" href="struct_descuento.html">Descuento</a> **desc, <a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> **desc_cliente, int *cant_desc, int *cant_desc_cli)</td></tr>
+<tr class="separator:a0804422c1107833648764651566c58c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7167ce53b7de5f64e930ea000a89690c" id="r_a7167ce53b7de5f64e930ea000a89690c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7167ce53b7de5f64e930ea000a89690c">anadir_fecha_caducidad</a> (char *caducidad, int cantdad_descli)</td></tr>
+<tr class="separator:a7167ce53b7de5f64e930ea000a89690c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42b22582d1fe7393e40079603dfb4373" id="r_a42b22582d1fe7393e40079603dfb4373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42b22582d1fe7393e40079603dfb4373">baja_descuento_clientes</a> (<a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> **desccli, int *cantdad_desccli, int candtdad_desc, int cantdad_cli, char *id_baja)</td></tr>
+<tr class="separator:a42b22582d1fe7393e40079603dfb4373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d7528656f29e0988a276bc46627e41" id="r_a63d7528656f29e0988a276bc46627e41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63d7528656f29e0988a276bc46627e41">actualizar_estado_descuentos_vencidos</a> (<a class="el" href="struct_descuento.html">Descuento</a> *desc, <a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *desccli, int cant_desc)</td></tr>
+<tr class="separator:a63d7528656f29e0988a276bc46627e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a01c23b6b14006eb8d14c98252ccff" id="r_ab9a01c23b6b14006eb8d14c98252ccff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9a01c23b6b14006eb8d14c98252ccff">asignar_descuento</a> (<a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *desc_cliente, int cant_desc_cli)</td></tr>
+<tr class="separator:ab9a01c23b6b14006eb8d14c98252ccff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa7d543dac50961bda585bad8a09d2c" id="r_aeaa7d543dac50961bda585bad8a09d2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaa7d543dac50961bda585bad8a09d2c">aplicar_descuento</a> (float *precio, <a class="el" href="struct_descuento.html">Descuento</a> *desc, <a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *desccli, char id_cliente[8], <a class="el" href="struct_producto.html">Producto</a> *prod, int cantdad_desc, int cantdad_desccli, int numprodpe)</td></tr>
+<tr class="separator:aeaa7d543dac50961bda585bad8a09d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf89575e3e3fd04d96dfbd6f1c7d5455" id="r_adf89575e3e3fd04d96dfbd6f1c7d5455"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf89575e3e3fd04d96dfbd6f1c7d5455">guardarDescuentosClientesEnArchivo</a> (<a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *, int)</td></tr>
+<tr class="separator:adf89575e3e3fd04d96dfbd6f1c7d5455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a558596dcd54da7f920eacb485f03bd62" id="r_a558596dcd54da7f920eacb485f03bd62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a558596dcd54da7f920eacb485f03bd62">iniciarDescuentosClientesDeArchivo</a> (int *)</td></tr>
+<tr class="separator:a558596dcd54da7f920eacb485f03bd62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="a63d7528656f29e0988a276bc46627e41" name="a63d7528656f29e0988a276bc46627e41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63d7528656f29e0988a276bc46627e41">&#9670;&#160;</a></span>actualizar_estado_descuentos_vencidos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void actualizar_estado_descuentos_vencidos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_descuento.html">Descuento</a> *</td>          <td class="paramname"><span class="paramname"><em>desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *</td>          <td class="paramname"><span class="paramname"><em>desccli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cant_desc</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00168">168</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a63d7528656f29e0988a276bc46627e41_cgraph.png" border="0" usemap="#a_descuento_cliente_8h_a63d7528656f29e0988a276bc46627e41_cgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a63d7528656f29e0988a276bc46627e41_cgraph" id="a_descuento_cliente_8h_a63d7528656f29e0988a276bc46627e41_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,203,48"/>
+<area shape="rect" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="251,13,369,40"/>
+<area shape="poly" title=" " alt="" coords="203,24,235,24,235,29,203,29"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7167ce53b7de5f64e930ea000a89690c" name="a7167ce53b7de5f64e930ea000a89690c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7167ce53b7de5f64e930ea000a89690c">&#9670;&#160;</a></span>anadir_fecha_caducidad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void anadir_fecha_caducidad </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>caducidad</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cantdad_descli</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00111">111</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a7167ce53b7de5f64e930ea000a89690c_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_a7167ce53b7de5f64e930ea000a89690c_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a7167ce53b7de5f64e930ea000a89690c_icgraph" id="a_descuento_cliente_8h_a7167ce53b7de5f64e930ea000a89690c_icgraph">
+<area shape="rect" title=" " alt="" coords="630,5,790,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a7b1347bc69410cb38d6f04363515f45e" title=" " alt="" coords="410,5,582,32"/>
+<area shape="poly" title=" " alt="" coords="614,21,582,21,582,16,614,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aeaa7d543dac50961bda585bad8a09d2c" name="aeaa7d543dac50961bda585bad8a09d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaa7d543dac50961bda585bad8a09d2c">&#9670;&#160;</a></span>aplicar_descuento()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void aplicar_descuento </td>
+          <td>(</td>
+          <td class="paramtype">float *</td>          <td class="paramname"><span class="paramname"><em>precio</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_descuento.html">Descuento</a> *</td>          <td class="paramname"><span class="paramname"><em>desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *</td>          <td class="paramname"><span class="paramname"><em>desccli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>id_cliente</em>[8], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_producto.html">Producto</a> *</td>          <td class="paramname"><span class="paramname"><em>prod</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cantdad_desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cantdad_desccli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numprodpe</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00220">220</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_cgraph.png" border="0" usemap="#a_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_cgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_cgraph" id="a_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,132,184"/>
+<area shape="rect" href="_descuento_cliente_8c.html#a1a463be24ed76b156357f757864377b5" title=" " alt="" coords="197,5,302,32"/>
+<area shape="poly" title=" " alt="" coords="76,155,116,101,145,70,178,42,186,37,189,42,181,46,149,73,120,104,81,158"/>
+<area shape="rect" href="_descuento_cliente_8c.html#a992369bb91d03c2bdc71ef7ced33580f" title=" " alt="" coords="215,56,284,83"/>
+<area shape="poly" title=" " alt="" coords="85,155,126,124,178,92,199,83,201,88,181,97,129,129,88,159"/>
+<area shape="rect" href="_descuento_cliente_8c.html#ae01c8a428f25bf5cb50f167a98e1eca5" title=" " alt="" coords="211,107,288,133"/>
+<area shape="poly" title=" " alt="" coords="118,154,195,132,197,137,120,159"/>
+<area shape="rect" href="_descuento_cliente_8c.html#a7a753c1edee54aa109a8b372ad4eea9a" title=" " alt="" coords="210,157,289,184"/>
+<area shape="poly" title=" " alt="" coords="132,168,195,168,195,173,132,173"/>
+<area shape="rect" href="_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="195,208,304,235"/>
+<area shape="poly" title=" " alt="" coords="120,182,185,201,184,206,118,187"/>
+<area shape="rect" href="_descuento_cliente_8c.html#a0804422c1107833648764651566c58c2" title=" " alt="" coords="180,259,319,301"/>
+<area shape="poly" title=" " alt="" coords="89,182,181,244,189,249,186,253,178,249,86,187"/>
+<area shape="rect" href="_descuento_cliente_8c.html#afc6969ff4c213fde75ccd77fdbbffb38" title=" " alt="" coords="200,325,299,352"/>
+<area shape="poly" title=" " alt="" coords="79,183,118,244,147,280,181,311,188,316,185,320,178,315,143,284,113,247,75,186"/>
+<area shape="rect" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="367,267,485,293"/>
+<area shape="poly" title=" " alt="" coords="320,277,351,277,351,283,320,283"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_icgraph" id="a_descuento_cliente_8h_aeaa7d543dac50961bda585bad8a09d2c_icgraph">
+<area shape="rect" title=" " alt="" coords="625,5,751,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a4f9c31e227a795a720339535d2fdf73b" title=" " alt="" coords="417,5,577,32"/>
+<area shape="poly" title=" " alt="" coords="609,21,577,21,577,16,609,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a5d31eb2ee236bc4cefb79fb71f0e9947" title=" " alt="" coords="274,5,369,32"/>
+<area shape="poly" title=" " alt="" coords="402,21,370,21,370,16,402,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="259,21,227,21,227,16,259,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab9a01c23b6b14006eb8d14c98252ccff" name="ab9a01c23b6b14006eb8d14c98252ccff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a01c23b6b14006eb8d14c98252ccff">&#9670;&#160;</a></span>asignar_descuento()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void asignar_descuento </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *</td>          <td class="paramname"><span class="paramname"><em>desc_cliente</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cant_desc_cli</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00194">194</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_cgraph.png" border="0" usemap="#a_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_cgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_cgraph" id="a_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,136,32"/>
+<area shape="rect" href="_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="184,5,293,32"/>
+<area shape="poly" title=" " alt="" coords="136,16,168,16,168,21,136,21"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_icgraph" id="a_descuento_cliente_8h_ab9a01c23b6b14006eb8d14c98252ccff_icgraph">
+<area shape="rect" title=" " alt="" coords="630,5,760,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a7b1347bc69410cb38d6f04363515f45e" title=" " alt="" coords="410,5,582,32"/>
+<area shape="poly" title=" " alt="" coords="614,21,582,21,582,16,614,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a42b22582d1fe7393e40079603dfb4373" name="a42b22582d1fe7393e40079603dfb4373"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42b22582d1fe7393e40079603dfb4373">&#9670;&#160;</a></span>baja_descuento_clientes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void baja_descuento_clientes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> **</td>          <td class="paramname"><span class="paramname"><em>desccli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cantdad_desccli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>candtdad_desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cantdad_cli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id_baja</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00153">153</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a42b22582d1fe7393e40079603dfb4373_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_a42b22582d1fe7393e40079603dfb4373_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a42b22582d1fe7393e40079603dfb4373_icgraph" id="a_descuento_cliente_8h_a42b22582d1fe7393e40079603dfb4373_icgraph">
+<area shape="rect" title=" " alt="" coords="630,5,794,32"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a7b1347bc69410cb38d6f04363515f45e" title=" " alt="" coords="410,5,582,32"/>
+<area shape="poly" title=" " alt="" coords="614,21,582,21,582,16,614,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#ae1b068941819f96eba962fac33d8a886" title=" " alt="" coords="274,5,362,32"/>
+<area shape="poly" title=" " alt="" coords="395,21,363,21,363,16,395,16"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,5,226,32"/>
+<area shape="poly" title=" " alt="" coords="258,21,226,21,226,16,258,16"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="adf89575e3e3fd04d96dfbd6f1c7d5455" name="adf89575e3e3fd04d96dfbd6f1c7d5455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf89575e3e3fd04d96dfbd6f1c7d5455">&#9670;&#160;</a></span>guardarDescuentosClientesEnArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void guardarDescuentosClientesEnArchivo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> *</td>          <td class="paramname"><span class="paramname"><em>descuentosClientes</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>numDescuentosClientes</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00285">285</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_cgraph.png" border="0" usemap="#a_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_cgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_cgraph" id="a_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,186,48"/>
+<area shape="rect" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="234,13,352,40"/>
+<area shape="poly" title=" " alt="" coords="186,24,218,24,218,29,186,29"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_icgraph" id="a_descuento_cliente_8h_adf89575e3e3fd04d96dfbd6f1c7d5455_icgraph">
+<area shape="rect" title=" " alt="" coords="266,5,446,48"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a35abc4450146d3aae8de62a433f9290b" title=" " alt="" coords="103,13,218,40"/>
+<area shape="poly" title=" " alt="" coords="251,29,219,29,219,24,251,24"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,55,40"/>
+<area shape="poly" title=" " alt="" coords="87,29,55,29,55,24,87,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a558596dcd54da7f920eacb485f03bd62" name="a558596dcd54da7f920eacb485f03bd62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a558596dcd54da7f920eacb485f03bd62">&#9670;&#160;</a></span>iniciarDescuentosClientesDeArchivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> * iniciarDescuentosClientesDeArchivo </td>
+          <td>(</td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>numDescC</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00307">307</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_cgraph.png" border="0" usemap="#a_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_cgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_cgraph" id="a_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,177,48"/>
+<area shape="rect" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="225,13,343,40"/>
+<area shape="poly" title=" " alt="" coords="177,24,209,24,209,29,177,29"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_icgraph" id="a_descuento_cliente_8h_a558596dcd54da7f920eacb485f03bd62_icgraph">
+<area shape="rect" title=" " alt="" coords="260,5,431,48"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a2cdbba72c2510dbd1ff8146bd896e897" title=" " alt="" coords="103,13,212,40"/>
+<area shape="poly" title=" " alt="" coords="245,29,212,29,212,24,245,24"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,55,40"/>
+<area shape="poly" title=" " alt="" coords="87,29,55,29,55,24,87,24"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0804422c1107833648764651566c58c2" name="a0804422c1107833648764651566c58c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0804422c1107833648764651566c58c2">&#9670;&#160;</a></span>mostrar_descuentos_cliente()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mostrar_descuentos_cliente </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>id_cliente</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_descuento.html">Descuento</a> **</td>          <td class="paramname"><span class="paramname"><em>desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> **</td>          <td class="paramname"><span class="paramname"><em>desc_cliente</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cant_desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cant_desc_cli</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_descuento_cliente_8c_source.html#l00126">126</a> del archivo <a class="el" href="_descuento_cliente_8c_source.html">DescuentoCliente.c</a>.</p>
+<div class="dynheader">
+Gráfico de llamadas de esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a0804422c1107833648764651566c58c2_cgraph.png" border="0" usemap="#a_descuento_cliente_8h_a0804422c1107833648764651566c58c2_cgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a0804422c1107833648764651566c58c2_cgraph" id="a_descuento_cliente_8h_a0804422c1107833648764651566c58c2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,145,48"/>
+<area shape="rect" href="_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="193,13,311,40"/>
+<area shape="poly" title=" " alt="" coords="145,24,177,24,177,29,145,29"/>
+</map>
+</div>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><img src="_descuento_cliente_8h_a0804422c1107833648764651566c58c2_icgraph.png" border="0" usemap="#a_descuento_cliente_8h_a0804422c1107833648764651566c58c2_icgraph" alt=""/></div>
+<map name="a_descuento_cliente_8h_a0804422c1107833648764651566c58c2_icgraph" id="a_descuento_cliente_8h_a0804422c1107833648764651566c58c2_icgraph">
+<area shape="rect" title=" " alt="" coords="799,23,938,65"/>
+<area shape="rect" href="_descuento_cliente_8c.html#aeaa7d543dac50961bda585bad8a09d2c" title=" " alt="" coords="625,5,751,32"/>
+<area shape="poly" title=" " alt="" coords="783,35,751,30,752,25,784,29"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a5d31eb2ee236bc4cefb79fb71f0e9947" title=" " alt="" coords="274,31,369,57"/>
+<area shape="poly" title=" " alt="" coords="783,47,370,47,370,41,783,41"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a4f9c31e227a795a720339535d2fdf73b" title=" " alt="" coords="417,5,577,32"/>
+<area shape="poly" title=" " alt="" coords="609,21,577,21,577,16,609,16"/>
+<area shape="poly" title=" " alt="" coords="402,35,370,40,369,35,402,30"/>
+<area shape="rect" href="_e_s_i_z_o_n_8c.html#a0a470efaa01e9af0501ee7c0d5fd8677" title=" " alt="" coords="103,31,226,57"/>
+<area shape="poly" title=" " alt="" coords="259,47,227,47,227,41,259,41"/>
+<area shape="rect" href="_main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" title=" " alt="" coords="87,47,55,47,55,41,87,41"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4baa6d310a95db3ea830c2d36143e9b5" name="a4baa6d310a95db3ea830c2d36143e9b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4baa6d310a95db3ea830c2d36143e9b5">&#9670;&#160;</a></span>rellenar_descuentocliente()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rellenar_descuentocliente </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_descuento.html">Descuento</a></td>          <td class="paramname"><span class="paramname"><em>desc</em>[], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_cliente.html">Cliente</a></td>          <td class="paramname"><span class="paramname"><em>clientes</em>[], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_descuento_cliente.html">DescuentoCliente</a> **</td>          <td class="paramname"><span class="paramname"><em>desccliente</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cantdad_desc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cantdad_cli</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cantdad_desccli</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

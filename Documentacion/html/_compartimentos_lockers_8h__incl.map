@@ -1,0 +1,16 @@
+<map id="CompartimentosLockers.h" name="CompartimentosLockers.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="62,5,236,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,69,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,35,110,55,86,82,66,112,51,141,46,139,61,109,82,78,106,52,131,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="103,155,163,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,34,111,55,94,81,92,97,95,112,113,142,108,145,90,114,86,97,89,79,107,51,129,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="193,155,257,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,31,189,51,209,79,220,109,226,139,220,140,215,111,204,81,185,55,163,34"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="270,80,327,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="176,30,259,70,257,75,174,35"/>
+<area shape="rect" id="Node000006" href="$_utilidades_8h.html" title=" " alt="" coords="104,80,194,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="152,33,152,64,146,64,146,33"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="131,109,71,148,68,144,128,105"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="149,108,142,140,136,139,144,107"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="164,105,203,142,199,146,160,109"/>
+</map>

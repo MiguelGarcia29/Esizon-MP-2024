@@ -1,0 +1,16 @@
+<map id="Categoria.c" name="Categoria.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="95,5,182,32"/>
+<area shape="rect" id="Node000002" href="$_categoria_8h.html" title=" " alt="" coords="95,80,182,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,33,141,64,136,64,136,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,229,66,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="102,110,68,128,54,141,42,156,33,185,33,214,28,214,28,184,37,153,50,137,65,124,99,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="100,229,163,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="146,106,156,140,158,161,157,182,146,216,141,214,152,181,153,161,150,141,141,108"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="193,229,257,256"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="148,106,212,215,208,217,143,109"/>
+<area shape="rect" id="Node000006" href="$_utilidades_8h.html" title=" " alt="" coords="52,155,142,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="133,109,114,143,109,140,129,106"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="88,184,58,219,54,216,84,180"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="105,181,121,214,117,216,100,183"/>
+<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="120,180,191,219,188,224,118,184"/>
+</map>

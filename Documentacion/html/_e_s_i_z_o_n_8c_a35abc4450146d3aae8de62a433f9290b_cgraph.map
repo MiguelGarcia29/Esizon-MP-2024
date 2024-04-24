@@ -1,0 +1,45 @@
+<map id="almacenarDatos" name="almacenarDatos">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,284,121,311"/>
+<area shape="rect" id="Node000002" href="$_admin_prov_8c.html#a9360c307db22a2aae3acaa9e5c04733b" title=" " alt="" coords="184,5,368,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,283,70,237,88,172,101,137,118,102,140,70,167,42,172,38,175,42,170,46,144,73,123,105,106,139,93,174,76,238,68,284"/>
+<area shape="rect" id="Node000003" href="$_categoria_8c.html#a64a65777c6e52d0bbb18af4d40c0d18a" title=" " alt="" coords="184,56,368,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="65,283,75,245,95,193,125,139,144,114,167,93,173,88,176,92,170,97,148,118,129,142,99,195,80,246,70,284"/>
+<area shape="rect" id="Node000004" href="$_cliente_8c.html#a165dc43b49f573857508c72576ce37f9" title=" " alt="" coords="191,107,361,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="68,282,104,219,132,182,167,150,189,137,192,142,170,154,136,185,108,222,73,285"/>
+<area shape="rect" id="Node000008" href="$_compartimentos_lockers_8c.html#ac934c1d5fd592e35e5fce98558c2c6fa" title=" " alt="" coords="435,160,626,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="76,282,115,249,140,232,168,219,231,199,296,187,360,179,419,176,419,182,360,185,297,192,232,205,170,224,143,237,118,253,79,286"/>
+<area shape="rect" id="Node000010" href="$_descuento_cliente_8c.html#a1a17c2014fd5507debee44cfacadc1b7" title=" " alt="" coords="440,231,620,273"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="84,281,122,261,168,244,234,233,301,229,425,235,424,240,301,235,234,239,169,249,124,265,87,286"/>
+<area shape="rect" id="Node000011" href="$_descuentos_8c.html#abcf8c53db7d9f8a793e2c2ec49148f2a" title=" " alt="" coords="180,259,372,285"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="121,288,164,283,165,288,122,293"/>
+<area shape="rect" id="Node000012" href="$_devoluciones_8c.html#a4e7abd1420e0f3505aa941381d6b1b07" title=" " alt="" coords="431,307,629,333"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="121,297,415,312,415,317,121,303"/>
+<area shape="rect" id="Node000013" href="$_lockers_8c.html#accc1a8ff174f5afef053690ca61070d2" title=" " alt="" coords="192,360,360,387"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="96,309,170,339,211,352,209,358,168,344,94,314"/>
+<area shape="rect" id="Node000014" href="$_pedidos_8c.html#a47f59fddca485243eca0455b6b8df572" title=" " alt="" coords="195,411,357,437"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="77,309,115,353,141,377,170,396,182,402,180,407,167,401,137,381,111,357,73,313"/>
+<area shape="rect" id="Node000015" href="$_productos__pedidos_8c.html#ac998d7a308aed601929ad0b649302e49" title=" " alt="" coords="169,461,383,488"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="72,310,85,339,106,377,135,415,170,447,178,452,175,457,167,451,131,419,102,380,81,342,67,312"/>
+<area shape="rect" id="Node000016" href="$_productos_8c.html#af4b30cd804e8409b81351b81ffb001dd" title=" " alt="" coords="185,512,367,539"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="70,311,80,348,99,399,129,453,148,477,170,498,176,502,173,507,167,502,144,481,125,456,95,402,75,350,65,312"/>
+<area shape="rect" id="Node000020" href="$_transportista_8c.html#a77b54112a00744eba868bbc13cff72e0" title=" " alt="" coords="174,563,378,589"/>
+<area shape="poly" id="edge23_Node000001_Node000020" title=" " alt="" coords="68,310,76,356,93,421,106,456,123,490,144,522,170,549,175,552,172,556,167,553,140,525,118,493,101,458,88,423,70,357,63,311"/>
+<area shape="rect" id="Node000005" href="$_cliente_8c.html#ac384f5a215143c541613d95d8387c2f2" title=" " alt="" coords="500,107,561,133"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="361,117,484,117,484,123,361,123"/>
+<area shape="rect" id="Node000006" href="$_cliente_8c.html#a5cf6c78adb8c6bff5ac73848c8315d98" title=" " alt="" coords="702,81,797,108"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="561,114,686,99,687,105,561,119"/>
+<area shape="rect" id="Node000007" href="$_cliente_8c.html#a5a9e49f6feb24835af05799e8fc723bb" title=" " alt="" coords="700,132,799,159"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="561,121,685,135,684,141,561,126"/>
+<area shape="rect" id="Node000009" href="$_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="690,267,809,293"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="593,201,630,216,711,256,709,261,628,221,591,206"/>
+<area shape="poly" id="edge10_Node000010_Node000009" title=" " alt="" coords="621,261,675,268,675,273,621,266"/>
+<area shape="poly" id="edge13_Node000012_Node000009" title=" " alt="" coords="607,303,675,291,676,296,608,309"/>
+<area shape="rect" id="Node000017" href="$_transportista_8c.html#a6809b2335ceb4f1860bb0108257eb06b" title=" " alt="" coords="498,455,562,481"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="337,509,482,476,484,481,339,514"/>
+<area shape="poly" id="edge20_Node000017_Node000009" title=" " alt="" coords="546,452,719,301,723,305,549,456"/>
+<area shape="poly" id="edge19_Node000017_Node000017" title=" " alt="" coords="496,458,487,447,490,437,505,430,530,428,561,432,573,441,569,445,559,437,530,433,506,435,494,441,492,446,499,454"/>
+<area shape="rect" id="Node000018" href="$_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="695,429,804,456"/>
+<area shape="poly" id="edge21_Node000017_Node000018" title=" " alt="" coords="562,462,679,448,680,453,563,467"/>
+<area shape="rect" id="Node000019" href="$_utilidades_8c.html#a00f0e4685c0837a08b16474234bd0cb8" title=" " alt="" coords="677,480,822,507"/>
+<area shape="poly" id="edge22_Node000017_Node000019" title=" " alt="" coords="563,469,662,481,662,486,562,474"/>
+</map>

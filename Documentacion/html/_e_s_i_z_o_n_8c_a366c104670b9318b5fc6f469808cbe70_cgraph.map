@@ -1,0 +1,18 @@
+<map id="mostrarProveedoresAdmin" name="mostrarProveedoresAdmin">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,132,179,159"/>
+<area shape="rect" id="Node000002" href="$_proveedor_8c.html#a4606f36d31df18355d7daf55ccc91bfe" title=" " alt="" coords="242,5,342,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,129,158,87,225,42,236,36,238,41,228,46,161,92,110,133"/>
+<area shape="rect" id="Node000003" href="$_proveedor_8c.html#a7ad5ab04e34ddaf4cde02fe40cb683d6" title=" " alt="" coords="241,56,343,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,129,239,86,241,91,130,134"/>
+<area shape="rect" id="Node000004" href="$_proveedor_8c.html#aca2ab8de9111e8bdbddb1885715f0807" title=" " alt="" coords="233,107,351,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="179,132,217,127,218,132,180,137"/>
+<area shape="rect" id="Node000005" href="$_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="583,208,693,235"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="179,155,568,209,567,214,178,160"/>
+<area shape="rect" id="Node000006" href="$_proveedor_8c.html#acee12bbae42f1d7b6df19764ebf23223" title=" " alt="" coords="232,208,352,235"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="130,157,241,199,239,204,129,162"/>
+<area shape="rect" id="Node000007" href="$_proveedor_8c.html#affbdff2143ebdac1bf0e11cbc9c5bd6a" title=" " alt="" coords="227,259,357,285"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="110,157,161,199,228,244,238,250,236,254,225,249,158,203,107,161"/>
+<area shape="rect" id="Node000008" href="$_proveedor_8c.html#afd0e0f4d2d25584e2ccf3d125807cd7c" title=" " alt="" coords="405,233,535,260"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="357,260,389,255,390,261,358,265"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="535,234,568,229,569,234,536,239"/>
+</map>

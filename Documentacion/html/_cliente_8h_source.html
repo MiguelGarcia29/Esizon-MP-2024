@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de código fuente Cliente.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Cliente.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_cliente_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef PROVEEDOR_H_INCLUDED</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define PROVEEDOR_H_INCLUDED</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//cliente</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_utilidades_8h.html">Utilidades.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_cliente.html">   11</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_cliente.html#a62577099c447655c2fee680e5c06700d">   12</a></span>    <span class="keywordtype">char</span> id_cliente[8];</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct_cliente.html#a22409b133f4ff7873d40984e072e7d86">   13</a></span>    <span class="keywordtype">char</span> nomb_cliente[21];</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_cliente.html#ae6d3294129e7794f1827c7c36cd884e2">   14</a></span>    <span class="keywordtype">char</span> dir_cliente[51];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_cliente.html#a585314c77e9c127890ca2503f84c1c92">   15</a></span>    <span class="keywordtype">char</span> localidad[21];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_cliente.html#a6cdac37bb9bdde977d3ea7c45e595615">   16</a></span>    <span class="keywordtype">char</span> provincia[21];</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="struct_cliente.html#a7635d004a2a38f1b8810bf4d99441f39">   17</a></span>    <span class="keywordtype">char</span> email[31];</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="struct_cliente.html#a8000c2266a446e14dfba20db9e556f80">   18</a></span>    <span class="keywordtype">char</span> contrasenia[16];</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="struct_cliente.html#afc0f0182be298613794d19949d031f9b">   19</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_cliente.html#afc0f0182be298613794d19949d031f9b">cartera</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>} <a class="code hl_struct" href="struct_cliente.html">Cliente</a>;</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#ad253e11a17588ddf8152245e7741fdbe">mostrar_cliente</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> cliente);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#ae007330d4f116fc418b5c0243a8978ed">cambiar_perfil_cliente</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> *cliente); <span class="comment">//se presentara un menu para que el cliente pueda cambiar los datos que considere necesario</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a165dc43b49f573857508c72576ce37f9">guardarClientesEnArchivo</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> *clientes, <span class="keywordtype">int</span> numClientes);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><a class="code hl_struct" href="struct_cliente.html">Cliente</a> *<a class="code hl_function" href="_cliente_8h.html#a3b3b51cbc3c23cb5280c4851c66df79f">iniciarClientesDeArchivo</a>(<span class="keywordtype">int</span> *numClientes);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#afcaf771e7f462f6bd785236e74ee8ed8">cambiar_contrasenia_cliente</a>(<span class="keywordtype">char</span> nueva[16]); <span class="comment">// funcion que cambia la contrasenia</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a966872a00d3d505cba24743b989a135a">cambiar_email_cliente</a>(<span class="keywordtype">char</span> nuevo[31]); <span class="comment">//funcion que cambia el email</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a2e3231bb6adfe58c62729618290c655b">cambiar_direccion_cliente</a>(<span class="keywordtype">char</span> direccion[51], <span class="keywordtype">char</span> provincia[21], <span class="keywordtype">char</span> localidad[21]); <span class="comment">//funcion que cambia direccion, provincia y localidad</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#ac384f5a215143c541613d95d8387c2f2">cartera</a>(<span class="keywordtype">float</span> *saldo);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a5cf6c78adb8c6bff5ac73848c8315d98">anadir_saldo</a>(<span class="keywordtype">float</span> *saldo);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a5a9e49f6feb24835af05799e8fc723bb">extraer_saldo</a>(<span class="keywordtype">float</span> *saldo);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">int</span> <a class="code hl_function" href="_cliente_8h.html#ac59efb4d62cda45c0320b9b5803f5e3d">corroborar_contrasenia</a>(<span class="keywordtype">char</span> cad[16]);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#ab7b9bbcd6516969941d3ee7ef130b0b8">altaCliente</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> **clientes, <span class="keywordtype">int</span> *numClientes);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#ab9ddf71233fd80b80fd0870bd33d45d9">bajaCliente</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> **clientes, <span class="keywordtype">int</span> *numClientes);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a7c85f15bf8993107a29fd382dbfb2574">buscarCliente</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> **clientes, <span class="keywordtype">int</span> *numClientes);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#ae477b7f9ff0a7d37f947d33bed2adf86">listarClientes</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> **clientes, <span class="keywordtype">int</span> *numClientes);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">void</span> <a class="code hl_function" href="_cliente_8h.html#a9c693e327ae67f19e61f261499f6e175">modificarCliente</a>(<a class="code hl_struct" href="struct_cliente.html">Cliente</a> **clientes, <span class="keywordtype">int</span> *numClientes);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif </span><span class="comment">// DEVOLUCION_H_INCLUDED</span></div>
+<div class="ttc" id="a_cliente_8h_html_a165dc43b49f573857508c72576ce37f9"><div class="ttname"><a href="_cliente_8h.html#a165dc43b49f573857508c72576ce37f9">guardarClientesEnArchivo</a></div><div class="ttdeci">void guardarClientesEnArchivo(Cliente *clientes, int numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00132">Cliente.c:132</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a2e3231bb6adfe58c62729618290c655b"><div class="ttname"><a href="_cliente_8h.html#a2e3231bb6adfe58c62729618290c655b">cambiar_direccion_cliente</a></div><div class="ttdeci">void cambiar_direccion_cliente(char direccion[51], char provincia[21], char localidad[21])</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00060">Cliente.c:60</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a3b3b51cbc3c23cb5280c4851c66df79f"><div class="ttname"><a href="_cliente_8h.html#a3b3b51cbc3c23cb5280c4851c66df79f">iniciarClientesDeArchivo</a></div><div class="ttdeci">Cliente * iniciarClientesDeArchivo(int *numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00158">Cliente.c:158</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a5a9e49f6feb24835af05799e8fc723bb"><div class="ttname"><a href="_cliente_8h.html#a5a9e49f6feb24835af05799e8fc723bb">extraer_saldo</a></div><div class="ttdeci">void extraer_saldo(float *saldo)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00116">Cliente.c:116</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a5cf6c78adb8c6bff5ac73848c8315d98"><div class="ttname"><a href="_cliente_8h.html#a5cf6c78adb8c6bff5ac73848c8315d98">anadir_saldo</a></div><div class="ttdeci">void anadir_saldo(float *saldo)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00107">Cliente.c:107</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a7c85f15bf8993107a29fd382dbfb2574"><div class="ttname"><a href="_cliente_8h.html#a7c85f15bf8993107a29fd382dbfb2574">buscarCliente</a></div><div class="ttdeci">void buscarCliente(Cliente **clientes, int *numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00303">Cliente.c:303</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a966872a00d3d505cba24743b989a135a"><div class="ttname"><a href="_cliente_8h.html#a966872a00d3d505cba24743b989a135a">cambiar_email_cliente</a></div><div class="ttdeci">void cambiar_email_cliente(char nuevo[31])</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00052">Cliente.c:52</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_a9c693e327ae67f19e61f261499f6e175"><div class="ttname"><a href="_cliente_8h.html#a9c693e327ae67f19e61f261499f6e175">modificarCliente</a></div><div class="ttdeci">void modificarCliente(Cliente **clientes, int *numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00335">Cliente.c:335</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ab7b9bbcd6516969941d3ee7ef130b0b8"><div class="ttname"><a href="_cliente_8h.html#ab7b9bbcd6516969941d3ee7ef130b0b8">altaCliente</a></div><div class="ttdeci">void altaCliente(Cliente **clientes, int *numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00232">Cliente.c:232</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ab9ddf71233fd80b80fd0870bd33d45d9"><div class="ttname"><a href="_cliente_8h.html#ab9ddf71233fd80b80fd0870bd33d45d9">bajaCliente</a></div><div class="ttdeci">void bajaCliente(Cliente **clientes, int *numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00275">Cliente.c:275</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ac384f5a215143c541613d95d8387c2f2"><div class="ttname"><a href="_cliente_8h.html#ac384f5a215143c541613d95d8387c2f2">cartera</a></div><div class="ttdeci">void cartera(float *saldo)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00086">Cliente.c:86</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ac59efb4d62cda45c0320b9b5803f5e3d"><div class="ttname"><a href="_cliente_8h.html#ac59efb4d62cda45c0320b9b5803f5e3d">corroborar_contrasenia</a></div><div class="ttdeci">int corroborar_contrasenia(char cad[16])</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00074">Cliente.c:74</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ad253e11a17588ddf8152245e7741fdbe"><div class="ttname"><a href="_cliente_8h.html#ad253e11a17588ddf8152245e7741fdbe">mostrar_cliente</a></div><div class="ttdeci">void mostrar_cliente(Cliente cliente)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00004">Cliente.c:4</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ae007330d4f116fc418b5c0243a8978ed"><div class="ttname"><a href="_cliente_8h.html#ae007330d4f116fc418b5c0243a8978ed">cambiar_perfil_cliente</a></div><div class="ttdeci">void cambiar_perfil_cliente(Cliente *cliente)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00014">Cliente.c:14</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_ae477b7f9ff0a7d37f947d33bed2adf86"><div class="ttname"><a href="_cliente_8h.html#ae477b7f9ff0a7d37f947d33bed2adf86">listarClientes</a></div><div class="ttdeci">void listarClientes(Cliente **clientes, int *numClientes)</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00325">Cliente.c:325</a></div></div>
+<div class="ttc" id="a_cliente_8h_html_afcaf771e7f462f6bd785236e74ee8ed8"><div class="ttname"><a href="_cliente_8h.html#afcaf771e7f462f6bd785236e74ee8ed8">cambiar_contrasenia_cliente</a></div><div class="ttdeci">void cambiar_contrasenia_cliente(char nueva[16])</div><div class="ttdef"><b>Definition</b> <a href="_cliente_8c_source.html#l00044">Cliente.c:44</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html"><div class="ttname"><a href="_utilidades_8h.html">Utilidades.h</a></div></div>
+<div class="ttc" id="astruct_cliente_html"><div class="ttname"><a href="struct_cliente.html">Cliente</a></div><div class="ttdef"><b>Definition</b> <a href="#l00011">Cliente.h:11</a></div></div>
+<div class="ttc" id="astruct_cliente_html_afc0f0182be298613794d19949d031f9b"><div class="ttname"><a href="struct_cliente.html#afc0f0182be298613794d19949d031f9b">Cliente::cartera</a></div><div class="ttdeci">float cartera</div><div class="ttdef"><b>Definition</b> <a href="#l00019">Cliente.h:19</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

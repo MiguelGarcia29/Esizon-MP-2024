@@ -1,0 +1,14 @@
+<map id="modificar_entrega" name="modificar_entrega">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,81,129,108"/>
+<area shape="rect" id="Node000002" href="$_transportista_8c.html#a6809b2335ceb4f1860bb0108257eb06b" title=" " alt="" coords="201,56,266,83"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,83,186,74,187,79,130,88"/>
+<area shape="rect" id="Node000006" href="$_productos_8c.html#a8c7dd4da78eafca1728e330a14aab71d" title=" " alt="" coords="177,107,290,133"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="130,101,162,106,161,112,129,107"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="205,57,200,47,203,38,215,32,233,29,253,32,264,38,261,43,252,37,233,35,216,37,207,41,205,47,209,54"/>
+<area shape="rect" id="Node000003" href="$_transportista_8c.html#a14d937d00bc62ac1a0dfd81912053bef" title=" " alt="" coords="351,5,469,32"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="265,58,345,34,347,39,267,63"/>
+<area shape="rect" id="Node000004" href="$_utilidades_8c.html#ac8cef70ef41c0959cdaf0371d2c42087" title=" " alt="" coords="356,56,465,83"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="266,67,340,67,340,72,266,72"/>
+<area shape="rect" id="Node000005" href="$_utilidades_8c.html#a00f0e4685c0837a08b16474234bd0cb8" title=" " alt="" coords="338,107,482,133"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="267,76,347,99,345,104,265,81"/>
+</map>

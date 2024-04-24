@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>| Esizon: Archivo de cÃ³digo fuente Pedidos.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="esizon-17-4-2024.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">| Esizon
+   </div>
+   <div id="projectbrief">PortalWeb</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Pedidos.c</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_pedidos_8c.html">Ir a la documentaciÃ³n de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="_pedidos_8h.html">Pedidos.h</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="foldopen" id="foldopen00003" data-start="{" data-end="}">
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="_pedidos_8c.html#a0a4c9829120956fbdd4f1e881c863373">    3</a></span><span class="keywordtype">char</span> *<a class="code hl_function" href="_pedidos_8c.html#a0a4c9829120956fbdd4f1e881c863373">id_generator_pedido</a> (<a class="code hl_struct" href="struct_pedido.html">Pedido</a> *pedidos, <span class="keywordtype">int</span> tamanio_vector) {</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    <span class="keywordtype">int</span> id_generada = 1;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordflow">if</span> (tamanio_vector != 0)</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    { <span class="comment">// Si no hay nada en el vector, la primer id es 0000011.</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        id_generada = atoi(pedidos[tamanio_vector - 1].id_pedido);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        id_generada++;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    }</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">char</span> *<span class="keywordtype">id</span> = malloc(8 * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == NULL)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        printf(<span class="stringliteral">&quot;Error al guardar memoria\n&quot;</span>);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    }</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    sprintf(<span class="keywordtype">id</span>, <span class="stringliteral">&quot;%07d&quot;</span>, id_generada);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> id;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
+</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// Guarda el vector de ComportamientoLocker en el archivo siguiendo la estructura:</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    o Identificador del pedido (Id_pedido), 7 dígitos.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">    o Fecha del pedido (día, mes y año)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">    o Identificador del cliente que realiza el pedido (Id_cliente), 7 dígitos.</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">    o Lugar de entrega (Lugar): «domicilio» o «locker»</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">    o Identificador de Locker (Id_locker), 10 caracteres máximo.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    o Identificador del código promocional o cheque regalo (Id_cod), 10 caracteres máximo.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">*/</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="_pedidos_8c.html#a47f59fddca485243eca0455b6b8df572">   33</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_pedidos_8c.html#a47f59fddca485243eca0455b6b8df572">guardarPedidoEnArchivo</a>(<a class="code hl_struct" href="struct_pedido.html">Pedido</a> *pedidos, <span class="keywordtype">int</span> numPedidos)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    FILE *archivo = fopen(<a class="code hl_define" href="_utilidades_8h.html#a817411de73527260d733372a7c2d938a">Pedido_txt</a>, <span class="stringliteral">&quot;w&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (archivo == NULL)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        printf(<span class="stringliteral">&quot;Error al abrir el archivo Pedidos.txt.\n&quot;</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numPedidos; i++)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="comment">// PARA QUE INTRODUZCA UN ESPACIO SI NO HAY LOCKER</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">if</span> (strcmp(pedidos[i].lugar_entrega, <span class="stringliteral">&quot;locker&quot;</span>) != 0)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            strcpy(pedidos[i].id_locker, <span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        fprintf(archivo, <span class="stringliteral">&quot;%s-%s-%s-%s-%s-%s-\n&quot;</span>,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                pedidos[i].id_pedido,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                pedidos[i].fecha_pedido,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                pedidos[i].id_cliente,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                pedidos[i].lugar_entrega,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                pedidos[i].id_locker,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                pedidos[i].id_cod);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    fclose(archivo);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="_pedidos_8c.html#a6279469a0376f39708fa815824160834">   63</a></span><a class="code hl_struct" href="struct_pedido.html">Pedido</a> *<a class="code hl_function" href="_pedidos_8c.html#a6279469a0376f39708fa815824160834">iniciarPedidosDeArchivo</a>(<span class="keywordtype">int</span> *numPedidos)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    FILE *archivo = fopen(<a class="code hl_define" href="_utilidades_8h.html#a817411de73527260d733372a7c2d938a">Pedido_txt</a>, <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">if</span> (archivo == NULL)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        printf(<span class="stringliteral">&quot;Error al abrir el archivo %s.\n&quot;</span>, <a class="code hl_define" href="_utilidades_8h.html#a817411de73527260d733372a7c2d938a">Pedido_txt</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// Contar la cantidad de lineas en el archivo</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">char</span> buffer[<a class="code hl_define" href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a>]; <span class="comment">// Longitud maxima de linea</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">while</span> (fgets(buffer, <a class="code hl_define" href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a>, archivo) != NULL)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        count++;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">// Regresar al inicio del archivo</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    rewind(archivo);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="comment">// Crear el vector de Locker</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_struct" href="struct_pedido.html">Pedido</a> *pedidos = (<a class="code hl_struct" href="struct_pedido.html">Pedido</a> *)malloc(count * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_pedido.html">Pedido</a>));</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (pedidos == NULL)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        fclose(archivo);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        printf(<span class="stringliteral">&quot;Error: No se pudo asignar memoria para el vector de Pedido.\n&quot;</span>);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="comment">// Leo cada linea y rellenar el vector de adminProv</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;count;i++)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">if</span>(fgets(buffer, <a class="code hl_define" href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a>, archivo) != NULL){</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordtype">char</span> *token = strtok(buffer, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        strncpy(pedidos[i].id_pedido, token, <span class="keyword">sizeof</span>(pedidos[i].id_pedido));</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        strncpy(pedidos[i].fecha_pedido, token, <span class="keyword">sizeof</span>(pedidos[i].fecha_pedido));</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        strncpy(pedidos[i].id_cliente, token, <span class="keyword">sizeof</span>(pedidos[i].id_cliente));</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        strncpy(pedidos[i].lugar_entrega, token, <span class="keyword">sizeof</span>(pedidos[i].lugar_entrega));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="comment">// SI NO ESTA EN LOCKER QUE DEJE ID LOCKER VACIA</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">if</span> (strcmp(pedidos[i].lugar_entrega, <span class="stringliteral">&quot;locker&quot;</span>) != 0)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            strncpy(pedidos[i].id_locker, <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">sizeof</span>(pedidos[i].id_locker));</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            strncpy(pedidos[i].id_locker, token, <span class="keyword">sizeof</span>(pedidos[i].id_locker));</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        token = strtok(NULL, <span class="stringliteral">&quot;-&quot;</span>);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        strncpy(pedidos[i].id_cod, token, <span class="keyword">sizeof</span>(pedidos[i].id_cod));</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    fclose(archivo);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    *numPedidos = count;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">return</span> pedidos;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="_pedidos_8c.html#a1424df6c0b46f466516342ade84b354e">  121</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_pedidos_8c.html#a1424df6c0b46f466516342ade84b354e">baja_pedido</a>(<a class="code hl_struct" href="struct_pedido.html">Pedido</a> **pedidos, <span class="keywordtype">int</span> *npedidos, <span class="keywordtype">char</span> *id_pedido_baja) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">int</span> i, j;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">for</span> (i = 0; i &lt; *npedidos; i++) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> (strcmp((*pedidos)[i].id_pedido, id_pedido_baja) == 0) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="comment">// Si se encuentra el pedido, se eliminan los datos de esa posición</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <span class="keywordflow">for</span> (j = i; j &lt; *npedidos - 1; j++) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                (*pedidos)[j] = (*pedidos)[j + 1];</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            (*npedidos)--; <span class="comment">// Se reduce la cantidad de pedidos</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            printf(<span class="stringliteral">&quot;Pedido dado de baja.\n&quot;</span> );</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    printf(<span class="stringliteral">&quot;No se encontro ningun pedido con el ID.\n&quot;</span>);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}</div>
+</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="_pedidos_8c.html#aa825669e24ca81a328e0e79e81d3c8e3">  137</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_pedidos_8c.html#aa825669e24ca81a328e0e79e81d3c8e3">listado_pedido_cliente</a>(<a class="code hl_struct" href="struct_pedido.html">Pedido</a> **pedidos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *idC) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; *tamanio; i++) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">if</span> (strcmp((*pedidos)[i].id_cliente, idC) == 0) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            printf(<span class="stringliteral">&quot;ID Pedido: %s\n&quot;</span>, (*pedidos)[i].id_pedido);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            printf(<span class="stringliteral">&quot;Fecha Pedido: %s\n&quot;</span>, (*pedidos)[i].fecha_pedido);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            printf(<span class="stringliteral">&quot;ID Cliente: %s\n&quot;</span>, (*pedidos)[i].id_cliente);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            printf(<span class="stringliteral">&quot;Lugar de Entrega: %s\n&quot;</span>, (*pedidos)[i].lugar_entrega);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            printf(<span class="stringliteral">&quot;ID Locker: %s\n&quot;</span>, (*pedidos)[i].id_locker);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            printf(<span class="stringliteral">&quot;ID COD: %s\n&quot;</span>, (*pedidos)[i].id_cod);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="_pedidos_8c.html#a85c4458e08f154d82358504424a93cac">  150</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_pedidos_8c.html#a85c4458e08f154d82358504424a93cac">buscar_pedido_cliente</a>(<a class="code hl_struct" href="struct_pedido.html">Pedido</a> **pedidos, <span class="keywordtype">int</span>* tamanio, <span class="keywordtype">char</span> *idC, <span class="keywordtype">char</span> *idProducto) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; *tamanio; i++) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">if</span> (strcmp((*pedidos)[i].id_cliente, idC) == 0 &amp;&amp; strcmp((*pedidos)[i].id_cod, idProducto) == 0) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="comment">// Si coincide, imprimir los detalles del pedido</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            printf(<span class="stringliteral">&quot;ID Pedido: %s\n&quot;</span>, (*pedidos)[i].id_pedido);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            printf(<span class="stringliteral">&quot;Fecha Pedido: %s\n&quot;</span>, (*pedidos)[i].fecha_pedido);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            printf(<span class="stringliteral">&quot;ID Cliente: %s\n&quot;</span>, (*pedidos)[i].id_cliente);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            printf(<span class="stringliteral">&quot;Lugar de Entrega: %s\n&quot;</span>, (*pedidos)[i].lugar_entrega);</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            printf(<span class="stringliteral">&quot;ID Locker: %s\n&quot;</span>, (*pedidos)[i].id_locker);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            printf(<span class="stringliteral">&quot;ID COD: %s\n&quot;</span>, (*pedidos)[i].id_cod);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        }</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="ttc" id="a_pedidos_8c_html_a0a4c9829120956fbdd4f1e881c863373"><div class="ttname"><a href="_pedidos_8c.html#a0a4c9829120956fbdd4f1e881c863373">id_generator_pedido</a></div><div class="ttdeci">char * id_generator_pedido(Pedido *pedidos, int tamanio_vector)</div><div class="ttdef"><b>Definition</b> <a href="#l00003">Pedidos.c:3</a></div></div>
+<div class="ttc" id="a_pedidos_8c_html_a1424df6c0b46f466516342ade84b354e"><div class="ttname"><a href="_pedidos_8c.html#a1424df6c0b46f466516342ade84b354e">baja_pedido</a></div><div class="ttdeci">void baja_pedido(Pedido **pedidos, int *npedidos, char *id_pedido_baja)</div><div class="ttdef"><b>Definition</b> <a href="#l00121">Pedidos.c:121</a></div></div>
+<div class="ttc" id="a_pedidos_8c_html_a47f59fddca485243eca0455b6b8df572"><div class="ttname"><a href="_pedidos_8c.html#a47f59fddca485243eca0455b6b8df572">guardarPedidoEnArchivo</a></div><div class="ttdeci">void guardarPedidoEnArchivo(Pedido *pedidos, int numPedidos)</div><div class="ttdef"><b>Definition</b> <a href="#l00033">Pedidos.c:33</a></div></div>
+<div class="ttc" id="a_pedidos_8c_html_a6279469a0376f39708fa815824160834"><div class="ttname"><a href="_pedidos_8c.html#a6279469a0376f39708fa815824160834">iniciarPedidosDeArchivo</a></div><div class="ttdeci">Pedido * iniciarPedidosDeArchivo(int *numPedidos)</div><div class="ttdef"><b>Definition</b> <a href="#l00063">Pedidos.c:63</a></div></div>
+<div class="ttc" id="a_pedidos_8c_html_a85c4458e08f154d82358504424a93cac"><div class="ttname"><a href="_pedidos_8c.html#a85c4458e08f154d82358504424a93cac">buscar_pedido_cliente</a></div><div class="ttdeci">void buscar_pedido_cliente(Pedido **pedidos, int *tamanio, char *idC, char *idProducto)</div><div class="ttdef"><b>Definition</b> <a href="#l00150">Pedidos.c:150</a></div></div>
+<div class="ttc" id="a_pedidos_8c_html_aa825669e24ca81a328e0e79e81d3c8e3"><div class="ttname"><a href="_pedidos_8c.html#aa825669e24ca81a328e0e79e81d3c8e3">listado_pedido_cliente</a></div><div class="ttdeci">void listado_pedido_cliente(Pedido **pedidos, int *tamanio, char *idC)</div><div class="ttdef"><b>Definition</b> <a href="#l00137">Pedidos.c:137</a></div></div>
+<div class="ttc" id="a_pedidos_8h_html"><div class="ttname"><a href="_pedidos_8h.html">Pedidos.h</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html_a7ed421561768d4651e6c2347eb875bb4"><div class="ttname"><a href="_utilidades_8h.html#a7ed421561768d4651e6c2347eb875bb4">TAMANIO_MAXIMO_LINEA</a></div><div class="ttdeci">#define TAMANIO_MAXIMO_LINEA</div><div class="ttdef"><b>Definition</b> <a href="_utilidades_8h_source.html#l00008">Utilidades.h:8</a></div></div>
+<div class="ttc" id="a_utilidades_8h_html_a817411de73527260d733372a7c2d938a"><div class="ttname"><a href="_utilidades_8h.html#a817411de73527260d733372a7c2d938a">Pedido_txt</a></div><div class="ttdeci">#define Pedido_txt</div><div class="ttdef"><b>Definition</b> <a href="_utilidades_8h_source.html#l00017">Utilidades.h:17</a></div></div>
+<div class="ttc" id="astruct_pedido_html"><div class="ttname"><a href="struct_pedido.html">Pedido</a></div><div class="ttdef"><b>Definition</b> <a href="_pedidos_8h_source.html#l00011">Pedidos.h:11</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

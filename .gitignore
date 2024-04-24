@@ -1,6 +1,0 @@
-
-*.exe
-*.depend
-*.layout
-/obj
-*.cbp
