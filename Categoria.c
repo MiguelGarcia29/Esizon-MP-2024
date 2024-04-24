@@ -109,7 +109,7 @@ char *indicar_categ(Categoria **categ, int* tamanio, char *categoria_productos) 
 // Función para guardar las categorías en un archivo
 void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias)
 {
-    FILE *archivo = fopen("Categorias.txt", "w");
+    FILE *archivo = fopen(Categorias_txt, "w");
     if (archivo == NULL)
     {
         printf("Error al abrir el archivo Categorias.txt.\n");
