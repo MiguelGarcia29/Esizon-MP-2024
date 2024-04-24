@@ -185,7 +185,7 @@ int comprobarUsuario(char *email, char *contrasenia, Cliente *clientes, int numC
         {
             // Si hay coincidencia, actualiza las variables y sale del bucle
             encontrado = 0;
-            *posVectorClienteActual = 2; // Se asigna un valor fijo de 2, pero debería ser i para obtener la posición real del cliente
+            *posVectorClienteActual = i; // Se asigna un valor fijo de 2, pero debería ser i para obtener la posición real del cliente
         }
     }
 
