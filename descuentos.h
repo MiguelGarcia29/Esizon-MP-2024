@@ -3,9 +3,9 @@
 #define Descuentos_H
 
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "Utilidades.h"
 
 typedef struct {
@@ -21,9 +21,10 @@ void alta_descuentos(Descuento **desc, int *cantdad_desc);
 
 void baja_descuentos(Descuento **desc, int *cantdad_desc, char *id_baja);
 
-void modificar_descuento(Descuento *desc, int cantdad_desc, char *id);
+void modificar_descuento(Descuento *desc, int cantdad_desc);
 void guardarDescuentosEnArchivo(Descuento *descuentos, int numDescuentos);
+void listar_descuentos_admin(Descuento *desc,int cantdad_desc);
 
-Descuento *iniciarDescuentosDeArchivo(int *numDesc);
+void listar_descuentos(Descuento **descuentos, int *tamano);
 
 #endif

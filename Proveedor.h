@@ -18,3 +18,9 @@ int mi_producto(char empresa[5],char gestor[5]); //Corrobora que el producto sob
 int mi_pedido(ProductoPedido *pedidos,char busc[8],Producto *prod,AdminProv prov,int cantdad_productospedidos,int cantdad_prod); //Corrobora que el pedido sobre el que se quiere
 //hacer algo es provisto por el proveedor. Recibe todos los estructs de pedidos, el id del pedido que se quiere manipular, todos los estructs de productos y
 //el perfil del proveedor
+
+void altaProveedor(AdminProv **proveedores, int *numProveedores);
+void bajaProveedor(AdminProv **proveedores, int *numProveedores,char *id);
+void buscarProveedor(AdminProv **proveedores, int *numProveedores);
+void listarProveedores(AdminProv **proveedores, int *numProveedores);
+void modificarProveedor(AdminProv **proveedores, int *numProveedores);

@@ -1,10 +1,12 @@
 #include "Categoria.h"
 
+// Función para limpiar el búfer de entrada
 void flushInputBufferC(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+// Función para generar un ID para una categoría
 char* id_generator_categ(Categoria *categorias, int tamanio_vector){
 
     int id_generada = 1;
@@ -24,105 +26,87 @@ char* id_generator_categ(Categoria *categorias, int tamanio_vector){
     return id;
 }
 
-//Dar de altas las categorias. Habria que identificar quien lo hace pq solo podrian los admins.
-void alta_categoria(Categoria *categoria, int* tamanio_vector /*Cliente actual*/){
+// Función para agregar una nueva categoría
+void alta_categoria(Categoria **categorias, int* tamanio_vector){
 
     Categoria nueva_categoria;
 
-    strcpy(nueva_categoria.id_categ, id_generator_categ(categoria ,*tamanio_vector));
+    strcpy(nueva_categoria.id_categ, id_generator_categ(*categorias ,*tamanio_vector));
 
-    printf("\nIndique una breve descripcion de la categoria:");
+    printf("Ingrese la descripcion de la categoria: ");
     fgets(nueva_categoria.descrip, 51, stdin);
-    nueva_categoria.descrip[strcspn(nueva_categoria.descrip,"\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
+    nueva_categoria.descrip[strcspn(nueva_categoria.descrip, "\n")] = '\0';
 
-    categoria[*tamanio_vector] = nueva_categoria;
+    // Agregar la nueva categoría al array
+    *categorias = (Categoria *)realloc(*categorias, ((*tamanio_vector) + 1) * sizeof(Categoria));
+    if (*categorias == NULL) {
+        printf("Error al asignar memoria.\n");
+        exit(1);
+    }
 
+    (*categorias)[*tamanio_vector] = nueva_categoria;
     (*tamanio_vector)++;
-
+    printf("Categoria agregada exitosamente.\n");
 }
 
-//Procedimiento da de baja los productos. (Usando la id introducida por user, quizas alla que cambiarlo, o imprimir la lista de productos cada vez que se haga)
-void baja_categoria(Categoria *categoria , int* tamanio, char *id_baja){
-
+// Procedimiento para dar de baja una categoría
+void baja_categoria(Categoria **categorias, int *numCategorias) {
+    char id[5];
     int encontrado = 0;
-
-    for(int i = 0 ; i < *tamanio && encontrado==0 ; i++) //Comparamos la id que queremos dar de baja con las ids registradas.
-    {
-        if(strcmp(categoria[i].id_categ,id_baja) == 0){
+    printf("Ingrese el ID de la categoria a eliminar: ");
+    fgets(id, 5, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numCategorias; i++) {
+        if (strcmp((*categorias)[i].id_categ, id) == 0) {
             encontrado = 1;
-
-        for(int j = i; j < *tamanio - 1; j++) //Reposicionamos las ids posteriores a la dada de baja.
-        {
-           categoria[j] = categoria[j + 1];
-        }
-
-        (*tamanio)--; //Reduzco el tamaño del array.
-
-        printf("Categoria con ID %s ha sido de baja correctamente.\n", id_baja);
-
+            // Eliminar la categoría moviendo los elementos hacia adelante
+            for (int j = i; j < *numCategorias - 1; j++) {
+                (*categorias)[j] = (*categorias)[j + 1];
+            }
+            // Reducir el tamaño del array
+            *categorias = (Categoria *)realloc(*categorias, ((*numCategorias) - 1) * sizeof(Categoria));
+            if (*categorias == NULL) {
+                printf("Error al liberar memoria.\n");
+                exit(1);
+            }
+            (*numCategorias)--;
+            printf("Categoria eliminada.\n");
+            break;
         }
     }
-
-    if(encontrado != 0){
-        printf("La ID registrada no ha sido encontrada.");
+    if (!encontrado) {
+        printf("Categoria no encontrada.\n");
     }
 }
-//Funcion usada para compara categorias con la que ingresara el usuario al dar de alta un producto. Se pasa como parametro el registro de categorias y categoria_productos como aquella categoria que introduce el usuario.
-int check_categ(Categoria *categ, int* tamanio,char *categoria_productos){
+
+// Función para comparar categorías
+int check_categ(Categoria **categ, int *tamanio,char *categoria_productos){
 
     int coincidencia = 0 ;
 
     for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++){
-    if (strcmp(categ[i].descrip, categoria_productos) == 0) {
+    if (strcmp((*categ)[i].descrip, categoria_productos) == 0) {
                 coincidencia = 1;
             }
         }
     return coincidencia;
 }
 
-char *indicar_categ(Categoria *categ, int* tamanio, char *categoria_productos) {
-    char *categoriaEncontrada;
+// Función para obtener el ID de una categoría
+char *indicar_categ(Categoria **categ, int* tamanio, char *categoria_productos) {
+    char *categoriaEncontrada = "";
     int coincidencia = 0;
 
     for(int i = 0 ; i < *tamanio && coincidencia == 0 ; i++) {
-        if (strcmp(categ[i].descrip, categoria_productos) == 0) {
-            categoriaEncontrada = categ[i].id_categ;
+        if (strcmp((*categ)[i].descrip, categoria_productos) == 0) {
+            categoriaEncontrada = (*categ)[i].id_categ;
             coincidencia = 1;
         }
     }
     return categoriaEncontrada;
 }
 
-void modificar_categoria(Categoria *categorias, int* tamanio){
-    char id_modificar[8];
-
-    printf("\nIntroduce el ID de la categoria que quieres modificar: ");
-    fgets(id_modificar,8,stdin);
-    id_modificar[strcspn(id_modificar,"\n")] = '\0';
-    flushInputBufferC();
-
-    modificar_descripcion_categ(categorias, tamanio, id_modificar);
-}
-
-void modificar_descripcion_categ(Categoria *categorias, int* tamanio,char *id_modificar) {
-    int i = 0;
-
-    while(i < *tamanio && strcmp(categorias[i].id_categ,id_modificar) != 0){
-        i++;
-    }
-
-    printf("Escribe la nueva descripcion: ");
-    fflush(stdin);
-    fgets(categorias[i].descrip, 51, stdin);
-    categorias[i].descrip[strcspn(categorias[i].descrip, "\n")] = '\0';
-    flushInputBufferC();
-}
-
-// Guarda el vector de Categoria en el archivo siguiendo la estructura:
-/*
-    o Identificador de la categoria (Id_categ), 4 digitos.
-    o Descripción de la categoria (Descrip), 50 caracteres maximo.
-*/
+// Función para guardar las categorías en un archivo
 void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias)
 {
     FILE *archivo = fopen(Categorias_txt, "w");
@@ -140,18 +124,19 @@ void guardarCategoriasEnArchivo(Categoria *categorias, int numCategorias)
     fclose(archivo);
 }
 
+// Función para iniciar las categorías desde un archivo
 Categoria *iniciarCategoriasDeArchivo(int *numCat)
 {
     FILE *archivo = fopen(Categorias_txt, "r");
     if (archivo == NULL)
     {
-        printf("Error al abrir el archivo %s.\n", Categorias_txt);
+        printf("Error al abrir el archivo Categorias.txt.\n");
         return NULL;
     }
 
-    // Contar la cantidad de lineas en el archivo
+    // Contar la cantidad de líneas en el archivo
     int count = 0;
-    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud maxima de linea
+    char buffer[TAMANIO_MAXIMO_LINEA]; // Longitud máxima de línea
     while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
     {
         count++;
@@ -160,7 +145,7 @@ Categoria *iniciarCategoriasDeArchivo(int *numCat)
     // Regresar al inicio del archivo
     rewind(archivo);
 
-    // Crear el vector de categorias
+    // Crear el vector de categorías
     Categoria *categorias = (Categoria *)malloc(count * sizeof(Categoria));
     if (categorias == NULL)
     {
@@ -169,18 +154,74 @@ Categoria *iniciarCategoriasDeArchivo(int *numCat)
         return NULL;
     }
 
-    // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    // Leer cada línea y rellenar el vector
+    for(int i=0; i < count; i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(categorias[i].id_categ, token, sizeof(categorias[i].id_categ));
         token = strtok(NULL, "-");
         strncpy(categorias[i].descrip, token, sizeof(categorias[i].descrip));
-        i++;
+        }
     }
 
     fclose(archivo);
     *numCat = count;
     return categorias;
+}
+
+// Procedimiento para modificar una categoría
+void modificarCategoria(Categoria **categorias, int *numCategorias) {
+    char id[5];
+    int encontrado = 0;
+    printf("Ingrese el ID de la categoria: ");
+    fgets(id, 5, stdin);
+    id[strcspn(id, "\n")] = '\0';
+    for (int i = 0; i < *numCategorias; i++) {
+        if (strcmp((*categorias)[i].id_categ, id) == 0) {
+            encontrado = 1;
+            printf("Ingrese la nueva descripcion de la categoria (maximo 50 caracteres): ");
+            fgets((*categorias)[i].descrip, 51, stdin);
+            (*categorias)[i].descrip[strcspn((*categorias)[i].descrip, "\n")] = '\0';
+            printf("Categoria modificada exitosamente.\n");
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Categoria no encontrada.\n");
+    }
+}
+
+// Procedimiento para listar todas las categorías
+void listarCategorias(Categoria **categorias, int *numCategorias) {
+    printf("Categorias:\n");
+    for (int i = 0; i < *numCategorias; i++) {
+        printf("ID: %s\n", (*categorias)[i].id_categ);
+        printf("Descripcion: %s\n", (*categorias)[i].descrip);
+        printf("\n");
+    }
+}
+
+// Procedimiento para buscar una categoría por su ID
+void buscarCategoria(Categoria **categorias, int *numCategorias) {
+    char id[5];
+    int encontrado = 0;
+
+    printf("Ingrese el ID de la categoria: ");
+    fgets(id, 5, stdin);
+    id[strcspn(id, "\n")] = '\0';
+
+    for (int i = 0; i < *numCategorias && encontrado == 0; i++) {
+        if (strcmp((*categorias)[i].id_categ, id) == 0) {
+            encontrado = 1;
+            printf("ID de la categoria: %s\n", (*categorias)[i].id_categ);
+            printf("Descripcion: %s\n", (*categorias)[i].descrip);
+            printf("---------------------------------\n");
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("No se encontro ninguna categoria con el ID.\n");
+    }
 }

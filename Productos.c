@@ -78,9 +78,9 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
     }
 
     // Leer cada linea del archivo y rellenar el vector de productos
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(productos[i].id_prod, token, sizeof(productos[i].id_prod));
         token = strtok(NULL, "-");
@@ -97,7 +97,7 @@ Producto *iniciarProductosDeArchivo(int *numProductos)
         productos[i].entrega = atoi(token); // atoi convierte la cadena en int
         token = strtok(NULL, "-");
         productos[i].importe = atof(token); // atof convierte la cadena en Float.
-        i++;
+        }
     }
 
     fclose(archivo);
@@ -130,7 +130,7 @@ char *id_generator_prod(Producto *productos, int tamanio_vector)
 
 // Procedimiento da de alta los productos.
 //  En ella se necesita que se hayan dado de alta previamente las categorias.
-void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria *categ, int *tamanio_categ)
+void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Categoria **categ, int * tamanio_categ)
 {
 
     Producto nuevo_producto;
@@ -163,19 +163,17 @@ void alta_producto(Producto **productos, int *tamanio_vector, char *idAlta, Cate
     fgets(categoria_productos, 51, stdin);                          // Dejo esto para hacer primero dar de alta de categs.
     categoria_productos[strcspn(categoria_productos, "\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
 
-    int encontradoCategoria = check_categ(categ, tamanio_categ, categoria_productos);
-    while (encontradoCategoria == 0)
+    char* encontradoCategoria = indicar_categ(categ, tamanio_categ, categoria_productos);
+    while (strcmp(encontradoCategoria,"") == 0)
     {
         printf("\nCategoria no encontrada.");
         printf("\nIndique la categoria de su producto: ");
         fgets(categoria_productos, 51, stdin);                          // Dejo esto para hacer primero dar de alta de categs.
         categoria_productos[strcspn(categoria_productos, "\n")] = '\0'; // strcspn() recorre el string en busca del salto de linea para depurarlo.
-        encontradoCategoria = check_categ(categ, tamanio_categ, categoria_productos);
+        encontradoCategoria = indicar_categ(categ, tamanio_categ, categoria_productos);
     }
-    if (encontradoCategoria != 0)
-    {
-        strcpy(nuevo_producto.id_categ, indicar_categ(categ, tamanio_categ, categoria_productos));
-    }
+
+    strcpy(nuevo_producto.id_categ, encontradoCategoria);
 
     strcpy(nuevo_producto.id_gestor, idAlta);
 
@@ -212,35 +210,37 @@ void baja_producto(Producto **productos, int *tamanio, char *id_baja)
 }
 
 // Muestra lista de los productos, dados de alta.
-void listado_producto(Producto *productos, int *tamanio)
+void listado_producto(Producto **productos, int *tamanio)
 {
 
     for (int i = 0; i < *tamanio; i++)
     {
-        printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+        printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip,
+                   (*productos)[i].id_categ, (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
     }
 }
 
 // Muestra lista de los productos, dados de alta.
-void listado_producto_prooved(Producto *productos, int *tamanio, char *idProv)
+void listado_producto_prooved(Producto **productos, int tamanio, char *idProv)
 {
 
-    for (int i = 0; i < *tamanio; i++)
+    for (int i = 0; i < tamanio; i++)
     {
-        if (strcmp(productos[i].id_gestor, idProv) == 0)
-            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+        if (strcmp((*productos)[i].id_gestor, idProv) == 0)
+            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip,
+                   (*productos)[i].id_categ, (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
     }
 }
 
 // Muestra lista de los productos, dados de alta.
-int productoEsDeProveedor(Producto *productos, int *tamanio, char *idProv, char *idProd)
+int productoEsDeProveedor(Producto **productos, int *tamanio, char *idProv, char *idProd)
 {
     int encontrado = 0;
 
     for (int i = 0; i < *tamanio && encontrado == 0; i++)
     {
 
-        if (strcmp(productos[i].id_gestor, idProv) == 0 && strcmp(productos[i].id_prod, idProd) == 0)
+        if (strcmp((*productos)[i].id_gestor, idProv) == 0 && strcmp((*productos)[i].id_prod, idProd) == 0)
             encontrado = 1;
     }
 
@@ -273,7 +273,7 @@ void busqueda_producto_descr(Producto *productos, int *tamanio, char *descripcio
 }
 
 // Búsqueda por categoría. Se toma como parametro "categ" aquella categoria que introduce el usuario.
-void busqueda_producto_categ(Producto *productos, int *tamanio, char *categ, Categoria *categorias, int *tamanio_categ)
+void busqueda_producto_categ(Producto **productos, int *tamanio, char *categ, Categoria **categorias, int *tamanio_categ)
 {
     int coincidencias = 0;
 
@@ -283,10 +283,11 @@ void busqueda_producto_categ(Producto *productos, int *tamanio, char *categ, Cat
     {
         for (int j = 0; j < *tamanio_categ; j++)
         {
-            if (strcmp(productos[i].id_categ, categorias[j].id_categ) == 0)
+            if (strcmp((*productos)[i].id_categ, (*categorias)[j].id_categ) == 0)
             {
 
-                printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+                printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip, (*productos)[i].id_categ,
+                        (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
                 printf("\n");
                 coincidencias++;
             }
@@ -298,7 +299,7 @@ void busqueda_producto_categ(Producto *productos, int *tamanio, char *categ, Cat
     }
 }
 // Buscador de un producto. Se toma como parametro "producto_buscado" aquel producto que introduce el usuario.
-void buscador_un_producto(Producto *productos, int *tamanio, char *producto_buscado)
+void buscador_un_producto(Producto **productos, int *tamanio, char *producto_buscado)
 {
 
     int coincidencias = 0;
@@ -306,10 +307,11 @@ void buscador_un_producto(Producto *productos, int *tamanio, char *producto_busc
     for (int i = 0; i < *tamanio; i++)
     {
 
-        if (strcmp(productos[i].nombre, producto_buscado) == 0)
+        if (strcmp((*productos)[i].nombre, producto_buscado) == 0)
         {
 
-            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", productos[i].id_prod, productos[i].nombre, productos[i].descrip, productos[i].id_categ, productos[i].id_gestor, productos[i].stock, productos[i].entrega, productos[i].importe);
+            printf("%s-%s-%s-%s-%s-%d-%d-%.2f\n", (*productos)[i].id_prod, (*productos)[i].nombre, (*productos)[i].descrip,
+                   (*productos)[i].id_categ, (*productos)[i].id_gestor, (*productos)[i].stock, (*productos)[i].entrega, (*productos)[i].importe);
             printf("\n");
             coincidencias++;
         }
@@ -320,13 +322,13 @@ void buscador_un_producto(Producto *productos, int *tamanio, char *producto_busc
     }
 }
 
-void modificar_descripcion_prod(Producto *productos, int *tamanio, char *id_modificar);
-void modificar_precio(Producto *productos, int *tamanio, char *id_modificar);
-void modificar_stock(Producto *productos, int *tamanio, char *id_modificar);
-void modificar_entrega(Producto *productos, int *tamanio, char *id_modificar);
+void modificar_descripcion_prod(Producto **productos, int *tamanio, char *id_modificar);
+void modificar_precio(Producto **productos, int *tamanio, char *id_modificar);
+void modificar_stock(Producto **productos, int *tamanio, char *id_modificar);
+void modificar_entrega(Producto **productos, int *tamanio, char *id_modificar);
 
 // idProv == -1 para admins
-void modificar_producto(Producto *productos, int *tamanio, char *idProv)
+void modificar_producto(Producto **productos, int *tamanio, char *idProv)
 {
     int a;
     char producto_buscado[51];
@@ -384,65 +386,129 @@ void modificar_producto(Producto *productos, int *tamanio, char *idProv)
     }
 }
 
-void modificar_descripcion_prod(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_descripcion_prod(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while ((i + 1) < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while ((i + 1) < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Escribe la nueva descripcion: ");
-    fgets(productos[i].descrip, 51, stdin);
-    productos[i].descrip[strcspn(productos[i].descrip, "\n")] = '\0';
+    fgets((*productos)[i].descrip, 51, stdin);
+    (*productos)[i].descrip[strcspn((*productos)[i].descrip, "\n")] = '\0';
 }
 
-void modificar_precio(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_precio(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while (i < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while (i < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Introduce el nuevo importe: ");
     fflush(stdin);
-    scanf("%f", &productos[i].importe);
+    scanf("%f", &(*productos)[i].importe);
     flushInputBufferr();
 }
 
-void modificar_stock(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_stock(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while (i < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while (i < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Cantidad de productos en stock: ");
     fflush(stdin);
-    scanf("%d", &productos[i].stock);
+    scanf("%d", &(*productos)[i].stock);
     flushInputBufferr();
 }
 
-void modificar_entrega(Producto *productos, int *tamanio, char *id_modificar)
+void modificar_entrega(Producto **productos, int *tamanio, char *id_modificar)
 {
 
     int i = 0;
 
-    while (i < *tamanio && strcmp(productos[i].id_prod, id_modificar) != 0)
+    while (i < *tamanio && strcmp((*productos)[i].id_prod, id_modificar) != 0)
     {
         i++; // El objetivo del bucle es encontrar la posicion del id del producto que se quiere modificar.
     }
 
     printf("Nueva fecha maxima de entrega: ");
     fflush(stdin);
-    scanf("%d", &productos[i].entrega);
+    scanf("%d", &(*productos)[i].entrega);
     flushInputBufferr();
+}
+
+void listarProductosPorCategoria(Producto **productos, int *numProductos, Categoria **categorias, int *numCategorias) {
+
+    for (int i = 0; i < *numCategorias; i++) {
+        printf("Categoria: %s - %s\n", (*categorias)[i].id_categ, (*categorias)[i].descrip);
+        int encontrados = 0;
+        for (int j = 0; j < *numProductos; j++) {
+            if (strcmp((*productos)[j].id_categ, (*categorias)[i].id_categ) == 0) {
+                encontrados = 1;
+                printf("ID del producto: %s\n", (*productos)[j].id_prod);
+                printf("Nombre: %s\n", (*productos)[j].nombre);
+                printf("Descripcion: %s\n", (*productos)[j].descrip);
+                printf("Stock: %d\n", (*productos)[j].stock);
+                printf("Tiempo de entrega: %d\n", (*productos)[j].entrega);
+                printf("Importe: %.2f\n", (*productos)[j].importe);
+                printf("\n");
+            }
+        }
+        if (!encontrados) {
+            printf("No hay productos asociados a esta categoría.\n");
+        }
+    }
+}
+
+Producto* agregar_a_cesta(Producto **catalogo, int *num_productos, float *coste, int *tamLista) {
+    int capacidad = 1;
+    int num_seleccionados = 0;
+    Producto *cesta = malloc(capacidad * sizeof(Producto));
+    float precio = 0;
+
+    char nombre_producto[16];
+    while (1) {
+        printf("Ingrese el nombre del producto que desea agregar a la cesta (o escriba 'fin' para salir): ");
+        fgets(nombre_producto, 16, stdin);
+        nombre_producto[strcspn(nombre_producto, "\n")] = '\0';
+        if (strcmp(nombre_producto, "fin") == 0) {
+            break;
+        }
+
+        // Buscar el producto en el catálogo
+        int i;
+        for (i = 0; i < *num_productos; i++) {
+            if (strcmp((*catalogo)[i].nombre, nombre_producto) == 0) {
+                // Agregar el producto a la cesta
+                if (num_seleccionados == capacidad) {
+                    // Aumentar la capacidad de la cesta si es necesario
+                    capacidad += 1;
+                    cesta = realloc(cesta, capacidad * sizeof(Producto));
+                }
+                cesta[num_seleccionados] = (*catalogo)[i];
+                num_seleccionados++;
+                precio += (*catalogo)[i].importe;
+                break;
+            }
+        }
+    }
+
+    capacidad--;
+    *tamLista = capacidad;
+    cesta = realloc(cesta, capacidad * sizeof(Producto));
+    *coste = precio;
+
+    return cesta;
 }

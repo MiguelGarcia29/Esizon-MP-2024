@@ -35,19 +35,19 @@ void alta_locker(Locker **l, int* tamanio_vector){
     free(cadena); // Libera la memoria asignada para el ID generado
 
     // Solicita al usuario información sobre el nuevo locker
-    printf("\nDime la localidad:");
+    printf("\nDime la localidad");
     scanf("%20s", nuevo_locker.localidad);
     flushInputBuffer();
 
-    printf("\nDime la provincia:");
+    printf("\nDime la provincia");
     scanf("%20s", nuevo_locker.provincia);
     flushInputBuffer();
 
-    printf("\nDime la direccion:");
+    printf("\nDime la direccion");
     scanf("%20s", nuevo_locker.ubicacion);
     flushInputBuffer();
 
-    printf("\nDime cuantos lockers hay en total:");
+    printf("\nDime cuantos lockers hay en total");
     scanf("%d", &nuevo_locker.num_compt);
     // Realiza una realocación de memoria para agregar el nuevo locker al arreglo
     *l = (Locker *)realloc(*l, (*tamanio_vector + 1) * sizeof(Locker));
@@ -70,7 +70,7 @@ int ocupados_lockers(Locker *l, int tamanio, char *id) {
             }
         }
     }
-    printf("El ID del locker no se encontró en el sistema\n");
+    printf("El ID del locker no se encontro en el sistema\n");
     return -1; // Devuelve -1 si no se encontró el ID del locker
 }
 
@@ -108,6 +108,7 @@ void listado_locker(Locker *l, int tamanio){
         printf("%s-%s-%s-%s-%d-%d\n", l[i].id_locker, l[i].localidad, l[i].provincia, l[i].ubicacion, l[i].num_compt, (l[i].num_compocup-1));
     }
 }
+
 
 // Guarda el vector de DescuentosClientes en el archivo siguiendo la estructura:
 /*
@@ -171,9 +172,9 @@ Locker *iniciarLockersDeArchivo(int *numLock)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(lockers[i].id_locker, token, sizeof(lockers[i].id_locker));
         token = strtok(NULL, "-");
@@ -186,7 +187,7 @@ Locker *iniciarLockersDeArchivo(int *numLock)
         lockers[i].num_compt = atoi(token);
         token = strtok(NULL, "-");
         lockers[i].num_compocup = atoi(token);
-        i++;
+        }
     }
 
     fclose(archivo);

@@ -1,13 +1,14 @@
-//Descuentos
+// Descuentos
 
-#include"descuentos.h"
+#include "descuentos.h"
 
+// FunciÃ³n para generar el ID de descuentos
 char *generar_id_descuentos(Descuento *desc, int cantdad_desc);
 
+// FunciÃ³n para encontrar un descuento por su ID
 int encontrar_descuento(int cantdad_desc, Descuento *desc, char *id);
 
-
-
+// FunciÃ³n para generar el ID de descuentos
 char *generar_id_descuentos(Descuento *desc, int cantdad_desc) {
     int id_generada = 1;
 
@@ -27,7 +28,7 @@ char *generar_id_descuentos(Descuento *desc, int cantdad_desc) {
     return id;
 }
 
-
+// FunciÃ³n para dar de alta un nuevo descuento
 void alta_descuentos(Descuento **desc, int *cantdad_desc) {
     int a;
     Descuento nuevo_descuento;
@@ -40,7 +41,7 @@ void alta_descuentos(Descuento **desc, int *cantdad_desc) {
     printf("(1) Codigo promocional\n");
     printf("(2) Cheque regalo\n");
     scanf("%d", &a);
-                flushInputBuffer();
+    flushInputBuffer();
 
     switch (a) {
         case 1:
@@ -59,7 +60,7 @@ void alta_descuentos(Descuento **desc, int *cantdad_desc) {
     printf("(1) Todos\n");
     printf("(2) Solo ESIZON\n");
     scanf("%d", &a);
-                flushInputBuffer();
+    flushInputBuffer();
 
     switch (a) {
         case 1:
@@ -76,13 +77,13 @@ void alta_descuentos(Descuento **desc, int *cantdad_desc) {
 
     printf("Importe: ");
     scanf("%f", &nuevo_descuento.importe);
-                    flushInputBuffer();
+    flushInputBuffer();
 
     printf("Estado:\n");
     printf("(1) Activo\n");
     printf("(2) Inactivo\n");
     scanf("%d", &a);
-                flushInputBuffer();
+    flushInputBuffer();
 
     switch (a) {
         case 1:
@@ -106,7 +107,7 @@ void alta_descuentos(Descuento **desc, int *cantdad_desc) {
     (*cantdad_desc)++;
 }
 
-
+// FunciÃ³n para dar de baja un descuento
 void baja_descuentos(Descuento **desc, int *cantdad_desc, char *id_baja) {
     int encontrado = 0, i, j;
 
@@ -128,9 +129,14 @@ void baja_descuentos(Descuento **desc, int *cantdad_desc, char *id_baja) {
     }
 }
 
-
-void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) {
+// FunciÃ³n para modificar un descuento
+void modificar_descuento(Descuento *desc, int cantdad_desc) {
     int opcion, i;
+    char id[11];
+
+    printf("Introduce el ID del descuento que desea modificar: ");
+    scanf("%s", id);
+    flushInputBuffer();
 
     i = encontrar_descuento(cantdad_desc, desc, id);
 
@@ -139,7 +145,7 @@ void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) {
         printf("(1) Estado\n");
         printf("(2) Importe\n");
         scanf("%d", &opcion);
-                        flushInputBuffer();
+        flushInputBuffer();
 
         switch (opcion) {
             case 1:
@@ -148,6 +154,7 @@ void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) {
                 printf("(2) Inactivo\n");
                 scanf("%d", &opcion);
                 flushInputBuffer();
+
                 if (opcion == 1)
                     strcpy(desc[i].estado, "activo");
                 else if (opcion == 2)
@@ -155,10 +162,12 @@ void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) {
                 else
                     printf("\nOpcion invalida\n");
             break;
+
             case 2:
                 printf("\nNuevo importe: ");
                 scanf("%f", &desc[i].importe);
             break;
+
             default:
                 printf("\nOpcion invalida\n");
             break;
@@ -168,7 +177,7 @@ void modificar_descuento(Descuento *desc, int cantdad_desc, char *id) {
     }
 }
 
-
+// FunciÃ³n para encontrar un descuento por su ID
 int encontrar_descuento(int cantdad_desc, Descuento *desc, char *id) {
     int i, encontrado = 0;
 
@@ -184,14 +193,15 @@ int encontrar_descuento(int cantdad_desc, Descuento *desc, char *id) {
     return i - 1;
 }
 
+
 // Guarda el vector de Descuentos en el archivo siguiendo la estructura:
 /*
-    o Identificador del código promocional o cheque regalo (Id_cod), 10 caracteres máximo.
-    o Descripción del descuento (Descrip), 50 caracteres máximo.
-    o Tipo de descuento (Tipo): «codpro» (código promocional) o «cheqreg» (cheque regalo)
-    o Estado (Estado): «activo» o «inactivo»
+    o Identificador del cÃ³digo promocional o cheque regalo (Id_cod), 10 caracteres mÃ¡ximo.
+    o DescripciÃ³n del descuento (Descrip), 50 caracteres mÃ¡ximo.
+    o Tipo de descuento (Tipo): Â«codproÂ» (cÃ³digo promocional) o Â«cheqregÂ» (cheque regalo)
+    o Estado (Estado): Â«activoÂ» o Â«inactivoÂ»
     o Importe del descuento en euros (Importe)
-    o Aplicabilidad (Aplicable): «todos» (si es aplicable a todos los productos) o «esizon» (si sólo es
+    o Aplicabilidad (Aplicable): Â«todosÂ» (si es aplicable a todos los productos) o Â«esizonÂ» (si sÃ³lo es
     aplicable a los gestionados por ESIZON.
 */
 
@@ -248,9 +258,9 @@ Descuento *iniciarDescuentosDeArchivo(int *numDesc)
     }
 
     // Leo cada linea y rellenar el vector de adminProv
-    int i = 0;
-    while (fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL)
+    for(int i=0;i<count;i++)
     {
+        if(fgets(buffer, TAMANIO_MAXIMO_LINEA, archivo) != NULL){
         char *token = strtok(buffer, "-");
         strncpy(descuentos[i].id_cod, token, sizeof(descuentos[i].id_cod));
         token = strtok(NULL, "-");
@@ -263,10 +273,24 @@ Descuento *iniciarDescuentosDeArchivo(int *numDesc)
         descuentos[i].importe = atof(token);
         token = strtok(NULL, "-");
         strncpy(descuentos[i].aplicable, token, sizeof(descuentos[i].aplicable));
-        i++;
+        }
     }
 
     fclose(archivo);
     *numDesc = count;
     return descuentos;
+}
+
+void listar_descuentos(Descuento **descuentos, int *tamano) {
+    printf("Lista de descuentos:\n");
+    for (int i = 0; i < *tamano; i++) {
+        printf("Descuento %d:\n", i + 1);
+        printf("ID CÃ³digo: %s\n", (*descuentos)[i].id_cod);
+        printf("DescripciÃ³n: %s\n", (*descuentos)[i].descrip);
+        printf("Tipo: %s\n", (*descuentos)[i].tipo);
+        printf("Estado: %s\n", (*descuentos)[i].estado);
+        printf("Importe: %.2f\n", (*descuentos)[i].importe);
+        printf("Aplicable: %s\n", (*descuentos)[i].aplicable);
+        printf("\n");
+    }
 }
